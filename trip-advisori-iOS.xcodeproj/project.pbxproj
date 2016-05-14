@@ -1,0 +1,807 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1E0003CA1C83954000B25C05 /* AmbassadorOfTheAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0003C91C83954000B25C05 /* AmbassadorOfTheAPI.swift */; };
+		1E0003CC1C8525F400B25C05 /* TripDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0003CB1C8525F400B25C05 /* TripDetailsViewController.swift */; };
+		1E05B88B1C5D135D009E37BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05B88A1C5D135D009E37BA /* AppDelegate.swift */; };
+		1E05B8921C5D135D009E37BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E05B8901C5D135D009E37BA /* Main.storyboard */; };
+		1E05B8941C5D135D009E37BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E05B8931C5D135D009E37BA /* Assets.xcassets */; };
+		1E05B8971C5D135D009E37BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E05B8951C5D135D009E37BA /* LaunchScreen.storyboard */; };
+		1E05B8A21C5D135D009E37BA /* trip_advisori_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05B8A11C5D135D009E37BA /* trip_advisori_iOSTests.swift */; };
+		1E05B8AD1C5D135D009E37BA /* trip_advisori_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05B8AC1C5D135D009E37BA /* trip_advisori_iOSUITests.swift */; };
+		1E05B8BB1C5D1566009E37BA /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05B8BA1C5D1566009E37BA /* Location.swift */; };
+		1E05B8BD1C5D193B009E37BA /* CurrentLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05B8BC1C5D193B009E37BA /* CurrentLocationService.swift */; };
+		1E05B8BF1C5D1A07009E37BA /* DataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05B8BE1C5D1A07009E37BA /* DataWrapper.swift */; };
+		1E05B8C11C5D327A009E37BA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05B8C01C5D327A009E37BA /* MapViewController.swift */; };
+		1E17118D1CD41F320083236C /* ContentLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17118C1CD41F320083236C /* ContentLoaderService.swift */; };
+		1E1711931CD431D20083236C /* Injector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1711921CD431D20083236C /* Injector.swift */; };
+		1E1F32601CA8B9CE009B6D0F /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1F325F1CA8B9CE009B6D0F /* LobbyViewController.swift */; };
+		1E2014901C705C280012B863 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20148F1C705C280012B863 /* ProfileService.swift */; };
+		1E2014961C70DB790012B863 /* FacebookProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2014951C70DB790012B863 /* FacebookProfile.swift */; };
+		1E2014981C71273B0012B863 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2014971C71273B0012B863 /* LoginService.swift */; };
+		1E20149C1C72B39D0012B863 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20149B1C72B39D0012B863 /* ProfileViewController.swift */; };
+		1E20149F1C72B7730012B863 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20149E1C72B7730012B863 /* AuthService.swift */; };
+		1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22C6741C70232200B13A1B /* LoginViewController.swift */; };
+		1E64A6971CA627A000D9F90C /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6961CA627A000D9F90C /* JoinPartyViewController.swift */; };
+		1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6981CA6307F00D9F90C /* PartyService.swift */; };
+		1E6998441CE191F900DFC697 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6998431CE191F900DFC697 /* AlertService.swift */; };
+		1E6998481CE3735A00DFC697 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6998471CE3735A00DFC697 /* File.swift */; };
+		1E841C581C66DA0C00AD638E /* TripsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C571C66DA0C00AD638E /* TripsService.swift */; };
+		1E841C5A1C66DB8900AD638E /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C591C66DB8900AD638E /* Trip.swift */; };
+		1E841C5C1C6704A600AD638E /* TripListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C5B1C6704A600AD638E /* TripListTableViewController.swift */; };
+		1E841C5F1C679B5600AD638E /* TripListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C5E1C679B5500AD638E /* TripListTableViewCell.swift */; };
+		1E841C621C67C02200AD638E /* TripListTableViewCellDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C611C67C02200AD638E /* TripListTableViewCellDecorator.swift */; };
+		1E841C651C67C48F00AD638E /* AsynchronousUIImageLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */; };
+		1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */; };
+		1EE4C55F1CB5ED130095845C /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE4C55E1CB5ED130095845C /* TripViewController.swift */; };
+		1EF49A871C990035001A32C2 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF49A861C990035001A32C2 /* Party.swift */; };
+		1EF93BFE1C6046F800A5B463 /* InitialLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */; };
+		1EF93C001C604DA600A5B463 /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */; };
+		1EF93C071C605A5C00A5B463 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93C061C605A5C00A5B463 /* Service.swift */; };
+		9124443D98759B610CA027FA /* Pods_trip_advisori_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADB4A205645AF4BD20A06E0 /* Pods_trip_advisori_iOS.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1E05B89E1C5D135D009E37BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E05B87F1C5D135D009E37BA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E05B8861C5D135D009E37BA;
+			remoteInfo = "trip-advisori-iOS";
+		};
+		1E05B8A91C5D135D009E37BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E05B87F1C5D135D009E37BA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E05B8861C5D135D009E37BA;
+			remoteInfo = "trip-advisori-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1E0003C91C83954000B25C05 /* AmbassadorOfTheAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbassadorOfTheAPI.swift; sourceTree = "<group>"; };
+		1E0003CB1C8525F400B25C05 /* TripDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDetailsViewController.swift; sourceTree = "<group>"; };
+		1E05B8871C5D135D009E37BA /* trip-advisori-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "trip-advisori-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E05B88A1C5D135D009E37BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1E05B8911C5D135D009E37BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1E05B8931C5D135D009E37BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1E05B8961C5D135D009E37BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1E05B8981C5D135D009E37BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E05B89D1C5D135D009E37BA /* trip-advisori-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "trip-advisori-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E05B8A11C5D135D009E37BA /* trip_advisori_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trip_advisori_iOSTests.swift; sourceTree = "<group>"; };
+		1E05B8A31C5D135D009E37BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E05B8A81C5D135D009E37BA /* trip-advisori-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "trip-advisori-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E05B8AC1C5D135D009E37BA /* trip_advisori_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trip_advisori_iOSUITests.swift; sourceTree = "<group>"; };
+		1E05B8AE1C5D135D009E37BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E05B8BA1C5D1566009E37BA /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		1E05B8BC1C5D193B009E37BA /* CurrentLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationService.swift; sourceTree = "<group>"; };
+		1E05B8BE1C5D1A07009E37BA /* DataWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataWrapper.swift; sourceTree = "<group>"; };
+		1E05B8C01C5D327A009E37BA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		1E17118C1CD41F320083236C /* ContentLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoaderService.swift; sourceTree = "<group>"; };
+		1E1711921CD431D20083236C /* Injector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Injector.swift; sourceTree = "<group>"; };
+		1E1F325F1CA8B9CE009B6D0F /* LobbyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
+		1E20148F1C705C280012B863 /* ProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		1E2014951C70DB790012B863 /* FacebookProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookProfile.swift; sourceTree = "<group>"; };
+		1E2014971C71273B0012B863 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		1E20149B1C72B39D0012B863 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		1E20149E1C72B7730012B863 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		1E22C6711C701AE000B13A1B /* -Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "-Bridging-Header.h"; sourceTree = "<group>"; };
+		1E22C6741C70232200B13A1B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1E64A6961CA627A000D9F90C /* JoinPartyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinPartyViewController.swift; sourceTree = "<group>"; };
+		1E64A6981CA6307F00D9F90C /* PartyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyService.swift; sourceTree = "<group>"; };
+		1E6998431CE191F900DFC697 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		1E6998471CE3735A00DFC697 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		1E841C571C66DA0C00AD638E /* TripsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripsService.swift; sourceTree = "<group>"; };
+		1E841C591C66DB8900AD638E /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		1E841C5B1C6704A600AD638E /* TripListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListTableViewController.swift; sourceTree = "<group>"; };
+		1E841C5E1C679B5500AD638E /* TripListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListTableViewCell.swift; sourceTree = "<group>"; };
+		1E841C611C67C02200AD638E /* TripListTableViewCellDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListTableViewCellDecorator.swift; sourceTree = "<group>"; };
+		1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousUIImageLoading.swift; sourceTree = "<group>"; };
+		1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
+		1EE4C55E1CB5ED130095845C /* TripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
+		1EF49A861C990035001A32C2 /* Party.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
+		1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialLoadingViewController.swift; sourceTree = "<group>"; };
+		1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewController.swift; sourceTree = "<group>"; };
+		1EF93C061C605A5C00A5B463 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		2ADB4A205645AF4BD20A06E0 /* Pods_trip_advisori_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trip_advisori_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FFFEB7839A565E790733793 /* Pods-trip-advisori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		CC641C4C708F459BFB4B60B1 /* Pods-trip-advisori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1E05B8841C5D135D009E37BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9124443D98759B610CA027FA /* Pods_trip_advisori_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E05B89A1C5D135D009E37BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E05B8A51C5D135D009E37BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		07F9C147E8B695E6C7D82523 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CC641C4C708F459BFB4B60B1 /* Pods-trip-advisori-iOS.debug.xcconfig */,
+				7FFFEB7839A565E790733793 /* Pods-trip-advisori-iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		1E05B87E1C5D135D009E37BA = {
+			isa = PBXGroup;
+			children = (
+				1E05B8891C5D135D009E37BA /* trip-advisori-iOS */,
+				1E05B8A01C5D135D009E37BA /* trip-advisori-iOSTests */,
+				1E05B8AB1C5D135D009E37BA /* trip-advisori-iOSUITests */,
+				1E05B8881C5D135D009E37BA /* Products */,
+				07F9C147E8B695E6C7D82523 /* Pods */,
+				400E7ED1A7B730941D0A381A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1E05B8881C5D135D009E37BA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1E05B8871C5D135D009E37BA /* trip-advisori-iOS.app */,
+				1E05B89D1C5D135D009E37BA /* trip-advisori-iOSTests.xctest */,
+				1E05B8A81C5D135D009E37BA /* trip-advisori-iOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1E05B8891C5D135D009E37BA /* trip-advisori-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				1EE4C5601CB5FD530095845C /* components */,
+				1E841C631C67C40000AD638E /* utilities */,
+				1EF93C041C60536D00A5B463 /* models */,
+				1E05B88A1C5D135D009E37BA /* AppDelegate.swift */,
+				1E22C6711C701AE000B13A1B /* -Bridging-Header.h */,
+				1E05B8901C5D135D009E37BA /* Main.storyboard */,
+				1E05B8931C5D135D009E37BA /* Assets.xcassets */,
+				1E05B8951C5D135D009E37BA /* LaunchScreen.storyboard */,
+				1E05B8981C5D135D009E37BA /* Info.plist */,
+			);
+			path = "trip-advisori-iOS";
+			sourceTree = "<group>";
+		};
+		1E05B8A01C5D135D009E37BA /* trip-advisori-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				1E05B8A11C5D135D009E37BA /* trip_advisori_iOSTests.swift */,
+				1E05B8A31C5D135D009E37BA /* Info.plist */,
+			);
+			path = "trip-advisori-iOSTests";
+			sourceTree = "<group>";
+		};
+		1E05B8AB1C5D135D009E37BA /* trip-advisori-iOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1E05B8AC1C5D135D009E37BA /* trip_advisori_iOSUITests.swift */,
+				1E05B8AE1C5D135D009E37BA /* Info.plist */,
+			);
+			path = "trip-advisori-iOSUITests";
+			sourceTree = "<group>";
+		};
+		1E1711941CD458AC0083236C /* tripPicker */ = {
+			isa = PBXGroup;
+			children = (
+				1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */,
+				1E841C5B1C6704A600AD638E /* TripListTableViewController.swift */,
+				1E841C571C66DA0C00AD638E /* TripsService.swift */,
+				1E841C5E1C679B5500AD638E /* TripListTableViewCell.swift */,
+				1E841C611C67C02200AD638E /* TripListTableViewCellDecorator.swift */,
+				1E05B8C01C5D327A009E37BA /* MapViewController.swift */,
+			);
+			name = tripPicker;
+			sourceTree = "<group>";
+		};
+		1E841C631C67C40000AD638E /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */,
+			);
+			name = utilities;
+			sourceTree = "<group>";
+		};
+		1EE4C5601CB5FD530095845C /* components */ = {
+			isa = PBXGroup;
+			children = (
+				1E1711941CD458AC0083236C /* tripPicker */,
+				1EE4C56B1CB6076B0095845C /* contentLoader */,
+				1EE4C56A1CB605B40095845C /* trip */,
+				1EE4C5691CB605550095845C /* partyJoiner */,
+				1EE4C5681CB603A90095845C /* tripDetails */,
+				1EE4C5651CB5FFFF0095845C /* common */,
+				1EE4C5641CB5FF530095845C /* login */,
+				1EE4C5631CB5FEE90095845C /* lobby */,
+				1EE4C5611CB5FD670095845C /* profile */,
+			);
+			name = components;
+			sourceTree = "<group>";
+		};
+		1EE4C5611CB5FD670095845C /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				1E20148F1C705C280012B863 /* ProfileService.swift */,
+				1E20149B1C72B39D0012B863 /* ProfileViewController.swift */,
+			);
+			name = profile;
+			sourceTree = "<group>";
+		};
+		1EE4C5631CB5FEE90095845C /* lobby */ = {
+			isa = PBXGroup;
+			children = (
+				1E1F325F1CA8B9CE009B6D0F /* LobbyViewController.swift */,
+			);
+			name = lobby;
+			sourceTree = "<group>";
+		};
+		1EE4C5641CB5FF530095845C /* login */ = {
+			isa = PBXGroup;
+			children = (
+				1E22C6741C70232200B13A1B /* LoginViewController.swift */,
+				1E2014971C71273B0012B863 /* LoginService.swift */,
+			);
+			name = login;
+			sourceTree = "<group>";
+		};
+		1EE4C5651CB5FFFF0095845C /* common */ = {
+			isa = PBXGroup;
+			children = (
+				1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */,
+				1E64A6981CA6307F00D9F90C /* PartyService.swift */,
+				1E1711921CD431D20083236C /* Injector.swift */,
+				1E20149E1C72B7730012B863 /* AuthService.swift */,
+				1E05B8BC1C5D193B009E37BA /* CurrentLocationService.swift */,
+				1E0003C91C83954000B25C05 /* AmbassadorOfTheAPI.swift */,
+				1EF93C061C605A5C00A5B463 /* Service.swift */,
+				1E6998431CE191F900DFC697 /* AlertService.swift */,
+				1E6998471CE3735A00DFC697 /* File.swift */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		1EE4C5681CB603A90095845C /* tripDetails */ = {
+			isa = PBXGroup;
+			children = (
+				1E0003CB1C8525F400B25C05 /* TripDetailsViewController.swift */,
+			);
+			name = tripDetails;
+			sourceTree = "<group>";
+		};
+		1EE4C5691CB605550095845C /* partyJoiner */ = {
+			isa = PBXGroup;
+			children = (
+				1E64A6961CA627A000D9F90C /* JoinPartyViewController.swift */,
+			);
+			name = partyJoiner;
+			sourceTree = "<group>";
+		};
+		1EE4C56A1CB605B40095845C /* trip */ = {
+			isa = PBXGroup;
+			children = (
+				1EE4C55E1CB5ED130095845C /* TripViewController.swift */,
+			);
+			name = trip;
+			sourceTree = "<group>";
+		};
+		1EE4C56B1CB6076B0095845C /* contentLoader */ = {
+			isa = PBXGroup;
+			children = (
+				1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */,
+				1E17118C1CD41F320083236C /* ContentLoaderService.swift */,
+			);
+			name = contentLoader;
+			sourceTree = "<group>";
+		};
+		1EF93C041C60536D00A5B463 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				1E05B8BE1C5D1A07009E37BA /* DataWrapper.swift */,
+				1E05B8BA1C5D1566009E37BA /* Location.swift */,
+				1E841C591C66DB8900AD638E /* Trip.swift */,
+				1E2014951C70DB790012B863 /* FacebookProfile.swift */,
+				1EF49A861C990035001A32C2 /* Party.swift */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		400E7ED1A7B730941D0A381A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2ADB4A205645AF4BD20A06E0 /* Pods_trip_advisori_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1E05B8861C5D135D009E37BA /* trip-advisori-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E05B8B11C5D135D009E37BA /* Build configuration list for PBXNativeTarget "trip-advisori-iOS" */;
+			buildPhases = (
+				71E2B44F3B4F54E8D1C584F5 /* Check Pods Manifest.lock */,
+				1E05B8831C5D135D009E37BA /* Sources */,
+				1E05B8841C5D135D009E37BA /* Frameworks */,
+				1E05B8851C5D135D009E37BA /* Resources */,
+				86F30828A58975953C782D9E /* Embed Pods Frameworks */,
+				341497D4C47D60E7310B6374 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "trip-advisori-iOS";
+			productName = "trip-advisori-iOS";
+			productReference = 1E05B8871C5D135D009E37BA /* trip-advisori-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1E05B89C1C5D135D009E37BA /* trip-advisori-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E05B8B41C5D135D009E37BA /* Build configuration list for PBXNativeTarget "trip-advisori-iOSTests" */;
+			buildPhases = (
+				1E05B8991C5D135D009E37BA /* Sources */,
+				1E05B89A1C5D135D009E37BA /* Frameworks */,
+				1E05B89B1C5D135D009E37BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E05B89F1C5D135D009E37BA /* PBXTargetDependency */,
+			);
+			name = "trip-advisori-iOSTests";
+			productName = "trip-advisori-iOSTests";
+			productReference = 1E05B89D1C5D135D009E37BA /* trip-advisori-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1E05B8A71C5D135D009E37BA /* trip-advisori-iOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E05B8B71C5D135D009E37BA /* Build configuration list for PBXNativeTarget "trip-advisori-iOSUITests" */;
+			buildPhases = (
+				1E05B8A41C5D135D009E37BA /* Sources */,
+				1E05B8A51C5D135D009E37BA /* Frameworks */,
+				1E05B8A61C5D135D009E37BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E05B8AA1C5D135D009E37BA /* PBXTargetDependency */,
+			);
+			name = "trip-advisori-iOSUITests";
+			productName = "trip-advisori-iOSUITests";
+			productReference = 1E05B8A81C5D135D009E37BA /* trip-advisori-iOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1E05B87F1C5D135D009E37BA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Blaushild, Max";
+				TargetAttributes = {
+					1E05B8861C5D135D009E37BA = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					1E05B89C1C5D135D009E37BA = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 1E05B8861C5D135D009E37BA;
+					};
+					1E05B8A71C5D135D009E37BA = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 1E05B8861C5D135D009E37BA;
+					};
+				};
+			};
+			buildConfigurationList = 1E05B8821C5D135D009E37BA /* Build configuration list for PBXProject "trip-advisori-iOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1E05B87E1C5D135D009E37BA;
+			productRefGroup = 1E05B8881C5D135D009E37BA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1E05B8861C5D135D009E37BA /* trip-advisori-iOS */,
+				1E05B89C1C5D135D009E37BA /* trip-advisori-iOSTests */,
+				1E05B8A71C5D135D009E37BA /* trip-advisori-iOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1E05B8851C5D135D009E37BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E05B8971C5D135D009E37BA /* LaunchScreen.storyboard in Resources */,
+				1E05B8941C5D135D009E37BA /* Assets.xcassets in Resources */,
+				1E05B8921C5D135D009E37BA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E05B89B1C5D135D009E37BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E05B8A61C5D135D009E37BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		341497D4C47D60E7310B6374 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		71E2B44F3B4F54E8D1C584F5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		86F30828A58975953C782D9E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1E05B8831C5D135D009E37BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */,
+				1E17118D1CD41F320083236C /* ContentLoaderService.swift in Sources */,
+				1E841C5A1C66DB8900AD638E /* Trip.swift in Sources */,
+				1EF93BFE1C6046F800A5B463 /* InitialLoadingViewController.swift in Sources */,
+				1E1711931CD431D20083236C /* Injector.swift in Sources */,
+				1E6998481CE3735A00DFC697 /* File.swift in Sources */,
+				1E2014981C71273B0012B863 /* LoginService.swift in Sources */,
+				1E05B8BF1C5D1A07009E37BA /* DataWrapper.swift in Sources */,
+				1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */,
+				1E0003CC1C8525F400B25C05 /* TripDetailsViewController.swift in Sources */,
+				1EF49A871C990035001A32C2 /* Party.swift in Sources */,
+				1E6998441CE191F900DFC697 /* AlertService.swift in Sources */,
+				1E1F32601CA8B9CE009B6D0F /* LobbyViewController.swift in Sources */,
+				1E0003CA1C83954000B25C05 /* AmbassadorOfTheAPI.swift in Sources */,
+				1E05B88B1C5D135D009E37BA /* AppDelegate.swift in Sources */,
+				1EE4C55F1CB5ED130095845C /* TripViewController.swift in Sources */,
+				1E841C581C66DA0C00AD638E /* TripsService.swift in Sources */,
+				1E20149F1C72B7730012B863 /* AuthService.swift in Sources */,
+				1E841C5C1C6704A600AD638E /* TripListTableViewController.swift in Sources */,
+				1E64A6971CA627A000D9F90C /* JoinPartyViewController.swift in Sources */,
+				1E05B8BB1C5D1566009E37BA /* Location.swift in Sources */,
+				1E20149C1C72B39D0012B863 /* ProfileViewController.swift in Sources */,
+				1E841C5F1C679B5600AD638E /* TripListTableViewCell.swift in Sources */,
+				1E841C651C67C48F00AD638E /* AsynchronousUIImageLoading.swift in Sources */,
+				1EF93C001C604DA600A5B463 /* HomeTabBarViewController.swift in Sources */,
+				1E05B8BD1C5D193B009E37BA /* CurrentLocationService.swift in Sources */,
+				1E2014961C70DB790012B863 /* FacebookProfile.swift in Sources */,
+				1E841C621C67C02200AD638E /* TripListTableViewCellDecorator.swift in Sources */,
+				1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */,
+				1E05B8C11C5D327A009E37BA /* MapViewController.swift in Sources */,
+				1E2014901C705C280012B863 /* ProfileService.swift in Sources */,
+				1EF93C071C605A5C00A5B463 /* Service.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E05B8991C5D135D009E37BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E05B8A21C5D135D009E37BA /* trip_advisori_iOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E05B8A41C5D135D009E37BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E05B8AD1C5D135D009E37BA /* trip_advisori_iOSUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1E05B89F1C5D135D009E37BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E05B8861C5D135D009E37BA /* trip-advisori-iOS */;
+			targetProxy = 1E05B89E1C5D135D009E37BA /* PBXContainerItemProxy */;
+		};
+		1E05B8AA1C5D135D009E37BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E05B8861C5D135D009E37BA /* trip-advisori-iOS */;
+			targetProxy = 1E05B8A91C5D135D009E37BA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1E05B8901C5D135D009E37BA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E05B8911C5D135D009E37BA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1E05B8951C5D135D009E37BA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E05B8961C5D135D009E37BA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1E05B8AF1C5D135D009E37BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1E05B8B01C5D135D009E37BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1E05B8B21C5D135D009E37BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC641C4C708F459BFB4B60B1 /* Pods-trip-advisori-iOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "trip-advisori-iOS/-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		1E05B8B31C5D135D009E37BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FFFEB7839A565E790733793 /* Pods-trip-advisori-iOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "trip-advisori-iOS/-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		1E05B8B51C5D135D009E37BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "trip-advisori-iOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/trip-advisori-iOS.app/trip-advisori-iOS";
+			};
+			name = Debug;
+		};
+		1E05B8B61C5D135D009E37BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "trip-advisori-iOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/trip-advisori-iOS.app/trip-advisori-iOS";
+			};
+			name = Release;
+		};
+		1E05B8B81C5D135D009E37BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "trip-advisori-iOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "trip-advisori-iOS";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		1E05B8B91C5D135D009E37BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "trip-advisori-iOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "trip-advisori-iOS";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1E05B8821C5D135D009E37BA /* Build configuration list for PBXProject "trip-advisori-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E05B8AF1C5D135D009E37BA /* Debug */,
+				1E05B8B01C5D135D009E37BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E05B8B11C5D135D009E37BA /* Build configuration list for PBXNativeTarget "trip-advisori-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E05B8B21C5D135D009E37BA /* Debug */,
+				1E05B8B31C5D135D009E37BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E05B8B41C5D135D009E37BA /* Build configuration list for PBXNativeTarget "trip-advisori-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E05B8B51C5D135D009E37BA /* Debug */,
+				1E05B8B61C5D135D009E37BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E05B8B71C5D135D009E37BA /* Build configuration list for PBXNativeTarget "trip-advisori-iOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E05B8B81C5D135D009E37BA /* Debug */,
+				1E05B8B91C5D135D009E37BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1E05B87F1C5D135D009E37BA /* Project object */;
+}
