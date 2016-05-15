@@ -15,7 +15,7 @@ protocol SocketServiceDelegate {
     func openAlert(title: String, message: String)
 }
 
-class SocketService: Service, WebSocketDelegate {
+class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate {
     private var socket: WebSocket!
     var authService: AuthService!
     var headers:Dictionary<String, String>!
@@ -25,6 +25,8 @@ class SocketService: Service, WebSocketDelegate {
     init(_authService_: AuthService, _currentLocation_: CurrentLocationService) {
         super.init()
         currentLocation = _currentLocation_
+        currentLocation.delegate = self
+        
         authService = _authService_
     }
     
@@ -52,18 +54,21 @@ class SocketService: Service, WebSocketDelegate {
     func updateLocation() {
         let location:Location = currentLocation.location
         let jsonLocation = Mapper().toJSONString(location, prettyPrint: true)
-        socket.writeString(jsonLocation!)
+        if socket != nil {
+            socket.writeString(jsonLocation!)
+        }
     }
     
     func websocketDidDisconnect(ws: WebSocket, error: NSError?) {
-        
-        
-        
         if let e = error {
             print("websocket is disconnected: \(e.localizedDescription)")
         } else {
             print("websocket disconnected")
         }
+    }
+    
+    func onLocationUpdated() {
+        updateLocation()
     }
     
     func websocketDidReceiveMessage(ws: WebSocket, text: String) {

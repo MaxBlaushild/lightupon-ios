@@ -16,7 +16,6 @@ class ContentLoaderService: Service {
     init(_authService_: AuthService, _partyService_: PartyService){
         authService = _authService_
         partyService = _partyService_
-        authService.logout()
     }
     
     func loadContent(callback: (String) -> Void) {

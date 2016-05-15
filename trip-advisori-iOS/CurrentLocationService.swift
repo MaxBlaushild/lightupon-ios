@@ -9,13 +9,18 @@ protocol LocationInfo{
     
 }
 
+protocol CurrentLocationServiceDelegate {
+    func onLocationUpdated() -> Void
+}
+
 class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo {
     
     private var locationManager:CLLocationManager
-    
     private var _locationStatus:(code: Int, message: String)
     private var _longitude:Double
     private var _latitude:Double
+    
+    internal var delegate: CurrentLocationServiceDelegate!
     
     override init (){
         
@@ -33,16 +38,11 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         locationManager.requestLocation()
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
     }
     
-    // MARK: CLLocationManagerDelegate implementation
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        
         locationManager.stopUpdatingLocation()
-        
-        // TODO: add a notification to the propagate the error
-        
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -51,6 +51,10 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         
         _latitude = coord.latitude
         _longitude = coord.longitude
+        
+        if delegate != nil {
+            delegate.onLocationUpdated()
+        }
         
     }
     
