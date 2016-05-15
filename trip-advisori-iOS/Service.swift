@@ -9,10 +9,8 @@
 import UIKit
 
 class Service: NSObject {
-    
-//    let apiURL:String = "https://secret-escarpment-63890.herokuapp.com"
-    let apiURL:String = "http://45.55.160.25/lightupon"
-    let wsURL:String = "http://45.55.160.25/lightupon"
-//    let apiURL:String = "http://localhost:5000/lightupon"
-//    let wsURL:String = "http://localhost:5000/lightupon"
+//    let apiURL:String = "http://45.55.160.25/lightupon"
+//    let wsURL:String = "http://45.55.160.25/lightupon"
+    let apiURL:String = "http://localhost:5000/lightupon"
+    let wsURL:String = "http://localhost:5000/lightupon"
 }

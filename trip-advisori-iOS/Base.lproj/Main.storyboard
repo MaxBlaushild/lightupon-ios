@@ -223,10 +223,10 @@
             </objects>
             <point key="canvasLocation" x="-2159" y="1056"/>
         </scene>
-        <!--View Controller-->
+        <!--Story Teller View Controller-->
         <scene sceneID="ZaQ-HI-xke">
             <objects>
-                <viewController id="HdF-g8-bjL" sceneMemberID="viewController">
+                <viewController id="HdF-g8-bjL" customClass="StoryTellerViewController" customModule="trip_advisori_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5HK-bC-KLO"/>
                         <viewControllerLayoutGuide type="bottom" id="TZO-lZ-mXE"/>
@@ -234,7 +234,19 @@
                     <view key="view" contentMode="scaleToFill" id="MRq-0E-QxT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyteller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pku-F1-yzr">
+                                <rect key="frame" x="261" y="289" width="79" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pku-F1-yzr" firstAttribute="centerY" secondItem="MRq-0E-QxT" secondAttribute="centerY" id="Tcn-V0-ysJ"/>
+                            <constraint firstItem="pku-F1-yzr" firstAttribute="centerX" secondItem="MRq-0E-QxT" secondAttribute="centerX" id="iCe-bC-0Gm"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdN-tM-tuL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -284,7 +296,9 @@
                     </view>
                     <connections>
                         <outlet property="passcodeLabel" destination="f91-wq-Tm3" id="Dfg-Dq-n87"/>
+                        <outlet property="startPartyButton" destination="ijV-4R-dTP" id="LPw-DP-kLe"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="LobbyToHome" id="2XB-nh-RvN"/>
+                        <segue destination="HdF-g8-bjL" kind="show" identifier="LobbyToStoryTeller" id="K7y-dE-Hni"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hrn-dv-c1L" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -39,10 +39,9 @@ class PartyService: Service {
         })
     }
     
-    func startParty(partyID: Int, callback: () -> Void) {
-        apiAmbassador.get(apiURL + "/parties/\(partyID)/start", success: { request, response, result in
+    func startNextScene(partyID: Int) {
+        apiAmbassador.get(apiURL + "/parties/\(partyID)/nextScene", success: { request, response, result in
             
-            callback()
         })
     }
     

@@ -13,6 +13,7 @@ import SwiftyJSON
 
 protocol SocketServiceDelegate {
     func openAlert(title: String, message: String)
+    func onResponseRecieved(socketResponse: SocketResponse) -> Void
 }
 
 class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate {
@@ -72,9 +73,9 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     }
     
     func websocketDidReceiveMessage(ws: WebSocket, text: String) {
-        let json = JSON(text)
-        
-        print("Received text: \(text)")
+        if let socketResponse:SocketResponse = Mapper<SocketResponse>().map(text) {
+            delegate.onResponseRecieved(socketResponse)
+        }
     }
     
     func websocketDidReceiveData(ws: WebSocket, data: NSData) {

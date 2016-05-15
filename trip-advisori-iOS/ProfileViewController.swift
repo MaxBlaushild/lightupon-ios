@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        profileService.getProfile(self.bindProfileToView)
+        profileService.getMyProfile(self.bindProfileToView)
     }
 
     @IBAction func logout(sender: AnyObject) {
