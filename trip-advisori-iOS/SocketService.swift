@@ -13,10 +13,9 @@ import SwiftyJSON
 
 protocol SocketServiceDelegate {
     func openAlert(title: String, message: String)
-    func onResponseRecieved(socketResponse: SocketResponse) -> Void
 }
 
-class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate {
+class SocketService: Service, WebSocketDelegate {
     private var socket: WebSocket!
     var authService: AuthService!
     var headers:Dictionary<String, String>!
@@ -26,8 +25,6 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     init(_authService_: AuthService, _currentLocation_: CurrentLocationService) {
         super.init()
         currentLocation = _currentLocation_
-        currentLocation.delegate = self
-        
         authService = _authService_
     }
     
@@ -55,12 +52,13 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     func updateLocation() {
         let location:Location = currentLocation.location
         let jsonLocation = Mapper().toJSONString(location, prettyPrint: true)
-        if socket != nil {
-            socket.writeString(jsonLocation!)
-        }
+        socket.writeString(jsonLocation!)
     }
     
     func websocketDidDisconnect(ws: WebSocket, error: NSError?) {
+        
+        
+        
         if let e = error {
             print("websocket is disconnected: \(e.localizedDescription)")
         } else {
@@ -68,14 +66,10 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
         }
     }
     
-    func onLocationUpdated() {
-        updateLocation()
-    }
-    
     func websocketDidReceiveMessage(ws: WebSocket, text: String) {
-        if let socketResponse:SocketResponse = Mapper<SocketResponse>().map(text) {
-            delegate.onResponseRecieved(socketResponse)
-        }
+        let json = JSON(text)
+        
+        print("Received text: \(text)")
     }
     
     func websocketDidReceiveData(ws: WebSocket, data: NSData) {

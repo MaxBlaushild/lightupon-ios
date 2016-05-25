@@ -32,10 +32,6 @@
 		1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6981CA6307F00D9F90C /* PartyService.swift */; };
 		1E6998441CE191F900DFC697 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6998431CE191F900DFC697 /* AlertService.swift */; };
 		1E6998481CE3735A00DFC697 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6998471CE3735A00DFC697 /* File.swift */; };
-		1E7032AD1CE8F53A00B1C18D /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7032AC1CE8F53A00B1C18D /* SocketResponse.swift */; };
-		1E7032AF1CE8F58800B1C18D /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7032AE1CE8F58800B1C18D /* Scene.swift */; };
-		1E7032B11CE8F7B200B1C18D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7032B01CE8F7B200B1C18D /* User.swift */; };
-		1E7032B61CE9084500B1C18D /* StoryTellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7032B51CE9084500B1C18D /* StoryTellerViewController.swift */; };
 		1E841C581C66DA0C00AD638E /* TripsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C571C66DA0C00AD638E /* TripsService.swift */; };
 		1E841C5A1C66DB8900AD638E /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C591C66DB8900AD638E /* Trip.swift */; };
 		1E841C5C1C6704A600AD638E /* TripListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C5B1C6704A600AD638E /* TripListTableViewController.swift */; };
@@ -101,10 +97,6 @@
 		1E64A6981CA6307F00D9F90C /* PartyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyService.swift; sourceTree = "<group>"; };
 		1E6998431CE191F900DFC697 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		1E6998471CE3735A00DFC697 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		1E7032AC1CE8F53A00B1C18D /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketResponse.swift; sourceTree = "<group>"; };
-		1E7032AE1CE8F58800B1C18D /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
-		1E7032B01CE8F7B200B1C18D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		1E7032B51CE9084500B1C18D /* StoryTellerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTellerViewController.swift; sourceTree = "<group>"; };
 		1E841C571C66DA0C00AD638E /* TripsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripsService.swift; sourceTree = "<group>"; };
 		1E841C591C66DB8900AD638E /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		1E841C5B1C6704A600AD638E /* TripListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListTableViewController.swift; sourceTree = "<group>"; };
@@ -182,7 +174,6 @@
 		1E05B8891C5D135D009E37BA /* trip-advisori-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				1E7032AB1CE829B800B1C18D /* Templates */,
 				1EE4C5601CB5FD530095845C /* components */,
 				1E841C631C67C40000AD638E /* utilities */,
 				1EF93C041C60536D00A5B463 /* models */,
@@ -227,21 +218,6 @@
 			name = tripPicker;
 			sourceTree = "<group>";
 		};
-		1E7032AB1CE829B800B1C18D /* Templates */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Templates;
-			sourceTree = "<group>";
-		};
-		1E7032B21CE9080800B1C18D /* storyTeller */ = {
-			isa = PBXGroup;
-			children = (
-				1E7032B51CE9084500B1C18D /* StoryTellerViewController.swift */,
-			);
-			name = storyTeller;
-			sourceTree = "<group>";
-		};
 		1E841C631C67C40000AD638E /* utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,7 +229,6 @@
 		1EE4C5601CB5FD530095845C /* components */ = {
 			isa = PBXGroup;
 			children = (
-				1E7032B21CE9080800B1C18D /* storyTeller */,
 				1E1711941CD458AC0083236C /* tripPicker */,
 				1EE4C56B1CB6076B0095845C /* contentLoader */,
 				1EE4C56A1CB605B40095845C /* trip */,
@@ -350,9 +325,6 @@
 				1E841C591C66DB8900AD638E /* Trip.swift */,
 				1E2014951C70DB790012B863 /* FacebookProfile.swift */,
 				1EF49A861C990035001A32C2 /* Party.swift */,
-				1E7032AC1CE8F53A00B1C18D /* SocketResponse.swift */,
-				1E7032AE1CE8F58800B1C18D /* Scene.swift */,
-				1E7032B01CE8F7B200B1C18D /* User.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -436,6 +408,7 @@
 				TargetAttributes = {
 					1E05B8861C5D135D009E37BA = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = XLWZ7RAXK6;
 					};
 					1E05B89C1C5D135D009E37BA = {
 						CreatedOnToolsVersion = 7.2;
@@ -549,7 +522,6 @@
 			files = (
 				1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */,
 				1E17118D1CD41F320083236C /* ContentLoaderService.swift in Sources */,
-				1E7032B61CE9084500B1C18D /* StoryTellerViewController.swift in Sources */,
 				1E841C5A1C66DB8900AD638E /* Trip.swift in Sources */,
 				1EF93BFE1C6046F800A5B463 /* InitialLoadingViewController.swift in Sources */,
 				1E1711931CD431D20083236C /* Injector.swift in Sources */,
@@ -558,10 +530,8 @@
 				1E05B8BF1C5D1A07009E37BA /* DataWrapper.swift in Sources */,
 				1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */,
 				1E0003CC1C8525F400B25C05 /* TripDetailsViewController.swift in Sources */,
-				1E7032AF1CE8F58800B1C18D /* Scene.swift in Sources */,
 				1EF49A871C990035001A32C2 /* Party.swift in Sources */,
 				1E6998441CE191F900DFC697 /* AlertService.swift in Sources */,
-				1E7032B11CE8F7B200B1C18D /* User.swift in Sources */,
 				1E1F32601CA8B9CE009B6D0F /* LobbyViewController.swift in Sources */,
 				1E0003CA1C83954000B25C05 /* AmbassadorOfTheAPI.swift in Sources */,
 				1E05B88B1C5D135D009E37BA /* AppDelegate.swift in Sources */,
@@ -577,7 +547,6 @@
 				1EF93C001C604DA600A5B463 /* HomeTabBarViewController.swift in Sources */,
 				1E05B8BD1C5D193B009E37BA /* CurrentLocationService.swift in Sources */,
 				1E2014961C70DB790012B863 /* FacebookProfile.swift in Sources */,
-				1E7032AD1CE8F53A00B1C18D /* SocketResponse.swift in Sources */,
 				1E841C621C67C02200AD638E /* TripListTableViewCellDecorator.swift in Sources */,
 				1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */,
 				1E05B8C11C5D327A009E37BA /* MapViewController.swift in Sources */,
@@ -725,10 +694,13 @@
 			baseConfigurationReference = CC641C4C708F459BFB4B60B1 /* Pods-trip-advisori-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lightupon.lightupon-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "trip-advisori-iOS/-Bridging-Header.h";
 			};
 			name = Debug;
@@ -738,10 +710,13 @@
 			baseConfigurationReference = 7FFFEB7839A565E790733793 /* Pods-trip-advisori-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lightupon.lightupon-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "trip-advisori-iOS/-Bridging-Header.h";
 			};
 			name = Release;

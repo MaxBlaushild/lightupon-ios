@@ -13,7 +13,6 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     private let socketService: SocketService = Injector.sharedInjector.getSocketService()
     private let alertService: AlertService = Injector.sharedInjector.getAlertService()
     
-    @IBOutlet weak var startPartyButton: UIButton!
     var currentParty: Party!
 
     @IBOutlet weak var passcodeLabel: UILabel!
@@ -26,11 +25,15 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     }
     
     @IBAction func startParty(sender: AnyObject) {
-        partyService.startNextScene(currentParty.id)
+        partyService.startParty(currentParty.id, callback: self.onPartyStarted)
     }
     
     @IBAction func leaveParty(sender: AnyObject) {
         partyService.leaveParty(currentParty.id, callback: self.onPartyLeft)
+    }
+    
+    func onPartyStarted() {
+        print("wahooo")
     }
     
     func getParty() {
@@ -43,20 +46,8 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
         socketService.openSocket(currentParty.passcode)
     }
     
-    func onResponseRecieved(socketResponse: SocketResponse) {
-        if (socketResponse.nextScene!.id != 1) {
-            segueToStoryTeller()
-        } else if (socketResponse.nextSceneAvailable!) {
-            activateStartPartyButton()
-        }
-    }
-    
-    func segueToStoryTeller() {
-        performSegueWithIdentifier("LobbyToStoryTeller", sender: nil)
-    }
-    
-    func activateStartPartyButton() {
-        startPartyButton.enabled = true
+    func onCheckIn() {
+        
     }
     
     func openAlert(title: String, message: String) {
@@ -69,11 +60,5 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destinationVC = segue.destinationViewController as? StoryTellerViewController {
-            socketService.delegate = destinationVC
-        }
     }
 }
