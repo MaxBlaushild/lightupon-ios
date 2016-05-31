@@ -11,15 +11,15 @@ import Foundation
 import UIKit
 import ObjectMapper
 
-class SocketResponse: NSObject, Mappable {
+class PartyState: NSObject, Mappable {
     var nextSceneAvailable: Bool?
-    var nextScene: Scene?
-    var Users: [User]?
+    var scene: Scene?
+    var users: [User]?
     
     func mapping(map: Map) {
         nextSceneAvailable <- map["NextSceneAvailable"]
-        nextScene          <- map["NextScene"]
-        Users              <- map["Users"]
+        scene              <- map["Scene"]
+        users              <- map["Users"]
     }
     
     required init?(_ map: Map) {

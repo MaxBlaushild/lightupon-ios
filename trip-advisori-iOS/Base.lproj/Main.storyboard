@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zM7-UW-UFv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zM7-UW-UFv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -224,34 +224,55 @@
             <point key="canvasLocation" x="-2159" y="1056"/>
         </scene>
         <!--Story Teller View Controller-->
-        <scene sceneID="ZaQ-HI-xke">
+        <scene sceneID="Qlu-6U-Qo3">
             <objects>
-                <viewController id="HdF-g8-bjL" customClass="StoryTellerViewController" customModule="trip_advisori_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5HK-bC-KLO"/>
-                        <viewControllerLayoutGuide type="bottom" id="TZO-lZ-mXE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="MRq-0E-QxT">
+                <collectionViewController id="0T6-nY-vo1" customClass="StoryTellerViewController" customModule="trip_advisori_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Hfc-Uv-eSh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyteller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pku-F1-yzr">
-                                <rect key="frame" x="261" y="289" width="79" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="pku-F1-yzr" firstAttribute="centerY" secondItem="MRq-0E-QxT" secondAttribute="centerY" id="Tcn-V0-ysJ"/>
-                            <constraint firstItem="pku-F1-yzr" firstAttribute="centerX" secondItem="MRq-0E-QxT" secondAttribute="centerX" id="iCe-bC-0Gm"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PdN-tM-tuL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" red="0.79297870062162801" green="0.095812499275981344" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2q2-yl-hzf">
+                            <size key="itemSize" width="449" height="466"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cardCollectionViewCell" id="Oeu-kj-CYY" customClass="CardCollectionViewCell" customModule="trip_advisori_iOS" customModuleProvider="target">
+                                <rect key="frame" x="75.5" y="0.0" width="449" height="466"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="449" height="466"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Dd-Fi-iNG">
+                                            <rect key="frame" x="203" y="222" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="1" green="0.96712150894588" blue="0.99612552607774474" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="0Dd-Fi-iNG" firstAttribute="centerY" secondItem="Oeu-kj-CYY" secondAttribute="centerY" id="F44-Kj-1ia"/>
+                                    <constraint firstItem="0Dd-Fi-iNG" firstAttribute="centerX" secondItem="Oeu-kj-CYY" secondAttribute="centerX" id="UvI-Pg-CGz"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="cardLabel" destination="0Dd-Fi-iNG" id="rPo-H2-agv"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="0T6-nY-vo1" id="a5H-0j-XuV"/>
+                            <outlet property="delegate" destination="0T6-nY-vo1" id="79k-GT-5iz"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mwg-OV-0t8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-701" y="-1170"/>
+            <point key="canvasLocation" x="-622" y="-1114"/>
         </scene>
         <!--Lobby View Controller-->
         <scene sceneID="xLw-4z-Xyr">
@@ -288,7 +309,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f91-wq-Tm3">
                                 <rect key="frame" x="328" y="255" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -298,12 +319,12 @@
                         <outlet property="passcodeLabel" destination="f91-wq-Tm3" id="Dfg-Dq-n87"/>
                         <outlet property="startPartyButton" destination="ijV-4R-dTP" id="LPw-DP-kLe"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="LobbyToHome" id="2XB-nh-RvN"/>
-                        <segue destination="HdF-g8-bjL" kind="show" identifier="LobbyToStoryTeller" id="K7y-dE-Hni"/>
+                        <segue destination="0T6-nY-vo1" kind="show" identifier="LobbyToStoryTeller" id="ZD8-kb-jyu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hrn-dv-c1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-697" y="-457"/>
+            <point key="canvasLocation" x="-630" y="-493"/>
         </scene>
         <!--Initial Loading View Controller-->
         <scene sceneID="KWa-es-hyg">

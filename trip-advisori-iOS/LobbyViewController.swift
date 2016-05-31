@@ -13,10 +13,11 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     private let socketService: SocketService = Injector.sharedInjector.getSocketService()
     private let alertService: AlertService = Injector.sharedInjector.getAlertService()
     
-    @IBOutlet weak var startPartyButton: UIButton!
+    var partyState: PartyState!
     var currentParty: Party!
 
     @IBOutlet weak var passcodeLabel: UILabel!
+    @IBOutlet weak var startPartyButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +44,12 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
         socketService.openSocket(currentParty.passcode)
     }
     
-    func onResponseRecieved(socketResponse: SocketResponse) {
-        if (socketResponse.nextScene!.id != 1) {
+    func onResponseRecieved(_partyState_: PartyState) {
+        partyState = _partyState_
+        
+        if (partyState.scene?.id != 0) {
             segueToStoryTeller()
-        } else if (socketResponse.nextSceneAvailable!) {
+        } else if (partyState.nextSceneAvailable!) {
             activateStartPartyButton()
         }
     }
@@ -74,6 +77,7 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destinationVC = segue.destinationViewController as? StoryTellerViewController {
             socketService.delegate = destinationVC
+            destinationVC.partyState = partyState
         }
     }
 }
