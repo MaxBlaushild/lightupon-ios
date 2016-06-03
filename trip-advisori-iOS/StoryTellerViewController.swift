@@ -11,17 +11,14 @@ import UIKit
 private let reuseIdentifier = "cardCollectionViewCell"
 
 class StoryTellerViewController: UICollectionViewController, SocketServiceDelegate {
-    private var cards: [Card] = [Card]()
+    private let partyService:PartyService = Injector.sharedInjector.getPartyService()
+    
+    
     var partyState: PartyState!
+    var currentParty: Party!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,10 +30,17 @@ class StoryTellerViewController: UICollectionViewController, SocketServiceDelega
         
     }
     
+    @IBAction func leaveParty(sender: AnyObject) {
+        partyService.leaveParty(currentParty.id, callback: self.onPartyLeft)
+    }
+    
     func onResponseRecieved(_partyState_: PartyState) {
         
     }
-
+    
+    func onPartyLeft() {
+        performSegueWithIdentifier("StoryTellerToHome", sender: nil)
+    }
     /*
     // MARK: - Navigation
 
@@ -61,11 +65,11 @@ class StoryTellerViewController: UICollectionViewController, SocketServiceDelega
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> CardCollectionViewCell {
+        let card: Card = partyState.scene!.cards![indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CardCollectionViewCell
-    
-        let card:Card = partyState.scene!.cards![indexPath.row]
-        cell.setCard(card)
-    
+        
+        cell.bindCard(card)
+
         return cell
     }
 
