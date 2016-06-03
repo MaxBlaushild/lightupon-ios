@@ -245,22 +245,16 @@
                                     <rect key="frame" x="0.0" y="0.0" width="449" height="466"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Dd-Fi-iNG">
-                                            <rect key="frame" x="203" y="222" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y9S-RB-qS7" customClass="CardView" customModule="trip_advisori_iOS" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="449" height="466"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.96712150894588" blue="0.99612552607774474" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="0Dd-Fi-iNG" firstAttribute="centerY" secondItem="Oeu-kj-CYY" secondAttribute="centerY" id="F44-Kj-1ia"/>
-                                    <constraint firstItem="0Dd-Fi-iNG" firstAttribute="centerX" secondItem="Oeu-kj-CYY" secondAttribute="centerX" id="UvI-Pg-CGz"/>
-                                </constraints>
                                 <connections>
-                                    <outlet property="cardLabel" destination="0Dd-Fi-iNG" id="rPo-H2-agv"/>
+                                    <segue destination="49e-Tb-3d3" kind="show" identifier="StoryTellerToHome" id="tWa-8y-sJp"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -272,7 +266,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mwg-OV-0t8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-622" y="-1114"/>
+            <point key="canvasLocation" x="-654" y="-1190"/>
         </scene>
         <!--Lobby View Controller-->
         <scene sceneID="xLw-4z-Xyr">
@@ -385,8 +379,8 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="n8e-Qh-4NE"/>
         <segue reference="zDp-n4-q0i"/>
-        <segue reference="2XB-nh-RvN"/>
+        <segue reference="n8e-Qh-4NE"/>
+        <segue reference="tWa-8y-sJp"/>
     </inferredMetricsTieBreakers>
 </document>

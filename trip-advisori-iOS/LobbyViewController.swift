@@ -78,6 +78,7 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
         if let destinationVC = segue.destinationViewController as? StoryTellerViewController {
             socketService.delegate = destinationVC
             destinationVC.partyState = partyState
+            destinationVC.currentParty = currentParty
         }
     }
 }

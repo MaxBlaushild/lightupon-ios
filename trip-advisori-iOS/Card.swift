@@ -16,15 +16,19 @@ class Card: NSObject, Mappable {
     var imageUrl: String?
     var cardOrder: Int?
     var universal: Bool?
+    var identifier: String?
+    var nibId: String?
     
     
     func mapping(map: Map) {
-        id        <- map["ID"]
-        cardType  <- map["CardType"]
-        text      <- map["Text"]
-        imageUrl  <- map["ImageURL"]
-        cardOrder <- map["CardOrder"]
-        universal <- map["Universal"]
+        id         <- map["ID"]
+        cardType   <- map["CardType"]
+        text       <- map["Text"]
+        imageUrl   <- map["ImageURL"]
+        cardOrder  <- map["CardOrder"]
+        universal  <- map["Universal"]
+        identifier <- map["Identifier"]
+        nibId      <- map["NibID"]
     }
     
     required init?(_ map: Map) {

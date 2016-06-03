@@ -11,33 +11,36 @@ import UIKit
 class Injector: Service {
     static let sharedInjector: Injector = Injector()
     
-    private var apiAmbassador: AmbassadorToTheAPI!
-    private var authService: AuthService!
-    private var contentLoaderService: ContentLoaderService!
-    private var tripsService: TripsService!
-    private var partyService: PartyService!
-    private var currentLocationService: CurrentLocationService!
-    private var profileService: ProfileService!
-    private var loginService: LoginService!
-    private var socketService: SocketService!
-    private var alertService: AlertService!
+    private var apiAmbassador: AmbassadorToTheAPI
+    private var authService: AuthService
+    private var contentLoaderService: ContentLoaderService
+    private var tripsService: TripsService
+    private var partyService: PartyService
+    private var currentLocationService: CurrentLocationService
+    private var profileService: ProfileService
+    private var loginService: LoginService
+    private var socketService: SocketService
+    private var alertService: AlertService
+    private var cardService: CardService
 
     override init(){
-        super.init()
-        instantiateServices()
-    }
-    
-    func instantiateServices() {
         authService = AuthService()
         currentLocationService = CurrentLocationService()
         profileService = ProfileService()
         alertService = AlertService()
+        cardService = CardService()
         loginService = LoginService(_authService_: authService)
         apiAmbassador = AmbassadorToTheAPI(_authService_: authService)
         tripsService = TripsService(_apiAmbassador_: apiAmbassador)
         partyService = PartyService(_apiAmbassador_: apiAmbassador)
         contentLoaderService = ContentLoaderService(_authService_: authService, _partyService_: partyService)
         socketService = SocketService(_authService_: authService, _currentLocation_: currentLocationService)
+        
+        super.init()
+    }
+    
+    func getCardService() -> CardService {
+        return cardService
     }
     
     func getAuthService() -> AuthService {
