@@ -14,11 +14,13 @@ class ProfileViewController: UIViewController {
     private let profileService: ProfileService = Injector.sharedInjector.getProfileService()
 
     @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var profileBanner: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         profileService.getMyProfile(self.bindProfileToView)
+        //TEMP BANNER: Need to grab cover photo from FB? or have people capture one they can upload?
+        profileBanner.image = UIImage(named: "banner")
     }
 
     @IBAction func logout(sender: AnyObject) {
@@ -28,20 +30,11 @@ class ProfileViewController: UIViewController {
     
     func bindProfileToView(profile: FacebookProfile){
         profilePic.imageFromUrl(profile.profilePictureURL)
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

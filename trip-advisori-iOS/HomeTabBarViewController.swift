@@ -14,7 +14,6 @@ class HomeTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tripsService.getTrips(self.setTrips)
-        // Do any additional setup after loading the view.
     }
 
     
