@@ -8,17 +8,15 @@
 
 import UIKit
 
+
 class CardCollectionViewCell: UICollectionViewCell {
-    private var card: Card!
-    @IBOutlet weak var cardLabel: UILabel!
+    private let cardService:CardService = Injector.sharedInjector.getCardService()
     
-    func setCard(_card_: Card) {
-        card = _card_
-        bindCard()
+    func bindCard(card: Card) {
+        var cardView:IAmACard = cardService.getView(card.nibId!)
+        cardView.card = card
+        cardView.bindCard()
+        self.addSubview(cardView as! UIView)
     }
-    
-    func bindCard() {
-        cardLabel.text = card.text
-    }
-    
+
 }
