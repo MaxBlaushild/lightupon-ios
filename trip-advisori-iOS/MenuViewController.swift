@@ -1,23 +1,29 @@
 //
-//  JoinPartyViewController.swift
+//  MenuViewController.swift
 //  trip-advisori-iOS
 //
-//  Created by Blaushild, Max on 3/25/16.
+//  Created by Blaushild, Max on 6/7/16.
 //  Copyright © 2016 Blaushild, Max. All rights reserved.
 //
 
 import UIKit
 
-class JoinPartyViewController: MenuViewController {
-    private let partyService:PartyService = Injector.sharedInjector.getPartyService()
-    
-    @IBOutlet weak var passcodeField: UITextField!
-    
+class MenuViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Colors.basePurple
-        addTitle("JOURNEY", color: UIColor.whiteColor())
+
         // Do any additional setup after loading the view.
+    }
+    
+    func addTitle(title: String, color: UIColor) {
+        let label = UILabel(frame: CGRectMake(0, 0, 200, 40))
+        label.center = CGPointMake(100, 50)
+        label.textAlignment = NSTextAlignment.Center
+        label.text = title
+        label.font = UIFont(name: Fonts.dosisExtraLight, size: 38)
+        label.textColor = color
+        self.view.addSubview(label)
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,14 +31,6 @@ class JoinPartyViewController: MenuViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func submitPasscode(sender: AnyObject) {
-        let passcode:String = passcodeField.text!
-        partyService.joinParty(passcode, callback: self.goToLobby)
-    }
-    
-    func goToLobby() {
-        self.performSegueWithIdentifier("JoinPartyToLobby", sender: self)
-    }
 
     /*
     // MARK: - Navigation

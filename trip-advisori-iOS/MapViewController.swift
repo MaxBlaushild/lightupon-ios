@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController {
+class MapViewController: MenuViewController {
     var currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
     var trips:[Trip]!
 
@@ -24,6 +24,8 @@ class MapViewController: UIViewController {
         for trip in trips {
             placeTripOnMap(trip, mapView: mapView)
         }
+        
+        addTitle("SERENDIPITY", color: Colors.basePurple)
     }
 
     override func didReceiveMemoryWarning() {

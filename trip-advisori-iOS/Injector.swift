@@ -35,7 +35,6 @@ class Injector: Service {
         partyService = PartyService(_apiAmbassador_: apiAmbassador)
         contentLoaderService = ContentLoaderService(_authService_: authService, _partyService_: partyService)
         socketService = SocketService(_authService_: authService, _currentLocation_: currentLocationService)
-        
         super.init()
     }
     
