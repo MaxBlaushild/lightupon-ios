@@ -16,6 +16,7 @@ class TripListTableViewCellDecorator: NSObject {
         cell.tripTitle.text = trip.title
         cell.tripDescription.text = trip.descriptionText
         cell.tag = trip.id
+        cell.estimatedTime.text = trip.estimatedTime
         
     }
 

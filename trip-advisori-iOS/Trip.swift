@@ -17,6 +17,7 @@ class Trip: NSObject {
     var title: String
     var descriptionText: String
     var imageUrl: String
+    var estimatedTime: String
     
     required init(json:JSON){
         var trip:[String: JSON] = json.dictionary!
@@ -27,5 +28,9 @@ class Trip: NSObject {
         self.title = trip["Title"]!.string!
         self.descriptionText = trip["Description"]!.string!
         self.id = trip["ID"]!.int!
+        let time = trip["EstimatedTime"]!.int!
+        let hours = time / 60
+        let minutes = time % 60
+        self.estimatedTime = "\(hours):\(minutes)h"
     }
 }

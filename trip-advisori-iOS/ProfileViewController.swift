@@ -19,8 +19,6 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         profileService.getMyProfile(self.bindProfileToView)
-        //TEMP BANNER: Need to grab cover photo from FB? or have people capture one they can upload?
-        profileBanner.image = UIImage(named: "banner")
     }
 
     @IBAction func logout(sender: AnyObject) {
@@ -29,8 +27,8 @@ class ProfileViewController: UIViewController {
     }
     
     func bindProfileToView(profile: FacebookProfile){
+        profileBanner.imageFromUrl(profile.coverPhoto)
         profilePic.imageFromUrl(profile.profilePictureURL)
-        
     }
     
     override func didReceiveMemoryWarning() {

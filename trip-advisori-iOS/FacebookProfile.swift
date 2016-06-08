@@ -15,6 +15,7 @@ class FacebookProfile: NSObject {
     var email: String = ""
     var id:String = ""
     var profilePictureURL: String = ""
+    var coverPhoto:String = ""
    
     required init(json: JSON){
         let profile:[String: JSON] = json.dictionary!
@@ -26,6 +27,7 @@ class FacebookProfile: NSObject {
         self.fullName = profile["name"]!.string!
         self.email = profile["email"]!.string!
         self.profilePictureURL = data["url"]!.string!
+        self.coverPhoto = json["cover"]["source"].string!
 
     }
 }

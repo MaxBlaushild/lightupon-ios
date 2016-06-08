@@ -44,6 +44,18 @@
 		1E841C651C67C48F00AD638E /* AsynchronousUIImageLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */; };
 		1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */; };
 		1ED4D5A61CEA8D9500722695 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED4D5A51CEA8D9500722695 /* Card.swift */; };
+		1ED69B351D07A96800CF2172 /* Dosis-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ED69B2D1D07A96800CF2172 /* Dosis-Bold.otf */; };
+		1ED69B361D07A96800CF2172 /* Dosis-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ED69B2E1D07A96800CF2172 /* Dosis-ExtraBold.otf */; };
+		1ED69B371D07A96800CF2172 /* Dosis-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ED69B2F1D07A96800CF2172 /* Dosis-ExtraLight.otf */; };
+		1ED69B381D07A96800CF2172 /* Dosis-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ED69B301D07A96800CF2172 /* Dosis-Light.otf */; };
+		1ED69B391D07A96800CF2172 /* Dosis-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ED69B311D07A96800CF2172 /* Dosis-Medium.otf */; };
+		1ED69B3A1D07A96800CF2172 /* Dosis-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ED69B321D07A96800CF2172 /* Dosis-Regular.otf */; };
+		1ED69B3B1D07A96800CF2172 /* Dosis-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ED69B331D07A96800CF2172 /* Dosis-SemiBold.otf */; };
+		1ED69B3C1D07A96800CF2172 /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1ED69B341D07A96800CF2172 /* SIL Open Font License.txt */; };
+		1ED69B3E1D07AF5100CF2172 /* fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B3D1D07AF5100CF2172 /* fonts.swift */; };
+		1ED69B401D07B19A00CF2172 /* colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B3F1D07B19A00CF2172 /* colors.swift */; };
+		1ED69B421D07B1C300CF2172 /* ColorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B411D07B1C300CF2172 /* ColorFromHex.swift */; };
+		1ED69B461D07B3EF00CF2172 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B451D07B3EF00CF2172 /* MenuViewController.swift */; };
 		1EE4C55F1CB5ED130095845C /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE4C55E1CB5ED130095845C /* TripViewController.swift */; };
 		1EF49A871C990035001A32C2 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF49A861C990035001A32C2 /* Party.swift */; };
 		1EF783A11CFF5DAF00860510 /* TextHero.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EF783A01CFF5DAF00860510 /* TextHero.xib */; };
@@ -121,6 +133,18 @@
 		1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousUIImageLoading.swift; sourceTree = "<group>"; };
 		1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		1ED4D5A51CEA8D9500722695 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		1ED69B2D1D07A96800CF2172 /* Dosis-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Bold.otf"; sourceTree = "<group>"; };
+		1ED69B2E1D07A96800CF2172 /* Dosis-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraBold.otf"; sourceTree = "<group>"; };
+		1ED69B2F1D07A96800CF2172 /* Dosis-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraLight.otf"; sourceTree = "<group>"; };
+		1ED69B301D07A96800CF2172 /* Dosis-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Light.otf"; sourceTree = "<group>"; };
+		1ED69B311D07A96800CF2172 /* Dosis-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Medium.otf"; sourceTree = "<group>"; };
+		1ED69B321D07A96800CF2172 /* Dosis-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Regular.otf"; sourceTree = "<group>"; };
+		1ED69B331D07A96800CF2172 /* Dosis-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.otf"; sourceTree = "<group>"; };
+		1ED69B341D07A96800CF2172 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
+		1ED69B3D1D07AF5100CF2172 /* fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fonts.swift; sourceTree = "<group>"; };
+		1ED69B3F1D07B19A00CF2172 /* colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = colors.swift; sourceTree = "<group>"; };
+		1ED69B411D07B1C300CF2172 /* ColorFromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorFromHex.swift; sourceTree = "<group>"; };
+		1ED69B451D07B3EF00CF2172 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		1EE4C55E1CB5ED130095845C /* TripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
 		1EF49A861C990035001A32C2 /* Party.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
 		1EF783A01CFF5DAF00860510 /* TextHero.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextHero.xib; sourceTree = "<group>"; };
@@ -198,6 +222,8 @@
 		1E05B8891C5D135D009E37BA /* trip-advisori-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				1ED69B2C1D07A93500CF2172 /* styles */,
+				1ED69B2B1D07A92C00CF2172 /* resources */,
 				1EF7839B1CFF46D100860510 /* cards */,
 				1EE4C5601CB5FD530095845C /* components */,
 				1E841C631C67C40000AD638E /* utilities */,
@@ -257,8 +283,33 @@
 			children = (
 				1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */,
 				1EF783AA1D0084A600860510 /* FromNib.swift */,
+				1ED69B411D07B1C300CF2172 /* ColorFromHex.swift */,
 			);
 			name = utilities;
+			sourceTree = "<group>";
+		};
+		1ED69B2B1D07A92C00CF2172 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				1ED69B2D1D07A96800CF2172 /* Dosis-Bold.otf */,
+				1ED69B2E1D07A96800CF2172 /* Dosis-ExtraBold.otf */,
+				1ED69B2F1D07A96800CF2172 /* Dosis-ExtraLight.otf */,
+				1ED69B301D07A96800CF2172 /* Dosis-Light.otf */,
+				1ED69B311D07A96800CF2172 /* Dosis-Medium.otf */,
+				1ED69B321D07A96800CF2172 /* Dosis-Regular.otf */,
+				1ED69B331D07A96800CF2172 /* Dosis-SemiBold.otf */,
+				1ED69B341D07A96800CF2172 /* SIL Open Font License.txt */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
+		1ED69B2C1D07A93500CF2172 /* styles */ = {
+			isa = PBXGroup;
+			children = (
+				1ED69B3D1D07AF5100CF2172 /* fonts.swift */,
+				1ED69B3F1D07B19A00CF2172 /* colors.swift */,
+			);
+			name = styles;
 			sourceTree = "<group>";
 		};
 		1EE4C5601CB5FD530095845C /* components */ = {
@@ -316,6 +367,7 @@
 				1EF93C061C605A5C00A5B463 /* Service.swift */,
 				1E6998431CE191F900DFC697 /* AlertService.swift */,
 				1EF783B21D00D8A500860510 /* CardService.swift */,
+				1ED69B451D07B3EF00CF2172 /* MenuViewController.swift */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -497,11 +549,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ED69B361D07A96800CF2172 /* Dosis-ExtraBold.otf in Resources */,
+				1ED69B391D07A96800CF2172 /* Dosis-Medium.otf in Resources */,
+				1ED69B381D07A96800CF2172 /* Dosis-Light.otf in Resources */,
 				1EF783A11CFF5DAF00860510 /* TextHero.xib in Resources */,
 				1E05B8971C5D135D009E37BA /* LaunchScreen.storyboard in Resources */,
 				1E05B8941C5D135D009E37BA /* Assets.xcassets in Resources */,
+				1ED69B3C1D07A96800CF2172 /* SIL Open Font License.txt in Resources */,
 				1E05B8921C5D135D009E37BA /* Main.storyboard in Resources */,
+				1ED69B3B1D07A96800CF2172 /* Dosis-SemiBold.otf in Resources */,
+				1ED69B3A1D07A96800CF2172 /* Dosis-Regular.otf in Resources */,
 				1EF783AD1D00940100860510 /* PictureHero.xib in Resources */,
+				1ED69B371D07A96800CF2172 /* Dosis-ExtraLight.otf in Resources */,
+				1ED69B351D07A96800CF2172 /* Dosis-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,11 +651,13 @@
 				1E1A1A9B1CEE9D1A00A3A812 /* StoryTellerViewController.swift in Sources */,
 				1E6998441CE191F900DFC697 /* AlertService.swift in Sources */,
 				1E7032B11CE8F7B200B1C18D /* User.swift in Sources */,
+				1ED69B401D07B19A00CF2172 /* colors.swift in Sources */,
 				1E1F32601CA8B9CE009B6D0F /* LobbyViewController.swift in Sources */,
 				1E0003CA1C83954000B25C05 /* AmbassadorOfTheAPI.swift in Sources */,
 				1E05B88B1C5D135D009E37BA /* AppDelegate.swift in Sources */,
 				1EF783AF1D00941700860510 /* PictureHero.swift in Sources */,
 				1EE4C55F1CB5ED130095845C /* TripViewController.swift in Sources */,
+				1ED69B3E1D07AF5100CF2172 /* fonts.swift in Sources */,
 				1E841C581C66DA0C00AD638E /* TripsService.swift in Sources */,
 				1E20149F1C72B7730012B863 /* AuthService.swift in Sources */,
 				1ED4D5A61CEA8D9500722695 /* Card.swift in Sources */,
@@ -616,6 +678,8 @@
 				1E2014901C705C280012B863 /* ProfileService.swift in Sources */,
 				1E1A1A9D1CF243CC00A3A812 /* CardCollectionViewCell.swift in Sources */,
 				1EF93C071C605A5C00A5B463 /* Service.swift in Sources */,
+				1ED69B421D07B1C300CF2172 /* ColorFromHex.swift in Sources */,
+				1ED69B461D07B3EF00CF2172 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
