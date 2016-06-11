@@ -42,12 +42,7 @@ class AmbassadorToTheAPI: Service {
     func get(URLString: URLStringConvertible, success: NetworkSuccessHandler?) {
         setHeaders()
         Alamofire.request(.GET, URLString, headers: headers).responseJSON { request, response, result in
-                
-            if response!.statusCode == 401 {
-                self.refreshToken(URLString, success: success)
-            } else {
-                success!(request, response, result)
-            }
+            self.processResponse(request, response: response, result: result, success: success!, URLString: URLString)
         }
             
     }
@@ -55,12 +50,7 @@ class AmbassadorToTheAPI: Service {
     func post(URLString: URLStringConvertible, parameters:[String:AnyObject], success: NetworkSuccessHandler?) {
         setHeaders()
         Alamofire.request(.POST, URLString, parameters: parameters, headers: headers, encoding: .JSON).responseJSON { request, response, result in
-            
-            if response!.statusCode == 401 {
-                self.refreshToken(URLString, success: success)
-            } else {
-                success!(request, response, result)
-            }
+            self.processResponse(request, response: response!, result: result, success: success!, URLString: URLString)
         }
         
     }
@@ -68,13 +58,29 @@ class AmbassadorToTheAPI: Service {
     func delete(URLString: URLStringConvertible, success: NetworkSuccessHandler?) {
         setHeaders()
         Alamofire.request(.POST, URLString, headers: headers, encoding: .JSON).responseJSON { request, response, result in
-            
-            if response!.statusCode == 401 {
-                self.refreshToken(URLString, success: success)
-            } else {
-                success!(request, response, result)
-            }
+            self.processResponse(request, response: response!, result: result, success: success!, URLString: URLString)
         }
+    }
+    
+    func processResponse(request: NSURLRequest?, response: NSHTTPURLResponse?, result: Result<AnyObject>, success: NetworkSuccessHandler, URLString: URLStringConvertible) {
+        if result.isFailure {
+            createNoInternetWarning()
+        } else if response!.statusCode == 401 {
+            self.refreshToken(URLString, success: success)
+        } else {
+            success(request, response, result)
+        }
+    }
+    
+    func createNoInternetWarning() {
+        let label = UILabel(frame: CGRectMake(0, 0, 200, 40))
+        label.center = CGPointMake(200, 580)
+        label.textAlignment = NSTextAlignment.Center
+        label.text = "No Internet Connectivity"
+        label.font = UIFont(name: Fonts.dosisBold, size: 16)
+        label.textColor = UIColor.whiteColor()
+        label.backgroundColor = Colors.basePurple
+        UIApplication.topViewController()!.view.addSubview(label)
     }
     
     private func refreshToken(URLString: URLStringConvertible, success: NetworkSuccessHandler?) {
