@@ -30,6 +30,7 @@
 		1E20149C1C72B39D0012B863 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20149B1C72B39D0012B863 /* ProfileViewController.swift */; };
 		1E20149F1C72B7730012B863 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20149E1C72B7730012B863 /* AuthService.swift */; };
 		1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22C6741C70232200B13A1B /* LoginViewController.swift */; };
+		1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6B9F1D0C8A1F00D5793A /* owl.png */; };
 		1E64A6971CA627A000D9F90C /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6961CA627A000D9F90C /* JoinPartyViewController.swift */; };
 		1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6981CA6307F00D9F90C /* PartyService.swift */; };
 		1E6998441CE191F900DFC697 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6998431CE191F900DFC697 /* AlertService.swift */; };
@@ -120,6 +121,7 @@
 		1E20149E1C72B7730012B863 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1E22C6711C701AE000B13A1B /* -Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "-Bridging-Header.h"; sourceTree = "<group>"; };
 		1E22C6741C70232200B13A1B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1E5F6B9F1D0C8A1F00D5793A /* owl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owl.png; sourceTree = "<group>"; };
 		1E64A6961CA627A000D9F90C /* JoinPartyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinPartyViewController.swift; sourceTree = "<group>"; };
 		1E64A6981CA6307F00D9F90C /* PartyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyService.swift; sourceTree = "<group>"; };
 		1E6998431CE191F900DFC697 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				1ED69B311D07A96800CF2172 /* Dosis-Medium.otf */,
 				1ED69B321D07A96800CF2172 /* Dosis-Regular.otf */,
 				1ED69B331D07A96800CF2172 /* Dosis-SemiBold.otf */,
+				1E5F6B9F1D0C8A1F00D5793A /* owl.png */,
 				1ED69B341D07A96800CF2172 /* SIL Open Font License.txt */,
 			);
 			name = resources;
@@ -445,6 +448,9 @@
 		1E05B87F1C5D135D009E37BA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					owl,
+				);
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Blaushild, Max";
@@ -490,6 +496,7 @@
 			files = (
 				1ED69B361D07A96800CF2172 /* Dosis-ExtraBold.otf in Resources */,
 				1ED69B391D07A96800CF2172 /* Dosis-Medium.otf in Resources */,
+				1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */,
 				1ED69B381D07A96800CF2172 /* Dosis-Light.otf in Resources */,
 				1EF783A11CFF5DAF00860510 /* TextHero.xib in Resources */,
 				1E05B8971C5D135D009E37BA /* LaunchScreen.storyboard in Resources */,

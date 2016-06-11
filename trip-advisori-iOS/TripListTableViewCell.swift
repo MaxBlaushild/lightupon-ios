@@ -9,31 +9,17 @@
 import UIKit
 
 class TripListTableViewCell: UITableViewCell {
-    @IBOutlet weak var tripTitle: UILabel! {
-        didSet {
-            tripTitle.font = UIFont(name: Fonts.dosisMedium, size: 18)
-            tripTitle.textColor = UIColor.whiteColor()
-        }
-    }
-    @IBOutlet weak var tripDescription: UILabel!{
-        didSet {
-            tripDescription.font = UIFont(name: Fonts.dosisMedium, size: 18)
-            tripDescription.textColor = UIColor.whiteColor()
-        }
-    }
+    @IBOutlet weak var tripTitle: UILabel!
+    @IBOutlet weak var tripDescription: UILabel!
     @IBOutlet weak var tripImage: UIImageView!
+    @IBOutlet weak var estimatedTime: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    @IBOutlet weak var estimatedTime: UILabel! {
-        didSet {
-            estimatedTime.font = UIFont(name: Fonts.dosisMedium, size: 18)
-            estimatedTime.textColor = UIColor.whiteColor()
-        }
-    }
+
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

@@ -15,7 +15,7 @@ class JoinPartyViewController: MenuViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Colors.basePurple
+        
         addTitle("JOURNEY", color: UIColor.whiteColor())
         // Do any additional setup after loading the view.
     }

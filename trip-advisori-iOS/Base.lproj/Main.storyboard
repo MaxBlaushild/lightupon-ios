@@ -5,6 +5,16 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Dosis-Regular.otf">
+            <string>Dosis-Regular</string>
+            <string>Dosis-Regular</string>
+            <string>Dosis-Regular</string>
+        </mutableArray>
+        <mutableArray key="Dosis-SemiBold.otf">
+            <string>Dosis-SemiBold</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Map-->
         <scene sceneID="hNz-n2-bh7">
@@ -66,37 +76,38 @@
         <scene sceneID="9AP-aB-2QA">
             <objects>
                 <tableViewController title="List" id="Fhg-ak-H59" customClass="TripListTableViewController" customModule="trip_advisori_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" id="tfE-ps-3yA">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" id="tfE-ps-3yA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tripListTableViewCell" rowHeight="140" id="8xR-H3-KMF" customClass="TripListTableViewCell" customModule="trip_advisori_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="140"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8xR-H3-KMF" id="PxO-gp-TgI">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="139.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="140"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXd-o5-SQ3">
                                             <rect key="frame" x="0.0" y="-7" width="600" height="151"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sc-Ml-td2">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sc-Ml-td2">
                                             <rect key="frame" x="41" y="20" width="171" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-Ir-hCK">
-                                            <rect key="frame" x="41" y="81" width="171" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-Ir-hCK">
+                                            <rect key="frame" x="41" y="89" width="300" height="50"/>
+                                            <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="17"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ea5-bS-s4j">
-                                            <rect key="frame" x="295" y="59" width="70" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="estimatedTime" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ea5-bS-s4j">
+                                            <rect key="frame" x="265" y="20" width="70" height="21"/>
+                                            <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="17"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -133,33 +144,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YVn-4k-cFq">
-                                <rect key="frame" x="205" y="285" width="191" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Want to join an adventure? Enter a passcode to join a party!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pef-mW-RB2">
+                                <rect key="frame" x="151" y="194" width="299" height="104"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Igx-H8-KXL"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="toP-I2-0XF"/>
+                                    <constraint firstAttribute="height" constant="104" id="uU4-jF-iKh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="17"/>
+                                <color key="textColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="passcode" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YVn-4k-cFq">
+                                <rect key="frame" x="250" y="306" width="100" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="passcodeField:" destination="uOy-l8-fHn" eventType="editingDidEnd" id="8Mq-Uw-Jdk"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93n-0C-tZC">
-                                <rect key="frame" x="277" y="372" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="submitPasscode:" destination="uOy-l8-fHn" eventType="touchUpInside" id="gQs-bD-QAA"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Enter a password to join a party!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pef-mW-RB2">
-                                <rect key="frame" x="151" y="81" width="299" height="104"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="93n-0C-tZC" firstAttribute="top" secondItem="YVn-4k-cFq" secondAttribute="bottom" constant="55" id="7Jz-Gl-vv6"/>
-                            <constraint firstItem="pef-mW-RB2" firstAttribute="top" secondItem="aig-c5-DxS" secondAttribute="bottom" constant="43" id="Hie-Hn-NHC"/>
-                            <constraint firstItem="93n-0C-tZC" firstAttribute="centerX" secondItem="mUZ-N7-1n9" secondAttribute="centerX" id="s8z-VP-CcR"/>
+                            <constraint firstItem="YVn-4k-cFq" firstAttribute="top" secondItem="pef-mW-RB2" secondAttribute="bottom" constant="8" id="8ll-jp-phy"/>
+                            <constraint firstItem="pef-mW-RB2" firstAttribute="centerX" secondItem="mUZ-N7-1n9" secondAttribute="centerX" id="Nmz-fx-UKr"/>
+                            <constraint firstItem="YVn-4k-cFq" firstAttribute="centerX" secondItem="pef-mW-RB2" secondAttribute="centerX" id="jOF-Sp-iNQ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Journey" image="journey_unfilled" selectedImage="journey_filled" id="Soc-my-NRI"/>
@@ -366,17 +375,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUS-Bh-KEG">
-                                <rect key="frame" x="260" y="251" width="61" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="160" placeholderIntrinsicHeight="120" image="owl.png" translatesAutoresizingMaskIntoConstraints="NO" id="fjL-mL-yUJ">
+                                <rect key="frame" x="180" y="200" width="240" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="V6C-3Y-Axd"/>
+                                    <constraint firstAttribute="width" constant="240" id="Wyb-ld-12T"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fjL-mL-yUJ" firstAttribute="centerY" secondItem="DIN-K5-xq6" secondAttribute="centerY" id="2xf-ar-a0F"/>
+                            <constraint firstItem="fjL-mL-yUJ" firstAttribute="centerX" secondItem="DIN-K5-xq6" secondAttribute="centerX" id="g4j-vl-Fy5"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="loadingLabel" destination="PUS-Bh-KEG" id="dlk-GC-KX9"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="LoadingToTabs" id="buV-g5-I9B"/>
                         <segue destination="gQu-ls-H9T" kind="show" identifier="InitialToLogin" id="n8e-Qh-4NE"/>
                         <segue destination="WRV-8c-gCf" kind="show" identifier="InitialToLobby" id="zDp-n4-q0i"/>
@@ -418,14 +431,15 @@
         <image name="journey_unfilled" width="30" height="30"/>
         <image name="map_filled" width="30" height="30"/>
         <image name="map_unfilled" width="30" height="30"/>
+        <image name="owl.png" width="574" height="504"/>
         <image name="profile_filled" width="30" height="30"/>
         <image name="profile_unfilled" width="30" height="30"/>
         <image name="trips_filled" width="30" height="30"/>
         <image name="trips_unfilled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zDp-n4-q0i"/>
         <segue reference="n8e-Qh-4NE"/>
         <segue reference="tWa-8y-sJp"/>
+        <segue reference="iiN-Ge-40v"/>
     </inferredMetricsTieBreakers>
 </document>
