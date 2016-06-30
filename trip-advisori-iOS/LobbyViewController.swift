@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class LobbyViewController: UIViewController, SocketServiceDelegate {
     private let partyService: PartyService = Injector.sharedInjector.getPartyService()
@@ -56,10 +57,23 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     
     func segueToStoryTeller() {
         performSegueWithIdentifier("LobbyToStoryTeller", sender: nil)
+        print("segueToStoryTeller")
+        
+        var bombSoundEffect: AVAudioPlayer!
+        let path = NSBundle.mainBundle().pathForResource("TestSound.mp3", ofType:nil)!
+        let url = NSURL(fileURLWithPath: path)
+        do {
+            let sound = try AVAudioPlayer(contentsOfURL: url)
+            bombSoundEffect = sound
+            sound.play()
+        } catch {
+            // couldn't load file :(
+        }
     }
     
     func activateStartPartyButton() {
         startPartyButton.enabled = true
+        print("activateStartPartyButton")
     }
     
     func openAlert(title: String, message: String) {
@@ -79,6 +93,18 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
             socketService.delegate = destinationVC
             destinationVC.partyState = partyState
             destinationVC.currentParty = currentParty
+        }
+        print("prepareForSegue")
+        var bombSoundEffect: AVAudioPlayer!
+        let path = NSBundle.mainBundle().pathForResource("TestSound.mp3", ofType:nil)!
+        let url = NSURL(fileURLWithPath: path)
+        do {
+            let sound = try AVAudioPlayer(contentsOfURL: url)
+            bombSoundEffect = sound
+            sound.play()
+            print("play the sound")
+        } catch {
+            // couldn't load file :(
         }
     }
 }

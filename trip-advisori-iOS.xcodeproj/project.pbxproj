@@ -71,6 +71,7 @@
 		1EF93C001C604DA600A5B463 /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */; };
 		1EF93C071C605A5C00A5B463 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93C061C605A5C00A5B463 /* Service.swift */; };
 		9124443D98759B610CA027FA /* Pods_trip_advisori_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADB4A205645AF4BD20A06E0 /* Pods_trip_advisori_iOS.framework */; };
+		9CBF3EE21D24A54C00533570 /* TestSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9CBF3EE11D24A54C00533570 /* TestSound.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +164,7 @@
 		1EF93C061C605A5C00A5B463 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		2ADB4A205645AF4BD20A06E0 /* Pods_trip_advisori_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trip_advisori_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FFFEB7839A565E790733793 /* Pods-trip-advisori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		9CBF3EE11D24A54C00533570 /* TestSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TestSound.mp3; sourceTree = "<group>"; };
 		CC641C4C708F459BFB4B60B1 /* Pods-trip-advisori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,6 +277,7 @@
 		1ED69B2B1D07A92C00CF2172 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				9CBF3EE11D24A54C00533570 /* TestSound.mp3 */,
 				1ED69B2D1D07A96800CF2172 /* Dosis-Bold.otf */,
 				1ED69B2E1D07A96800CF2172 /* Dosis-ExtraBold.otf */,
 				1ED69B2F1D07A96800CF2172 /* Dosis-ExtraLight.otf */,
@@ -494,6 +497,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CBF3EE21D24A54C00533570 /* TestSound.mp3 in Resources */,
 				1ED69B361D07A96800CF2172 /* Dosis-ExtraBold.otf in Resources */,
 				1ED69B391D07A96800CF2172 /* Dosis-Medium.otf in Resources */,
 				1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */,
