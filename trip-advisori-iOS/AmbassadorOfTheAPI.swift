@@ -57,7 +57,7 @@ class AmbassadorToTheAPI: Service {
     
     func delete(URLString: URLStringConvertible, success: NetworkSuccessHandler?) {
         setHeaders()
-        Alamofire.request(.POST, URLString, headers: headers, encoding: .JSON).responseJSON { request, response, result in
+        Alamofire.request(.DELETE, URLString, headers: headers, encoding: .JSON).responseJSON { request, response, result in
             self.processResponse(request, response: response!, result: result, success: success!, URLString: URLString)
         }
     }

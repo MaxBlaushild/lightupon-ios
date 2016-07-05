@@ -31,7 +31,7 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     }
     
     @IBAction func leaveParty(sender: AnyObject) {
-        partyService.leaveParty(currentParty.id, callback: self.onPartyLeft)
+        partyService.leaveParty(self.onPartyLeft)
     }
     
     func getParty() {

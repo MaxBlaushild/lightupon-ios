@@ -45,8 +45,8 @@ class PartyService: Service {
         })
     }
     
-    func leaveParty(partyID: Int, callback: () -> Void) {
-        apiAmbassador.get(apiURL + "/parties/\(partyID)/leave", success: { request, response, result in
+    func leaveParty(callback: () -> Void) {
+        apiAmbassador.delete(apiURL + "/parties", success: { request, response, result in
             
             callback()
         })
