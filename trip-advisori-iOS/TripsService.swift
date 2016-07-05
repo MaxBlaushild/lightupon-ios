@@ -39,9 +39,9 @@ class TripsService: Service {
     }
     
     func getTrip(tripId: Int, vc: TripDetailsViewController) {
-        apiAmbassador.get(apiURL + "/trips", success: { request, response, result in
+        apiAmbassador.get(apiURL + "/trips/\(tripId)", success: { request, response, result in
             
-            let json = JSON(result!.value!)[0]
+            let json = JSON(result!.value!)
             
             let trip = Trip(json: json)
             
