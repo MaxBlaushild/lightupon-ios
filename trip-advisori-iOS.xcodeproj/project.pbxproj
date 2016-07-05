@@ -29,6 +29,8 @@
 		1E2014981C71273B0012B863 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2014971C71273B0012B863 /* LoginService.swift */; };
 		1E20149C1C72B39D0012B863 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20149B1C72B39D0012B863 /* ProfileViewController.swift */; };
 		1E20149F1C72B7730012B863 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20149E1C72B7730012B863 /* AuthService.swift */; };
+		1E22A7CA1D2C37BA00163785 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22A7C91D2C37BA00163785 /* CardView.swift */; };
+		1E22A7CC1D2C383400163785 /* IAmACard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22A7CB1D2C383400163785 /* IAmACard.swift */; };
 		1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22C6741C70232200B13A1B /* LoginViewController.swift */; };
 		1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6B9F1D0C8A1F00D5793A /* owl.png */; };
 		1E64A6971CA627A000D9F90C /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6961CA627A000D9F90C /* JoinPartyViewController.swift */; };
@@ -62,7 +64,6 @@
 		1EF49A871C990035001A32C2 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF49A861C990035001A32C2 /* Party.swift */; };
 		1EF783A11CFF5DAF00860510 /* TextHero.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EF783A01CFF5DAF00860510 /* TextHero.xib */; };
 		1EF783A51CFF666000860510 /* TextHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF783A41CFF666000860510 /* TextHero.swift */; };
-		1EF783A71CFF66AB00860510 /* IAmACard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF783A61CFF66AB00860510 /* IAmACard.swift */; };
 		1EF783AB1D0084A600860510 /* FromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF783AA1D0084A600860510 /* FromNib.swift */; };
 		1EF783AD1D00940100860510 /* PictureHero.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EF783AC1D00940100860510 /* PictureHero.xib */; };
 		1EF783AF1D00941700860510 /* PictureHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF783AE1D00941700860510 /* PictureHero.swift */; };
@@ -119,6 +120,8 @@
 		1E2014971C71273B0012B863 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		1E20149B1C72B39D0012B863 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1E20149E1C72B7730012B863 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		1E22A7C91D2C37BA00163785 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		1E22A7CB1D2C383400163785 /* IAmACard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAmACard.swift; sourceTree = "<group>"; };
 		1E22C6711C701AE000B13A1B /* -Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "-Bridging-Header.h"; sourceTree = "<group>"; };
 		1E22C6741C70232200B13A1B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1E5F6B9F1D0C8A1F00D5793A /* owl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owl.png; sourceTree = "<group>"; };
@@ -153,7 +156,6 @@
 		1EF49A861C990035001A32C2 /* Party.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
 		1EF783A01CFF5DAF00860510 /* TextHero.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextHero.xib; sourceTree = "<group>"; };
 		1EF783A41CFF666000860510 /* TextHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextHero.swift; sourceTree = "<group>"; };
-		1EF783A61CFF66AB00860510 /* IAmACard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAmACard.swift; sourceTree = "<group>"; };
 		1EF783AA1D0084A600860510 /* FromNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromNib.swift; sourceTree = "<group>"; };
 		1EF783AC1D00940100860510 /* PictureHero.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureHero.xib; sourceTree = "<group>"; };
 		1EF783AE1D00941700860510 /* PictureHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureHero.swift; sourceTree = "<group>"; };
@@ -352,9 +354,10 @@
 			children = (
 				1EF783A01CFF5DAF00860510 /* TextHero.xib */,
 				1EF783A41CFF666000860510 /* TextHero.swift */,
-				1EF783A61CFF66AB00860510 /* IAmACard.swift */,
 				1EF783AC1D00940100860510 /* PictureHero.xib */,
 				1EF783AE1D00941700860510 /* PictureHero.swift */,
+				1E22A7C91D2C37BA00163785 /* CardView.swift */,
+				1E22A7CB1D2C383400163785 /* IAmACard.swift */,
 			);
 			name = cards;
 			sourceTree = "<group>";
@@ -591,11 +594,11 @@
 				1E05B8BF1C5D1A07009E37BA /* DataWrapper.swift in Sources */,
 				1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */,
 				1E0003CC1C8525F400B25C05 /* TripDetailsViewController.swift in Sources */,
-				1EF783A71CFF66AB00860510 /* IAmACard.swift in Sources */,
 				1E7032AF1CE8F58800B1C18D /* Scene.swift in Sources */,
 				1EF49A871C990035001A32C2 /* Party.swift in Sources */,
 				1E1A1A9B1CEE9D1A00A3A812 /* StoryTellerViewController.swift in Sources */,
 				1E6998441CE191F900DFC697 /* AlertService.swift in Sources */,
+				1E22A7CA1D2C37BA00163785 /* CardView.swift in Sources */,
 				1E7032B11CE8F7B200B1C18D /* User.swift in Sources */,
 				1ED69B4B1D0C836000CF2172 /* GetTopViewController.swift in Sources */,
 				1ED69B401D07B19A00CF2172 /* colors.swift in Sources */,
@@ -617,6 +620,7 @@
 				1EF783AB1D0084A600860510 /* FromNib.swift in Sources */,
 				1EF93C001C604DA600A5B463 /* HomeTabBarViewController.swift in Sources */,
 				1E05B8BD1C5D193B009E37BA /* CurrentLocationService.swift in Sources */,
+				1E22A7CC1D2C383400163785 /* IAmACard.swift in Sources */,
 				1E2014961C70DB790012B863 /* FacebookProfile.swift in Sources */,
 				1E7032AD1CE8F53A00B1C18D /* PartyState.swift in Sources */,
 				1E841C621C67C02200AD638E /* TripListTableViewCellDecorator.swift in Sources */,
