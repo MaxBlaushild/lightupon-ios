@@ -8,27 +8,12 @@
 
 import UIKit
 
-class PictureHero: UIView, IAmACard {
-    private var _card_:Card!
+class PictureHero: CardView, IAmACard {
     
     @IBOutlet weak var pictureHero: UIImageView!
     
-    @IBOutlet weak var labely: UILabel!
-    @IBAction func buttonPress(sender: AnyObject) {
-        labely.text = "pressed"
-    }
-    var card: Card {
-        get {
-            return self._card_
-        }
-        
-        set(newCard) {
-            self._card_ = newCard
-        }
-    }
-    
     func bindCard() {
-        pictureHero.imageFromUrl(_card_.imageUrl!)
+        pictureHero.imageFromUrl(card.imageUrl!)
     }
 
 }

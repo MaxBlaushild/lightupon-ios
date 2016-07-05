@@ -2,13 +2,13 @@
 //  File.swift
 //  trip-advisori-iOS
 //
-//  Created by Blaushild, Max on 6/1/16.
+//  Created by Blaushild, Max on 7/5/16.
 //  Copyright © 2016 Blaushild, Max. All rights reserved.
 //
 
 import Foundation
 
 protocol IAmACard {
-    var card: Card { get set }
     func bindCard() -> Void
+    var card: Card { get set }
 }

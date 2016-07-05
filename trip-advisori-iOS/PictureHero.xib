@@ -11,26 +11,16 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hsi-KU-eDt">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hsi-KU-eDt">
                     <rect key="frame" x="180" y="236" width="240" height="128"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKt-VU-p5Z">
-                    <rect key="frame" x="277" y="112" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dwh-7B-EEj">
-                    <rect key="frame" x="243" y="173" width="114" height="30"/>
-                    <state key="normal" title="BUTTTONNNNN"/>
-                    <connections>
-                        <action selector="buttonPress:" destination="iN0-l3-epB" eventType="touchUpInside" id="7re-4F-bHJ"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Hsi-KU-eDt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Pxk-PQ-0U9"/>
+                <constraint firstItem="Hsi-KU-eDt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="zJr-77-oN5"/>
+            </constraints>
             <connections>
-                <outlet property="labely" destination="mKt-VU-p5Z" id="0if-hB-26A"/>
                 <outlet property="pictureHero" destination="Hsi-KU-eDt" id="fWk-2G-deA"/>
             </connections>
         </view>

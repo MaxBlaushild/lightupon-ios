@@ -11,14 +11,18 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="farts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="md2-1C-u0c">
-                    <rect key="frame" x="285" y="289" width="36" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="farts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="md2-1C-u0c">
+                    <rect key="frame" x="145" y="289" width="331" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="md2-1C-u0c" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="IE5-vs-9fW"/>
+                <constraint firstItem="md2-1C-u0c" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="rgP-F8-Csh"/>
+            </constraints>
             <connections>
                 <outlet property="textHero" destination="md2-1C-u0c" id="t5r-zy-tSQ"/>
             </connections>
