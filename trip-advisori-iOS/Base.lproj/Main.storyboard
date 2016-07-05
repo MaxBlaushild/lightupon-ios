@@ -145,7 +145,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Want to join an adventure? Enter a passcode to join a party!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pef-mW-RB2">
-                                <rect key="frame" x="151" y="194" width="299" height="104"/>
+                                <rect key="frame" x="151" y="336" width="299" height="104"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="Igx-H8-KXL"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="toP-I2-0XF"/>
@@ -155,8 +155,11 @@
                                 <color key="textColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="birdhouse.png" translatesAutoresizingMaskIntoConstraints="NO" id="ux8-jg-ERr">
+                                <rect key="frame" x="211" y="167" width="179" height="187"/>
+                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="passcode" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YVn-4k-cFq">
-                                <rect key="frame" x="250" y="306" width="100" height="30"/>
+                                <rect key="frame" x="250" y="426" width="100" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -169,6 +172,7 @@
                             <constraint firstItem="YVn-4k-cFq" firstAttribute="top" secondItem="pef-mW-RB2" secondAttribute="bottom" constant="8" id="8ll-jp-phy"/>
                             <constraint firstItem="pef-mW-RB2" firstAttribute="centerX" secondItem="mUZ-N7-1n9" secondAttribute="centerX" id="Nmz-fx-UKr"/>
                             <constraint firstItem="YVn-4k-cFq" firstAttribute="centerX" secondItem="pef-mW-RB2" secondAttribute="centerX" id="jOF-Sp-iNQ"/>
+                            <constraint firstItem="ux8-jg-ERr" firstAttribute="centerX" secondItem="mUZ-N7-1n9" secondAttribute="centerX" id="vQP-fC-E3x"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Journey" image="journey_unfilled" selectedImage="journey_filled" id="Soc-my-NRI"/>
@@ -193,7 +197,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ew5-xR-i23">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ew5-xR-i23">
                                 <rect key="frame" x="491" y="28" width="89" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="89" id="fGu-SP-EUd"/>
@@ -206,13 +210,13 @@
                                     <action selector="logout:" destination="MPG-Ne-4SO" eventType="touchUpInside" id="U48-c1-Y5l"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ux9-0o-LSg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ux9-0o-LSg">
                                 <rect key="frame" x="250" y="69" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="BHQ-7f-ANI"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pDv-aD-PSX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pDv-aD-PSX">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="I4N-er-bx8"/>
@@ -282,7 +286,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cardCollectionViewCell" id="Oeu-kj-CYY" customClass="CardCollectionViewCell" customModule="trip_advisori_iOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="42.5" width="449" height="466"/>
+                                <rect key="frame" x="0.0" y="67" width="449" height="466"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="449" height="466"/>
@@ -471,6 +475,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="birdhouse.png" width="200" height="200"/>
         <image name="journey_filled" width="30" height="30"/>
         <image name="journey_unfilled" width="30" height="30"/>
         <image name="map_filled" width="30" height="30"/>

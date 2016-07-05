@@ -23,7 +23,7 @@ class StoryTellerMenuViewController: UIViewController {
     }
 
     func goBack(){
-        dismissViewControllerAnimated(false, completion: {})
+        dismissViewControllerAnimated(true, completion: {})
     }
     
     @IBAction func leaveParty(sender: AnyObject) {
