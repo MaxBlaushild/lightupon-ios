@@ -273,7 +273,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Hfc-Uv-eSh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.79297870062162801" green="0.095812499275981344" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2q2-yl-hzf">
                             <size key="itemSize" width="449" height="466"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -306,10 +306,54 @@
                             <outlet property="delegate" destination="0T6-nY-vo1" id="79k-GT-5iz"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <segue destination="h04-z6-OpC" kind="presentation" identifier="StoryTellerToStoryTellerMenu" id="nQ6-bu-aDc"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mwg-OV-0t8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-654" y="-1190"/>
+            <point key="canvasLocation" x="-625" y="-1190"/>
+        </scene>
+        <!--Story Teller Menu View Controller-->
+        <scene sceneID="8kY-Ir-N0z">
+            <objects>
+                <viewController id="h04-z6-OpC" customClass="StoryTellerMenuViewController" customModule="trip_advisori_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kzy-ze-y9g"/>
+                        <viewControllerLayoutGuide type="bottom" id="wgw-A5-JhF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CGj-6A-E1t">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3q-S5-cfL">
+                                <rect key="frame" x="254" y="285" width="92" height="30"/>
+                                <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="aeq-Gc-VNR"/>
+                                    <constraint firstAttribute="height" constant="30" id="fwm-mf-5zd"/>
+                                </constraints>
+                                <state key="normal" title="Leave Party">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="leaveParty:" destination="h04-z6-OpC" eventType="touchUpInside" id="w1R-Vb-GMM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="I3q-S5-cfL" firstAttribute="centerX" secondItem="CGj-6A-E1t" secondAttribute="centerX" id="eqo-eQ-Jix"/>
+                            <constraint firstItem="I3q-S5-cfL" firstAttribute="centerY" secondItem="CGj-6A-E1t" secondAttribute="centerY" id="zEm-LO-XWi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="zM7-UW-UFv" kind="show" identifier="StoryTellerMenuToHome" id="gY1-t0-Oa9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vAt-v1-R1J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="72" y="-1190"/>
         </scene>
         <!--Lobby View Controller-->
         <scene sceneID="xLw-4z-Xyr">
@@ -438,8 +482,9 @@
         <image name="trips_unfilled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="n8e-Qh-4NE"/>
-        <segue reference="tWa-8y-sJp"/>
         <segue reference="iiN-Ge-40v"/>
+        <segue reference="tWa-8y-sJp"/>
+        <segue reference="gY1-t0-Oa9"/>
+        <segue reference="n8e-Qh-4NE"/>
     </inferredMetricsTieBreakers>
 </document>

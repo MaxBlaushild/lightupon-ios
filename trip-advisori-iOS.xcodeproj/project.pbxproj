@@ -31,6 +31,7 @@
 		1E20149F1C72B7730012B863 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20149E1C72B7730012B863 /* AuthService.swift */; };
 		1E22A7CA1D2C37BA00163785 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22A7C91D2C37BA00163785 /* CardView.swift */; };
 		1E22A7CC1D2C383400163785 /* IAmACard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22A7CB1D2C383400163785 /* IAmACard.swift */; };
+		1E22A7D01D2C491C00163785 /* StoryTellerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22A7CF1D2C491C00163785 /* StoryTellerMenuViewController.swift */; };
 		1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22C6741C70232200B13A1B /* LoginViewController.swift */; };
 		1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6B9F1D0C8A1F00D5793A /* owl.png */; };
 		1E64A6971CA627A000D9F90C /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6961CA627A000D9F90C /* JoinPartyViewController.swift */; };
@@ -122,6 +123,7 @@
 		1E20149E1C72B7730012B863 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1E22A7C91D2C37BA00163785 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		1E22A7CB1D2C383400163785 /* IAmACard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAmACard.swift; sourceTree = "<group>"; };
+		1E22A7CF1D2C491C00163785 /* StoryTellerMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTellerMenuViewController.swift; sourceTree = "<group>"; };
 		1E22C6711C701AE000B13A1B /* -Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "-Bridging-Header.h"; sourceTree = "<group>"; };
 		1E22C6741C70232200B13A1B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1E5F6B9F1D0C8A1F00D5793A /* owl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owl.png; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				1E841C5B1C6704A600AD638E /* TripListTableViewController.swift */,
 				1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */,
 				1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */,
+				1E22A7CF1D2C491C00163785 /* StoryTellerMenuViewController.swift */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				1EF783B31D00D8A500860510 /* CardService.swift in Sources */,
 				1E17118D1CD41F320083236C /* ContentLoaderService.swift in Sources */,
 				1EF783A51CFF666000860510 /* TextHero.swift in Sources */,
+				1E22A7D01D2C491C00163785 /* StoryTellerMenuViewController.swift in Sources */,
 				1E841C5A1C66DB8900AD638E /* Trip.swift in Sources */,
 				1EF93BFE1C6046F800A5B463 /* InitialLoadingViewController.swift in Sources */,
 				1E1711931CD431D20083236C /* Injector.swift in Sources */,

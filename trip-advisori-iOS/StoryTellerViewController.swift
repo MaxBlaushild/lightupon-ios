@@ -18,6 +18,10 @@ class StoryTellerViewController: UICollectionViewController, SocketServiceDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = Colors.basePurple
+        self.collectionView!.backgroundView = backgroundView;
+        addMenuButton()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,12 +33,22 @@ class StoryTellerViewController: UICollectionViewController, SocketServiceDelega
         
     }
     
-    @IBAction func leaveParty(sender: AnyObject) {
-        partyService.leaveParty(currentParty.id, callback: self.onPartyLeft)
+    func addMenuButton() {
+        let button   = UIButton()
+        button.frame = CGRectMake(250, 25, 100, 50)
+        button.backgroundColor = UIColor.whiteColor()
+        button.setTitle("Menu", forState: UIControlState.Normal)
+        button.setTitleColor(Colors.basePurple, forState: UIControlState.Normal)
+        button.addTarget(self, action: #selector(segueToStoryTellerMenu), forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(button)
     }
     
     func onResponseRecieved(_partyState_: PartyState) {
         
+    }
+    
+    func segueToStoryTellerMenu() {
+        performSegueWithIdentifier("StoryTellerToStoryTellerMenu", sender: nil)
     }
     
     func onPartyLeft() {
