@@ -37,7 +37,6 @@ class Injector: Service {
         socketService = SocketService(_authService_: authService, _currentLocation_: currentLocationService)
         super.init()
     }
-    
     func getCardService() -> CardService {
         return cardService
     }

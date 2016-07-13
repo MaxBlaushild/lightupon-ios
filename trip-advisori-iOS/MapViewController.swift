@@ -10,27 +10,26 @@ import UIKit
 import GoogleMaps
 
 class MapViewController: MenuViewController {
-    var currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
+    private let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
+    
     var trips:[Trip]!
 
+    @IBOutlet weak var mapView: GMSMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let camera = GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 8)
-        let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-        
-        mapView.myLocationEnabled = true
-        self.view = mapView
-        
-        for trip in trips {
-            placeTripOnMap(trip, mapView: mapView)
-        }
-        
+        initMap()
         addTitle("SERENDIPITY", color: Colors.basePurple)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func initMap() {
+        for trip in trips {
+            placeTripOnMap(trip, mapView: mapView)
+        }
     }
     
     func placeTripOnMap(trip: Trip, mapView: GMSMapView) {

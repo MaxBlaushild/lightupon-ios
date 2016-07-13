@@ -14,12 +14,14 @@ import ObjectMapper
 class PartyState: NSObject, Mappable {
     var nextSceneAvailable: Bool?
     var scene: Scene?
+    var nextScene: Scene?
     var users: [User]?
     
     func mapping(map: Map) {
         nextSceneAvailable <- map["NextSceneAvailable"]
         scene              <- map["Scene"]
         users              <- map["Users"]
+        nextScene          <- map["NextScene"]
     }
     
     required init?(_ map: Map) {

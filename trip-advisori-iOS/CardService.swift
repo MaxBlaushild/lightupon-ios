@@ -15,6 +15,8 @@ class CardService: Service {
             return TextHero.fromNib("TextHero")
         case "PictureHero":
             return PictureHero.fromNib("PictureHero")
+        case "MapHero":
+            return MapHero.fromNib("MapHero")
         default:
             return TextHero.fromNib("TextHero")
         }

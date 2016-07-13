@@ -35,6 +35,8 @@
 		1E22A7D41D2C6FD200163785 /* birdhouse@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D11D2C6FD200163785 /* birdhouse@3x.png */; };
 		1E22A7D51D2C6FD200163785 /* birdhouse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D21D2C6FD200163785 /* birdhouse@2x.png */; };
 		1E22A7D61D2C6FD200163785 /* birdhouse@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D31D2C6FD200163785 /* birdhouse@1x.png */; };
+		1E22A7DA1D2C763300163785 /* MapHero.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D91D2C763300163785 /* MapHero.xib */; };
+		1E22A7DC1D2C764100163785 /* MapHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22A7DB1D2C764100163785 /* MapHero.swift */; };
 		1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22C6741C70232200B13A1B /* LoginViewController.swift */; };
 		1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6B9F1D0C8A1F00D5793A /* owl.png */; };
 		1E64A6971CA627A000D9F90C /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6961CA627A000D9F90C /* JoinPartyViewController.swift */; };
@@ -130,6 +132,8 @@
 		1E22A7D11D2C6FD200163785 /* birdhouse@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "birdhouse@3x.png"; sourceTree = "<group>"; };
 		1E22A7D21D2C6FD200163785 /* birdhouse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "birdhouse@2x.png"; sourceTree = "<group>"; };
 		1E22A7D31D2C6FD200163785 /* birdhouse@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "birdhouse@1x.png"; sourceTree = "<group>"; };
+		1E22A7D91D2C763300163785 /* MapHero.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapHero.xib; sourceTree = "<group>"; };
+		1E22A7DB1D2C764100163785 /* MapHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapHero.swift; sourceTree = "<group>"; };
 		1E22C6711C701AE000B13A1B /* -Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "-Bridging-Header.h"; sourceTree = "<group>"; };
 		1E22C6741C70232200B13A1B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1E5F6B9F1D0C8A1F00D5793A /* owl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owl.png; sourceTree = "<group>"; };
@@ -370,6 +374,8 @@
 				1EF783AE1D00941700860510 /* PictureHero.swift */,
 				1E22A7C91D2C37BA00163785 /* CardView.swift */,
 				1E22A7CB1D2C383400163785 /* IAmACard.swift */,
+				1E22A7D91D2C763300163785 /* MapHero.xib */,
+				1E22A7DB1D2C764100163785 /* MapHero.swift */,
 			);
 			name = cards;
 			sourceTree = "<group>";
@@ -517,6 +523,7 @@
 				1EF783A11CFF5DAF00860510 /* TextHero.xib in Resources */,
 				1E05B8971C5D135D009E37BA /* LaunchScreen.storyboard in Resources */,
 				1E05B8941C5D135D009E37BA /* Assets.xcassets in Resources */,
+				1E22A7DA1D2C763300163785 /* MapHero.xib in Resources */,
 				1ED69B3C1D07A96800CF2172 /* SIL Open Font License.txt in Resources */,
 				1E05B8921C5D135D009E37BA /* Main.storyboard in Resources */,
 				1ED69B3B1D07A96800CF2172 /* Dosis-SemiBold.otf in Resources */,
@@ -598,6 +605,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E22A7DC1D2C764100163785 /* MapHero.swift in Sources */,
 				1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */,
 				1EF783B31D00D8A500860510 /* CardService.swift in Sources */,
 				1E17118D1CD41F320083236C /* ContentLoaderService.swift in Sources */,
