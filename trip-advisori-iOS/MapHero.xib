@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,18 +13,34 @@
             <subviews>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vex-Dt-rY1" customClass="GMSMapView">
                     <rect key="frame" x="0.0" y="0.0" width="605" height="600"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="9So-v4-BKH">
+                            <rect key="frame" x="277" y="275" width="50" height="49"/>
+                            <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="GFq-tx-To0"/>
+                                <constraint firstAttribute="height" constant="49" id="IMH-b3-beG"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="600" id="6L8-WT-N48"/>
+                        <constraint firstItem="9So-v4-BKH" firstAttribute="centerX" secondItem="vex-Dt-rY1" secondAttribute="centerX" id="7Yw-fn-XXA"/>
                         <constraint firstAttribute="width" constant="600" id="EbJ-aB-xbW"/>
+                        <constraint firstItem="9So-v4-BKH" firstAttribute="centerY" secondItem="vex-Dt-rY1" secondAttribute="centerY" id="Eza-rs-HrS"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="600" id="ODX-gb-M1U"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="mapView" destination="vex-Dt-rY1" id="R65-sw-CyE"/>
+                <outlet property="compass" destination="9So-v4-BKH" id="6As-Dp-i2S"/>
+                <outlet property="sceneMapView" destination="vex-Dt-rY1" id="pOK-YY-0mO"/>
             </connections>
         </view>
     </objects>
+    <resources>
+        <image name="arrow.png" width="256" height="256"/>
+    </resources>
 </document>

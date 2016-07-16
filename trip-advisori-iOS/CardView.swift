@@ -10,6 +10,7 @@ import UIKit
 
 class CardView: UIView {
     private var _card_:Card!
+    private var _nextScene_: Scene!
 
     var card: Card {
         get {
@@ -18,6 +19,16 @@ class CardView: UIView {
         
         set(newCard) {
             self._card_ = newCard
+        }
+    }
+    
+    var nextScene: Scene {
+        get {
+            return self._nextScene_
+        }
+        
+        set(newScene) {
+            self._nextScene_ = newScene
         }
     }
 
