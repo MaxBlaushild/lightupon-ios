@@ -27,8 +27,8 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         self.locationManager = CLLocationManager()
         
         self._locationStatus = (code: 0, message: "")
-        self._longitude = 0.0
-        self._latitude = 0.0
+        self._longitude = 50.0
+        self._latitude = 50.0
         
         super.init()
         
@@ -38,7 +38,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         locationManager.requestLocation()
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.startUpdatingLocation()
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -48,7 +48,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let locationObj:CLLocation = locations.last!
         let coord = locationObj.coordinate
-        
+
         _latitude = coord.latitude
         _longitude = coord.longitude
         
@@ -74,15 +74,13 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
             _locationStatus = (code: 1, message: "Allowed to location Access")
             
         }
-        
+        print(_locationStatus.message)
         // TODO: add a notification for the status changed event
         let data:[NSObject: AnyObject] = ["status": DataWrapper(element: _locationStatus)]
         
         NSNotificationCenter.defaultCenter().postNotificationName("updatedLocations",
             object: nil,
             userInfo: data)
-        
-        
         
     }
     

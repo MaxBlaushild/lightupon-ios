@@ -12,6 +12,8 @@ private let reuseIdentifier = "cardCollectionViewCell"
 
 class StoryTellerViewController: UICollectionViewController, SocketServiceDelegate {
     private let partyService:PartyService = Injector.sharedInjector.getPartyService()
+    private let socketService: SocketService = Injector.sharedInjector.getSocketService()
+    private let nextSceneButton: UIButton = UIButton()
     
     var partyState: PartyState!
     var currentParty: Party!
@@ -22,6 +24,7 @@ class StoryTellerViewController: UICollectionViewController, SocketServiceDelega
         backgroundView.backgroundColor = Colors.basePurple
         self.collectionView!.backgroundView = backgroundView;
         addMenuButton()
+        addNextSceneButton()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,12 +46,23 @@ class StoryTellerViewController: UICollectionViewController, SocketServiceDelega
         self.view.addSubview(button)
     }
     
-    func onResponseRecieved(_partyState_: PartyState) {
-        
+    func addNextSceneButton() {
+        nextSceneButton.frame = CGRectMake(150, 590, 100, 50)
+        nextSceneButton.backgroundColor = UIColor.whiteColor()
+        nextSceneButton.setTitle("NextScene", forState: UIControlState.Normal)
+        nextSceneButton.setTitleColor(Colors.basePurple, forState: UIControlState.Normal)
+        nextSceneButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Disabled)
+        nextSceneButton.addTarget(self, action: #selector(goToNextScene), forControlEvents: UIControlEvents.TouchUpInside)
+        nextSceneButton.enabled = false
+        self.view.addSubview(nextSceneButton)
     }
     
     func segueToStoryTellerMenu() {
         performSegueWithIdentifier("StoryTellerToStoryTellerMenu", sender: nil)
+    }
+    
+    func goToNextScene() {
+        partyService.startNextScene(currentParty.id)
     }
     
     func onPartyLeft() {
@@ -65,12 +79,17 @@ class StoryTellerViewController: UICollectionViewController, SocketServiceDelega
         // #warning Incomplete implementation, return the number of items
         return partyState.scene!.cards!.count
     }
+    
+    func onResponseRecieved(_partyState_: PartyState) {
+        partyState = _partyState_
+        nextSceneButton.enabled = partyState.nextSceneAvailable!
+    }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> CardCollectionViewCell {
         let card: Card = partyState.scene!.cards![indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CardCollectionViewCell
         
-        cell.bindCard(card)
+        cell.bindCard(card, nextScene: partyState.nextScene!)
 
         return cell
     }

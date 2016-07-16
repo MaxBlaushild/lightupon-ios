@@ -67,6 +67,7 @@
 		1ED69B461D07B3EF00CF2172 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B451D07B3EF00CF2172 /* MenuViewController.swift */; };
 		1ED69B4B1D0C836000CF2172 /* GetTopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B4A1D0C836000CF2172 /* GetTopViewController.swift */; };
 		1EE4C55F1CB5ED130095845C /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE4C55E1CB5ED130095845C /* TripViewController.swift */; };
+		1EEA2DA01D3AA9C900F53A86 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEA2D9F1D3AA9C900F53A86 /* arrow.png */; };
 		1EF49A871C990035001A32C2 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF49A861C990035001A32C2 /* Party.swift */; };
 		1EF783A11CFF5DAF00860510 /* TextHero.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EF783A01CFF5DAF00860510 /* TextHero.xib */; };
 		1EF783A51CFF666000860510 /* TextHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF783A41CFF666000860510 /* TextHero.swift */; };
@@ -165,6 +166,7 @@
 		1ED69B451D07B3EF00CF2172 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		1ED69B4A1D0C836000CF2172 /* GetTopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTopViewController.swift; sourceTree = "<group>"; };
 		1EE4C55E1CB5ED130095845C /* TripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
+		1EEA2D9F1D3AA9C900F53A86 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		1EF49A861C990035001A32C2 /* Party.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
 		1EF783A01CFF5DAF00860510 /* TextHero.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextHero.xib; sourceTree = "<group>"; };
 		1EF783A41CFF666000860510 /* TextHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextHero.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				1ED69B311D07A96800CF2172 /* Dosis-Medium.otf */,
 				1E22A7D11D2C6FD200163785 /* birdhouse@3x.png */,
 				1E22A7D21D2C6FD200163785 /* birdhouse@2x.png */,
+				1EEA2D9F1D3AA9C900F53A86 /* arrow.png */,
 				1E22A7D31D2C6FD200163785 /* birdhouse@1x.png */,
 				1ED69B321D07A96800CF2172 /* Dosis-Regular.otf */,
 				1ED69B331D07A96800CF2172 /* Dosis-SemiBold.otf */,
@@ -333,8 +336,8 @@
 				1EE4C55E1CB5ED130095845C /* TripViewController.swift */,
 				1E64A6961CA627A000D9F90C /* JoinPartyViewController.swift */,
 				1E22C6741C70232200B13A1B /* LoginViewController.swift */,
-				1E1F325F1CA8B9CE009B6D0F /* LobbyViewController.swift */,
 				1E20149B1C72B39D0012B863 /* ProfileViewController.swift */,
+				1E1F325F1CA8B9CE009B6D0F /* LobbyViewController.swift */,
 				1E0003CB1C8525F400B25C05 /* TripDetailsViewController.swift */,
 				1E841C5B1C6704A600AD638E /* TripListTableViewController.swift */,
 				1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */,
@@ -531,6 +534,7 @@
 				1EF783AD1D00940100860510 /* PictureHero.xib in Resources */,
 				1ED69B371D07A96800CF2172 /* Dosis-ExtraLight.otf in Resources */,
 				1E22A7D41D2C6FD200163785 /* birdhouse@3x.png in Resources */,
+				1EEA2DA01D3AA9C900F53A86 /* arrow.png in Resources */,
 				1ED69B351D07A96800CF2172 /* Dosis-Bold.otf in Resources */,
 				1E22A7D61D2C6FD200163785 /* birdhouse@1x.png in Resources */,
 			);

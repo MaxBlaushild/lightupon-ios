@@ -12,9 +12,10 @@ import UIKit
 class CardCollectionViewCell: UICollectionViewCell {
     private let cardService:CardService = Injector.sharedInjector.getCardService()
     
-    func bindCard(card: Card) {
+    func bindCard(card: Card, nextScene: Scene) {
         var cardView:IAmACard = cardService.getView(card.nibId!)
         cardView.card = card
+        cardView.nextScene = nextScene
         cardView.bindCard()
         self.addSubview(cardView as! UIView)
     }

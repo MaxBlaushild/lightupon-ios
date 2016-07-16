@@ -11,4 +11,5 @@ import Foundation
 protocol IAmACard {
     func bindCard() -> Void
     var card: Card { get set }
+    var nextScene: Scene { get set }
 }
