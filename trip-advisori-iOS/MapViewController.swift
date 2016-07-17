@@ -18,6 +18,8 @@ class MapViewController: MenuViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initMap()
+        mapView.camera = GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
+        mapView.myLocationEnabled = true
         addTitle("SERENDIPITY", color: Colors.basePurple)
     }
 
