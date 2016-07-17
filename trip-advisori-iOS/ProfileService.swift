@@ -54,7 +54,7 @@ class ProfileService: Service {
     
     func getLoginInfo(callback: (FacebookProfile) -> Void){
         
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me?fields=id,name,email,first_name,picture.width(800).height(800)", parameters: nil)
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me?fields=id,name,email,first_name,picture.width(800).height(800),cover", parameters: nil)
         
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
