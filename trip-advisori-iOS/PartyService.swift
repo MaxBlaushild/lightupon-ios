@@ -16,15 +16,17 @@ class PartyService: Service {
         apiAmbassador = _apiAmbassador_
     }
     
-    func joinParty(passcode: String, callback: () -> Void) {
+    func joinParty(passcode: String, successCallback: () -> Void, failureCallback: () -> Void) {
         let parameters = [
             "": ""
         ]
         
         apiAmbassador.post(apiURL + "/parties/\(passcode)/users", parameters: parameters, success: { request, response, result in
-            
-            callback()
-            
+            if (response?.statusCode == 200) {
+                successCallback()
+            } else {
+                failureCallback()
+            }
         })
     }
     
