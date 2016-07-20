@@ -80,9 +80,17 @@ class StoryTellerViewController: UICollectionViewController, SocketServiceDelega
         return partyState.scene!.cards!.count
     }
     
-    func onResponseRecieved(_partyState_: PartyState) {
-        partyState = _partyState_
+    func onResponseRecieved(newPartyState: PartyState) {
+        let oldId = partyState.scene?.id
+        partyState = newPartyState
         nextSceneButton.enabled = partyState.nextSceneAvailable!
+        if (oldId != newPartyState.scene!.id!) {
+            loadNewScene()
+        }
+    }
+    
+    func loadNewScene() {
+        collectionView?.reloadData()
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> CardCollectionViewCell {

@@ -182,7 +182,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="passcodeField:" destination="uOy-l8-fHn" eventType="editingDidEnd" id="8Mq-Uw-Jdk"/>
+                                    <action selector="submitPasscode:" destination="uOy-l8-fHn" eventType="editingDidEndOnExit" id="gPj-E9-WVW"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -196,6 +196,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Journey" image="journey_unfilled" selectedImage="journey_filled" id="Soc-my-NRI"/>
                     <connections>
+                        <outlet property="joinPartyCopy" destination="pef-mW-RB2" id="urQ-rK-maz"/>
                         <outlet property="passcodeField" destination="YVn-4k-cFq" id="uBn-pd-lmJ"/>
                         <segue destination="WRV-8c-gCf" kind="show" identifier="JoinPartyToLobby" id="iiN-Ge-40v"/>
                     </connections>

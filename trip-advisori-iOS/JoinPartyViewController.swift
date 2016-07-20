@@ -13,6 +13,8 @@ class JoinPartyViewController: MenuViewController {
     
     @IBOutlet weak var passcodeField: UITextField!
     
+    @IBOutlet weak var joinPartyCopy: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,18 +22,22 @@ class JoinPartyViewController: MenuViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func submitPasscode(sender: AnyObject) {
-        let passcode:String = passcodeField.text!
-        partyService.joinParty(passcode, callback: self.goToLobby)
+        var passcode:String = passcodeField.text!.removeWhitespace()
+        
+        if passcode.characters.count == 0 {
+            passcode = "a"
+        }
+        
+        partyService.joinParty(passcode, successCallback: self.goToLobby, failureCallback: self.onPartyNotFound)
     }
     
     func goToLobby() {
         self.performSegueWithIdentifier("JoinPartyToLobby", sender: self)
+    }
+    
+    func onPartyNotFound() {
+        joinPartyCopy.text = "There is no party with that passcode. Try again!"
     }
 
     /*

@@ -64,7 +64,7 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
         if let e = error {
             print("websocket is disconnected: \(e.localizedDescription)")
         } else {
-            print("websocket disconnected")
+            createNoSocketWarning()
         }
     }
     
@@ -80,5 +80,16 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     
     func websocketDidReceiveData(ws: WebSocket, data: NSData) {
         print("Received data: \(data.length)")
+    }
+    
+    func createNoSocketWarning() {
+        let label = UILabel(frame: CGRectMake(0, 0, 200, 40))
+        label.center = CGPointMake(200, 580)
+        label.textAlignment = NSTextAlignment.Center
+        label.text = "No Socket"
+        label.font = UIFont(name: Fonts.dosisBold, size: 16)
+        label.textColor = UIColor.whiteColor()
+        label.backgroundColor = Colors.basePurple
+        UIApplication.topViewController()!.view.addSubview(label)
     }
 }

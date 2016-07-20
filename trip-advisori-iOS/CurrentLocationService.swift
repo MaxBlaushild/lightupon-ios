@@ -52,6 +52,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         _latitude = coord.latitude
         _longitude = coord.longitude
         
+        print(coord)
         if delegate != nil {
             delegate.onLocationUpdated()
         }

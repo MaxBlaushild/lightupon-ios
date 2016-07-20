@@ -21,6 +21,7 @@
 		1E05B8C11C5D327A009E37BA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05B8C01C5D327A009E37BA /* MapViewController.swift */; };
 		1E17118D1CD41F320083236C /* ContentLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17118C1CD41F320083236C /* ContentLoaderService.swift */; };
 		1E1711931CD431D20083236C /* Injector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1711921CD431D20083236C /* Injector.swift */; };
+		1E1763AB1D403E6F00C3FBCE /* StringEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1763AA1D403E6F00C3FBCE /* StringEscaping.swift */; };
 		1E1A1A9B1CEE9D1A00A3A812 /* StoryTellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */; };
 		1E1A1A9D1CF243CC00A3A812 /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A1A9C1CF243CC00A3A812 /* CardCollectionViewCell.swift */; };
 		1E1F32601CA8B9CE009B6D0F /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1F325F1CA8B9CE009B6D0F /* LobbyViewController.swift */; };
@@ -119,6 +120,7 @@
 		1E05B8C01C5D327A009E37BA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1E17118C1CD41F320083236C /* ContentLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLoaderService.swift; sourceTree = "<group>"; };
 		1E1711921CD431D20083236C /* Injector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Injector.swift; sourceTree = "<group>"; };
+		1E1763AA1D403E6F00C3FBCE /* StringEscaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringEscaping.swift; sourceTree = "<group>"; };
 		1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTellerViewController.swift; sourceTree = "<group>"; };
 		1E1A1A9C1CF243CC00A3A812 /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E1F325F1CA8B9CE009B6D0F /* LobbyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				1EF783AA1D0084A600860510 /* FromNib.swift */,
 				1ED69B411D07B1C300CF2172 /* ColorFromHex.swift */,
 				1ED69B4A1D0C836000CF2172 /* GetTopViewController.swift */,
+				1E1763AA1D403E6F00C3FBCE /* StringEscaping.swift */,
 			);
 			name = utilities;
 			sourceTree = "<group>";
@@ -625,6 +628,7 @@
 				1E7032AF1CE8F58800B1C18D /* Scene.swift in Sources */,
 				1EF49A871C990035001A32C2 /* Party.swift in Sources */,
 				1E1A1A9B1CEE9D1A00A3A812 /* StoryTellerViewController.swift in Sources */,
+				1E1763AB1D403E6F00C3FBCE /* StringEscaping.swift in Sources */,
 				1E6998441CE191F900DFC697 /* AlertService.swift in Sources */,
 				1E22A7CA1D2C37BA00163785 /* CardView.swift in Sources */,
 				1E7032B11CE8F7B200B1C18D /* User.swift in Sources */,
