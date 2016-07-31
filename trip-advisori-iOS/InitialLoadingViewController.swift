@@ -10,7 +10,6 @@ import UIKit
 
 class InitialLoadingViewController: UIViewController {
     private let contentLoaderService:ContentLoaderService = Injector.sharedInjector.getContentLoaderService()
-    @IBOutlet weak var loadingLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +18,14 @@ class InitialLoadingViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
     }
     
     func routeTo(segue: String){

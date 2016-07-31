@@ -26,6 +26,14 @@ class ProfileViewController: UIViewController {
         performSegueWithIdentifier("ProfileToLogin", sender: nil)
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+    
     func bindProfileToView(profile: FacebookProfile){
         profileBanner.imageFromUrl(profile.coverPhoto)
         profilePic.imageFromUrl(profile.profilePictureURL)

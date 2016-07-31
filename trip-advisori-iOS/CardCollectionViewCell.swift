@@ -17,7 +17,15 @@ class CardCollectionViewCell: UICollectionViewCell {
         cardView.card = card
         cardView.nextScene = nextScene
         cardView.bindCard()
-        self.addSubview(cardView as! UIView)
+        let castedCardView = cardView as! UIView
+        sizeCardView(castedCardView)
+        self.addSubview(castedCardView)
+    }
+    
+    func sizeCardView(cardView: UIView) {
+        let height = self.contentView.bounds.size.height
+        let width = self.contentView.bounds.size.width
+        cardView.frame = CGRect(x: 0, y: 0, width: width, height: height)
     }
 
 }

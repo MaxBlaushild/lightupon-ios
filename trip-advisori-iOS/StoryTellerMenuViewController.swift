@@ -10,16 +10,27 @@ import UIKit
 
 class StoryTellerMenuViewController: UIViewController {
     let partyService: PartyService = Injector.sharedInjector.getPartyService()
+    let profileService: ProfileService = Injector.sharedInjector.getProfileService()
 
+    @IBOutlet weak var profilePicture: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addBackButton()
+        profilePicture.imageFromUrl(profileService.profile.profilePictureURL)
+        self.profilePicture.makeCircle()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
     }
 
     func goBack(){
@@ -31,15 +42,4 @@ class StoryTellerMenuViewController: UIViewController {
             self.performSegueWithIdentifier("StoryTellerMenuToHome", sender: nil)
         })
     }
-    
-    func addBackButton() {
-        let button   = UIButton()
-        button.frame = CGRectMake(50, 25, 100, 50)
-        button.backgroundColor = Colors.basePurple
-        button.setTitle("Back", forState: UIControlState.Normal)
-        button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        button.addTarget(self, action: #selector(goBack), forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(button)
-    }
-
 }

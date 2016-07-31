@@ -21,6 +21,14 @@ class JoinPartyViewController: MenuViewController {
         addTitle("JOURNEY", color: UIColor.whiteColor())
         // Do any additional setup after loading the view.
     }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
 
     @IBAction func submitPasscode(sender: AnyObject) {
         var passcode:String = passcodeField.text!.removeWhitespace()

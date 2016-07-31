@@ -64,13 +64,12 @@ class AmbassadorToTheAPI: Service {
     
     func processResponse(request: NSURLRequest?, response: NSHTTPURLResponse?, result: Result<AnyObject>, success: NetworkSuccessHandler, URLString: URLStringConvertible) {
         if result.isFailure {
-            
-            
-            
-            createNoInternetWarning()
-        } else if response!.statusCode == 401 {
-            self.refreshToken(URLString, success: success)
-        } else {
+            if response!.statusCode == 401 {
+                self.refreshToken(URLString, success: success)
+            } else {
+                createNoInternetWarning()
+            }
+        }  else {
             success(request, response, result)
         }
     }

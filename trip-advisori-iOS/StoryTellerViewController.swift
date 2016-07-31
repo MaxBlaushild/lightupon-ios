@@ -9,22 +9,49 @@
 import UIKit
 
 private let reuseIdentifier = "cardCollectionViewCell"
+private let centerPanelExpandedOffset: CGFloat = 60
 
-class StoryTellerViewController: UICollectionViewController, SocketServiceDelegate {
+protocol StoryTellerViewControllerDelegate {
+    func toggleRightPanel()
+}
+
+class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, SocketServiceDelegate {
     private let partyService:PartyService = Injector.sharedInjector.getPartyService()
     private let socketService: SocketService = Injector.sharedInjector.getSocketService()
-    private let nextSceneButton: UIButton = UIButton()
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    var delegate: StoryTellerViewControllerDelegate?
+    var numberOfCards: Int = 0
+    
+    @IBAction func openMenu(sender: AnyObject) {
+        delegate!.toggleRightPanel()
+    }
     
     var partyState: PartyState!
     var currentParty: Party!
     
+    @IBOutlet weak var nextSceneButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        socketService.delegate = self
+
+        nextSceneButton.enabled = false
+        
+        configureCollectionView()
+        styleCollectionView()
+    }
+    
+    func configureCollectionView() {
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+    }
+    
+    func styleCollectionView() {
         let backgroundView = UIView()
         backgroundView.backgroundColor = Colors.basePurple
-        self.collectionView!.backgroundView = backgroundView;
-        addMenuButton()
-        addNextSceneButton()
+        collectionView.backgroundView = backgroundView;
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,33 +59,20 @@ class StoryTellerViewController: UICollectionViewController, SocketServiceDelega
         // Dispose of any resources that can be recreated.
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+    
     func openAlert(title: String, message: String) {
         
     }
     
-    func addMenuButton() {
-        let button   = UIButton()
-        button.frame = CGRectMake(250, 25, 100, 50)
-        button.backgroundColor = UIColor.whiteColor()
-        button.setTitle("Menu", forState: UIControlState.Normal)
-        button.setTitleColor(Colors.basePurple, forState: UIControlState.Normal)
-        button.addTarget(self, action: #selector(segueToStoryTellerMenu), forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(button)
-    }
-    
-    func addNextSceneButton() {
-        nextSceneButton.frame = CGRectMake(150, 590, 100, 50)
-        nextSceneButton.backgroundColor = UIColor.whiteColor()
-        nextSceneButton.setTitle("NextScene", forState: UIControlState.Normal)
-        nextSceneButton.setTitleColor(Colors.basePurple, forState: UIControlState.Normal)
-        nextSceneButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Disabled)
-        nextSceneButton.addTarget(self, action: #selector(goToNextScene), forControlEvents: UIControlEvents.TouchUpInside)
-        nextSceneButton.enabled = false
-        self.view.addSubview(nextSceneButton)
-    }
-    
-    func segueToStoryTellerMenu() {
-        performSegueWithIdentifier("StoryTellerToStoryTellerMenu", sender: nil)
+    @IBAction func nextSceneButtonPress(sender: AnyObject) {
+        goToNextScene()
     }
     
     func goToNextScene() {
@@ -69,31 +83,31 @@ class StoryTellerViewController: UICollectionViewController, SocketServiceDelega
         performSegueWithIdentifier("StoryTellerToHome", sender: nil)
     }
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return partyState.scene!.cards!.count
     }
     
     func onResponseRecieved(newPartyState: PartyState) {
         let oldId = partyState.scene?.id
+        
         partyState = newPartyState
         nextSceneButton.enabled = partyState.nextSceneAvailable!
+        
         if (oldId != newPartyState.scene!.id!) {
             loadNewScene()
         }
     }
     
     func loadNewScene() {
-        collectionView?.reloadData()
+        collectionView.reloadData()
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> CardCollectionViewCell {
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let card: Card = partyState.scene!.cards![indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CardCollectionViewCell
         

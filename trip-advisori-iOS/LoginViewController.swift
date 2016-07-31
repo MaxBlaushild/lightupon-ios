@@ -19,6 +19,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         setLoginButton()
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+    
     func setLoginButton() {
         let loginView : FBSDKLoginButton = FBSDKLoginButton()
         self.view.addSubview(loginView)

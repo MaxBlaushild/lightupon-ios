@@ -30,6 +30,14 @@ class TripDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+    
     func goToLobby() {
         self.performSegueWithIdentifier("DetailsToLobby", sender: self)
     }

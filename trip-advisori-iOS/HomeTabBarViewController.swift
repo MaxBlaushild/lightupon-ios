@@ -15,6 +15,14 @@ class HomeTabBarViewController: UITabBarController {
         super.viewDidLoad()
         tripsService.getTrips(self.setTrips)
     }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
 
     
     func setTrips(trips: [Trip]) {

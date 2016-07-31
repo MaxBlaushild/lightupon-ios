@@ -24,6 +24,9 @@
 		1E1763AB1D403E6F00C3FBCE /* StringEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1763AA1D403E6F00C3FBCE /* StringEscaping.swift */; };
 		1E1A1A9B1CEE9D1A00A3A812 /* StoryTellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */; };
 		1E1A1A9D1CF243CC00A3A812 /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A1A9C1CF243CC00A3A812 /* CardCollectionViewCell.swift */; };
+		1E1ED1BD1D4C18CE00B49C64 /* user_menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1ED1BA1D4C18CE00B49C64 /* user_menu@3x.png */; };
+		1E1ED1BE1D4C18CE00B49C64 /* user_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1ED1BB1D4C18CE00B49C64 /* user_menu@2x.png */; };
+		1E1ED1BF1D4C18CE00B49C64 /* user_menu@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1ED1BC1D4C18CE00B49C64 /* user_menu@1x.png */; };
 		1E1F32601CA8B9CE009B6D0F /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1F325F1CA8B9CE009B6D0F /* LobbyViewController.swift */; };
 		1E2014901C705C280012B863 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20148F1C705C280012B863 /* ProfileService.swift */; };
 		1E2014961C70DB790012B863 /* FacebookProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2014951C70DB790012B863 /* FacebookProfile.swift */; };
@@ -52,6 +55,8 @@
 		1E841C5F1C679B5600AD638E /* TripListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C5E1C679B5500AD638E /* TripListTableViewCell.swift */; };
 		1E841C621C67C02200AD638E /* TripListTableViewCellDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C611C67C02200AD638E /* TripListTableViewCellDecorator.swift */; };
 		1E841C651C67C48F00AD638E /* AsynchronousUIImageLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */; };
+		1E935F1D1D4C249200CB070B /* StoryTellerContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E935F1C1D4C249200CB070B /* StoryTellerContainerViewController.swift */; };
+		1E935F1F1D4C2F3300CB070B /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E935F1E1D4C2F3300CB070B /* CircularImageView.swift */; };
 		1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */; };
 		1ED4D5A61CEA8D9500722695 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED4D5A51CEA8D9500722695 /* Card.swift */; };
 		1ED69B351D07A96800CF2172 /* Dosis-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ED69B2D1D07A96800CF2172 /* Dosis-Bold.otf */; };
@@ -123,6 +128,9 @@
 		1E1763AA1D403E6F00C3FBCE /* StringEscaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringEscaping.swift; sourceTree = "<group>"; };
 		1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTellerViewController.swift; sourceTree = "<group>"; };
 		1E1A1A9C1CF243CC00A3A812 /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
+		1E1ED1BA1D4C18CE00B49C64 /* user_menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_menu@3x.png"; sourceTree = "<group>"; };
+		1E1ED1BB1D4C18CE00B49C64 /* user_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_menu@2x.png"; sourceTree = "<group>"; };
+		1E1ED1BC1D4C18CE00B49C64 /* user_menu@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_menu@1x.png"; sourceTree = "<group>"; };
 		1E1F325F1CA8B9CE009B6D0F /* LobbyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
 		1E20148F1C705C280012B863 /* ProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		1E2014951C70DB790012B863 /* FacebookProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookProfile.swift; sourceTree = "<group>"; };
@@ -152,6 +160,8 @@
 		1E841C5E1C679B5500AD638E /* TripListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListTableViewCell.swift; sourceTree = "<group>"; };
 		1E841C611C67C02200AD638E /* TripListTableViewCellDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListTableViewCellDecorator.swift; sourceTree = "<group>"; };
 		1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousUIImageLoading.swift; sourceTree = "<group>"; };
+		1E935F1C1D4C249200CB070B /* StoryTellerContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTellerContainerViewController.swift; sourceTree = "<group>"; };
+		1E935F1E1D4C2F3300CB070B /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
 		1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		1ED4D5A51CEA8D9500722695 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		1ED69B2D1D07A96800CF2172 /* Dosis-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Bold.otf"; sourceTree = "<group>"; };
@@ -287,6 +297,7 @@
 				1ED69B411D07B1C300CF2172 /* ColorFromHex.swift */,
 				1ED69B4A1D0C836000CF2172 /* GetTopViewController.swift */,
 				1E1763AA1D403E6F00C3FBCE /* StringEscaping.swift */,
+				1E935F1E1D4C2F3300CB070B /* CircularImageView.swift */,
 			);
 			name = utilities;
 			sourceTree = "<group>";
@@ -300,6 +311,9 @@
 				1ED69B301D07A96800CF2172 /* Dosis-Light.otf */,
 				1ED69B311D07A96800CF2172 /* Dosis-Medium.otf */,
 				1E22A7D11D2C6FD200163785 /* birdhouse@3x.png */,
+				1E1ED1BA1D4C18CE00B49C64 /* user_menu@3x.png */,
+				1E1ED1BB1D4C18CE00B49C64 /* user_menu@2x.png */,
+				1E1ED1BC1D4C18CE00B49C64 /* user_menu@1x.png */,
 				1E22A7D21D2C6FD200163785 /* birdhouse@2x.png */,
 				1EEA2D9F1D3AA9C900F53A86 /* arrow.png */,
 				1E22A7D31D2C6FD200163785 /* birdhouse@1x.png */,
@@ -346,6 +360,7 @@
 				1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */,
 				1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */,
 				1E22A7CF1D2C491C00163785 /* StoryTellerMenuViewController.swift */,
+				1E935F1C1D4C249200CB070B /* StoryTellerContainerViewController.swift */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -529,11 +544,14 @@
 				1EF783A11CFF5DAF00860510 /* TextHero.xib in Resources */,
 				1E05B8971C5D135D009E37BA /* LaunchScreen.storyboard in Resources */,
 				1E05B8941C5D135D009E37BA /* Assets.xcassets in Resources */,
+				1E1ED1BE1D4C18CE00B49C64 /* user_menu@2x.png in Resources */,
 				1E22A7DA1D2C763300163785 /* MapHero.xib in Resources */,
 				1ED69B3C1D07A96800CF2172 /* SIL Open Font License.txt in Resources */,
 				1E05B8921C5D135D009E37BA /* Main.storyboard in Resources */,
 				1ED69B3B1D07A96800CF2172 /* Dosis-SemiBold.otf in Resources */,
 				1ED69B3A1D07A96800CF2172 /* Dosis-Regular.otf in Resources */,
+				1E1ED1BD1D4C18CE00B49C64 /* user_menu@3x.png in Resources */,
+				1E1ED1BF1D4C18CE00B49C64 /* user_menu@1x.png in Resources */,
 				1EF783AD1D00940100860510 /* PictureHero.xib in Resources */,
 				1ED69B371D07A96800CF2172 /* Dosis-ExtraLight.otf in Resources */,
 				1E22A7D41D2C6FD200163785 /* birdhouse@3x.png in Resources */,
@@ -654,7 +672,9 @@
 				1E05B8BD1C5D193B009E37BA /* CurrentLocationService.swift in Sources */,
 				1E22A7CC1D2C383400163785 /* IAmACard.swift in Sources */,
 				1E2014961C70DB790012B863 /* FacebookProfile.swift in Sources */,
+				1E935F1D1D4C249200CB070B /* StoryTellerContainerViewController.swift in Sources */,
 				1E7032AD1CE8F53A00B1C18D /* PartyState.swift in Sources */,
+				1E935F1F1D4C2F3300CB070B /* CircularImageView.swift in Sources */,
 				1E841C621C67C02200AD638E /* TripListTableViewCellDecorator.swift in Sources */,
 				1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */,
 				1E05B8C11C5D327A009E37BA /* MapViewController.swift in Sources */,

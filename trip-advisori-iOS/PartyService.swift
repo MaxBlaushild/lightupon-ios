@@ -10,7 +10,9 @@ import UIKit
 import SwiftyJSON
 
 class PartyService: Service {
-    var apiAmbassador:AmbassadorToTheAPI!
+    let apiAmbassador:AmbassadorToTheAPI
+    
+    private var _currentParty_: Party!
     
     init(_apiAmbassador_: AmbassadorToTheAPI){
         apiAmbassador = _apiAmbassador_
@@ -49,7 +51,6 @@ class PartyService: Service {
     
     func leaveParty(callback: () -> Void) {
         apiAmbassador.delete(apiURL + "/parties", success: { request, response, result in
-            
             callback()
         })
     }

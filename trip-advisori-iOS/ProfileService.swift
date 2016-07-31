@@ -10,6 +10,13 @@ import UIKit
 import SwiftyJSON
 
 class ProfileService: Service {
+    var _profile_: FacebookProfile!
+    
+    var profile: FacebookProfile {
+        get {
+            return _profile_
+        }
+    }
 
     func getMyProfile(callback: (FacebookProfile) -> Void){
         
@@ -26,7 +33,7 @@ class ProfileService: Service {
                 let json = JSON(result!)
                 
                 let profile = FacebookProfile(json: json)
-                
+                self._profile_ = profile
                 callback(profile)
             }
         })
@@ -47,6 +54,10 @@ class ProfileService: Service {
                 
                 let profile = FacebookProfile(json: json)
                 
+                
+                
+                
+                self._profile_ = profile
                 callback(profile)
             }
         })
@@ -67,7 +78,7 @@ class ProfileService: Service {
                 let json = JSON(result!)
                 
                 let profile = FacebookProfile(json: json)
-                
+                self._profile_ = profile
                 callback(profile)
             }
         })

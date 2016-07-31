@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -11,14 +11,16 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hsi-KU-eDt">
-                    <rect key="frame" x="180" y="236" width="240" height="128"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hsi-KU-eDt">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Hsi-KU-eDt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Pxk-PQ-0U9"/>
-                <constraint firstItem="Hsi-KU-eDt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="zJr-77-oN5"/>
+                <constraint firstAttribute="trailing" secondItem="Hsi-KU-eDt" secondAttribute="trailing" id="5dd-8E-Ke2"/>
+                <constraint firstAttribute="bottom" secondItem="Hsi-KU-eDt" secondAttribute="bottom" id="7xo-Ph-tfW"/>
+                <constraint firstItem="Hsi-KU-eDt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="D21-HM-3AB"/>
+                <constraint firstItem="Hsi-KU-eDt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hCw-pv-Rt9"/>
             </constraints>
             <connections>
                 <outlet property="pictureHero" destination="Hsi-KU-eDt" id="fWk-2G-deA"/>

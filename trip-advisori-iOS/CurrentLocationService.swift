@@ -42,6 +42,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Location services stoppped polling.")
         locationManager.stopUpdatingLocation()
     }
     
@@ -52,7 +53,6 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         _latitude = coord.latitude
         _longitude = coord.longitude
         
-        print(coord)
         if delegate != nil {
             delegate.onLocationUpdated()
         }
@@ -75,7 +75,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
             _locationStatus = (code: 1, message: "Allowed to location Access")
             
         }
-        print(_locationStatus.message)
+        
         // TODO: add a notification for the status changed event
         let data:[NSObject: AnyObject] = ["status": DataWrapper(element: _locationStatus)]
         

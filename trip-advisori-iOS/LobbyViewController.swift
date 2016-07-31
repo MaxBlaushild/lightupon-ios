@@ -16,14 +16,23 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     var partyState: PartyState!
     var currentParty: Party!
 
-    @IBOutlet weak var passcodeLabel: UILabel!
     @IBOutlet weak var startPartyButton: UIButton!
+    @IBOutlet weak var passcodeLabel: UILabel!
+    @IBOutlet weak var tripTitle: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         socketService.delegate = self
         partyService.getUsersParty(self.processParty)
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
     }
     
     @IBAction func startParty(sender: AnyObject) {
@@ -41,7 +50,7 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     func processParty(party: Party) {
         currentParty = party
         passcodeLabel.text = currentParty.passcode
-        socketService.openSocket(currentParty.passcode)
+        tripTitle.text = currentParty.trip.title
     }
     
     func onResponseRecieved(_partyState_: PartyState) {
@@ -75,8 +84,7 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destinationVC = segue.destinationViewController as? StoryTellerViewController {
-            socketService.delegate = destinationVC
+        if let destinationVC = segue.destinationViewController as? StoryTellerContainerViewController {
             destinationVC.partyState = partyState
             destinationVC.currentParty = currentParty
         }

@@ -26,9 +26,11 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     init(_authService_: AuthService, _currentLocation_: CurrentLocationService) {
         super.init()
         currentLocation = _currentLocation_
+        authService = _authService_
+        
         currentLocation.delegate = self
         
-        authService = _authService_
+        openSocket()
     }
     
     private func setSocketHeaders() {
@@ -41,9 +43,10 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
         socket.headers = headers
     }
     
-    func openSocket(passcode: String) {
-        socket = WebSocket(url: NSURL(string: "\(wsURL)/parties/\(passcode)/pull")!, protocols: ["chat", "superchat"])
+    func openSocket() {
+        socket = WebSocket(url: NSURL(string: "\(wsURL)/pull")!, protocols: ["chat", "superchat"])
         socket.delegate = self
+        socket.voipEnabled = true
         setSocketHeaders()
         socket.connect()
     }
@@ -64,7 +67,7 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
         if let e = error {
             print("websocket is disconnected: \(e.localizedDescription)")
         } else {
-            createNoSocketWarning()
+            openSocket()
         }
     }
     
@@ -74,7 +77,9 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     
     func websocketDidReceiveMessage(ws: WebSocket, text: String) {
         if let partyState:PartyState = Mapper<PartyState>().map(text) {
-            delegate.onResponseRecieved(partyState)
+            if delegate != nil {
+                delegate.onResponseRecieved(partyState)
+            }
         }
     }
     
