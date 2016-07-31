@@ -85,6 +85,7 @@
 		1EF93C001C604DA600A5B463 /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */; };
 		1EF93C071C605A5C00A5B463 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93C061C605A5C00A5B463 /* Service.swift */; };
 		9124443D98759B610CA027FA /* Pods_trip_advisori_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADB4A205645AF4BD20A06E0 /* Pods_trip_advisori_iOS.framework */; };
+		9C3F53181D4EB25300A6B3DE /* TestSound2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C3F53171D4EB25300A6B3DE /* TestSound2.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,6 +192,7 @@
 		1EF93C061C605A5C00A5B463 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		2ADB4A205645AF4BD20A06E0 /* Pods_trip_advisori_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trip_advisori_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FFFEB7839A565E790733793 /* Pods-trip-advisori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		9C3F53171D4EB25300A6B3DE /* TestSound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TestSound2.mp3; sourceTree = "<group>"; };
 		CC641C4C708F459BFB4B60B1 /* Pods-trip-advisori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -314,6 +316,7 @@
 				1E1ED1BA1D4C18CE00B49C64 /* user_menu@3x.png */,
 				1E1ED1BB1D4C18CE00B49C64 /* user_menu@2x.png */,
 				1E1ED1BC1D4C18CE00B49C64 /* user_menu@1x.png */,
+				9C3F53171D4EB25300A6B3DE /* TestSound2.mp3 */,
 				1E22A7D21D2C6FD200163785 /* birdhouse@2x.png */,
 				1EEA2D9F1D3AA9C900F53A86 /* arrow.png */,
 				1E22A7D31D2C6FD200163785 /* birdhouse@1x.png */,
@@ -536,6 +539,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C3F53181D4EB25300A6B3DE /* TestSound2.mp3 in Resources */,
 				1ED69B361D07A96800CF2172 /* Dosis-ExtraBold.otf in Resources */,
 				1ED69B391D07A96800CF2172 /* Dosis-Medium.otf in Resources */,
 				1E22A7D51D2C6FD200163785 /* birdhouse@2x.png in Resources */,

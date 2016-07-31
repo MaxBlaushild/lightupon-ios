@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class LobbyViewController: UIViewController, SocketServiceDelegate {
     private let partyService: PartyService = Injector.sharedInjector.getPartyService()
@@ -15,6 +16,9 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     
     var partyState: PartyState!
     var currentParty: Party!
+    
+    var coinSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("TestSound2", ofType: "mp3")!)
+    var audioPlayer = AVAudioPlayer()
 
     @IBOutlet weak var startPartyButton: UIButton!
     @IBOutlet weak var passcodeLabel: UILabel!
@@ -33,6 +37,14 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
+    }
+    
+    @IBAction func playSound(sender: AnyObject) {
+        do {
+            try audioPlayer = AVAudioPlayer(contentsOfURL: coinSound, fileTypeHint: nil)
+        } catch _ { }
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
     }
     
     @IBAction func startParty(sender: AnyObject) {
