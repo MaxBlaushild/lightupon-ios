@@ -8,28 +8,26 @@
 
 import UIKit
 import SwiftyJSON
+import ObjectMapper
 
-class FacebookProfile: NSObject {
-    var firstName: String = ""
-    var fullName: String = ""
-    var email: String = ""
-    var id:String = ""
-    var profilePictureURL: String = ""
-    var coverPhoto:String = ""
-   
-    required init(json: JSON){
-        let profile:[String: JSON] = json.dictionary!
-        let picture:[String: JSON] = profile["picture"]!.dictionary!
-        let data:[String: JSON] = picture["data"]!.dictionary!
-        
-        self.id = profile["id"]!.string!
-        self.firstName = profile["first_name"]!.string!
-        self.fullName = profile["name"]!.string!
-        self.email = profile["email"]!.string!
-        self.profilePictureURL = data["url"]!.string!
-        self.coverPhoto = json["cover"]["source"].string!
-
+class FacebookProfile: NSObject, Mappable {
+    var firstName: String?
+    var fullName: String?
+    var email: String?
+    var id:String?
+    var profilePictureURL: String?
+    var coverPhoto:String?
+    
+    func mapping(map: Map) {
+        id         <- map["id"]
+        email      <- map["email"]
+        firstName  <- map["first_name"]
+        fullName   <- map["name"]
+        profilePictureURL <- map["picture.data.url"]
+        coverPhoto   <- map["cover.source"]
     }
+    
+    required init?(_ map: Map) {}
 }
 
 

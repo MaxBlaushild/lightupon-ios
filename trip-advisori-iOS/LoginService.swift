@@ -23,8 +23,8 @@ class LoginService: Service {
         let url:String = apiURL + "/users"
         
         let user = [
-            "FacebookId": profile.id,
-            "Email": profile.email
+            "FacebookId": profile.id!,
+            "Email": profile.email!
         ]
         
         Alamofire.request(.POST, url, parameters: user, encoding: .JSON)
@@ -34,7 +34,7 @@ class LoginService: Service {
             let token:String = json.string!
             
             self.authService.setToken(token)
-            self.authService.setFacebookId(profile.id)
+            self.authService.setFacebookId(profile.id!)
                 
             callback()
 

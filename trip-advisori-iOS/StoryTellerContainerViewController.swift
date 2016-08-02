@@ -56,9 +56,14 @@ class StoryTellerContainerViewController: UIViewController, StoryTellerViewContr
         if (menuShouldOpen) {
             addRightPanelViewController()
         }
-        
+        passPartyStateToMenu()
         animateRightPanel(menuShouldOpen)
         menuOpen = menuShouldOpen
+    }
+    
+    func passPartyStateToMenu() {
+        menuViewController.partyState = storyTellerViewController.partyState
+        menuViewController.bindParty(currentParty)
     }
     
     func addRightPanelViewController() {

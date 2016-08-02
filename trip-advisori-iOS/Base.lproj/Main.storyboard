@@ -11,6 +11,9 @@
             <string>Dosis-Regular</string>
             <string>Dosis-Regular</string>
             <string>Dosis-Regular</string>
+            <string>Dosis-Regular</string>
+            <string>Dosis-Regular</string>
+            <string>Dosis-Regular</string>
         </mutableArray>
         <mutableArray key="Dosis-SemiBold.otf">
             <string>Dosis-SemiBold</string>
@@ -323,11 +326,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EMX-6F-cdY">
-                                <rect key="frame" x="93" y="119" width="100" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EMX-6F-cdY">
+                                <rect key="frame" x="90" y="30" width="70" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="0Za-4W-11H"/>
-                                    <constraint firstAttribute="width" constant="100" id="vsr-pp-3BZ"/>
+                                    <constraint firstAttribute="height" constant="70" id="0Za-4W-11H"/>
+                                    <constraint firstAttribute="width" constant="70" id="vsr-pp-3BZ"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyQ-fW-HO4">
@@ -340,15 +343,87 @@
                                     <action selector="leaveParty:" destination="h04-z6-OpC" eventType="touchUpInside" id="irv-p9-XwN"/>
                                 </connections>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LrL-ww-nar">
+                                <rect key="frame" x="20" y="150" width="540" height="350"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ldP-YS-JZ9">
+                                    <size key="itemSize" width="291.5" height="127"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PartyMemberCollectionViewCell" id="UwX-TK-dnW" customClass="PartyMemberCollectionViewCell" customModule="trip_advisori_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="291.5" height="127"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="291.5" height="127"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sa3-ZV-h1K">
+                                                    <rect key="frame" x="68" y="28" width="70" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="70" id="4xy-fG-u1W"/>
+                                                        <constraint firstAttribute="height" constant="70" id="mwi-t6-oSX"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="fullName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wV-th-mOl">
+                                                    <rect key="frame" x="148" y="53" width="68.5" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="17"/>
+                                                    <color key="textColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="sa3-ZV-h1K" firstAttribute="leading" secondItem="UwX-TK-dnW" secondAttribute="leadingMargin" constant="60" id="8nC-3r-BnK"/>
+                                            <constraint firstItem="4wV-th-mOl" firstAttribute="centerY" secondItem="UwX-TK-dnW" secondAttribute="centerY" id="PRV-jE-cE4"/>
+                                            <constraint firstItem="sa3-ZV-h1K" firstAttribute="centerY" secondItem="UwX-TK-dnW" secondAttribute="centerY" id="UNw-eW-lbp"/>
+                                            <constraint firstItem="4wV-th-mOl" firstAttribute="leading" secondItem="sa3-ZV-h1K" secondAttribute="trailing" constant="10" id="vmI-T6-U6y"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="partyMemberFullName" destination="4wV-th-mOl" id="2nW-uz-QuA"/>
+                                            <outlet property="partyMemberProfilePicture" destination="sa3-ZV-h1K" id="q6l-zX-pWg"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="tripTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wf5-XA-nFV">
+                                <rect key="frame" x="168" y="30" width="58" height="21"/>
+                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="17"/>
+                                <color key="textColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="passcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qe2-hX-om4">
+                                <rect key="frame" x="168" y="79" width="74" height="21"/>
+                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
+                                <color key="textColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="LrL-ww-nar" secondAttribute="trailing" constant="20" id="2VM-kf-a72"/>
                             <constraint firstItem="p8f-gA-sEf" firstAttribute="top" secondItem="FyQ-fW-HO4" secondAttribute="bottom" constant="20" id="GjG-dv-YGL"/>
+                            <constraint firstItem="EMX-6F-cdY" firstAttribute="top" secondItem="Ma7-UU-f4e" secondAttribute="bottom" constant="10" id="KYo-Ni-rmv"/>
+                            <constraint firstItem="Qe2-hX-om4" firstAttribute="bottom" secondItem="EMX-6F-cdY" secondAttribute="bottom" id="Ld5-Ca-6W7"/>
+                            <constraint firstItem="p8f-gA-sEf" firstAttribute="top" secondItem="LrL-ww-nar" secondAttribute="bottom" constant="100" id="YEc-yi-AKi"/>
+                            <constraint firstItem="Qe2-hX-om4" firstAttribute="leading" secondItem="EMX-6F-cdY" secondAttribute="trailing" constant="8" id="ZYj-hb-ewa"/>
+                            <constraint firstItem="LrL-ww-nar" firstAttribute="leading" secondItem="phV-Ja-Fge" secondAttribute="leadingMargin" id="Zlg-4g-oE3"/>
+                            <constraint firstItem="EMX-6F-cdY" firstAttribute="leading" secondItem="phV-Ja-Fge" secondAttribute="leadingMargin" constant="70" id="bqv-Jr-pJN"/>
+                            <constraint firstItem="LrL-ww-nar" firstAttribute="top" secondItem="EMX-6F-cdY" secondAttribute="bottom" constant="50" id="dtE-JX-qZ4"/>
+                            <constraint firstItem="Wf5-XA-nFV" firstAttribute="leading" secondItem="EMX-6F-cdY" secondAttribute="trailing" constant="8" id="gjn-S9-MtE"/>
+                            <constraint firstItem="Wf5-XA-nFV" firstAttribute="top" secondItem="EMX-6F-cdY" secondAttribute="top" id="kgT-y5-WDV"/>
                             <constraint firstItem="FyQ-fW-HO4" firstAttribute="trailing" secondItem="phV-Ja-Fge" secondAttribute="trailingMargin" id="zHl-AO-2nH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="partyMemberCollectionView" destination="LrL-ww-nar" id="jbL-35-Ifv"/>
+                        <outlet property="passcode" destination="Qe2-hX-om4" id="p9u-fE-aWl"/>
                         <outlet property="profilePicture" destination="EMX-6F-cdY" id="b4Q-Fh-MOl"/>
+                        <outlet property="tripTitle" destination="Wf5-XA-nFV" id="334-9a-AD3"/>
                         <segue destination="zM7-UW-UFv" kind="presentation" identifier="StoryTellerMenuToHome" id="gY1-t0-Oa9"/>
                     </connections>
                 </viewController>

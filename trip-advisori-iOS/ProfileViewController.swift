@@ -35,8 +35,8 @@ class ProfileViewController: UIViewController {
     }
     
     func bindProfileToView(profile: FacebookProfile){
-        profileBanner.imageFromUrl(profile.coverPhoto)
-        profilePic.imageFromUrl(profile.profilePictureURL)
+        profileBanner.imageFromUrl(profile.coverPhoto!)
+        profilePic.imageFromUrl(profile.profilePictureURL!)
     }
     
     override func didReceiveMemoryWarning() {

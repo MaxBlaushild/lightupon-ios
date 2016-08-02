@@ -11,8 +11,6 @@ import UIKit
 import ObjectMapper
 
 class User: NSObject, Mappable {
-    static let profileService:ProfileService = Injector.sharedInjector.getProfileService()
-    
     var id:Int?
     var email: String?
     var facebookId:String?
@@ -24,17 +22,7 @@ class User: NSObject, Mappable {
         email      <- map["Email"]
         facebookId <- map["FacebookId"]
         location   <- map["Location"]
-        
-        self.populateProfile()
     }
     
     required init?(_ map: Map) {}
-    
-    func populateProfile() {
-        User.profileService.getProfile(self.facebookId!, callback: self.setProfile)
-    }
-    
-    func setProfile(profile: FacebookProfile){
-        self.facebookProfile = profile
-    }
 }

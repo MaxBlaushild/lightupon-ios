@@ -8,14 +8,18 @@
 
 import UIKit
 import SwiftyJSON
+import ObjectMapper
 
 class ProfileService: Service {
     var _profile_: FacebookProfile!
-    
     var profile: FacebookProfile {
         get {
             return _profile_
         }
+    }
+    
+    override init() {
+        super.init()
     }
 
     func getMyProfile(callback: (FacebookProfile) -> Void){
@@ -30,11 +34,11 @@ class ProfileService: Service {
                 
             } else {
                 
-                let json = JSON(result!)
+                let profile = Mapper<FacebookProfile>().map(result)
                 
-                let profile = FacebookProfile(json: json)
                 self._profile_ = profile
-                callback(profile)
+                callback(profile!)
+                
             }
         })
     }
@@ -50,15 +54,9 @@ class ProfileService: Service {
                 
             } else {
                 
-                let json = JSON(result!)
+                let profile = Mapper<FacebookProfile>().map(result)
+                callback(profile!)
                 
-                let profile = FacebookProfile(json: json)
-                
-                
-                
-                
-                self._profile_ = profile
-                callback(profile)
             }
         })
     }
@@ -75,11 +73,9 @@ class ProfileService: Service {
                 
             } else {
                 
-                let json = JSON(result!)
+                let profile = Mapper<FacebookProfile>().map(result)
+                callback(profile!)
                 
-                let profile = FacebookProfile(json: json)
-                self._profile_ = profile
-                callback(profile)
             }
         })
     }

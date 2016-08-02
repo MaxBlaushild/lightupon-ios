@@ -11,24 +11,29 @@ import UIKit
 class ContentLoaderService: Service {
     private var authService: AuthService!
     private var partyService: PartyService!
+    private var profileService: ProfileService!
     private var loggedIn: Bool = false
+    private var contentLoadedCallback: (String) -> Void
     
-    init(_authService_: AuthService, _partyService_: PartyService){
+    init(_authService_: AuthService, _partyService_: PartyService, _profileService_: ProfileService){
         authService = _authService_
         partyService = _partyService_
+        profileService = _profileService_
+        contentLoadedCallback = { _ in }
     }
     
     func loadContent(callback: (String) -> Void) {
         loggedIn = authService.userIsLoggedIn()
+        contentLoadedCallback = callback
         
         if (loggedIn) {
-            checkIfUserIsInParty(callback)
+            profileService.getMyProfile(self.checkIfUserIsInParty)
         } else {
            callback("InitialToLogin")
         }
     }
     
-    func checkIfUserIsInParty(callback: (String) -> Void){
-        partyService.isUserInParty(callback)
+    func checkIfUserIsInParty(_: FacebookProfile) {
+        partyService.isUserInParty(self.contentLoadedCallback)
     }
 }
