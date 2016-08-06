@@ -39,7 +39,3 @@ class Scene: NSObject, Mappable {
     }
 }
 
-//
-//var coinSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("TestSound2", ofType: "mp3")!)
-
-
