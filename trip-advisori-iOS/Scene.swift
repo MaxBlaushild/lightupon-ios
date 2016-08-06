@@ -17,13 +17,15 @@ class Scene: NSObject, Mappable {
     var latitude: Double?
     var longitude: Double?
     var cards: [Card]?
+    var backgroundUrl: String?
     
     func mapping(map: Map) {
-        id        <- map["ID"]
-        name      <- map["Name"]
-        latitude  <- map["Latitude"]
-        longitude <- map["Longitude"]
-        cards     <- map["Cards"]
+        id            <- map["ID"]
+        name          <- map["Name"]
+        latitude      <- map["Latitude"]
+        longitude     <- map["Longitude"]
+        cards         <- map["Cards"]
+        backgroundUrl <- map["BackgroundUrl"]
     }
     
     required init?(_ map: Map) {

@@ -57,6 +57,7 @@
 		1E841C651C67C48F00AD638E /* AsynchronousUIImageLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */; };
 		1E935F1D1D4C249200CB070B /* StoryTellerContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E935F1C1D4C249200CB070B /* StoryTellerContainerViewController.swift */; };
 		1E935F1F1D4C2F3300CB070B /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E935F1E1D4C2F3300CB070B /* CircularImageView.swift */; };
+		1E954EB71D50EA7A0021FDD8 /* BlurImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */; };
 		1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */; };
 		1ED4D5A61CEA8D9500722695 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED4D5A51CEA8D9500722695 /* Card.swift */; };
 		1ED69B351D07A96800CF2172 /* Dosis-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ED69B2D1D07A96800CF2172 /* Dosis-Bold.otf */; };
@@ -163,6 +164,7 @@
 		1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousUIImageLoading.swift; sourceTree = "<group>"; };
 		1E935F1C1D4C249200CB070B /* StoryTellerContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTellerContainerViewController.swift; sourceTree = "<group>"; };
 		1E935F1E1D4C2F3300CB070B /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
+		1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurImage.swift; sourceTree = "<group>"; };
 		1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		1ED4D5A51CEA8D9500722695 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		1ED69B2D1D07A96800CF2172 /* Dosis-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Bold.otf"; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 				1ED69B4A1D0C836000CF2172 /* GetTopViewController.swift */,
 				1E1763AA1D403E6F00C3FBCE /* StringEscaping.swift */,
 				1E935F1E1D4C2F3300CB070B /* CircularImageView.swift */,
+				1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */,
 			);
 			name = utilities;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				1E935F1F1D4C2F3300CB070B /* CircularImageView.swift in Sources */,
 				1E841C621C67C02200AD638E /* TripListTableViewCellDecorator.swift in Sources */,
 				1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */,
+				1E954EB71D50EA7A0021FDD8 /* BlurImage.swift in Sources */,
 				1E05B8C11C5D327A009E37BA /* MapViewController.swift in Sources */,
 				1E2014901C705C280012B863 /* ProfileService.swift in Sources */,
 				1EEBE0A01D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift in Sources */,

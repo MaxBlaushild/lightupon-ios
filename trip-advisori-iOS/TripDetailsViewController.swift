@@ -19,7 +19,7 @@ class TripDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tripsService.getTrip(tripId, vc: self)
+//        tripsService.getTrip(tripId, vc: self)
     }
 
     @IBAction func createParty(sender: AnyObject) {

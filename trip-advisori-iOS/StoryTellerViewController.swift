@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 private let reuseIdentifier = "cardCollectionViewCell"
 private let centerPanelExpandedOffset: CGFloat = 60
@@ -20,6 +21,8 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
     private let socketService: SocketService = Injector.sharedInjector.getSocketService()
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet var storyBackground: UIView!
     
     var delegate: StoryTellerViewControllerDelegate?
     var numberOfCards: Int = 0
@@ -36,11 +39,11 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         super.viewDidLoad()
         
         socketService.delegate = self
-
         nextSceneButton.enabled = false
         
         configureCollectionView()
         styleCollectionView()
+        loadBackgroundPicture()
     }
     
     func configureCollectionView() {
@@ -105,6 +108,30 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func loadNewScene() {
         collectionView.reloadData()
+        loadBackgroundPicture()
+    }
+    
+    func loadBackgroundPicture() {
+        let url = NSURL(string: (partyState.scene?.backgroundUrl)!)
+        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+        let backgroundImage = UIImage(data: data!)!
+        let blurredBackgroundImage = backgroundImage.applyBlurWithRadius(
+            CGFloat(5),
+            tintColor: nil,
+            saturationDeltaFactor: 1.0,
+            maskImage: nil
+        )
+        storyBackground.backgroundColor = UIColor(patternImage: blurredBackgroundImage!)
+
+
+    }
+    
+    func blurBackgroundPicture() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        storyBackground.insertSubview(blurEffectView, belowSubview: collectionView)
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
