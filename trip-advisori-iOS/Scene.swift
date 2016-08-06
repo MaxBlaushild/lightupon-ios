@@ -10,6 +10,7 @@ import Foundation
 
 import UIKit
 import ObjectMapper
+import AVFoundation
 
 class Scene: NSObject, Mappable {
     var id:Int?
@@ -17,16 +18,24 @@ class Scene: NSObject, Mappable {
     var latitude: Double?
     var longitude: Double?
     var cards: [Card]?
+    var soundResource:String?
+    var audioPlayer = AVAudioPlayer?()
     
     func mapping(map: Map) {
-        id        <- map["ID"]
-        name      <- map["Name"]
-        latitude  <- map["Latitude"]
-        longitude <- map["Longitude"]
-        cards     <- map["Cards"]
+        id            <- map["ID"]
+        name          <- map["Name"]
+        latitude      <- map["Latitude"]
+        longitude     <- map["Longitude"]
+        cards         <- map["Cards"]
+        soundResource <- map["soundResource"]
     }
     
     required init?(_ map: Map) {
-        
+        let coinSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("TestSound2", ofType: "mp3")!)
+        do {
+            try audioPlayer = AVAudioPlayer(contentsOfURL: coinSound, fileTypeHint: nil)
+        } catch _ { }
+        audioPlayer!.prepareToPlay()
     }
 }
+

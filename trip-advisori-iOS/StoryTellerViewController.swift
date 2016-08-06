@@ -89,6 +89,7 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        partyState.scene?.audioPlayer!.play()
         return partyState.scene!.cards!.count
     }
     
