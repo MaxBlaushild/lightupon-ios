@@ -19,7 +19,6 @@ class Scene: NSObject, Mappable {
     var longitude: Double?
     var cards: [Card]?
     var soundResource:String?
-    var audioPlayer = AVAudioPlayer?()
     
     func mapping(map: Map) {
         id            <- map["ID"]
@@ -27,15 +26,10 @@ class Scene: NSObject, Mappable {
         latitude      <- map["Latitude"]
         longitude     <- map["Longitude"]
         cards         <- map["Cards"]
-        soundResource <- map["soundResource"]
+        soundResource <- map["SoundResource"]
     }
     
     required init?(_ map: Map) {
-        let coinSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("TestSound2", ofType: "mp3")!)
-        do {
-            try audioPlayer = AVAudioPlayer(contentsOfURL: coinSound, fileTypeHint: nil)
-        } catch _ { }
-        audioPlayer!.prepareToPlay()
     }
 }
 

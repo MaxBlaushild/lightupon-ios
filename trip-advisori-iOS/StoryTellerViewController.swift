@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 private let reuseIdentifier = "cardCollectionViewCell"
 private let centerPanelExpandedOffset: CGFloat = 60
@@ -18,6 +19,9 @@ protocol StoryTellerViewControllerDelegate {
 class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, SocketServiceDelegate {
     private let partyService:PartyService = Injector.sharedInjector.getPartyService()
     private let socketService: SocketService = Injector.sharedInjector.getSocketService()
+    private var audioPlayer: AVAudioPlayer!
+    
+    private var player: AVAudioPlayer!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -27,6 +31,9 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBAction func openMenu(sender: AnyObject) {
         delegate!.toggleRightPanel()
     }
+    
+    
+    
     
     var partyState: PartyState!
     var currentParty: Party!
@@ -71,6 +78,8 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         
     }
     
+
+    
     @IBAction func nextSceneButtonPress(sender: AnyObject) {
         goToNextScene()
     }
@@ -87,9 +96,53 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
+    
+
+    func playSound(scene: Scene) {
+        print(scene.soundResource)
+        let urlstring = scene.soundResource
+        let url = NSURL(string: urlstring!)
+        print("the url = \(url!)")
+        downloadFileFromURL(url!)
+    }
+    
+    
+    func downloadFileFromURL(url:NSURL){
+        var downloadTask:NSURLSessionDownloadTask
+        downloadTask = NSURLSession.sharedSession().downloadTaskWithURL(url, completionHandler: { (URL, response, error) -> Void in
+            self.play(URL!)
+            
+        })
+        downloadTask.resume()
+    }
+    
+    
+    func play(url:NSURL) {
+        print("playing \(url)")
+        do {
+            self.player = try AVAudioPlayer(contentsOfURL: url)
+            player.prepareToPlay()
+            player.volume = 1.0
+            player.play()
+        } catch let error as NSError {
+            //self.player = nil
+            print(error.localizedDescription)
+        } catch {
+            print("AVAudioPlayer init failed")
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        partyState.scene?.audioPlayer!.play()
+        playSound(partyState.scene!)
         return partyState.scene!.cards!.count
     }
     
