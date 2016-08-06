@@ -13,7 +13,6 @@ class Injector: Service {
     
     private var apiAmbassador: AmbassadorToTheAPI
     private var authService: AuthService
-    private var contentLoaderService: ContentLoaderService
     private var tripsService: TripsService
     private var partyService: PartyService
     private var currentLocationService: CurrentLocationService
@@ -33,7 +32,6 @@ class Injector: Service {
         apiAmbassador = AmbassadorToTheAPI(_authService_: authService)
         tripsService = TripsService(_apiAmbassador_: apiAmbassador)
         partyService = PartyService(_apiAmbassador_: apiAmbassador)
-        contentLoaderService = ContentLoaderService(_authService_: authService, _partyService_: partyService, _profileService_: profileService)
         socketService = SocketService(_authService_: authService, _currentLocation_: currentLocationService)
         super.init()
     }
@@ -43,10 +41,6 @@ class Injector: Service {
     
     func getAuthService() -> AuthService {
         return authService
-    }
-    
-    func getContentLoaderService() -> ContentLoaderService {
-        return contentLoaderService
     }
     
     func getSocketService() -> SocketService {

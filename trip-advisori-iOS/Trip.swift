@@ -18,6 +18,7 @@ class Trip: NSObject {
     var descriptionText: String
     var imageUrl: String
     var estimatedTime: String
+    var details:String
     
     required init(json:JSON){
         var trip:[String: JSON] = json.dictionary!
@@ -25,6 +26,7 @@ class Trip: NSObject {
         self.imageUrl = trip["ImageUrl"]!.string!
         self.latitude = trip["Latitude"]!.double!
         self.longitude = trip["Longitude"]!.double!
+        self.details = trip["Details"]!.string!
         self.title = trip["Title"]!.string!
         self.descriptionText = trip["Description"]!.string!
         self.id = trip["ID"]!.int!

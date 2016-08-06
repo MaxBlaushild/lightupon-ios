@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Alamofire
 
 private let reuseIdentifier = "cardCollectionViewCell"
 private let centerPanelExpandedOffset: CGFloat = 60
@@ -25,15 +26,14 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet var storyBackground: UIView!
+    
     var delegate: StoryTellerViewControllerDelegate?
     var numberOfCards: Int = 0
     
     @IBAction func openMenu(sender: AnyObject) {
         delegate!.toggleRightPanel()
     }
-    
-    
-    
     
     var partyState: PartyState!
     var currentParty: Party!
@@ -45,6 +45,7 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         
         configureCollectionView()
         styleCollectionView()
+        loadBackgroundPicture()
     }
     
     func configureCollectionView() {
@@ -122,15 +123,6 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
             print("AVAudioPlayer init failed")
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         playSound(partyState.scene!)
@@ -147,12 +139,27 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         
         
         if (oldId != newPartyState.scene!.id!) {
+            loadBackgroundPicture()
             loadNewScene()
         }
     }
     
     func loadNewScene() {
         collectionView.reloadData()
+        loadBackgroundPicture()
+    }
+    
+    func loadBackgroundPicture() {
+        let url = NSURL(string: (partyState.scene?.backgroundUrl)!)
+        let data = NSData(contentsOfURL: url!)
+        let backgroundImage = UIImage(data: data!)!
+        let blurredBackgroundImage = backgroundImage.applyBlurWithRadius(
+            CGFloat(5),
+            tintColor: nil,
+            saturationDeltaFactor: 1.0,
+            maskImage: nil
+        )
+        storyBackground.backgroundColor = UIColor(patternImage: blurredBackgroundImage!)
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

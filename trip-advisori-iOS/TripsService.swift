@@ -47,6 +47,8 @@ class TripsService: Service {
             
             vc.trip = trip
             vc.tripTitle.text = trip.title
+            vc.tripDetailsLabel.text = trip.descriptionText
+            vc.tripDetailsPicture.imageFromUrl(trip.imageUrl)
             
         })
     }

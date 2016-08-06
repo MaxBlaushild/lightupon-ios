@@ -19,6 +19,7 @@ class Scene: NSObject, Mappable {
     var longitude: Double?
     var cards: [Card]?
     var soundResource:String?
+    var backgroundUrl: String?
     
     func mapping(map: Map) {
         id            <- map["ID"]
@@ -27,6 +28,7 @@ class Scene: NSObject, Mappable {
         longitude     <- map["Longitude"]
         cards         <- map["Cards"]
         soundResource <- map["SoundResource"]
+        backgroundUrl <- map["BackgroundUrl"]
     }
     
     required init?(_ map: Map) {
