@@ -38,13 +38,10 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
     var partyState: PartyState!
     var currentParty: Party!
     
-    @IBOutlet weak var nextSceneButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         socketService.delegate = self
-
-        nextSceneButton.enabled = false
         
         configureCollectionView()
         styleCollectionView()
@@ -76,12 +73,6 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func openAlert(title: String, message: String) {
         
-    }
-    
-
-    
-    @IBAction func nextSceneButtonPress(sender: AnyObject) {
-        goToNextScene()
     }
     
     func goToNextScene() {
@@ -150,7 +141,10 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         let oldId = partyState.scene?.id
         
         partyState = newPartyState
-        nextSceneButton.enabled = partyState.nextSceneAvailable!
+        if (partyState.nextSceneAvailable!) {
+            goToNextScene()
+        }
+        
         
         if (oldId != newPartyState.scene!.id!) {
             loadNewScene()
