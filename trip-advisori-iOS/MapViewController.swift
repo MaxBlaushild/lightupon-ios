@@ -9,7 +9,15 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: MenuViewController {
+private extension UIStoryboard {
+    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
+    
+    class func tripDetailsViewController() -> TripDetailsViewController? {
+        return mainStoryboard().instantiateViewControllerWithIdentifier("TripDetailsViewController") as? TripDetailsViewController
+    }
+}
+
+class MapViewController: MenuViewController, GMSMapViewDelegate, DismissalDelegate, UIViewControllerTransitioningDelegate {
     private let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
     
     var trips:[Trip]!
@@ -20,6 +28,7 @@ class MapViewController: MenuViewController {
         initMap()
         mapView.camera = GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
         mapView.myLocationEnabled = true
+        mapView.delegate = self
         addTitle("SERENDIPITY", color: Colors.basePurple)
     }
 
@@ -48,7 +57,40 @@ class MapViewController: MenuViewController {
         marker.position = CLLocationCoordinate2DMake(trip.latitude, trip.longitude)
         marker.title = trip.title
         marker.snippet = trip.descriptionText
+        marker.userData = trip.id
         marker.map = mapView
+    }
+    
+    func onDismissed() {
+        for subview in self.view.subviews {
+            if let blur = subview as? UIVisualEffectView {
+                blur.removeFromSuperview()
+            }
+        }
+    }
+    
+    func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
+        blurBackground()
+        let tripDetailsViewController = UIStoryboard.tripDetailsViewController()
+        tripDetailsViewController!.modalPresentationStyle = UIModalPresentationStyle.Custom
+        tripDetailsViewController!.transitioningDelegate = self
+        tripDetailsViewController!.dismissalDelegate = self
+        tripDetailsViewController!.tripId = marker.userData as! Int
+        self.presentViewController(tripDetailsViewController!, animated: true, completion: {})
+        
+        return true
+    }
+    
+    func blurBackground() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        view.addSubview(blurEffectView)
+    }
+    
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+        return HalfSizePresentationController(presentedViewController: presented, presentingViewController: presentingViewController!)
     }
     
 

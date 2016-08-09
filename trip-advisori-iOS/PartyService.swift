@@ -34,10 +34,9 @@ class PartyService: Service {
     
     func getUsersParty(callback: (Party) -> Void) {
         apiAmbassador.get(apiURL + "/parties", success: { request, response, result in
+            
             let json = JSON(result!.value!)
-            
             let party:Party = Party(json: json)
-            
             callback(party)
             
         })
@@ -54,28 +53,17 @@ class PartyService: Service {
             callback()
         })
     }
-
     
-    func isUserInParty(callback: (String) -> Void) {
-        apiAmbassador.get(apiURL + "/parties", success: { request, response, result in
-            let json = JSON(result!.value!)
-            
-            let party:Party = Party(json: json)
-            
-            let segue: String = party.id == 0 ? "LoadingToTabs" : "InitialToLobby"
-            
-            callback(segue)
-        })
-    }
-    
-    func createParty(tripId: Int, callback: () -> Void) {
+    func createParty(tripId: Int, callback: (Party) -> Void) {
         let parameters = [
             "ID": tripId
         ]
         
         apiAmbassador.post(apiURL + "/parties", parameters: parameters, success: { request, response, result in
             
-            callback()
+            let json = JSON(result!.value!)
+            let party:Party = Party(json: json)
+            callback(party)
             
         })
     }

@@ -12,7 +12,6 @@ import ObjectMapper
 import SwiftyJSON
 
 protocol SocketServiceDelegate {
-    func openAlert(title: String, message: String)
     func onResponseRecieved(_partyState_: PartyState) -> Void
 }
 

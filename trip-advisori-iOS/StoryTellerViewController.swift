@@ -102,6 +102,7 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         nextSceneButton.enabled = partyState.nextSceneAvailable!
         
         if (oldId != newPartyState.scene!.id!) {
+            loadBackgroundPicture()
             loadNewScene()
         }
     }
@@ -113,7 +114,7 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func loadBackgroundPicture() {
         let url = NSURL(string: (partyState.scene?.backgroundUrl)!)
-        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+        let data = NSData(contentsOfURL: url!)
         let backgroundImage = UIImage(data: data!)!
         let blurredBackgroundImage = backgroundImage.applyBlurWithRadius(
             CGFloat(5),
@@ -122,16 +123,6 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
             maskImage: nil
         )
         storyBackground.backgroundColor = UIColor(patternImage: blurredBackgroundImage!)
-
-
-    }
-    
-    func blurBackgroundPicture() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
-        storyBackground.insertSubview(blurEffectView, belowSubview: collectionView)
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

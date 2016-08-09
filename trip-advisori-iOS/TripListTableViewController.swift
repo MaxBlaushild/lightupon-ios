@@ -8,7 +8,29 @@
 
 import UIKit
 
-class TripListTableViewController: UITableViewController {
+private extension UIStoryboard {
+    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
+    
+    class func tripDetailsViewController() -> TripDetailsViewController? {
+        return mainStoryboard().instantiateViewControllerWithIdentifier("TripDetailsViewController") as? TripDetailsViewController
+    }
+}
+
+class HalfSizePresentationController : UIPresentationController {
+    override func frameOfPresentedViewInContainerView() -> CGRect {
+        let viewWidth = containerView!.bounds.width / 1.33
+        let viewHeight = containerView!.bounds.height / 2
+        let xOrigin = (containerView!.bounds.width - viewWidth) / 2
+        let yOrigin = (containerView!.bounds.height - viewHeight) / 2
+        return CGRect(x: xOrigin, y: yOrigin, width: viewWidth, height: viewHeight)
+    }
+}
+
+protocol DismissalDelegate {
+    func onDismissed() -> Void
+}
+
+class TripListTableViewController: UITableViewController, UIViewControllerTransitioningDelegate, DismissalDelegate {
     var trips:[Trip]!
     private let  tripListTableViewCellDecorator:TripListTableViewCellDecorator = TripListTableViewCellDecorator()
 
@@ -75,13 +97,34 @@ class TripListTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        let tripDetailsViewController = TripDetailsViewController()
-        tripDetailsViewController.tripId = trips[indexPath.row].id
-        tripDetailsViewController.view.frame = self.view.frame
-//        tripDetailsViewController.modalPresentationStyle = .OverCurrentContext
-        self.presentViewController(tripDetailsViewController, animated: true, completion: {})
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+        return HalfSizePresentationController(presentedViewController: presented, presentingViewController: presentingViewController!)
     }
-
+    
+    func onDismissed() {
+        for subview in self.view.subviews {
+            if let blur = subview as? UIVisualEffectView {
+                blur.removeFromSuperview()
+            }
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        blurBackground()
+        let tripDetailsViewController = UIStoryboard.tripDetailsViewController()
+        tripDetailsViewController!.modalPresentationStyle = UIModalPresentationStyle.Custom
+        tripDetailsViewController!.transitioningDelegate = self
+        tripDetailsViewController!.dismissalDelegate = self
+        tripDetailsViewController!.tripId = trips[indexPath.row].id
+        self.presentViewController(tripDetailsViewController!, animated: true, completion: {})
+    }
+    
+    func blurBackground() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        view.addSubview(blurEffectView)
+    }
 
 }
