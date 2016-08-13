@@ -30,17 +30,41 @@ protocol DismissalDelegate {
     func onDismissed() -> Void
 }
 
-class TripListTableViewController: UITableViewController, UIViewControllerTransitioningDelegate, DismissalDelegate {
-    var trips:[Trip]!
+class TripListTableViewController: UIViewController, UIViewControllerTransitioningDelegate, DismissalDelegate, UITableViewDelegate, UITableViewDataSource, MainContainerViewControllerDelegate {
+    private let tripsService: TripsService = Injector.sharedInjector.getTripsService()
     private let  tripListTableViewCellDecorator:TripListTableViewCellDecorator = TripListTableViewCellDecorator()
+    
+    var trips:[Trip]!
+    var delegate: MainViewControllerDelegate!
 
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setTripsIfNotSet()
         style()
         addTitle()
+        getTrips()
     }
     
+    func configureTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.reloadData()
+    }
+    
+    func getTrips() {
+        tripsService.getTrips(self.onTripsGotten)
+    }
+    
+    func onTripsGotten(_trips_: [Trip]) {
+        trips = _trips_
+        configureTableView()
+    }
+    
+    @IBAction func openMenu(sender: AnyObject) {
+        delegate!.toggleRightPanel()
+    }
     override func shouldAutorotate() -> Bool {
         return false
     }
@@ -75,21 +99,15 @@ class TripListTableViewController: UITableViewController, UIViewControllerTransi
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        
-        
-            return trips.count
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return trips.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> TripListTableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:TripListTableViewCell = tableView.dequeueReusableCellWithIdentifier("tripListTableViewCell", forIndexPath: indexPath) as! TripListTableViewCell
 
         tripListTableViewCellDecorator.decorateCell(cell, trip: trips[indexPath.row])
@@ -109,7 +127,9 @@ class TripListTableViewController: UITableViewController, UIViewControllerTransi
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+    func onReponseReceived(partyState: PartyState) {}
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         blurBackground()
         let tripDetailsViewController = UIStoryboard.tripDetailsViewController()
         tripDetailsViewController!.modalPresentationStyle = UIModalPresentationStyle.Custom

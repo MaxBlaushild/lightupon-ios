@@ -36,7 +36,7 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     }
     
     @IBAction func startParty(sender: AnyObject) {
-        partyService.startNextScene(currentParty.id)
+        partyService.startNextScene(currentParty.id!)
     }
     
     @IBAction func leaveParty(sender: AnyObject) {
@@ -50,7 +50,7 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     func processParty(party: Party) {
         currentParty = party
         passcodeLabel.text = currentParty.passcode
-        tripTitle.text = currentParty.trip.title
+        tripTitle.text = currentParty.trip!.title
     }
     
     func onResponseRecieved(_partyState_: PartyState) {
@@ -84,9 +84,9 @@ class LobbyViewController: UIViewController, SocketServiceDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destinationVC = segue.destinationViewController as? StoryTellerContainerViewController {
-            destinationVC.partyState = partyState
-            destinationVC.currentParty = currentParty
-        }
+//        if let destinationVC = segue.destinationViewController as? ContainerViewController {
+//            destinationVC.partyState = partyState
+//            destinationVC.currentParty = currentParty
+//        }
     }
 }

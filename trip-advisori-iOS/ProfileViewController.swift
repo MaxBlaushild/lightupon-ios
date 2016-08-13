@@ -20,12 +20,11 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         profileService.getMyProfile(self.bindProfileToView)
     }
-
-    @IBAction func logout(sender: AnyObject) {
+    
+    @IBAction func logOut(sender: AnyObject) {
         authService.logout()
         performSegueWithIdentifier("ProfileToLogin", sender: nil)
     }
-    
     override func shouldAutorotate() -> Bool {
         return false
     }

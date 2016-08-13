@@ -54,7 +54,7 @@
 		1E841C5F1C679B5600AD638E /* TripListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C5E1C679B5500AD638E /* TripListTableViewCell.swift */; };
 		1E841C621C67C02200AD638E /* TripListTableViewCellDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C611C67C02200AD638E /* TripListTableViewCellDecorator.swift */; };
 		1E841C651C67C48F00AD638E /* AsynchronousUIImageLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */; };
-		1E935F1D1D4C249200CB070B /* StoryTellerContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E935F1C1D4C249200CB070B /* StoryTellerContainerViewController.swift */; };
+		1E935F1D1D4C249200CB070B /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E935F1C1D4C249200CB070B /* MainContainerViewController.swift */; };
 		1E935F1F1D4C2F3300CB070B /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E935F1E1D4C2F3300CB070B /* CircularImageView.swift */; };
 		1E954EB71D50EA7A0021FDD8 /* BlurImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */; };
 		1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */; };
@@ -162,7 +162,7 @@
 		1E841C5E1C679B5500AD638E /* TripListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListTableViewCell.swift; sourceTree = "<group>"; };
 		1E841C611C67C02200AD638E /* TripListTableViewCellDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListTableViewCellDecorator.swift; sourceTree = "<group>"; };
 		1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousUIImageLoading.swift; sourceTree = "<group>"; };
-		1E935F1C1D4C249200CB070B /* StoryTellerContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTellerContainerViewController.swift; sourceTree = "<group>"; };
+		1E935F1C1D4C249200CB070B /* MainContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
 		1E935F1E1D4C2F3300CB070B /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
 		1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurImage.swift; sourceTree = "<group>"; };
 		1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
@@ -370,7 +370,7 @@
 				1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */,
 				1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */,
 				1E22A7CF1D2C491C00163785 /* StoryTellerMenuViewController.swift */,
-				1E935F1C1D4C249200CB070B /* StoryTellerContainerViewController.swift */,
+				1E935F1C1D4C249200CB070B /* MainContainerViewController.swift */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -682,7 +682,7 @@
 				1E05B8BD1C5D193B009E37BA /* CurrentLocationService.swift in Sources */,
 				1E22A7CC1D2C383400163785 /* IAmACard.swift in Sources */,
 				1E2014961C70DB790012B863 /* FacebookProfile.swift in Sources */,
-				1E935F1D1D4C249200CB070B /* StoryTellerContainerViewController.swift in Sources */,
+				1E935F1D1D4C249200CB070B /* MainContainerViewController.swift in Sources */,
 				1E7032AD1CE8F53A00B1C18D /* PartyState.swift in Sources */,
 				1E935F1F1D4C2F3300CB070B /* CircularImageView.swift in Sources */,
 				1E841C621C67C02200AD638E /* TripListTableViewCellDecorator.swift in Sources */,

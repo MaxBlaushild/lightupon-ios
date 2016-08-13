@@ -29,7 +29,7 @@ class TripsService: Service {
                 
                 for trip in jsonTrips {
                     
-                    trips.append(Trip(json: trip))
+//                    trips.append(Trip(json: trip))
                     
                 }
                 
@@ -43,12 +43,12 @@ class TripsService: Service {
             
             let json = JSON(result!.value!)
             
-            let trip = Trip(json: json)
+//            let trip = Trip(json: json)
             
-            vc.trip = trip
-            vc.tripTitle.text = trip.title
-            vc.tripDetailsLabel.text = trip.descriptionText
-            vc.tripDetailsPicture.imageFromUrl(trip.imageUrl)
+//            vc.trip = trip
+//            vc.tripTitle.text = trip.title
+//            vc.tripDetailsLabel.text = trip.descriptionText
+//            vc.tripDetailsPicture.imageFromUrl(trip.imageUrl)
             
         })
     }

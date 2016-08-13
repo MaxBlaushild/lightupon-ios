@@ -11,7 +11,7 @@ import UIKit
 
 private let reuseIdentifier = "PartyMemberCollectionViewCell"
 
-class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, MainContainerViewControllerDelegate {
     let partyService: PartyService = Injector.sharedInjector.getPartyService()
     let profileService: ProfileService = Injector.sharedInjector.getProfileService()
 
@@ -27,9 +27,7 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         super.viewDidLoad()
         
         bindProfile()
-        
-        partyMemberCollectionView.dataSource = self
-        partyMemberCollectionView.delegate = self
+        makeProfileClickable()
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,9 +48,26 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         profilePicture.makeCircle()
     }
     
-    func bindParty(currentParty: Party) {
-        tripTitle.text = currentParty.trip.title
-        passcode.text = currentParty.passcode
+    func onReponseReceived(_partyState_: PartyState) {
+        partyState = _partyState_
+        bindParty()
+        configurePartyCollectionView()
+    }
+    
+    func bindParty() {
+        tripTitle.text = partyState.party!.trip.title
+        passcode.text = partyState.party!.passcode
+    }
+    
+    func bindPartyState(_partyState_: PartyState) {
+        partyState = _partyState_
+        configurePartyCollectionView()
+    }
+    
+    func configurePartyCollectionView() {
+        partyMemberCollectionView.dataSource = self
+        partyMemberCollectionView.delegate = self
+        partyMemberCollectionView.reloadData()
     }
     
     func removeUserFromPartyList() {
@@ -65,6 +80,16 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
 
     func goBack(){
         dismissViewControllerAnimated(true, completion: {})
+    }
+    
+    func makeProfileClickable() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(StoryTellerMenuViewController.imageTapped(_:)))
+        profilePicture.userInteractionEnabled = true
+        profilePicture.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func imageTapped(img: AnyObject) {
+        self.performSegueWithIdentifier("MenuToProfile", sender: nil)
     }
     
     @IBAction func leaveParty(sender: AnyObject) {

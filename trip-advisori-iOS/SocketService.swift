@@ -76,6 +76,10 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     
     func websocketDidReceiveMessage(ws: WebSocket, text: String) {
         if let partyState:PartyState = Mapper<PartyState>().map(text) {
+            
+            
+            
+            
             if delegate != nil {
                 delegate.onResponseRecieved(partyState)
             }

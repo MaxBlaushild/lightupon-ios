@@ -13,13 +13,12 @@ import Alamofire
 private let reuseIdentifier = "cardCollectionViewCell"
 private let centerPanelExpandedOffset: CGFloat = 60
 
-protocol StoryTellerViewControllerDelegate {
+protocol MainViewControllerDelegate {
     func toggleRightPanel()
 }
 
-class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, SocketServiceDelegate {
+class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, MainContainerViewControllerDelegate {
     private let partyService:PartyService = Injector.sharedInjector.getPartyService()
-    private let socketService: SocketService = Injector.sharedInjector.getSocketService()
     private var audioPlayer: AVAudioPlayer!
     
     private var player: AVAudioPlayer!
@@ -28,7 +27,7 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet var storyBackground: UIView!
     
-    var delegate: StoryTellerViewControllerDelegate?
+    var delegate: MainViewControllerDelegate?
     var numberOfCards: Int = 0
     
     @IBAction func openMenu(sender: AnyObject) {
@@ -41,11 +40,7 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        socketService.delegate = self
-        
-        configureCollectionView()
         styleCollectionView()
-        loadBackgroundPicture()
     }
     
     func configureCollectionView() {
@@ -129,14 +124,14 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         return partyState.scene!.cards!.count
     }
     
-    func onResponseRecieved(newPartyState: PartyState) {
-        let oldId = partyState.scene?.id
-        
+    func onReponseReceived(newPartyState: PartyState) {
+        configureCollectionView()
+        let oldId = newPartyState.scene?.id
         partyState = newPartyState
+        
         if (partyState.nextSceneAvailable!) {
             goToNextScene()
         }
-        
         
         if (oldId != newPartyState.scene!.id!) {
             loadBackgroundPicture()
