@@ -19,6 +19,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     private var _locationStatus:(code: Int, message: String)
     private var _longitude:Double
     private var _latitude:Double
+    private var _course:Double
     
     internal var delegate: CurrentLocationServiceDelegate!
     
@@ -29,6 +30,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         self._locationStatus = (code: 0, message: "")
         self._longitude = 50.0
         self._latitude = 50.0
+        self._course = 0.0
         
         super.init()
         
@@ -52,6 +54,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
 
         _latitude = coord.latitude
         _longitude = coord.longitude
+        _course = locationObj.course
         
         if delegate != nil {
             delegate.onLocationUpdated()
@@ -87,35 +90,45 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     
     // MARK: LocationInfo implementation
     var locationStatus:String {
-        
+
         get {
-            
+
             return _locationStatus.message
-            
+
         }
-        
+
     }
-    
+
     var latitude:Double {
-        
+
         get {
-            
+
             return _latitude
-            
+
         }
-        
+
     }
-    
+
     var longitude:Double {
-        
+
         get {
-            
+
             return _longitude
-            
+
         }
-        
+
     }
-    
+
+    var course:Double {
+
+        get {
+
+            return _course
+
+        }
+
+    }
+
     var location:Location {
         get {
             return Location(longitude: _longitude, latitude: _latitude)

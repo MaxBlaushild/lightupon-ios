@@ -19,13 +19,17 @@ class MapHero: CardView, IAmACard, GMSMapViewDelegate {
     @IBOutlet weak var compass: UIImageView!
 
     func bindCard() {
-        sceneMapView.camera = GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
+        sceneMapView.camera = GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 17)
         sceneMapView.myLocationEnabled = true
+
+        sceneMapView.settings.zoomGestures = false
         sceneMapView.delegate = self
-        sceneMapView.bringSubviewToFront(compass)
-        placeNextSceneOnMap()
         let mapCenter = CLLocation(latitude: currentLocationService.latitude, longitude: currentLocationService.longitude)
         twirlCompass(mapCenter)
+        
+        sceneMapView.settings.scrollGestures = false
+        sceneMapView.bringSubviewToFront(compass)
+        sceneMapView.animateToBearing(currentLocationService.course)
 
     }
     
