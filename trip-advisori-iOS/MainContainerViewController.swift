@@ -21,13 +21,13 @@ private extension UIStoryboard {
         return mainStoryboard().instantiateViewControllerWithIdentifier("StoryTellerViewController") as? StoryTellerViewController
     }
     
-    class func tripListTableViewController() -> TripListTableViewController? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("TripListTableViewController") as? TripListTableViewController
+    class func homeTabBarViewController() -> HomeTabBarViewController? {
+        return mainStoryboard().instantiateViewControllerWithIdentifier("HomeTabBarViewController") as? HomeTabBarViewController
     }
 }
 
 protocol MainContainerViewControllerDelegate {
-    func onReponseReceived(partyState: PartyState) -> Void
+    func onResponseReceived(partyState: PartyState) -> Void
 }
 
 class MainContainerViewController: UIViewController, MainViewControllerDelegate, SocketServiceDelegate {
@@ -35,11 +35,11 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
     private let socketService: SocketService = Injector.sharedInjector.getSocketService()
     
     var storyTellerViewController: StoryTellerViewController!
-    var triplistTableViewController: TripListTableViewController!
+    var homeTabBarViewController: HomeTabBarViewController!
     var menuOpen: Bool = false
     var menuViewController: StoryTellerMenuViewController!
-    var shownViewController: MainContainerViewControllerDelegate!
-    var socketResponseRecepients: [MainContainerViewControllerDelegate] = [MainContainerViewControllerDelegate]()
+    var shownViewController: SocketServiceDelegate!
+    var socketResponseRecepients: [SocketServiceDelegate] = [SocketServiceDelegate]()
     
     var partyState: PartyState!
     var currentParty: Party!
@@ -54,7 +54,7 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
         currentParty = party
         
         if (party.id == 0) {
-            initTripList()
+            initHomeTabBarViewController()
         } else {
             initStoryTeller()
         }
@@ -77,21 +77,21 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
         storyTellerViewController.didMoveToParentViewController(self)
     }
     
-    func initTripList() {
-        triplistTableViewController = UIStoryboard.tripListTableViewController()
+    func initHomeTabBarViewController() {
+        homeTabBarViewController = UIStoryboard.homeTabBarViewController()
         
-        triplistTableViewController.delegate = self
+        homeTabBarViewController.assignDelegation(self)
         
-        view.addSubview(triplistTableViewController.view)
-        addChildViewController(triplistTableViewController)
-        shownViewController = triplistTableViewController
-        socketResponseRecepients.append(triplistTableViewController)
+        view.addSubview(homeTabBarViewController.view)
+        addChildViewController(homeTabBarViewController)
+        shownViewController = homeTabBarViewController
+        socketResponseRecepients.append(homeTabBarViewController)
         
-        triplistTableViewController.didMoveToParentViewController(self)
+        homeTabBarViewController.didMoveToParentViewController(self)
     }
     
     func segueToStoryTeller() {
-        triplistTableViewController.view.removeFromSuperview()
+        homeTabBarViewController.view.removeFromSuperview()
         initStoryTeller()
     }
 
@@ -100,20 +100,21 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
         // Dispose of any resources that can be recreated.
     }
     
-    func onResponseRecieved(_partyState_: PartyState) {
-        if let _ = shownViewController as? TripListTableViewController {
+    func onResponseReceived(_partyState_: PartyState) {
+        if let _ = shownViewController as? HomeTabBarViewController {
             if (self.partyState == nil) {
                 segueToStoryTeller()
             }
         }
 
         for vc in socketResponseRecepients {
-            vc.onReponseReceived(_partyState_)
+            vc.onResponseReceived(_partyState_)
         }
     }
     
     func toggleRightPanel() {
         let menuShouldOpen = !menuOpen
+        
         if (menuShouldOpen) {
             addRightPanelViewController()
         }
@@ -147,10 +148,7 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
             let vc = shownViewController as! UIViewController
             animateCenterPanelXPosition(-CGRectGetWidth(vc.view.frame) + centerPanelExpandedOffset)
         } else {
-            animateCenterPanelXPosition(0) { _ in
-                self.menuViewController!.view.removeFromSuperview()
-                self.menuViewController = nil;
-            }
+            animateCenterPanelXPosition(0) { _ in }
         }
     }
     

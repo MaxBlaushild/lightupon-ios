@@ -26,13 +26,20 @@ class TripDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tripsService.getTrip(tripId, vc: self)
+        tripsService.getTrip(tripId, callback: self.onTripReceived)
+    }
+    
+    func onTripReceived(_trip_: Trip) {
+        trip = _trip_
+        tripTitle.text = trip.title
+        tripDetailsLabel.text = trip.descriptionText
+        tripDetailsPicture.imageFromUrl(trip.imageUrl!)
     }
 
     @IBAction func createParty(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: {})
         dismissalDelegate.onDismissed()
-        partyService.createParty(trip.id, callback: self.onPartyCreated)
+        partyService.createParty(trip.id!, callback: self.onPartyCreated)
 
     }
     override func didReceiveMemoryWarning() {

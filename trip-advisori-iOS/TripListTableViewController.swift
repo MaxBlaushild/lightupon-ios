@@ -30,7 +30,7 @@ protocol DismissalDelegate {
     func onDismissed() -> Void
 }
 
-class TripListTableViewController: UIViewController, UIViewControllerTransitioningDelegate, DismissalDelegate, UITableViewDelegate, UITableViewDataSource, MainContainerViewControllerDelegate {
+class TripListTableViewController: UIViewController, UIViewControllerTransitioningDelegate, DismissalDelegate, UITableViewDelegate, UITableViewDataSource, SocketServiceDelegate {
     private let tripsService: TripsService = Injector.sharedInjector.getTripsService()
     private let  tripListTableViewCellDecorator:TripListTableViewCellDecorator = TripListTableViewCellDecorator()
     
@@ -40,9 +40,6 @@ class TripListTableViewController: UIViewController, UIViewControllerTransitioni
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTripsIfNotSet()
-        style()
-        addTitle()
         getTrips()
     }
     
@@ -71,27 +68,6 @@ class TripListTableViewController: UIViewController, UIViewControllerTransitioni
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
-    }
-    
-    func setTripsIfNotSet(){
-        if trips == nil {
-            trips = []
-        }
-    }
-    
-    func style() {
-        self.tableView.contentInset = UIEdgeInsetsMake(90, 0, 0, 0);
-        self.view.backgroundColor = Colors.basePurple
-    }
-    
-    func addTitle() {
-        let label = UILabel(frame: CGRectMake(0, 0, 200, 40))
-        label.center = CGPointMake(60, -40)
-        label.textAlignment = NSTextAlignment.Center
-        label.text = "TRIPS"
-        label.font = UIFont(name: Fonts.dosisExtraLight, size: 38)
-        label.textColor = UIColor.whiteColor()
-        self.view.addSubview(label)
     }
 
     override func didReceiveMemoryWarning() {
@@ -127,7 +103,7 @@ class TripListTableViewController: UIViewController, UIViewControllerTransitioni
         }
     }
     
-    func onReponseReceived(partyState: PartyState) {}
+    func onResponseReceived(partyState: PartyState) {}
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         blurBackground()

@@ -8,12 +8,12 @@
 
 import UIKit
 
-class HomeTabBarViewController: UITabBarController {
+class HomeTabBarViewController: UITabBarController, SocketServiceDelegate {
     private let tripsService: TripsService = Injector.sharedInjector.getTripsService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tripsService.getTrips(self.setTrips)
+//        tripsService.getTrips(self.setTrips)
     }
     
     override func shouldAutorotate() -> Bool {
@@ -23,22 +23,27 @@ class HomeTabBarViewController: UITabBarController {
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
     }
-
     
-    func setTrips(trips: [Trip]) {
+    func assignDelegation(vc: MainContainerViewController) {
         for controller in viewControllers! {
             
             if let mapController = controller as? MapViewController {
-                mapController.trips = trips
+                mapController.delegate = vc
             }
             
             if let tableController = controller as? TripListTableViewController {
-                tableController.trips = trips
-                tableController.tableView.reloadData()
+                tableController.delegate = vc
             }
         }
     }
-
+    
+    func onResponseReceived(partyState: PartyState) {
+        for controller in viewControllers! {   
+            if let vc = controller as? SocketServiceDelegate {
+                vc.onResponseReceived(partyState)
+            }
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

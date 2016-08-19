@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import ObjectMapper
 
 class PartyService: Service {
     let apiAmbassador:AmbassadorToTheAPI
@@ -23,8 +24,8 @@ class PartyService: Service {
             "": ""
         ]
         
-        apiAmbassador.post(apiURL + "/parties/\(passcode)/users", parameters: parameters, success: { request, response, result in
-            if (response?.statusCode == 200) {
+        apiAmbassador.post(apiURL + "/parties/\(passcode)/users", parameters: parameters, success: { response in
+            if (response.response!.statusCode == 200) {
                 successCallback()
             } else {
                 failureCallback()
@@ -33,23 +34,21 @@ class PartyService: Service {
     }
     
     func getUsersParty(callback: (Party) -> Void) {
-        apiAmbassador.get(apiURL + "/parties", success: { request, response, result in
-            
-            let json = JSON(result!.value!)
-            let party:Party = Party(json: json)
-            callback(party)
+        apiAmbassador.get(apiURL + "/parties", success: { response in
+            let party = Mapper<Party>().map(response.result.value)
+            callback(party!)
             
         })
     }
     
     func startNextScene(partyID: Int) {
-        apiAmbassador.get(apiURL + "/parties/\(partyID)/nextScene", success: { request, response, result in
+        apiAmbassador.get(apiURL + "/parties/\(partyID)/nextScene", success: { response in
             
         })
     }
     
     func leaveParty(callback: () -> Void) {
-        apiAmbassador.delete(apiURL + "/parties", success: { request, response, result in
+        apiAmbassador.delete(apiURL + "/parties", success: { response in
             callback()
         })
     }
@@ -59,12 +58,9 @@ class PartyService: Service {
             "ID": tripId
         ]
         
-        apiAmbassador.post(apiURL + "/parties", parameters: parameters, success: { request, response, result in
-            
-            let json = JSON(result!.value!)
-            let party:Party = Party(json: json)
-            callback(party)
-            
+        apiAmbassador.post(apiURL + "/parties", parameters: parameters, success: { response in
+            let party = Mapper<Party>().map(response.result.value)
+            callback(party!)
         })
     }
 }

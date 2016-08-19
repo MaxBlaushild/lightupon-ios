@@ -17,19 +17,26 @@ private extension UIStoryboard {
     }
 }
 
-class MapViewController: MenuViewController, GMSMapViewDelegate, DismissalDelegate, UIViewControllerTransitioningDelegate {
+class MapViewController: UIViewController, GMSMapViewDelegate, DismissalDelegate, SocketServiceDelegate, UIViewControllerTransitioningDelegate {
     private let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
+    private let tripsService:TripsService = Injector.sharedInjector.getTripsService()
     
     var trips:[Trip]!
-
+    
+    var delegate: MainViewControllerDelegate!
+    
+    
+    @IBAction func openMenu(sender: AnyObject) {
+        delegate.toggleRightPanel()
+    }
+    
     @IBOutlet weak var mapView: GMSMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        initMap()
+        getTrips()
         mapView.camera = GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
         mapView.myLocationEnabled = true
         mapView.delegate = self
-        addTitle("SERENDIPITY", color: Colors.basePurple)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,6 +52,15 @@ class MapViewController: MenuViewController, GMSMapViewDelegate, DismissalDelega
         return UIInterfaceOrientationMask.Portrait
     }
     
+    func getTrips() {
+        tripsService.getTrips(self.onTripsGotten)
+    }
+    
+    func onTripsGotten(_trips_: [Trip]) {
+        trips = _trips_
+        initMap()
+    }
+    
     func initMap() {
         for trip in trips {
             placeTripOnMap(trip, mapView: mapView)
@@ -54,7 +70,7 @@ class MapViewController: MenuViewController, GMSMapViewDelegate, DismissalDelega
     func placeTripOnMap(trip: Trip, mapView: GMSMapView) {
         let marker = GMSMarker()
         
-        marker.position = CLLocationCoordinate2DMake(trip.latitude, trip.longitude)
+        marker.position = CLLocationCoordinate2DMake(trip.latitude!, trip.longitude!)
         marker.title = trip.title
         marker.snippet = trip.descriptionText
         marker.userData = trip.id
@@ -68,6 +84,8 @@ class MapViewController: MenuViewController, GMSMapViewDelegate, DismissalDelega
             }
         }
     }
+    
+    func onResponseReceived(partyState: PartyState) {}
     
     func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
         blurBackground()

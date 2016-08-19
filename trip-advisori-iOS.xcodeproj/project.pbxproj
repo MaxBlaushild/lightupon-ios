@@ -26,7 +26,6 @@
 		1E1ED1BD1D4C18CE00B49C64 /* user_menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1ED1BA1D4C18CE00B49C64 /* user_menu@3x.png */; };
 		1E1ED1BE1D4C18CE00B49C64 /* user_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1ED1BB1D4C18CE00B49C64 /* user_menu@2x.png */; };
 		1E1ED1BF1D4C18CE00B49C64 /* user_menu@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1ED1BC1D4C18CE00B49C64 /* user_menu@1x.png */; };
-		1E1F32601CA8B9CE009B6D0F /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1F325F1CA8B9CE009B6D0F /* LobbyViewController.swift */; };
 		1E2014901C705C280012B863 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20148F1C705C280012B863 /* ProfileService.swift */; };
 		1E2014961C70DB790012B863 /* FacebookProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2014951C70DB790012B863 /* FacebookProfile.swift */; };
 		1E2014981C71273B0012B863 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2014971C71273B0012B863 /* LoginService.swift */; };
@@ -42,7 +41,6 @@
 		1E22A7DC1D2C764100163785 /* MapHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22A7DB1D2C764100163785 /* MapHero.swift */; };
 		1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22C6741C70232200B13A1B /* LoginViewController.swift */; };
 		1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6B9F1D0C8A1F00D5793A /* owl.png */; };
-		1E64A6971CA627A000D9F90C /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6961CA627A000D9F90C /* JoinPartyViewController.swift */; };
 		1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6981CA6307F00D9F90C /* PartyService.swift */; };
 		1E6998441CE191F900DFC697 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6998431CE191F900DFC697 /* AlertService.swift */; };
 		1E7032AD1CE8F53A00B1C18D /* PartyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7032AC1CE8F53A00B1C18D /* PartyState.swift */; };
@@ -70,7 +68,6 @@
 		1ED69B3E1D07AF5100CF2172 /* fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B3D1D07AF5100CF2172 /* fonts.swift */; };
 		1ED69B401D07B19A00CF2172 /* colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B3F1D07B19A00CF2172 /* colors.swift */; };
 		1ED69B421D07B1C300CF2172 /* ColorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B411D07B1C300CF2172 /* ColorFromHex.swift */; };
-		1ED69B461D07B3EF00CF2172 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B451D07B3EF00CF2172 /* MenuViewController.swift */; };
 		1ED69B4B1D0C836000CF2172 /* GetTopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B4A1D0C836000CF2172 /* GetTopViewController.swift */; };
 		1EE14DF71D579F9C00364B9D /* InstantiateViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE14DF61D579F9C00364B9D /* InstantiateViewControllers.swift */; };
 		1EE4C55F1CB5ED130095845C /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE4C55E1CB5ED130095845C /* TripViewController.swift */; };
@@ -133,7 +130,6 @@
 		1E1ED1BA1D4C18CE00B49C64 /* user_menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_menu@3x.png"; sourceTree = "<group>"; };
 		1E1ED1BB1D4C18CE00B49C64 /* user_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_menu@2x.png"; sourceTree = "<group>"; };
 		1E1ED1BC1D4C18CE00B49C64 /* user_menu@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_menu@1x.png"; sourceTree = "<group>"; };
-		1E1F325F1CA8B9CE009B6D0F /* LobbyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
 		1E20148F1C705C280012B863 /* ProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		1E2014951C70DB790012B863 /* FacebookProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookProfile.swift; sourceTree = "<group>"; };
 		1E2014971C71273B0012B863 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
@@ -150,7 +146,6 @@
 		1E22C6711C701AE000B13A1B /* -Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "-Bridging-Header.h"; sourceTree = "<group>"; };
 		1E22C6741C70232200B13A1B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1E5F6B9F1D0C8A1F00D5793A /* owl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owl.png; sourceTree = "<group>"; };
-		1E64A6961CA627A000D9F90C /* JoinPartyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinPartyViewController.swift; sourceTree = "<group>"; };
 		1E64A6981CA6307F00D9F90C /* PartyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyService.swift; sourceTree = "<group>"; };
 		1E6998431CE191F900DFC697 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		1E7032AC1CE8F53A00B1C18D /* PartyState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyState.swift; sourceTree = "<group>"; };
@@ -178,7 +173,6 @@
 		1ED69B3D1D07AF5100CF2172 /* fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fonts.swift; sourceTree = "<group>"; };
 		1ED69B3F1D07B19A00CF2172 /* colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = colors.swift; sourceTree = "<group>"; };
 		1ED69B411D07B1C300CF2172 /* ColorFromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorFromHex.swift; sourceTree = "<group>"; };
-		1ED69B451D07B3EF00CF2172 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		1ED69B4A1D0C836000CF2172 /* GetTopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTopViewController.swift; sourceTree = "<group>"; };
 		1EE14DF61D579F9C00364B9D /* InstantiateViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantiateViewControllers.swift; sourceTree = "<group>"; };
 		1EE4C55E1CB5ED130095845C /* TripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
@@ -359,12 +353,9 @@
 			children = (
 				1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */,
 				1E05B8C01C5D327A009E37BA /* MapViewController.swift */,
-				1ED69B451D07B3EF00CF2172 /* MenuViewController.swift */,
 				1EE4C55E1CB5ED130095845C /* TripViewController.swift */,
-				1E64A6961CA627A000D9F90C /* JoinPartyViewController.swift */,
 				1E22C6741C70232200B13A1B /* LoginViewController.swift */,
 				1E20149B1C72B39D0012B863 /* ProfileViewController.swift */,
-				1E1F325F1CA8B9CE009B6D0F /* LobbyViewController.swift */,
 				1E0003CB1C8525F400B25C05 /* TripDetailsViewController.swift */,
 				1E841C5B1C6704A600AD638E /* TripListTableViewController.swift */,
 				1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */,
@@ -662,7 +653,6 @@
 				1E7032B11CE8F7B200B1C18D /* User.swift in Sources */,
 				1ED69B4B1D0C836000CF2172 /* GetTopViewController.swift in Sources */,
 				1ED69B401D07B19A00CF2172 /* colors.swift in Sources */,
-				1E1F32601CA8B9CE009B6D0F /* LobbyViewController.swift in Sources */,
 				1E0003CA1C83954000B25C05 /* AmbassadorOfTheAPI.swift in Sources */,
 				1E05B88B1C5D135D009E37BA /* AppDelegate.swift in Sources */,
 				1EF783AF1D00941700860510 /* PictureHero.swift in Sources */,
@@ -672,7 +662,6 @@
 				1E20149F1C72B7730012B863 /* AuthService.swift in Sources */,
 				1ED4D5A61CEA8D9500722695 /* Card.swift in Sources */,
 				1E841C5C1C6704A600AD638E /* TripListTableViewController.swift in Sources */,
-				1E64A6971CA627A000D9F90C /* JoinPartyViewController.swift in Sources */,
 				1E05B8BB1C5D1566009E37BA /* Location.swift in Sources */,
 				1E20149C1C72B39D0012B863 /* ProfileViewController.swift in Sources */,
 				1E841C5F1C679B5600AD638E /* TripListTableViewCell.swift in Sources */,
@@ -694,7 +683,6 @@
 				1E1A1A9D1CF243CC00A3A812 /* CardCollectionViewCell.swift in Sources */,
 				1EF93C071C605A5C00A5B463 /* Service.swift in Sources */,
 				1ED69B421D07B1C300CF2172 /* ColorFromHex.swift in Sources */,
-				1ED69B461D07B3EF00CF2172 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

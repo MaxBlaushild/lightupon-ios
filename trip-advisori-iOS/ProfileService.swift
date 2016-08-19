@@ -11,10 +11,10 @@ import SwiftyJSON
 import ObjectMapper
 
 class ProfileService: Service {
-    var _profile_: FacebookProfile!
+    var _profile: FacebookProfile!
     var profile: FacebookProfile {
         get {
-            return _profile_
+            return _profile
         }
     }
     
@@ -36,7 +36,7 @@ class ProfileService: Service {
                 
                 let profile = Mapper<FacebookProfile>().map(result)
                 
-                self._profile_ = profile
+                self._profile = profile
                 callback(profile!)
                 
             }
