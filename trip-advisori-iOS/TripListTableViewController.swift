@@ -32,7 +32,6 @@ protocol DismissalDelegate {
 
 class TripListTableViewController: UIViewController, UIViewControllerTransitioningDelegate, DismissalDelegate, UITableViewDelegate, UITableViewDataSource, SocketServiceDelegate {
     private let tripsService: TripsService = Injector.sharedInjector.getTripsService()
-    private let  tripListTableViewCellDecorator:TripListTableViewCellDecorator = TripListTableViewCellDecorator()
     
     var trips:[Trip]!
     var delegate: MainViewControllerDelegate!
@@ -86,7 +85,7 @@ class TripListTableViewController: UIViewController, UIViewControllerTransitioni
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:TripListTableViewCell = tableView.dequeueReusableCellWithIdentifier("tripListTableViewCell", forIndexPath: indexPath) as! TripListTableViewCell
 
-        tripListTableViewCellDecorator.decorateCell(cell, trip: trips[indexPath.row])
+        cell.decorateCell(trips[indexPath.row])
         
         return cell
     }

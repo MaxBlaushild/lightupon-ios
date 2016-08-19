@@ -50,7 +50,6 @@
 		1E841C5A1C66DB8900AD638E /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C591C66DB8900AD638E /* Trip.swift */; };
 		1E841C5C1C6704A600AD638E /* TripListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C5B1C6704A600AD638E /* TripListTableViewController.swift */; };
 		1E841C5F1C679B5600AD638E /* TripListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C5E1C679B5500AD638E /* TripListTableViewCell.swift */; };
-		1E841C621C67C02200AD638E /* TripListTableViewCellDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C611C67C02200AD638E /* TripListTableViewCellDecorator.swift */; };
 		1E841C651C67C48F00AD638E /* AsynchronousUIImageLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */; };
 		1E935F1D1D4C249200CB070B /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E935F1C1D4C249200CB070B /* MainContainerViewController.swift */; };
 		1E935F1F1D4C2F3300CB070B /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E935F1E1D4C2F3300CB070B /* CircularImageView.swift */; };
@@ -155,7 +154,6 @@
 		1E841C591C66DB8900AD638E /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		1E841C5B1C6704A600AD638E /* TripListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListTableViewController.swift; sourceTree = "<group>"; };
 		1E841C5E1C679B5500AD638E /* TripListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListTableViewCell.swift; sourceTree = "<group>"; };
-		1E841C611C67C02200AD638E /* TripListTableViewCellDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListTableViewCellDecorator.swift; sourceTree = "<group>"; };
 		1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousUIImageLoading.swift; sourceTree = "<group>"; };
 		1E935F1C1D4C249200CB070B /* MainContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
 		1E935F1E1D4C2F3300CB070B /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
@@ -370,7 +368,6 @@
 			isa = PBXGroup;
 			children = (
 				1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */,
-				1E841C611C67C02200AD638E /* TripListTableViewCellDecorator.swift */,
 				1E64A6981CA6307F00D9F90C /* PartyService.swift */,
 				1E1711921CD431D20083236C /* Injector.swift */,
 				1E6998431CE191F900DFC697 /* AlertService.swift */,
@@ -674,7 +671,6 @@
 				1E935F1D1D4C249200CB070B /* MainContainerViewController.swift in Sources */,
 				1E7032AD1CE8F53A00B1C18D /* PartyState.swift in Sources */,
 				1E935F1F1D4C2F3300CB070B /* CircularImageView.swift in Sources */,
-				1E841C621C67C02200AD638E /* TripListTableViewCellDecorator.swift in Sources */,
 				1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */,
 				1E954EB71D50EA7A0021FDD8 /* BlurImage.swift in Sources */,
 				1E05B8C11C5D327A009E37BA /* MapViewController.swift in Sources */,

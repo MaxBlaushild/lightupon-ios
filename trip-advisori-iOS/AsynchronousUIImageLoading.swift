@@ -9,11 +9,12 @@
 
 import UIKit
 import Alamofire
+import Haneke
 
 extension UIImageView {
     public func imageFromUrl(urlString: String) {
-        Alamofire.request(.GET, urlString).response { (request, response, data, error) in
-            self.image = UIImage(data: data!, scale:1)
-        }
+        self.image = nil
+        let nsurl = NSURL(string: urlString)
+        self.hnk_setImageFromURL(nsurl!)
     }
 }

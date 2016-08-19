@@ -12,6 +12,8 @@ target 'trip-advisori-iOS' do
   pod 'Starscream', '~> 1.1.3'
   pod 'ObjectMapper'
   pod 'AlamofireObjectMapper', '~> 3.0'
+  pod 'HanekeSwift'
+  pod 'MDCSwipeToChoose'
 end
 
 target 'trip-advisori-iOS' do

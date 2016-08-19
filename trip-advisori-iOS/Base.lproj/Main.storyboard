@@ -592,42 +592,15 @@
                                     <constraint firstAttribute="trailing" secondItem="Gck-k1-Isd" secondAttribute="trailing" constant="8" id="heo-cO-YJc"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="L9h-qY-43k">
-                                <rect key="frame" x="30" y="130" width="540" height="420"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="V2Z-Dy-HSp">
-                                    <size key="itemSize" width="510" height="420"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cardCollectionViewCell" id="tAX-Ai-cbH" customClass="CardCollectionViewCell" customModule="trip_advisori_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="510" height="420"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="510" height="420"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="L9h-qY-43k" firstAttribute="centerX" secondItem="0lh-4A-IxJ" secondAttribute="centerX" id="9b3-kJ-FCc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="L9h-qY-43k" secondAttribute="trailing" constant="10" id="Dg6-ys-cfA"/>
                             <constraint firstItem="fNB-j1-gEP" firstAttribute="top" secondItem="lcf-o7-gAT" secondAttribute="bottom" id="J0E-WS-U6O"/>
                             <constraint firstAttribute="trailing" secondItem="fNB-j1-gEP" secondAttribute="trailing" id="RcH-1n-9AE"/>
-                            <constraint firstItem="L9h-qY-43k" firstAttribute="top" secondItem="fNB-j1-gEP" secondAttribute="bottom" constant="50" id="XvW-Pv-6uh"/>
-                            <constraint firstItem="L9h-qY-43k" firstAttribute="leading" secondItem="0lh-4A-IxJ" secondAttribute="leadingMargin" constant="10" id="ZQC-3N-x30"/>
                             <constraint firstItem="fNB-j1-gEP" firstAttribute="leading" secondItem="0lh-4A-IxJ" secondAttribute="leading" id="hoS-v9-GIi"/>
-                            <constraint firstItem="Mp6-4s-Uoc" firstAttribute="top" secondItem="L9h-qY-43k" secondAttribute="bottom" constant="50" id="wwH-H0-KLh"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="L9h-qY-43k" id="4oV-0j-Xvy"/>
                         <outlet property="storyBackground" destination="0lh-4A-IxJ" id="nwb-0B-XCG"/>
                         <outlet property="titleLabel" destination="qoH-qs-7Uu" id="6AA-bd-la7"/>
                     </connections>

@@ -11,6 +11,8 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <UIKit/UIKit.h>
+#import <MDCSwipeToChoose/MDCSwipeToChoose.h>
 
 
 #endif /* _Bridging_Header_h */

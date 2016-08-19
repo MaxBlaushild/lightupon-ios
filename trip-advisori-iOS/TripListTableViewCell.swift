@@ -18,7 +18,15 @@ class TripListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+    func decorateCell(trip: Trip) {
+        tripImage.imageFromUrl(trip.imageUrl!)
+        tripTitle.text = trip.title
+        tripDescription.text = trip.descriptionText
+        tag = trip.id!
+        estimatedTime.text = trip.estimatedTime
+        
+    }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

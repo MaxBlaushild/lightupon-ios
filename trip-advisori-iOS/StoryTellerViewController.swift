@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Alamofire
+import MDCSwipeToChoose
 
 private let reuseIdentifier = "cardCollectionViewCell"
 private let centerPanelExpandedOffset: CGFloat = 60
@@ -17,10 +18,12 @@ protocol MainViewControllerDelegate {
     func toggleRightPanel()
 }
 
-class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, SocketServiceDelegate {
-    private let partyService:PartyService = Injector.sharedInjector.getPartyService()
+class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwipeToChooseDelegate {
+    private let partyService = Injector.sharedInjector.getPartyService()
+    private let cardService = Injector.sharedInjector.getCardService()
     private var audioPlayer: AVAudioPlayer!
     private var player: AVAudioPlayer!
+    private var swipeOptions: MDCSwipeToChooseViewOptions!
     
     var delegate: MainViewControllerDelegate?
     var numberOfCards: Int = 0
@@ -28,13 +31,8 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
     var party: Party!
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet var storyBackground: UIView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        getParty()
-    }
     @IBAction func openMenu(sender: AnyObject) {
         delegate!.toggleRightPanel()
     }
@@ -52,13 +50,67 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         titleLabel.text = party.trip!.title
     }
     
-    func configureCollectionView() {
-//        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-//        layout.itemSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.width)
-//        self.collectionView.collectionViewLayout = layout
-        self.collectionView.dataSource = self
-        self.collectionView.delegate = self
+    override func viewDidLoad(){
+        super.viewDidLoad()
+        getParty()
+        setSwipeOptions()
+    }
+    
+    func loadSwipeViews() {
+        for card in partyState.scene!.cards! {
+            loadSwipeView(card)
+        }
+    }
+    
+    func loadSwipeView(card: Card) {
+        let frame = CGRect(x: 25, y: 120, width: self.view.frame.width - 50, height: self.view.frame.height - 160)
+        let swipeView = MDCSwipeToChooseView(frame:frame, options:self.swipeOptions)
+        let cardView = loadCardView(card)
+        sizeCardView(cardView)
+        swipeView.addSubview(cardView)
+        self.view.addSubview(swipeView)
+    }
+    
+    func loadCardView(card: Card) -> UIView {
+        var cardView:IAmACard = cardService.getView(card.nibId!)
+        cardView.card = card
+        cardView.nextScene = partyState.nextScene!
+        cardView.bindCard()
+        return cardView as! UIView
+    }
+    func sizeCardView(cardView: UIView) {
+        cardView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width - 50, height: self.view.frame.height - 160)
+    }
+    
+    func setSwipeOptions()  {
+        let options = MDCSwipeToChooseViewOptions()
+        options.delegate = self
+        options.likedText = nil
+        options.likedColor = UIColor.clearColor()
+        options.nopeText = nil
+        options.nopeColor = UIColor.clearColor()
+        options.onPan = { state -> Void in
+            if state.thresholdRatio == 1 && state.direction == MDCSwipeDirection.Left {
+                print("Photo deleted!")
+            }
+        }
+        self.swipeOptions = options
+    }
+    
+    func viewDidCancelSwipe(view: UIView) -> Void{
+        print("Couldn't decide, huh?")
+    }
+    
+    // Sent before a choice is made. Cancel the choice by returning `false`. Otherwise return `true`.
+    func view(view:UIView, shouldBeChosenWithDirection:MDCSwipeDirection) -> Bool {
+        
+        
+        return true
+    }
+    
+    // This is called then a user swipes the view fully left or right.
+    func view(view: UIView, wasChosenWithDirection: MDCSwipeDirection) -> Void{
+        // if no more cards, bring up map view
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,7 +144,6 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         let url = NSURL(string: urlstring!)
         downloadFileFromURL(url!)
     }
-    
     
     func downloadFileFromURL(url:NSURL){
         var downloadTask:NSURLSessionDownloadTask
@@ -135,13 +186,13 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func initStoryTeller(newPartyState: PartyState) {
         partyState = newPartyState
-        configureCollectionView()
+        loadSwipeViews()
         loadBackgroundPicture()
     }
     
     func loadNewScene(newPartyState: PartyState) {
         partyState = newPartyState
-        collectionView.reloadData()
+        loadSwipeViews()
         loadBackgroundPicture()
     }
     
@@ -164,12 +215,5 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
             saturationDeltaFactor: 1.0,
             maskImage: nil
         )!
-    }
-
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let card: Card = partyState.scene!.cards![indexPath.row]
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CardCollectionViewCell
-        cell.bindCard(card, nextScene: partyState.nextScene!)
-        return cell
     }
 }
