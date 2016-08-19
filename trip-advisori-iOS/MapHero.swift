@@ -29,11 +29,12 @@ class MapHero: CardView, IAmACard, GMSMapViewDelegate {
         
         sceneMapView.settings.scrollGestures = false
         sceneMapView.bringSubviewToFront(compass)
-        sceneMapView.animateToBearing(currentLocationService.course)
+        
 
     }
     
     func twirlCompass(origin: CLLocation) {
+        sceneMapView.animateToBearing(currentLocationService.course)
         let destination = CLLocation(latitude: nextScene.latitude!, longitude: nextScene.longitude!)
         let bearing = getBearingBetweenTwoPoints1(origin, point2: destination)
         compass.transform = CGAffineTransformMakeRotation(CGFloat(bearing) * CGFloat(M_PI)/180);
