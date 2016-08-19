@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'trip-advisori-iOS' do
-  pod 'Alamofire', '~> 2.0'
+  pod 'Alamofire'
   pod 'GoogleMaps' 
   pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
   pod 'Locksmith'
@@ -10,7 +10,8 @@ target 'trip-advisori-iOS' do
   pod 'FBSDKLoginKit'
   pod 'Locksmith'
   pod 'Starscream', '~> 1.1.3'
-  pod 'ObjectMapper', '~> 1.2'
+  pod 'ObjectMapper'
+  pod 'AlamofireObjectMapper', '~> 3.0'
 end
 
 target 'trip-advisori-iOS' do

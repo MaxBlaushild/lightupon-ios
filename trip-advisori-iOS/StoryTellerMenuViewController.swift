@@ -11,14 +11,14 @@ import UIKit
 
 private let reuseIdentifier = "PartyMemberCollectionViewCell"
 
-class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, SocketServiceDelegate {
     let partyService: PartyService = Injector.sharedInjector.getPartyService()
     let profileService: ProfileService = Injector.sharedInjector.getProfileService()
 
     @IBOutlet weak var partyMemberCollectionView: UICollectionView!
     @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var tripTitle: UILabel!
-    @IBOutlet weak var passcode: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var levelLabel: UILabel!
     
     var partyState: PartyState!
     var currentParty: Party!
@@ -27,9 +27,7 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         super.viewDidLoad()
         
         bindProfile()
-        
-        partyMemberCollectionView.dataSource = self
-        partyMemberCollectionView.delegate = self
+        makeProfileClickable()
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,12 +45,30 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     
     func bindProfile() {
         profilePicture.imageFromUrl(profileService.profile.profilePictureURL!)
+        nameLabel.text = profileService.profile.fullName
         profilePicture.makeCircle()
     }
     
-    func bindParty(currentParty: Party) {
-        tripTitle.text = currentParty.trip.title
-        passcode.text = currentParty.passcode
+    func onResponseReceived(_partyState_: PartyState) {
+        partyState = _partyState_
+        bindParty()
+        configurePartyCollectionView()
+    }
+    
+    func bindParty() {
+//        tripTitle.text = partyState.party!.trip!.title
+//        passcode.text = partyState.party!.passcode
+    }
+    
+    func bindPartyState(_partyState_: PartyState) {
+        partyState = _partyState_
+        configurePartyCollectionView()
+    }
+    
+    func configurePartyCollectionView() {
+        partyMemberCollectionView.dataSource = self
+        partyMemberCollectionView.delegate = self
+        partyMemberCollectionView.reloadData()
     }
     
     func removeUserFromPartyList() {
@@ -65,6 +81,16 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
 
     func goBack(){
         dismissViewControllerAnimated(true, completion: {})
+    }
+    
+    func makeProfileClickable() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(StoryTellerMenuViewController.imageTapped(_:)))
+        profilePicture.userInteractionEnabled = true
+        profilePicture.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func imageTapped(img: AnyObject) {
+        self.performSegueWithIdentifier("MenuToProfile", sender: nil)
     }
     
     @IBAction func leaveParty(sender: AnyObject) {

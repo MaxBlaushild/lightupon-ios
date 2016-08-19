@@ -12,7 +12,7 @@ import ObjectMapper
 import SwiftyJSON
 
 protocol SocketServiceDelegate {
-    func onResponseRecieved(_partyState_: PartyState) -> Void
+    func onResponseReceived(_partyState_: PartyState) -> Void
 }
 
 class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate {
@@ -77,7 +77,7 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     func websocketDidReceiveMessage(ws: WebSocket, text: String) {
         if let partyState:PartyState = Mapper<PartyState>().map(text) {
             if delegate != nil {
-                delegate.onResponseRecieved(partyState)
+                delegate.onResponseReceived(partyState)
             }
         }
     }

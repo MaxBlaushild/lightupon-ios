@@ -28,9 +28,9 @@ class LoginService: Service {
         ]
         
         Alamofire.request(.POST, url, parameters: user, encoding: .JSON)
-            .responseJSON { request, response, result in
+            .responseJSON { response in
                 
-            let json = JSON(result.value!)
+            let json = JSON(response.result.value!)
             let token:String = json.string!
             
             self.authService.setToken(token)

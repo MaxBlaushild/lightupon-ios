@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TripDetailsViewController: UIViewController, SocketServiceDelegate {
+class TripDetailsViewController: UIViewController {
     private let tripsService: TripsService = Injector.sharedInjector.getTripsService()
     private let partyService: PartyService = Injector.sharedInjector.getPartyService()
     private let socketService: SocketService = Injector.sharedInjector.getSocketService()
@@ -26,12 +26,21 @@ class TripDetailsViewController: UIViewController, SocketServiceDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        socketService.delegate = self
-        tripsService.getTrip(tripId, vc: self)
+        tripsService.getTrip(tripId, callback: self.onTripReceived)
+    }
+    
+    func onTripReceived(_trip_: Trip) {
+        trip = _trip_
+        tripTitle.text = trip.title
+        tripDetailsLabel.text = trip.descriptionText
+        tripDetailsPicture.imageFromUrl(trip.imageUrl!)
     }
 
     @IBAction func createParty(sender: AnyObject) {
-        partyService.createParty(trip.id, callback: self.onPartyCreated)
+        self.dismissViewControllerAnimated(true, completion: {})
+        dismissalDelegate.onDismissed()
+        partyService.createParty(trip.id!, callback: self.onPartyCreated)
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -39,14 +48,11 @@ class TripDetailsViewController: UIViewController, SocketServiceDelegate {
     }
     
     @IBAction func goBack(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: {});
+        self.dismissViewControllerAnimated(true, completion: {})
         dismissalDelegate.onDismissed()
     }
     
-    func onPartyCreated(party: Party) {
-        currentParty = party
-        waitingForPartyState = true
-    }
+    func onPartyCreated(party: Party) {}
     
     override func shouldAutorotate() -> Bool {
         return false
@@ -59,20 +65,4 @@ class TripDetailsViewController: UIViewController, SocketServiceDelegate {
     func segueToStoryTeller() {
         self.performSegueWithIdentifier("DetailsToStoryTeller", sender: self)
     }
-    
-    func onResponseRecieved(_partyState_: PartyState) {
-        partyState = _partyState_
-        
-        if (waitingForPartyState) {
-            segueToStoryTeller()
-        }
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destinationVC = segue.destinationViewController as? StoryTellerContainerViewController {
-            destinationVC.partyState = partyState
-            destinationVC.currentParty = currentParty
-        }
-    }
-
 }

@@ -16,10 +16,14 @@ class PartyState: NSObject, Mappable {
     var scene: Scene?
     var nextScene: Scene?
     var users: [User]?
+    var party: Party?
     
     func mapping(map: Map) {
+        
+        
         nextSceneAvailable <- map["NextSceneAvailable"]
         scene              <- map["Scene"]
+        party              <- map["Party"]
         users              <- map["Users"]
         nextScene          <- map["NextScene"]
     }

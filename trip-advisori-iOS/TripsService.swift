@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import SwiftyJSON
+import ObjectMapper
 import Locksmith
 
 class TripsService: Service {
@@ -19,37 +19,16 @@ class TripsService: Service {
     }
     
     func getTrips(callback: ([Trip]) -> Void){
-        apiAmbassador.get(apiURL + "/trips", success: { request, response, result in
-                
-                let json = JSON(result!.value!)
-                
-                let jsonTrips:[JSON] = json.array! as [JSON]
-                
-                var trips = [Trip]()
-                
-                for trip in jsonTrips {
-                    
-                    trips.append(Trip(json: trip))
-                    
-                }
-                
-                callback(trips)
-                
+        apiAmbassador.get(apiURL + "/trips", success: { response in
+            let trips = Mapper<Trip>().mapArray(response.result.value)
+            callback(trips!)
         })
     }
     
-    func getTrip(tripId: Int, vc: TripDetailsViewController) {
-        apiAmbassador.get(apiURL + "/trips/\(tripId)", success: { request, response, result in
-            
-            let json = JSON(result!.value!)
-            
-            let trip = Trip(json: json)
-            
-            vc.trip = trip
-            vc.tripTitle.text = trip.title
-            vc.tripDetailsLabel.text = trip.descriptionText
-            vc.tripDetailsPicture.imageFromUrl(trip.imageUrl)
-            
+    func getTrip(tripId: Int, callback: (Trip) -> Void) {
+        apiAmbassador.get(apiURL + "/trips/\(tripId)", success: { response in
+            let trip = Mapper<Trip>().map(response.result.value)
+            callback(trip!)
         })
     }
 }

@@ -16,16 +16,18 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var profileBanner: UIImageView!
     
+    @IBAction func goBack(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: {});
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         profileService.getMyProfile(self.bindProfileToView)
     }
-
-    @IBAction func logout(sender: AnyObject) {
+    
+    @IBAction func logOut(sender: AnyObject) {
         authService.logout()
         performSegueWithIdentifier("ProfileToLogin", sender: nil)
     }
-    
     override func shouldAutorotate() -> Bool {
         return false
     }

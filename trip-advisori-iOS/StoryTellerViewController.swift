@@ -13,50 +13,52 @@ import Alamofire
 private let reuseIdentifier = "cardCollectionViewCell"
 private let centerPanelExpandedOffset: CGFloat = 60
 
-protocol StoryTellerViewControllerDelegate {
+protocol MainViewControllerDelegate {
     func toggleRightPanel()
 }
 
 class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, SocketServiceDelegate {
     private let partyService:PartyService = Injector.sharedInjector.getPartyService()
-    private let socketService: SocketService = Injector.sharedInjector.getSocketService()
     private var audioPlayer: AVAudioPlayer!
-    
     private var player: AVAudioPlayer!
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    var delegate: MainViewControllerDelegate?
+    var numberOfCards: Int = 0
+    var partyState: PartyState!
+    var party: Party!
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet var storyBackground: UIView!
     
-    var delegate: StoryTellerViewControllerDelegate?
-    var numberOfCards: Int = 0
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getParty()
+    }
     @IBAction func openMenu(sender: AnyObject) {
         delegate!.toggleRightPanel()
     }
     
-    var partyState: PartyState!
-    var currentParty: Party!
+    func getParty() {
+        partyService.getUsersParty(self.onPartyRecieved)
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        socketService.delegate = self
-        
-        configureCollectionView()
-        styleCollectionView()
-        loadBackgroundPicture()
+    func onPartyRecieved(_party_: Party) {
+        party = _party_
+        bindParty()
+    }
+    
+    func bindParty() {
+        titleLabel.text = party.trip!.title
     }
     
     func configureCollectionView() {
+//        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+//        layout.itemSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.width)
+//        self.collectionView.collectionViewLayout = layout
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-    }
-    
-    func styleCollectionView() {
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = Colors.basePurple
-        collectionView.backgroundView = backgroundView;
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,12 +74,8 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         return UIInterfaceOrientationMask.Portrait
     }
     
-    func openAlert(title: String, message: String) {
-        
-    }
-    
     func goToNextScene() {
-        partyService.startNextScene(currentParty.id)
+        partyService.startNextScene(party.id!)
     }
     
     func onPartyLeft() {
@@ -89,12 +87,9 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         return 1
     }
     
-
     func playSound(scene: Scene) {
-        print(scene.soundResource)
         let urlstring = scene.soundResource
         let url = NSURL(string: urlstring!)
-        print("the url = \(url!)")
         downloadFileFromURL(url!)
     }
     
@@ -108,68 +103,73 @@ class StoryTellerViewController: UIViewController, UICollectionViewDelegate, UIC
         downloadTask.resume()
     }
     
-    
     func play(url:NSURL) {
-        print("playing \(url)")
         do {
             self.player = try AVAudioPlayer(contentsOfURL: url)
             player.prepareToPlay()
             player.volume = 1.0
             player.play()
         } catch let error as NSError {
-            //self.player = nil
             print(error.localizedDescription)
-        } catch {
-            print("AVAudioPlayer init failed")
         }
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        playSound(partyState.scene!)
+//        playSound(partyState.scene!)
         return partyState.scene!.cards!.count
     }
     
-    func onResponseRecieved(newPartyState: PartyState) {
-        let oldId = partyState.scene?.id
-        
-        partyState = newPartyState
-        if (partyState.nextSceneAvailable!) {
+    func onResponseReceived(newPartyState: PartyState) {
+        if (partyState == nil) {
+            initStoryTeller(newPartyState)
+        } else if (newPartyState.nextSceneAvailable!) {
             goToNextScene()
-        }
-        
-        
-        if (oldId != newPartyState.scene!.id!) {
-            loadBackgroundPicture()
-            loadNewScene()
+        } else if (hasMovedToNextScene(newPartyState)) {
+            loadNewScene(newPartyState)
         }
     }
     
-    func loadNewScene() {
+    func hasMovedToNextScene(newPartyState: PartyState) -> Bool {
+        return (partyState.scene!.id! != newPartyState.scene!.id!)
+    }
+    
+    func initStoryTeller(newPartyState: PartyState) {
+        partyState = newPartyState
+        configureCollectionView()
+        loadBackgroundPicture()
+    }
+    
+    func loadNewScene(newPartyState: PartyState) {
+        partyState = newPartyState
         collectionView.reloadData()
         loadBackgroundPicture()
     }
     
     func loadBackgroundPicture() {
+        let backgroundImage = getBackgroundPicture()
+        let blurredBackgroundImage = blurBackgroundImage(backgroundImage)
+        storyBackground.backgroundColor = UIColor(patternImage: blurredBackgroundImage)
+    }
+    
+    func getBackgroundPicture() -> UIImage {
         let url = NSURL(string: (partyState.scene?.backgroundUrl)!)
         let data = NSData(contentsOfURL: url!)
-        let backgroundImage = UIImage(data: data!)!
-        let blurredBackgroundImage = backgroundImage.applyBlurWithRadius(
+        return UIImage(data: data!)!
+    }
+    
+    func blurBackgroundImage(backgroundImage: UIImage) -> UIImage {
+        return backgroundImage.applyBlurWithRadius(
             CGFloat(5),
             tintColor: nil,
             saturationDeltaFactor: 1.0,
             maskImage: nil
-        )
-        storyBackground.backgroundColor = UIColor(patternImage: blurredBackgroundImage!)
+        )!
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let card: Card = partyState.scene!.cards![indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CardCollectionViewCell
-        
         cell.bindCard(card, nextScene: partyState.nextScene!)
-
         return cell
     }
-
-
 }

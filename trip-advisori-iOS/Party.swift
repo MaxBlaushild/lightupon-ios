@@ -7,20 +7,21 @@
 //
 
 import UIKit
-import SwiftyJSON
+import ObjectMapper
 
-class Party: NSObject {
+class Party: NSObject, Mappable {
+    var id:Int?
+    var trip: Trip?
+    var passcode: String?
     
-    var id:Int
-    var trip: Trip
-    var passcode: String
+    func mapping(map: Map) {
+        id       <- map["ID"]
+        trip     <- map["Trip"]
+        passcode <- map["Passcode"]
+    }
     
-    required init(json:JSON){
-        var party:[String: JSON] = json.dictionary!
+    required init?(_ map: Map) {
         
-        self.id = party["ID"]!.int!
-        self.trip = Trip(json: json["Trip"])
-        self.passcode = party["Passcode"]!.string!
     }
 }
 

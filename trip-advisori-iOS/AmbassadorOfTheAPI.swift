@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 
 class AmbassadorToTheAPI: Service {
-    internal typealias NetworkSuccessHandler = (NSURLRequest?, NSHTTPURLResponse?, Result<AnyObject>?) -> Void
+    internal typealias NetworkSuccessHandler = (Response<AnyObject, NSError>) -> Void
     internal typealias NetworkFailureHandler = (NSHTTPURLResponse?, AnyObject?, NSError) -> Void
     internal typealias Header = (Dictionary<String, String>)
     
@@ -41,36 +41,36 @@ class AmbassadorToTheAPI: Service {
 
     func get(URLString: URLStringConvertible, success: NetworkSuccessHandler?) {
         setHeaders()
-        Alamofire.request(.GET, URLString, headers: headers).responseJSON { request, response, result in
-            self.processResponse(request, response: response, result: result, success: success!, URLString: URLString)
+        Alamofire.request(.GET, URLString, headers: headers).responseJSON { response in
+            self.processResponse(response, success: success!, URLString: URLString)
         }
             
     }
     
     func post(URLString: URLStringConvertible, parameters:[String:AnyObject], success: NetworkSuccessHandler?) {
         setHeaders()
-        Alamofire.request(.POST, URLString, parameters: parameters, headers: headers, encoding: .JSON).responseJSON { request, response, result in
-            self.processResponse(request, response: response!, result: result, success: success!, URLString: URLString)
+        Alamofire.request(.POST, URLString, parameters: parameters, headers: headers, encoding: .JSON).responseJSON { response in
+            self.processResponse(response, success: success!, URLString: URLString)
         }
         
     }
     
     func delete(URLString: URLStringConvertible, success: NetworkSuccessHandler?) {
         setHeaders()
-        Alamofire.request(.DELETE, URLString, headers: headers, encoding: .JSON).responseJSON { request, response, result in
-            self.processResponse(request, response: response!, result: result, success: success!, URLString: URLString)
+        Alamofire.request(.DELETE, URLString, headers: headers, encoding: .JSON).responseJSON { response in
+            self.processResponse(response, success: success!, URLString: URLString)
         }
     }
     
-    func processResponse(request: NSURLRequest?, response: NSHTTPURLResponse?, result: Result<AnyObject>, success: NetworkSuccessHandler, URLString: URLStringConvertible) {
-        if result.isFailure {
-            if response!.statusCode == 401 {
+    func processResponse(response: Response<AnyObject, NSError>, success: NetworkSuccessHandler, URLString: URLStringConvertible) {
+        if response.result.isFailure {
+            if response.response!.statusCode == 401 {
                 self.refreshToken(URLString, success: success)
             } else {
                 createNoInternetWarning()
             }
         }  else {
-            success(request, response, result)
+            success(response)
         }
     }
     
@@ -88,8 +88,8 @@ class AmbassadorToTheAPI: Service {
     private func refreshToken(URLString: URLStringConvertible, success: NetworkSuccessHandler?) {
         let facebookId:String = authService.getFacebookId()
         Alamofire.request(.PATCH, apiURL + "/users/\(facebookId)/token")
-            .responseJSON { request, response, result in
-                let json = JSON(result.value!)
+            .responseJSON { response in
+                let json = JSON(response.result.value!)
                 let token:String = json.string!
                 self.authService.setToken(token)
                 self.setHeaders()
