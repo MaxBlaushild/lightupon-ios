@@ -57,6 +57,7 @@ class Trip: NSObject, Mappable {
     var imageUrl: String?
     var estimatedTime: String?
     var details:String?
+    var scenes: [Scene]?
     
     func mapping(map: Map) {
         imageUrl        <- map["ImageUrl"]
@@ -67,6 +68,7 @@ class Trip: NSObject, Mappable {
         descriptionText <- map["Description"]
         id              <- map["ID"]
         estimatedTime   <- map["EstimatedTime"]
+        scenes          <- map["Scenes"]
     }
     
     required init?(_ map: Map) {

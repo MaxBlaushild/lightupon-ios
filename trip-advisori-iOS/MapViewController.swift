@@ -66,11 +66,27 @@ class MapViewController: UIViewController, GMSMapViewDelegate, DismissalDelegate
             placeTripOnMap(trip, mapView: mapView)
         }
     }
+
+    func getRandomColor() -> UIColor{
+        let randomRed:CGFloat = CGFloat(drand48())
+        let randomGreen:CGFloat = CGFloat(drand48())
+        let randomBlue:CGFloat = CGFloat(drand48())
+        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
+    }
     
     func placeTripOnMap(trip: Trip, mapView: GMSMapView) {
+        let path = GMSMutablePath()
+        for scene in trip.scenes! {
+            path.addCoordinate(CLLocationCoordinate2D(latitude: scene.latitude!, longitude: scene.longitude!))
+
+        }
+        let polyline = GMSPolyline(path: path)
+        polyline.map = mapView
+
+        // Add one marker at the beginning of each trip
         let marker = GMSMarker()
-        
-        marker.position = CLLocationCoordinate2DMake(trip.latitude!, trip.longitude!)
+        marker.icon = GMSMarker.markerImageWithColor(getRandomColor())
+        marker.position = CLLocationCoordinate2DMake(trip.scenes![0].latitude!, trip.scenes![0].longitude!)
         marker.title = trip.title
         marker.snippet = trip.descriptionText
         marker.userData = trip.id
