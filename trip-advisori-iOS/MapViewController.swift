@@ -75,17 +75,19 @@ class MapViewController: UIViewController, GMSMapViewDelegate, DismissalDelegate
     }
     
     func placeTripOnMap(trip: Trip, mapView: GMSMapView) {
+        let colorForTrip = getRandomColor()
         let path = GMSMutablePath()
         for scene in trip.scenes! {
             path.addCoordinate(CLLocationCoordinate2D(latitude: scene.latitude!, longitude: scene.longitude!))
 
         }
         let polyline = GMSPolyline(path: path)
+        polyline.strokeColor = colorForTrip
         polyline.map = mapView
 
         // Add one marker at the beginning of each trip
         let marker = GMSMarker()
-        marker.icon = GMSMarker.markerImageWithColor(getRandomColor())
+        marker.icon = GMSMarker.markerImageWithColor(colorForTrip)
         marker.position = CLLocationCoordinate2DMake(trip.scenes![0].latitude!, trip.scenes![0].longitude!)
         marker.title = trip.title
         marker.snippet = trip.descriptionText
