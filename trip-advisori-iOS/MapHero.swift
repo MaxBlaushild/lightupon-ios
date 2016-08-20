@@ -11,17 +11,24 @@ import Foundation
 import GoogleMaps
 import Darwin
 
-class MapHero: CardView, IAmACard, GMSMapViewDelegate {
+class MapHero: CardView, IAmACard, GMSMapViewDelegate, CurrentLocationServiceDelegate {
     private let currentLocationService: CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
     private var compassTwirler: NSTimer?
     private var count: Int = 0;
     @IBOutlet weak var sceneMapView: GMSMapView!
     @IBOutlet weak var compass: UIImageView!
-
-    func bindCard() {
+    @IBOutlet weak var bearingLabel: UILabel!
+    @IBOutlet weak var longtiudeLabel: UILabel!
+    @IBOutlet weak var latitudeLabel: UILabel!
+    
+    func centerMapOnLocation() {
         sceneMapView.camera = GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 17)
+    }
+    
+    func bindCard() {
+        centerMapOnLocation()
         sceneMapView.myLocationEnabled = true
-
+        currentLocationService.delegate = self
         sceneMapView.settings.zoomGestures = false
         sceneMapView.delegate = self
         let mapCenter = CLLocation(latitude: currentLocationService.latitude, longitude: currentLocationService.longitude)
@@ -29,12 +36,23 @@ class MapHero: CardView, IAmACard, GMSMapViewDelegate {
         
         sceneMapView.settings.scrollGestures = false
         sceneMapView.bringSubviewToFront(compass)
-        
-
+    }
+    
+    func onLocationUpdated() {
+        centerMapOnLocation()
+        reorientCompass()
+    }
+    
+    func reorientCompass() {
+        let currentLocation = CLLocation(latitude: currentLocationService.latitude, longitude: currentLocationService.longitude)
+        twirlCompass(currentLocation)
+    }
+    
+    func realignMapView() {
+        sceneMapView.animateToBearing(currentLocationService.course)
     }
     
     func twirlCompass(origin: CLLocation) {
-        sceneMapView.animateToBearing(currentLocationService.course)
         let destination = CLLocation(latitude: nextScene.latitude!, longitude: nextScene.longitude!)
         let bearing = getBearingBetweenTwoPoints1(origin, point2: destination)
         compass.transform = CGAffineTransformMakeRotation(CGFloat(bearing) * CGFloat(M_PI)/180);

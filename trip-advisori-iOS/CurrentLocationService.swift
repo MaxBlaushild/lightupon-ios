@@ -11,6 +11,7 @@ protocol LocationInfo{
 
 protocol CurrentLocationServiceDelegate {
     func onLocationUpdated() -> Void
+    func onHeadingUpdated() -> Void
 }
 
 class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo {
@@ -20,6 +21,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     private var _longitude:Double
     private var _latitude:Double
     private var _course:Double
+    private var _heading:Double
     
     internal var delegate: CurrentLocationServiceDelegate!
     
@@ -41,6 +43,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -59,7 +62,11 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         if delegate != nil {
             delegate.onLocationUpdated()
         }
-        
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading ) {
+        CLLocationDirection  theHeading = ((newHeading.trueHeading > 0) ?
+            newHeading.trueHeading : newHeading.magneticHeading)
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
