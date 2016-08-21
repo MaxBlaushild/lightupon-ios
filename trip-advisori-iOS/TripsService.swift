@@ -18,8 +18,10 @@ class TripsService: Service {
         apiAmbassador = _apiAmbassador_
     }
     
-    func getTrips(callback: ([Trip]) -> Void){
-        apiAmbassador.get(apiURL + "/trips", success: { response in
+    func getTrips(callback: ([Trip]) -> Void, latitude: Double, longitude: Double){
+        let strLatitude = String(latitude)
+        let strLongitude = String(longitude)
+        apiAmbassador.get(apiURL + "/trips?lat=" + strLatitude + "&lon=" + strLongitude, success: { response in
             let trips = Mapper<Trip>().mapArray(response.result.value)
             callback(trips!)
         })

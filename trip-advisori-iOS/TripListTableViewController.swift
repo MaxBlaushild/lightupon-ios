@@ -32,6 +32,7 @@ protocol DismissalDelegate {
 
 class TripListTableViewController: UIViewController, UIViewControllerTransitioningDelegate, DismissalDelegate, UITableViewDelegate, UITableViewDataSource, SocketServiceDelegate {
     private let tripsService: TripsService = Injector.sharedInjector.getTripsService()
+    private let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
     
     var trips:[Trip]!
     var delegate: MainViewControllerDelegate!
@@ -50,7 +51,7 @@ class TripListTableViewController: UIViewController, UIViewControllerTransitioni
     }
     
     func getTrips() {
-        tripsService.getTrips(self.onTripsGotten)
+        tripsService.getTrips(self.onTripsGotten, latitude: self.currentLocationService.latitude, longitude: self.currentLocationService.longitude)
     }
     
     func onTripsGotten(_trips_: [Trip]) {
