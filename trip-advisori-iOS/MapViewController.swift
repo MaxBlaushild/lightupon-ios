@@ -53,7 +53,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, DismissalDelegate
     }
     
     func getTrips() {
-        tripsService.getTrips(self.onTripsGotten)
+        tripsService.getTrips(self.onTripsGotten, latitude: self.currentLocationService.latitude, longitude: self.currentLocationService.longitude)
     }
     
     func onTripsGotten(_trips_: [Trip]) {
