@@ -75,6 +75,7 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
         socketResponseRecepients.append(storyTellerViewController)
         
         storyTellerViewController.didMoveToParentViewController(self)
+        socketService.pokeSocket()
     }
     
     func initHomeTabBarViewController() {

@@ -33,6 +33,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         self._longitude = 50.0
         self._latitude = 50.0
         self._course = 0.0
+        self._heading = 0.0
         
         super.init()
         
@@ -65,8 +66,16 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     }
     
     func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading ) {
-        CLLocationDirection  theHeading = ((newHeading.trueHeading > 0) ?
-            newHeading.trueHeading : newHeading.magneticHeading)
+        if (newHeading.headingAccuracy < 0) {
+            return
+        }
+
+        let theHeading = (newHeading.trueHeading > 0) ? newHeading.trueHeading : newHeading.magneticHeading
+        self._heading = theHeading
+        
+        if delegate != nil {
+            delegate.onHeadingUpdated()
+        }
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -134,6 +143,16 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
 
         }
 
+    }
+    
+    var heading:Double {
+        
+        get {
+            
+            return _heading
+            
+        }
+        
     }
 
     var location:Location {

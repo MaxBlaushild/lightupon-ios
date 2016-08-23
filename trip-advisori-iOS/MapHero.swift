@@ -13,61 +13,75 @@ import Darwin
 
 class MapHero: CardView, IAmACard, GMSMapViewDelegate, CurrentLocationServiceDelegate {
     private let currentLocationService: CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
-    private var compassTwirler: NSTimer?
+
     private var count: Int = 0;
+    
     @IBOutlet weak var sceneMapView: GMSMapView!
     @IBOutlet weak var compass: UIImageView!
-    @IBOutlet weak var bearingLabel: UILabel!
-    @IBOutlet weak var longtiudeLabel: UILabel!
-    @IBOutlet weak var latitudeLabel: UILabel!
-    
-    func centerMapOnLocation() {
-        sceneMapView.camera = GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 17)
-    }
     
     func bindCard() {
-        centerMapOnLocation()
-        sceneMapView.myLocationEnabled = true
-        currentLocationService.delegate = self
-        sceneMapView.settings.zoomGestures = false
         sceneMapView.delegate = self
-        let mapCenter = CLLocation(latitude: currentLocationService.latitude, longitude: currentLocationService.longitude)
-        twirlCompass(mapCenter)
+        currentLocationService.delegate = self
         
-        sceneMapView.settings.scrollGestures = false
+        centerMapOnLocation()
+        configureMapView()
+        twirlCompass()
+        addNextScene()
+        
         sceneMapView.bringSubviewToFront(compass)
+    }
+    
+    func configureMapView() {
+        sceneMapView.myLocationEnabled = true
+        sceneMapView.settings.zoomGestures = false
+        sceneMapView.settings.scrollGestures = false
+    }
+    
+    func createCenteredCameraPostion() -> GMSCameraPosition {
+        return GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 17, bearing: currentLocationService.heading, viewingAngle: 0)
+    }
+    
+    func centerMapOnLocation() {
+        let newCenter = self.createCenteredCameraPostion()
+        sceneMapView.animateToCameraPosition(newCenter)
+    }
+    
+    func addNextScene() {
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2DMake(nextScene.latitude!, nextScene.longitude!)
+        marker.title = "fuck"
+        marker.snippet = "fuck"
+        marker.map = sceneMapView
     }
     
     func onLocationUpdated() {
         centerMapOnLocation()
-        reorientCompass()
+        twirlCompass()
     }
     
-    func reorientCompass() {
-        let currentLocation = CLLocation(latitude: currentLocationService.latitude, longitude: currentLocationService.longitude)
-        twirlCompass(currentLocation)
+    func onHeadingUpdated() {
+        realignMapView()
+        twirlCompass()
     }
     
     func realignMapView() {
-        sceneMapView.animateToBearing(currentLocationService.course)
+        let heading = currentLocationService.heading
+        sceneMapView.animateToBearing(heading)
     }
     
-    func twirlCompass(origin: CLLocation) {
+    func twirlCompass() {
+        let origin = CLLocation(latitude: currentLocationService.latitude, longitude: currentLocationService.longitude)
         let destination = CLLocation(latitude: nextScene.latitude!, longitude: nextScene.longitude!)
-        let bearing = getBearingBetweenTwoPoints1(origin, point2: destination)
-        compass.transform = CGAffineTransformMakeRotation(CGFloat(bearing) * CGFloat(M_PI)/180);
+        let bearing = CGFloat(getBearingBetweenTwoPoints1(origin, point2: destination))
+        let normalizedDelta = adjustBearingForDeviceHeading(bearing)
+        compass.transform = CGAffineTransformMakeRotation((normalizedDelta % 360) * CGFloat(M_PI)/180);
     }
     
-    func mapView(mapView: GMSMapView, didChangeCameraPosition cameraPosition: GMSCameraPosition) {
-        let mapCenter = CLLocation(latitude: cameraPosition.target.latitude, longitude: cameraPosition.target.longitude)
-        twirlCompass(mapCenter)
-    }
-    
-    func placeNextSceneOnMap() {
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(nextScene.latitude!, nextScene.longitude!)
-        marker.title = nextScene.name
-        marker.map = sceneMapView
+    func adjustBearingForDeviceHeading(bearing: CGFloat) -> CGFloat {
+        let heading = CGFloat(currentLocationService.heading)
+        let delta = bearing - heading
+        let normalizedDelta = delta + 360
+        return normalizedDelta
     }
     
     func degreesToRadians(degrees: Double) -> Double { return degrees * M_PI / 180.0 }

@@ -19,14 +19,12 @@ class Injector: Service {
     private var profileService: ProfileService
     private var loginService: LoginService
     private var socketService: SocketService
-    private var alertService: AlertService
     private var cardService: CardService
 
     override init(){
         authService = AuthService()
         currentLocationService = CurrentLocationService()
         profileService = ProfileService()
-        alertService = AlertService()
         cardService = CardService()
         loginService = LoginService(_authService_: authService)
         apiAmbassador = AmbassadorToTheAPI(_authService_: authService)
@@ -65,9 +63,5 @@ class Injector: Service {
     
     func getCurrentLocationService() -> CurrentLocationService {
         return currentLocationService
-    }
-    
-    func getAlertService() -> AlertService {
-        return alertService
     }
 }

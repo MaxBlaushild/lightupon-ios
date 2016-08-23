@@ -22,38 +22,11 @@
                                 <constraint firstAttribute="height" constant="49" id="cV1-eB-sB0"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="latitude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lhw-i6-Odf">
-                            <rect key="frame" x="191" y="278" width="222" height="43"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="bearing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNa-S9-5xv">
-                            <rect key="frame" x="258" y="329" width="58" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="longitude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4w-d6-4ia">
-                            <rect key="frame" x="160" y="328" width="72" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="N4w-d6-4ia" firstAttribute="baseline" secondItem="RNa-S9-5xv" secondAttribute="baseline" id="9ah-4h-BzI"/>
-                        <constraint firstItem="Lhw-i6-Odf" firstAttribute="centerX" secondItem="9So-v4-BKH" secondAttribute="centerX" id="AYt-d8-azl"/>
-                        <constraint firstItem="RNa-S9-5xv" firstAttribute="centerY" secondItem="vex-Dt-rY1" secondAttribute="centerY" id="Gbm-Wi-dCI"/>
-                        <constraint firstItem="N4w-d6-4ia" firstAttribute="leading" secondItem="RNa-S9-5xv" secondAttribute="trailing" constant="25" id="Gru-zG-775"/>
-                        <constraint firstItem="Lhw-i6-Odf" firstAttribute="leading" secondItem="RNa-S9-5xv" secondAttribute="trailing" constant="-125" id="SNA-kh-OZn"/>
-                        <constraint firstItem="Lhw-i6-Odf" firstAttribute="centerX" secondItem="vex-Dt-rY1" secondAttribute="centerX" id="Tvk-wD-Ipp"/>
                         <constraint firstItem="9So-v4-BKH" firstAttribute="centerX" secondItem="vex-Dt-rY1" secondAttribute="centerX" id="X5u-8w-DKh"/>
                         <constraint firstItem="9So-v4-BKH" firstAttribute="centerY" secondItem="vex-Dt-rY1" secondAttribute="centerY" id="Xl4-6d-AoE"/>
-                        <constraint firstItem="N4w-d6-4ia" firstAttribute="top" secondItem="RNa-S9-5xv" secondAttribute="top" id="cVh-1e-gWX"/>
-                        <constraint firstItem="Lhw-i6-Odf" firstAttribute="top" secondItem="N4w-d6-4ia" secondAttribute="bottom" constant="65" id="sAa-C3-gz8"/>
-                        <constraint firstItem="Lhw-i6-Odf" firstAttribute="centerY" secondItem="vex-Dt-rY1" secondAttribute="centerY" id="zP4-Be-Dcs"/>
                     </constraints>
                 </view>
             </subviews>
@@ -65,10 +38,7 @@
                 <constraint firstItem="vex-Dt-rY1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sRI-tc-fwr"/>
             </constraints>
             <connections>
-                <outlet property="bearingLabel" destination="RNa-S9-5xv" id="9Le-8H-E8y"/>
                 <outlet property="compass" destination="9So-v4-BKH" id="6As-Dp-i2S"/>
-                <outlet property="latitudeLabel" destination="Lhw-i6-Odf" id="3lR-tL-C9x"/>
-                <outlet property="longtiudeLabel" destination="N4w-d6-4ia" id="Av6-be-UCh"/>
                 <outlet property="sceneMapView" destination="vex-Dt-rY1" id="pOK-YY-0mO"/>
             </connections>
         </view>

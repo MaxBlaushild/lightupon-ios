@@ -31,12 +31,6 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     var party: Party!
     var cardCount: Int = 0
     
-    @IBOutlet weak var latitudeLabel: UILabel!
-    
-    @IBOutlet weak var longitudeLabel: UILabel!
-    
-    @IBOutlet weak var bearinglLabel: UILabel!
-    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet var storyBackground: UIView!
     
