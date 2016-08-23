@@ -79,8 +79,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate, DismissalDelegate
         let path = GMSMutablePath()
         for scene in trip.scenes! {
             path.addCoordinate(CLLocationCoordinate2D(latitude: scene.latitude!, longitude: scene.longitude!))
-
         }
+        
         let polyline = GMSPolyline(path: path)
         polyline.strokeColor = colorForTrip
         polyline.map = mapView
@@ -128,16 +128,5 @@ class MapViewController: UIViewController, GMSMapViewDelegate, DismissalDelegate
     func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
         return HalfSizePresentationController(presentedViewController: presented, presentingViewController: presentingViewController!)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

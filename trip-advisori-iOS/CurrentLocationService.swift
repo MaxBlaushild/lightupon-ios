@@ -11,6 +11,7 @@ protocol LocationInfo{
 
 protocol CurrentLocationServiceDelegate {
     func onLocationUpdated() -> Void
+    func onHeadingUpdated() -> Void
 }
 
 class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo {
@@ -20,6 +21,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     private var _longitude:Double
     private var _latitude:Double
     private var _course:Double
+    private var _heading:Double
     
     internal var delegate: CurrentLocationServiceDelegate!
     
@@ -31,6 +33,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         self._longitude = 50.0
         self._latitude = 50.0
         self._course = 0.0
+        self._heading = 0.0
         
         super.init()
         
@@ -41,6 +44,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -59,7 +63,19 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         if delegate != nil {
             delegate.onLocationUpdated()
         }
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading ) {
+        if (newHeading.headingAccuracy < 0) {
+            return
+        }
+
+        let theHeading = (newHeading.trueHeading > 0) ? newHeading.trueHeading : newHeading.magneticHeading
+        self._heading = theHeading
         
+        if delegate != nil {
+            delegate.onHeadingUpdated()
+        }
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -127,6 +143,16 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
 
         }
 
+    }
+    
+    var heading:Double {
+        
+        get {
+            
+            return _heading
+            
+        }
+        
     }
 
     var location:Location {

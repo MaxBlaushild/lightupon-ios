@@ -11,45 +11,77 @@ import Foundation
 import GoogleMaps
 import Darwin
 
-class MapHero: CardView, IAmACard, GMSMapViewDelegate {
+class MapHero: CardView, IAmACard, GMSMapViewDelegate, CurrentLocationServiceDelegate {
     private let currentLocationService: CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
-    private var compassTwirler: NSTimer?
+
     private var count: Int = 0;
+    
     @IBOutlet weak var sceneMapView: GMSMapView!
     @IBOutlet weak var compass: UIImageView!
-
+    
     func bindCard() {
-        sceneMapView.camera = GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 17)
-        sceneMapView.myLocationEnabled = true
-
-        sceneMapView.settings.zoomGestures = false
         sceneMapView.delegate = self
-        let mapCenter = CLLocation(latitude: currentLocationService.latitude, longitude: currentLocationService.longitude)
-        twirlCompass(mapCenter)
+        currentLocationService.delegate = self
         
-        sceneMapView.settings.scrollGestures = false
+        centerMapOnLocation()
+        configureMapView()
+        twirlCompass()
+        addNextScene()
+        
         sceneMapView.bringSubviewToFront(compass)
-        
-
     }
     
-    func twirlCompass(origin: CLLocation) {
-        sceneMapView.animateToBearing(currentLocationService.course)
-        let destination = CLLocation(latitude: nextScene.latitude!, longitude: nextScene.longitude!)
-        let bearing = getBearingBetweenTwoPoints1(origin, point2: destination)
-        compass.transform = CGAffineTransformMakeRotation(CGFloat(bearing) * CGFloat(M_PI)/180);
+    func configureMapView() {
+        sceneMapView.myLocationEnabled = true
+        sceneMapView.settings.zoomGestures = false
+        sceneMapView.settings.scrollGestures = false
     }
     
-    func mapView(mapView: GMSMapView, didChangeCameraPosition cameraPosition: GMSCameraPosition) {
-        let mapCenter = CLLocation(latitude: cameraPosition.target.latitude, longitude: cameraPosition.target.longitude)
-        twirlCompass(mapCenter)
+    func createCenteredCameraPostion() -> GMSCameraPosition {
+        return GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 17, bearing: currentLocationService.heading, viewingAngle: 0)
     }
     
-    func placeNextSceneOnMap() {
+    func centerMapOnLocation() {
+        let newCenter = self.createCenteredCameraPostion()
+        sceneMapView.animateToCameraPosition(newCenter)
+    }
+    
+    func addNextScene() {
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2DMake(nextScene.latitude!, nextScene.longitude!)
-        marker.title = nextScene.name
+        marker.title = "fuck"
+        marker.snippet = "fuck"
         marker.map = sceneMapView
+    }
+    
+    func onLocationUpdated() {
+        centerMapOnLocation()
+        twirlCompass()
+    }
+    
+    func onHeadingUpdated() {
+        realignMapView()
+        twirlCompass()
+    }
+    
+    func realignMapView() {
+        let heading = currentLocationService.heading
+        sceneMapView.animateToBearing(heading)
+    }
+    
+    func twirlCompass() {
+        let origin = CLLocation(latitude: currentLocationService.latitude, longitude: currentLocationService.longitude)
+        let destination = CLLocation(latitude: nextScene.latitude!, longitude: nextScene.longitude!)
+        let bearing = CGFloat(getBearingBetweenTwoPoints1(origin, point2: destination))
+        let normalizedDelta = adjustBearingForDeviceHeading(bearing)
+        compass.transform = CGAffineTransformMakeRotation((normalizedDelta % 360) * CGFloat(M_PI)/180);
+    }
+    
+    func adjustBearingForDeviceHeading(bearing: CGFloat) -> CGFloat {
+        let heading = CGFloat(currentLocationService.heading)
+        let delta = bearing - heading
+        let normalizedDelta = delta + 360
+        return normalizedDelta
     }
     
     func degreesToRadians(degrees: Double) -> Double { return degrees * M_PI / 180.0 }

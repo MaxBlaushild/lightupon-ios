@@ -52,7 +52,9 @@ class TripDetailsViewController: UIViewController {
         dismissalDelegate.onDismissed()
     }
     
-    func onPartyCreated(party: Party) {}
+    func onPartyCreated(party: Party) {
+        socketService.pokeSocket()
+    }
     
     override func shouldAutorotate() -> Bool {
         return false
