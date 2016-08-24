@@ -14,6 +14,7 @@ target 'trip-advisori-iOS' do
   pod 'AlamofireObjectMapper', '~> 3.0'
   pod 'HanekeSwift'
   pod 'MDCSwipeToChoose'
+  pod 'CBZSplashView', '~> 1.0.0'
 end
 
 target 'trip-advisori-iOS' do
