@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CBZSplashView
 
 private let centerPanelExpandedOffset: CGFloat = 60
 
@@ -50,6 +51,14 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
         socketService.delegate = self
     }
     
+    func splashScreen() {
+        let icon = UIBezierPath.mainLogo()
+        let splashView = CBZSplashView(bezierPath: icon, backgroundColor: Colors.basePurple)
+        splashView.animationDuration = 3
+        self.view.addSubview(splashView)
+        splashView.startAnimation()
+    }
+    
     func onPartyRetrieved(party: Party) {
         currentParty = party
         
@@ -76,6 +85,7 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
         
         storyTellerViewController.didMoveToParentViewController(self)
         socketService.pokeSocket()
+        splashScreen()
     }
     
     func initHomeTabBarViewController() {
@@ -89,6 +99,7 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
         socketResponseRecepients.append(homeTabBarViewController)
         
         homeTabBarViewController.didMoveToParentViewController(self)
+        splashScreen()
     }
     
     func segueToStoryTeller() {

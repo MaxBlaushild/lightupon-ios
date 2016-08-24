@@ -67,18 +67,19 @@ class InitialLoadingViewController: UIViewController {
         } else {
             presentMainContainerViewController()
         }
-        splashScreen()
     }
     
     func presentLoginViewController() {
         let loginViewController = UIStoryboard.loginViewController()
+        self.presentViewController(loginViewController!, animated: false, completion: nil)
         view.addSubview(loginViewController!.view)
         loginViewController?.didMoveToParentViewController(self)
+        splashScreen()
     }
     
     func presentMainContainerViewController() {
         let mainContainerViewController = UIStoryboard.mainContainerViewController()
-        view.addSubview(mainContainerViewController!.view)
+        self.presentViewController(mainContainerViewController!, animated: false, completion: nil)
         mainContainerViewController?.didMoveToParentViewController(self)
     }
     
