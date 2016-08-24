@@ -46,7 +46,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-DM-b4G">
                                 <rect key="frame" x="0.0" y="20" width="600" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SERENDIPITY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BM1-kl-vNr">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SERENDIPITY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BM1-kl-vNr">
                                         <rect key="frame" x="18" y="13" width="134" height="33"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="26"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -216,7 +216,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wTt-mB-I0i">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="140"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfX-WT-mUV">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfX-WT-mUV">
                                                     <rect key="frame" x="8" y="8" width="100" height="23"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="Idy-De-HLE"/>
@@ -225,13 +225,13 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="estimated time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gH2-G2-WAL">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="estimated time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gH2-G2-WAL">
                                                     <rect key="frame" x="489" y="8" width="103" height="23"/>
                                                     <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6M-TO-jhg">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6M-TO-jhg">
                                                     <rect key="frame" x="283" y="89" width="35" height="21"/>
                                                     <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -274,7 +274,7 @@
                                             <action selector="openMenu:" destination="HOi-Ee-twU" eventType="touchUpInside" id="YLu-7d-MWx"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TRIPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcB-wy-Qh6">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TRIPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcB-wy-Qh6">
                                         <rect key="frame" x="18" y="5" width="59" height="50"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="26"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -341,7 +341,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lyo-Xb-1RE">
                                 <rect key="frame" x="0.0" y="20" width="600" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFC-sd-MA4">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFC-sd-MA4">
                                         <rect key="frame" x="18" y="15" width="30" height="31"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="15"/>
                                         <state key="normal" title="Back">
@@ -418,7 +418,7 @@
         <!--Login View Controller-->
         <scene sceneID="AKr-vG-EU6">
             <objects>
-                <viewController id="gQu-ls-H9T" customClass="LoginViewController" customModule="trip_advisori_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="LoginViewController" storyboardIdentifier="LoginViewController" id="gQu-ls-H9T" customClass="LoginViewController" customModule="trip_advisori_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1vP-FU-7of"/>
                         <viewControllerLayoutGuide type="bottom" id="2m5-gn-uF4"/>
@@ -455,7 +455,7 @@
                                     <constraint firstAttribute="width" constant="70" id="vsr-pp-3BZ"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyQ-fW-HO4">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyQ-fW-HO4">
                                 <rect key="frame" x="505" y="547" width="75" height="33"/>
                                 <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="16"/>
                                 <state key="normal" title="Leave Story">
@@ -576,7 +576,7 @@
                                             <action selector="openMenu:" destination="HOY-KY-Sy1" eventType="touchUpInside" id="sS8-fv-Df1"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qoH-qs-7Uu">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Trip Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qoH-qs-7Uu">
                                         <rect key="frame" x="18" y="18" width="59" height="23"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -620,20 +620,7 @@
                     <view key="view" contentMode="scaleToFill" id="DIN-K5-xq6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="160" placeholderIntrinsicHeight="120" image="owl.png" translatesAutoresizingMaskIntoConstraints="NO" id="fjL-mL-yUJ">
-                                <rect key="frame" x="220" y="240" width="160" height="120"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="4UX-Ac-W9k"/>
-                                    <constraint firstAttribute="height" constant="120" id="QRR-XJ-98a"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="fjL-mL-yUJ" firstAttribute="centerX" secondItem="DIN-K5-xq6" secondAttribute="centerX" id="kfN-SB-5mk"/>
-                            <constraint firstItem="fjL-mL-yUJ" firstAttribute="centerY" secondItem="DIN-K5-xq6" secondAttribute="centerY" id="xPa-QW-ZIv"/>
-                        </constraints>
+                        <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <segue destination="gQu-ls-H9T" kind="presentation" identifier="InitialToLogin" id="n8e-Qh-4NE"/>
@@ -647,7 +634,7 @@
         <!--Main Container View Controller-->
         <scene sceneID="lik-QZ-Xj4">
             <objects>
-                <viewController id="0Y6-rN-5xt" customClass="MainContainerViewController" customModule="trip_advisori_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MainContainerViewController" storyboardIdentifier="MainContainerViewController" id="0Y6-rN-5xt" customClass="MainContainerViewController" customModule="trip_advisori_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Kg-Us-6yv"/>
                         <viewControllerLayoutGuide type="bottom" id="23K-qL-Brd"/>
@@ -655,7 +642,7 @@
                     <view key="view" contentMode="scaleToFill" id="8K9-nU-Jfi">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ALP-ov-bVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -666,7 +653,6 @@
     <resources>
         <image name="map_filled" width="30" height="30"/>
         <image name="map_unfilled" width="30" height="30"/>
-        <image name="owl.png" width="574" height="504"/>
         <image name="profile_filled" width="30" height="30"/>
         <image name="profile_unfilled" width="30" height="30"/>
         <image name="trips_filled" width="30" height="30"/>
@@ -674,7 +660,7 @@
         <image name="user_menu" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gY1-t0-Oa9"/>
-        <segue reference="5gH-Uh-KtK"/>
+        <segue reference="goM-kh-zUe"/>
+        <segue reference="n8e-Qh-4NE"/>
     </inferredMetricsTieBreakers>
 </document>
