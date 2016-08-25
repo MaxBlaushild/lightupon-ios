@@ -41,12 +41,6 @@ class PartyService: Service {
         })
     }
     
-    func startNextScene(partyID: Int) {
-        apiAmbassador.get(apiURL + "/parties/\(partyID)/nextScene", success: { response in
-            
-        })
-    }
-    
     func leaveParty(callback: () -> Void) {
         apiAmbassador.delete(apiURL + "/parties", success: { response in
             callback()

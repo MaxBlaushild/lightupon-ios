@@ -126,10 +126,6 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         return UIInterfaceOrientationMask.Portrait
     }
     
-    func goToNextScene() {
-        partyService.startNextScene(party.id!)
-    }
-    
     func onPartyLeft() {
         performSegueWithIdentifier("StoryTellerToHome", sender: nil)
     }
@@ -173,10 +169,13 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     func onResponseReceived(newPartyState: PartyState) {
         if (partyState == nil) {
             initStoryTeller(newPartyState)
-        } else if (newPartyState.nextSceneAvailable!) {
-            goToNextScene()
         } else if (hasMovedToNextScene(newPartyState)) {
-            loadNewScene(newPartyState)
+            if (newPartyState.scene!.id! != 0) {
+                loadNewScene(newPartyState)
+            } else {
+                // do trip endy stuff
+            }
+            
         }
     }
     
