@@ -7,14 +7,36 @@
 //
 
 import UIKit
+import CBZSplashView
+
+private extension UIStoryboard {
+    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
+    
+    class func loginViewController() -> LoginViewController? {
+        return mainStoryboard().instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController
+    }
+    
+    class func mainContainerViewController() -> MainContainerViewController? {
+        return mainStoryboard().instantiateViewControllerWithIdentifier("MainContainerViewController") as? MainContainerViewController
+    }
+}
 
 class InitialLoadingViewController: UIViewController {
     private let authService: AuthService = Injector.sharedInjector.getAuthService()
     private let profileService: ProfileService = Injector.sharedInjector.getProfileService()
     
+    @IBOutlet weak var splashImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUser()
+    }
+    
+    func splashScreen() {
+        let icon = UIBezierPath.mainLogo()
+        let splashView = CBZSplashView(bezierPath: icon, backgroundColor: Colors.basePurple)
+        splashView.animationDuration = 3
+        self.view.addSubview(splashView)
+        splashView.startAnimation()
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,9 +62,25 @@ class InitialLoadingViewController: UIViewController {
     }
     
     func routeTo(segue: String){
-        dispatch_async(dispatch_get_main_queue()){
-            self.performSegueWithIdentifier(segue, sender: nil)
+        if (segue == "InitialToLogin") {
+            presentLoginViewController()
+        } else {
+            presentMainContainerViewController()
         }
+    }
+    
+    func presentLoginViewController() {
+        let loginViewController = UIStoryboard.loginViewController()
+        self.presentViewController(loginViewController!, animated: false, completion: nil)
+        view.addSubview(loginViewController!.view)
+        loginViewController?.didMoveToParentViewController(self)
+        splashScreen()
+    }
+    
+    func presentMainContainerViewController() {
+        let mainContainerViewController = UIStoryboard.mainContainerViewController()
+        self.presentViewController(mainContainerViewController!, animated: false, completion: nil)
+        mainContainerViewController?.didMoveToParentViewController(self)
     }
     
     func onProfileGotten(_: FacebookProfile) {

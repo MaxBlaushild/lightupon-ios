@@ -29,6 +29,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     var numberOfCards: Int = 0
     var partyState: PartyState!
     var party: Party!
+    var cardCount: Int = 0
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet var storyBackground: UIView!
@@ -57,7 +58,8 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func loadSwipeViews() {
-        for card in partyState.scene!.cards! {
+        for card in partyState.scene!.cards!.reverse() {
+            cardCount += 1
             loadSwipeView(card)
         }
     }
@@ -103,14 +105,24 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     // Sent before a choice is made. Cancel the choice by returning `false`. Otherwise return `true`.
     func view(view:UIView, shouldBeChosenWithDirection:MDCSwipeDirection) -> Bool {
-        
-        
         return true
     }
     
     // This is called then a user swipes the view fully left or right.
     func view(view: UIView, wasChosenWithDirection: MDCSwipeDirection) -> Void{
-        // if no more cards, bring up map view
+        cardCount -= 1
+        if (cardCount == 0) {
+            openCompass()
+        }
+    }
+    
+    func openCompass() {
+        var compass = cardService.getView("MapHero")
+        compass.nextScene = partyState.nextScene!
+        compass.bindCard()
+        let compassView = compass as! UIView
+        compassView.frame = self.view.frame
+        self.view.addSubview(compassView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -174,6 +186,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
                 loadNewScene(newPartyState)
             } else {
                 // do trip endy stuff
+                // oh ok awesome the read and write pump are dying so it's never getting here
             }
             
         }
@@ -190,9 +203,18 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func loadNewScene(newPartyState: PartyState) {
+        removeCompass()
         partyState = newPartyState
         loadSwipeViews()
         loadBackgroundPicture()
+    }
+    
+    func removeCompass() {
+        for subview in self.view.subviews {
+            if let mapHero = subview as? MapHero {
+                mapHero.removeFromSuperview()
+            }
+        }
     }
     
     func loadBackgroundPicture() {

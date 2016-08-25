@@ -42,6 +42,9 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
         socket.headers = headers
     }
     
+    func onHeadingUpdated() {
+    }
+    
     func openSocket() {
         socket = WebSocket(url: NSURL(string: "\(wsURL)/pull")!, protocols: ["chat", "superchat"])
         socket.delegate = self
@@ -51,6 +54,10 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     }
         
     func websocketDidConnect(ws: WebSocket) {
+        updateLocation()
+    }
+    
+    func pokeSocket() {
         updateLocation()
     }
     
@@ -84,16 +91,5 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     
     func websocketDidReceiveData(ws: WebSocket, data: NSData) {
         print("Received data: \(data.length)")
-    }
-    
-    func createNoSocketWarning() {
-        let label = UILabel(frame: CGRectMake(0, 0, 200, 40))
-        label.center = CGPointMake(200, 580)
-        label.textAlignment = NSTextAlignment.Center
-        label.text = "No Socket"
-        label.font = UIFont(name: Fonts.dosisBold, size: 16)
-        label.textColor = UIColor.whiteColor()
-        label.backgroundColor = Colors.basePurple
-        UIApplication.topViewController()!.view.addSubview(label)
     }
 }
