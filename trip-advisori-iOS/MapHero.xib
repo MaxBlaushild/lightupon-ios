@@ -14,7 +14,7 @@
                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vex-Dt-rY1" customClass="GMSMapView">
                     <rect key="frame" x="0.0" y="0.0" width="605" height="600"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="9So-v4-BKH">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="dickCompass.png" translatesAutoresizingMaskIntoConstraints="NO" id="9So-v4-BKH">
                             <rect key="frame" x="277" y="275" width="50" height="49"/>
                             <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -44,6 +44,6 @@
         </view>
     </objects>
     <resources>
-        <image name="arrow.png" width="256" height="256"/>
+        <image name="dickCompass.png" width="670" height="670"/>
     </resources>
 </document>
