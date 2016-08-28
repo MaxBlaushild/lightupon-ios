@@ -13,7 +13,6 @@ class HomeTabBarViewController: UITabBarController, SocketServiceDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tripsService.getTrips(self.setTrips)
     }
     
     override func shouldAutorotate() -> Bool {

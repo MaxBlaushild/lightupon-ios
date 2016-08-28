@@ -8,10 +8,10 @@
 
 import UIKit
 
-class TextHero: CardView, IAmACard {
+class TextHero: UIView, IAmCardContents {
     @IBOutlet weak var textHero: UILabel!
     
-    func bindCard() {
+    func bindCard(card: Card) {
         textHero.text = card.text
     }
 

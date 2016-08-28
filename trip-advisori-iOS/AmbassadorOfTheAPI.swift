@@ -1,4 +1,4 @@
-//
+
 //  AmbassadorOfTheAPI.swift
 //  trip-advisori-iOS
 //
@@ -75,14 +75,14 @@ class AmbassadorToTheAPI: Service {
     }
     
     func createNoInternetWarning() {
-        let label = UILabel(frame: CGRectMake(0, 0, 200, 40))
-        label.center = CGPointMake(200, 580)
+        let topView = UIApplication.topViewController()!.view
+        let label = UILabel(frame: CGRectMake(0, topView.frame.height - 200, 200, 40))
         label.textAlignment = NSTextAlignment.Center
         label.text = "No Internet Connectivity"
         label.font = UIFont(name: Fonts.dosisBold, size: 16)
         label.textColor = UIColor.whiteColor()
         label.backgroundColor = Colors.basePurple
-        UIApplication.topViewController()!.view.addSubview(label)
+        topView.addSubview(label)
     }
     
     private func refreshToken(URLString: URLStringConvertible, success: NetworkSuccessHandler?) {

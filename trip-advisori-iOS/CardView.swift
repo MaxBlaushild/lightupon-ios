@@ -7,29 +7,40 @@
 //
 
 import UIKit
+import MDCSwipeToChoose
 
-class CardView: UIView {
-    private var _card_:Card!
-    private var _nextScene_: Scene!
-
-    var card: Card {
-        get {
-            return self._card_
-        }
-        
-        set(newCard) {
-            self._card_ = newCard
+class CardView: MDCSwipeToChooseView {
+    private var _card:Card
+    
+    init(card: Card, options: MDCSwipeToChooseViewOptions, frame: CGRect) {
+        _card = card
+        super.init(frame: frame, options: options)
+        loadCardContents()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    static func getView(nibId: String) -> IAmCardContents {
+        switch nibId {
+        case "TextHero":
+            return TextHero.fromNib("TextHero")
+        case "PictureHero":
+            return PictureHero.fromNib("PictureHero")
+        default:
+            return TextHero.fromNib("TextHero")
         }
     }
     
-    var nextScene: Scene {
-        get {
-            return self._nextScene_
-        }
-        
-        set(newScene) {
-            self._nextScene_ = newScene
-        }
+    func loadCardContents() {
+        let cardContents:IAmCardContents = CardView.getView(_card.nibId!)
+        cardContents.bindCard(_card)
+        let cardContentView = cardContents as! UIView
+        cardContentView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        self.addSubview(cardContentView)
     }
+    
+    
 
 }

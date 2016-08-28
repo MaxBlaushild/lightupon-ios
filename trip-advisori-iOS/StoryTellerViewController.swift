@@ -20,7 +20,6 @@ protocol MainViewControllerDelegate {
 
 class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwipeToChooseDelegate {
     private let partyService = Injector.sharedInjector.getPartyService()
-    private let cardService = Injector.sharedInjector.getCardService()
     private var audioPlayer: AVAudioPlayer!
     private var player: AVAudioPlayer!
     private var swipeOptions: MDCSwipeToChooseViewOptions!
@@ -31,8 +30,10 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     var party: Party!
     var cardCount: Int = 0
     
-    @IBOutlet weak var titleLabel: UILabel!
+    var compassView: CompassView!
+    
     @IBOutlet var storyBackground: UIView!
+    @IBOutlet weak var menuButton: UIButton!
     
     @IBAction func openMenu(sender: AnyObject) {
         delegate!.toggleRightPanel()
@@ -48,7 +49,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func bindParty() {
-        titleLabel.text = party.trip!.title
+//        titleLabel.text = party.trip!.title
     }
     
     override func viewDidLoad(){
@@ -58,45 +59,17 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func loadSwipeViews() {
+//        playSound(partyState.scene!)
         for card in partyState.scene!.cards!.reverse() {
             cardCount += 1
-            loadSwipeView(card)
+            loadCardView(card)
         }
     }
     
-    func loadSwipeView(card: Card) {
-        let frame = CGRect(x: 25, y: 120, width: self.view.frame.width - 50, height: self.view.frame.height - 160)
-        let swipeView = MDCSwipeToChooseView(frame:frame, options:self.swipeOptions)
-        let cardView = loadCardView(card)
-        sizeCardView(cardView)
-        swipeView.addSubview(cardView)
-        self.view.addSubview(swipeView)
-    }
-    
-    func loadCardView(card: Card) -> UIView {
-        var cardView:IAmACard = cardService.getView(card.nibId!)
-        cardView.card = card
-        cardView.nextScene = partyState.nextScene!
-        cardView.bindCard()
-        return cardView as! UIView
-    }
-    func sizeCardView(cardView: UIView) {
-        cardView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width - 50, height: self.view.frame.height - 160)
-    }
-    
-    func setSwipeOptions()  {
-        let options = MDCSwipeToChooseViewOptions()
-        options.delegate = self
-        options.likedText = nil
-        options.likedColor = UIColor.clearColor()
-        options.nopeText = nil
-        options.nopeColor = UIColor.clearColor()
-        options.onPan = { state -> Void in
-            if state.thresholdRatio == 1 && state.direction == MDCSwipeDirection.Left {
-                print("Photo deleted!")
-            }
-        }
-        self.swipeOptions = options
+    func loadCardView(card: Card) {
+        let frame = CGRect(x: 25, y: 80, width: self.view.frame.width - 50, height: self.view.frame.height - 120)
+        let cardView = CardView(card: card, options:self.swipeOptions, frame:frame)
+        self.view.addSubview(cardView)
     }
     
     func viewDidCancelSwipe(view: UIView) -> Void{
@@ -117,12 +90,23 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func openCompass() {
-        var compass = cardService.getView("MapHero")
-        compass.nextScene = partyState.nextScene!
-        compass.bindCard()
-        let compassView = compass as! UIView
-        compassView.frame = self.view.frame
-        self.view.addSubview(compassView)
+        compassView = CompassView.fromNib("CompassView")
+        compassView.pointCompassTowardScene(partyState.nextScene!)
+        animateCompassViewIn()
+        tuncCompassViewUnderMenuButton()
+    }
+    
+    func animateCompassViewIn() {
+        compassView.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: self.view.frame.width)
+        UIView.animateWithDuration(0.5, animations: {
+            self.compassView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        })
+    }
+    
+    func tuncCompassViewUnderMenuButton() {
+        self.menuButton.layer.zPosition = 100000
+        self.compassView.layer.zPosition = 0
+        self.view.insertSubview(compassView, atIndex: 0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -141,16 +125,14 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     func onPartyLeft() {
         performSegueWithIdentifier("StoryTellerToHome", sender: nil)
     }
-
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
     
     func playSound(scene: Scene) {
         let urlstring = scene.soundResource
-        let url = NSURL(string: urlstring!)
-        downloadFileFromURL(url!)
+        if urlstring?.characters.count > 0 {
+            let url = NSURL(string: urlstring!)
+            downloadFileFromURL(url!)
+        }
+
     }
     
     func downloadFileFromURL(url:NSURL){
@@ -171,11 +153,6 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-    }
-
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        playSound(partyState.scene!)
-        return partyState.scene!.cards!.count
     }
     
     func onResponseReceived(newPartyState: PartyState) {
@@ -211,7 +188,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     func removeCompass() {
         for subview in self.view.subviews {
-            if let mapHero = subview as? MapHero {
+            if let mapHero = subview as? CompassView {
                 mapHero.removeFromSuperview()
             }
         }
@@ -236,5 +213,20 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
             saturationDeltaFactor: 1.0,
             maskImage: nil
         )!
+    }
+    
+    func setSwipeOptions()  {
+        let options = MDCSwipeToChooseViewOptions()
+        options.delegate = self
+        options.likedText = nil
+        options.likedColor = UIColor.clearColor()
+        options.nopeText = nil
+        options.nopeColor = UIColor.clearColor()
+        options.onPan = { state -> Void in
+            if state.thresholdRatio == 1 && state.direction == MDCSwipeDirection.Left {
+                print("Photo deleted!")
+            }
+        }
+        self.swipeOptions = options
     }
 }

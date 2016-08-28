@@ -8,11 +8,11 @@
 
 import UIKit
 
-class PictureHero: CardView, IAmACard {
+class PictureHero: UIView, IAmCardContents {
     
     @IBOutlet weak var pictureHero: UIImageView!
     
-    func bindCard() {
+    func bindCard(card: Card) {
         pictureHero.imageFromUrl(card.imageUrl!)
     }
 

@@ -11,57 +11,58 @@ import UIKit
 class Injector: Service {
     static let sharedInjector: Injector = Injector()
     
-    private var apiAmbassador: AmbassadorToTheAPI
-    private var authService: AuthService
-    private var tripsService: TripsService
-    private var partyService: PartyService
-    private var currentLocationService: CurrentLocationService
-    private var profileService: ProfileService
-    private var loginService: LoginService
-    private var socketService: SocketService
-    private var cardService: CardService
+    private let _apiAmbassador: AmbassadorToTheAPI
+    private let _authService: AuthService
+    private let _tripsService: TripsService
+    private let _partyService: PartyService
+    private let _currentLocationService: CurrentLocationService
+    private let _profileService: ProfileService
+    private let _loginService: LoginService
+    private let _socketService: SocketService
+    private let _navigationService: NavigationService
 
     override init(){
-        authService = AuthService()
-        currentLocationService = CurrentLocationService()
-        profileService = ProfileService()
-        cardService = CardService()
-        loginService = LoginService(_authService_: authService)
-        apiAmbassador = AmbassadorToTheAPI(_authService_: authService)
-        tripsService = TripsService(_apiAmbassador_: apiAmbassador)
-        partyService = PartyService(_apiAmbassador_: apiAmbassador)
-        socketService = SocketService(_authService_: authService, _currentLocation_: currentLocationService)
+        _authService = AuthService()
+        _currentLocationService = CurrentLocationService()
+        _profileService = ProfileService()
+        _loginService = LoginService(_authService_: _authService)
+        _apiAmbassador = AmbassadorToTheAPI(_authService_: _authService)
+        _tripsService = TripsService(_apiAmbassador_: _apiAmbassador)
+        _partyService = PartyService(_apiAmbassador_: _apiAmbassador)
+        _socketService = SocketService(_authService_: _authService, _currentLocation_: _currentLocationService)
+        _navigationService = NavigationService()
         super.init()
-    }
-    func getCardService() -> CardService {
-        return cardService
     }
     
     func getAuthService() -> AuthService {
-        return authService
+        return _authService
     }
     
     func getSocketService() -> SocketService {
-        return socketService
+        return _socketService
     }
     
     func getLoginService() -> LoginService {
-        return loginService
+        return _loginService
     }
     
     func getTripsService() -> TripsService {
-        return tripsService
+        return _tripsService
     }
     
     func getProfileService() -> ProfileService {
-        return profileService
+        return _profileService
     }
     
     func getPartyService() -> PartyService {
-        return partyService
+        return _partyService
     }
     
     func getCurrentLocationService() -> CurrentLocationService {
-        return currentLocationService
+        return _currentLocationService
+    }
+    
+    func getNavigationService() -> NavigationService {
+        return _navigationService
     }
 }

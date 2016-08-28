@@ -30,14 +30,6 @@ class InitialLoadingViewController: UIViewController {
         super.viewDidLoad()
         initializeUser()
     }
-    
-    func splashScreen() {
-        let icon = UIBezierPath.mainLogo()
-        let splashView = CBZSplashView(bezierPath: icon, backgroundColor: Colors.basePurple)
-        splashView.animationDuration = 3
-        self.view.addSubview(splashView)
-        splashView.startAnimation()
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -74,7 +66,7 @@ class InitialLoadingViewController: UIViewController {
         self.presentViewController(loginViewController!, animated: false, completion: nil)
         view.addSubview(loginViewController!.view)
         loginViewController?.didMoveToParentViewController(self)
-        splashScreen()
+        self.view.splashView()
     }
     
     func presentMainContainerViewController() {
