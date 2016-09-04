@@ -74,7 +74,6 @@
 		1ED69B421D07B1C300CF2172 /* ColorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B411D07B1C300CF2172 /* ColorFromHex.swift */; };
 		1ED69B4B1D0C836000CF2172 /* GetTopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B4A1D0C836000CF2172 /* GetTopViewController.swift */; };
 		1EE14DF71D579F9C00364B9D /* InstantiateViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE14DF61D579F9C00364B9D /* InstantiateViewControllers.swift */; };
-		1EE4C55F1CB5ED130095845C /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE4C55E1CB5ED130095845C /* TripViewController.swift */; };
 		1EEA2DA01D3AA9C900F53A86 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEA2D9F1D3AA9C900F53A86 /* arrow.png */; };
 		1EEBE0A01D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEBE09F1D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift */; };
 		1EF49A871C990035001A32C2 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF49A861C990035001A32C2 /* Party.swift */; };
@@ -183,7 +182,6 @@
 		1ED69B411D07B1C300CF2172 /* ColorFromHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorFromHex.swift; sourceTree = "<group>"; };
 		1ED69B4A1D0C836000CF2172 /* GetTopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTopViewController.swift; sourceTree = "<group>"; };
 		1EE14DF61D579F9C00364B9D /* InstantiateViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantiateViewControllers.swift; sourceTree = "<group>"; };
-		1EE4C55E1CB5ED130095845C /* TripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
 		1EEA2D9F1D3AA9C900F53A86 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		1EEBE09F1D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		1EF49A861C990035001A32C2 /* Party.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
@@ -370,7 +368,6 @@
 			children = (
 				1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */,
 				1E05B8C01C5D327A009E37BA /* MapViewController.swift */,
-				1EE4C55E1CB5ED130095845C /* TripViewController.swift */,
 				1E22C6741C70232200B13A1B /* LoginViewController.swift */,
 				1E20149B1C72B39D0012B863 /* ProfileViewController.swift */,
 				1E0003CB1C8525F400B25C05 /* TripDetailsViewController.swift */,
@@ -671,7 +668,6 @@
 				1E0003CA1C83954000B25C05 /* AmbassadorOfTheAPI.swift in Sources */,
 				1E05B88B1C5D135D009E37BA /* AppDelegate.swift in Sources */,
 				1EF783AF1D00941700860510 /* PictureHero.swift in Sources */,
-				1EE4C55F1CB5ED130095845C /* TripViewController.swift in Sources */,
 				1ED69B3E1D07AF5100CF2172 /* fonts.swift in Sources */,
 				1E841C581C66DA0C00AD638E /* TripsService.swift in Sources */,
 				1EBBFC221D73545F00697894 /* AddShadow.swift in Sources */,

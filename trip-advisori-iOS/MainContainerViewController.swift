@@ -39,8 +39,7 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
     var homeTabBarViewController: HomeTabBarViewController!
     var menuOpen: Bool = false
     var menuViewController: StoryTellerMenuViewController!
-    var shownViewController: SocketServiceDelegate!
-    var socketResponseRecepients: [SocketServiceDelegate] = [SocketServiceDelegate]()
+    var shownViewController: UIViewController!
     
     var partyState: PartyState!
     var currentParty: Party!
@@ -48,7 +47,7 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         getParty()
-        socketService.delegate = self
+        socketService.registerDelegate(self)
     }
     
     func onPartyRetrieved(party: Party) {
@@ -73,7 +72,6 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
         
         view.addSubview(storyTellerViewController.view)
         addChildViewController(storyTellerViewController)
-        socketResponseRecepients.append(storyTellerViewController)
         
         storyTellerViewController.didMoveToParentViewController(self)
         socketService.pokeSocket()
@@ -88,7 +86,6 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
         view.addSubview(homeTabBarViewController.view)
         addChildViewController(homeTabBarViewController)
         shownViewController = homeTabBarViewController
-        socketResponseRecepients.append(homeTabBarViewController)
         
         homeTabBarViewController.didMoveToParentViewController(self)
         self.view.splashView()
@@ -110,10 +107,6 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
                 segueToStoryTeller()
             }
         }
-
-        for vc in socketResponseRecepients {
-            vc.onResponseReceived(_partyState_)
-        }
     }
     
     func toggleRightPanel() {
@@ -129,7 +122,6 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
     func addRightPanelViewController() {
         if (menuViewController == nil) {
             menuViewController = UIStoryboard.menuViewController()
-            socketResponseRecepients.append(menuViewController)
             addChildMenuController(menuViewController!)
         }
     }
@@ -142,15 +134,13 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
     
     func animateCenterPanelXPosition(targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
-            let vc = self.shownViewController as! UIViewController
-            vc.view.frame.origin.x = targetPosition
+            self.shownViewController.view.frame.origin.x = targetPosition
             }, completion: completion)
     }
     
     func animateRightPanel(shouldExpand: Bool) {
         if (shouldExpand) {
-            let vc = shownViewController as! UIViewController
-            animateCenterPanelXPosition(-CGRectGetWidth(vc.view.frame) + centerPanelExpandedOffset)
+            animateCenterPanelXPosition(-CGRectGetWidth(shownViewController.view.frame) + centerPanelExpandedOffset)
         } else {
             animateCenterPanelXPosition(0) { _ in }
         }

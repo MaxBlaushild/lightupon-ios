@@ -20,6 +20,8 @@ protocol MainViewControllerDelegate {
 
 class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwipeToChooseDelegate {
     private let partyService = Injector.sharedInjector.getPartyService()
+    private let socketService = Injector.sharedInjector.getSocketService()
+    
     private var audioPlayer: AVAudioPlayer!
     private var player: AVAudioPlayer!
     private var swipeOptions: MDCSwipeToChooseViewOptions!
@@ -35,9 +37,17 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     @IBOutlet var storyBackground: UIView!
     @IBOutlet weak var menuButton: UIButton!
     
+    override func viewDidLoad(){
+        super.viewDidLoad()
+        socketService.registerDelegate(self)
+        getParty()
+        setSwipeOptions()
+    }
+    
     @IBAction func openMenu(sender: AnyObject) {
         delegate!.toggleRightPanel()
     }
+    
     
     func getParty() {
         partyService.getUsersParty(self.onPartyRecieved)
@@ -50,12 +60,6 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     func bindParty() {
 //        titleLabel.text = party.trip!.title
-    }
-    
-    override func viewDidLoad(){
-        super.viewDidLoad()
-        getParty()
-        setSwipeOptions()
     }
     
     func loadSwipeViews() {

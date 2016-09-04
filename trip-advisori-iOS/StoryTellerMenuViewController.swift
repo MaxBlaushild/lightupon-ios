@@ -12,8 +12,9 @@ import UIKit
 private let reuseIdentifier = "PartyMemberCollectionViewCell"
 
 class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, SocketServiceDelegate {
-    let partyService: PartyService = Injector.sharedInjector.getPartyService()
-    let profileService: ProfileService = Injector.sharedInjector.getProfileService()
+    private let partyService: PartyService = Injector.sharedInjector.getPartyService()
+    private let profileService: ProfileService = Injector.sharedInjector.getProfileService()
+    private let socketService: SocketService = Injector.sharedInjector.getSocketService()
 
     @IBOutlet weak var partyMemberCollectionView: UICollectionView!
     @IBOutlet weak var profilePicture: UIImageView!
@@ -27,7 +28,7 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     override func viewDidLoad() {
         leavePartyButton.hidden = true
         super.viewDidLoad()
-        
+        socketService.registerDelegate(self)
         bindProfile()
         makeProfileClickable()
     }

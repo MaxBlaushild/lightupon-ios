@@ -20,7 +20,7 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     var authService: AuthService!
     var headers:Dictionary<String, String>!
     var currentLocation: CurrentLocationService!
-    var delegate:SocketServiceDelegate!
+    var delegates:[SocketServiceDelegate] = [SocketServiceDelegate]()
     
     init(_authService_: AuthService, _currentLocation_: CurrentLocationService) {
         super.init()
@@ -42,8 +42,11 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
         socket.headers = headers
     }
     
-    func onHeadingUpdated() {
+    func registerDelegate(delegate: SocketServiceDelegate) {
+        delegates.append(delegate)
     }
+    
+    func onHeadingUpdated() {}
     
     func openSocket() {
         socket = WebSocket(url: NSURL(string: "\(wsURL)/pull")!, protocols: ["chat", "superchat"])
@@ -83,7 +86,7 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     
     func websocketDidReceiveMessage(ws: WebSocket, text: String) {
         if let partyState:PartyState = Mapper<PartyState>().map(text) {
-            if delegate != nil {
+            for delegate in delegates {
                 delegate.onResponseReceived(partyState)
             }
         }

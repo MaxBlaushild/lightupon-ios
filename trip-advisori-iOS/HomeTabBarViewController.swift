@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeTabBarViewController: UITabBarController, SocketServiceDelegate {
+class HomeTabBarViewController: UITabBarController {
     private let tripsService: TripsService = Injector.sharedInjector.getTripsService()
     
     override func viewDidLoad() {
@@ -32,14 +32,6 @@ class HomeTabBarViewController: UITabBarController, SocketServiceDelegate {
             
             if let tableController = controller as? TripListTableViewController {
                 tableController.delegate = vc
-            }
-        }
-    }
-    
-    func onResponseReceived(partyState: PartyState) {
-        for controller in viewControllers! {   
-            if let vc = controller as? SocketServiceDelegate {
-                vc.onResponseReceived(partyState)
             }
         }
     }

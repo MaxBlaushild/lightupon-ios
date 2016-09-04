@@ -30,7 +30,7 @@ protocol DismissalDelegate {
     func onDismissed() -> Void
 }
 
-class TripListTableViewController: UIViewController, UIViewControllerTransitioningDelegate, DismissalDelegate, UITableViewDelegate, UITableViewDataSource, SocketServiceDelegate {
+class TripListTableViewController: UIViewController, UIViewControllerTransitioningDelegate, DismissalDelegate, UITableViewDelegate, UITableViewDataSource {
     private let tripsService: TripsService = Injector.sharedInjector.getTripsService()
     private let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
     
@@ -102,8 +102,6 @@ class TripListTableViewController: UIViewController, UIViewControllerTransitioni
             }
         }
     }
-    
-    func onResponseReceived(partyState: PartyState) {}
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         blurBackground()

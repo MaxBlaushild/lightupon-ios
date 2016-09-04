@@ -19,6 +19,7 @@ private extension UIStoryboard {
 
 class MapViewController: UIViewController, GMSMapViewDelegate, DismissalDelegate, SocketServiceDelegate, UIViewControllerTransitioningDelegate {
     private let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
+    private let socketService: SocketService = Injector.sharedInjector.getSocketService()
     private let tripsService:TripsService = Injector.sharedInjector.getTripsService()
     
     var trips:[Trip]!
@@ -33,7 +34,12 @@ class MapViewController: UIViewController, GMSMapViewDelegate, DismissalDelegate
     @IBOutlet weak var mapView: GMSMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        socketService.registerDelegate(self)
         getTrips()
+        configureMapView()
+    }
+    
+    func configureMapView() {
         mapView.camera = GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
         mapView.myLocationEnabled = true
         mapView.delegate = self
