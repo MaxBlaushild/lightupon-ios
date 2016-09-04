@@ -19,11 +19,13 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var leavePartyButton: UIButton!
     
     var partyState: PartyState!
     var currentParty: Party!
     
     override func viewDidLoad() {
+        leavePartyButton.hidden = true
         super.viewDidLoad()
         
         bindProfile()
