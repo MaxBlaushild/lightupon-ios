@@ -26,8 +26,8 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     var currentParty: Party!
     
     override func viewDidLoad() {
-        leavePartyButton.hidden = true
         super.viewDidLoad()
+        leavePartyButton.hidden = true
         socketService.registerDelegate(self)
         bindProfile()
         makeProfileClickable()
@@ -54,6 +54,9 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     
     func onResponseReceived(_partyState_: PartyState) {
         partyState = _partyState_
+        if (self.partyState != nil) {
+            leavePartyButton.hidden = false
+        }
         bindParty()
         configurePartyCollectionView()
     }
