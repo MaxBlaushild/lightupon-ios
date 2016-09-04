@@ -12,7 +12,7 @@ import GoogleMaps
 import Darwin
 
 class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate  {
-
+    
     private let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
     private let navigationService = Injector.sharedInjector.getNavigationService()
     

@@ -76,7 +76,7 @@ class AmbassadorToTheAPI: Service {
     
     func createNoInternetWarning() {
         let topView = UIApplication.topViewController()!.view
-        let label = UILabel(frame: CGRectMake(0, topView.frame.height - 200, 200, 40))
+        let label = UILabel(frame: CGRectMake(0, topView.frame.height - 40, topView.frame.width, 40))
         label.textAlignment = NSTextAlignment.Center
         label.text = "No Internet Connectivity"
         label.font = UIFont(name: Fonts.dosisBold, size: 16)

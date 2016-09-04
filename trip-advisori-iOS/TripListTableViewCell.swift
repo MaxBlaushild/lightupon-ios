@@ -25,18 +25,9 @@ class TripListTableViewCell: UITableViewCell {
         tripDescription.text = trip.descriptionText
         tag = trip.id!
         estimatedTime.text = trip.estimatedTime
-        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-    
-    
-    
-    
-    
-
 }
