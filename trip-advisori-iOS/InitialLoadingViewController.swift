@@ -25,7 +25,6 @@ class InitialLoadingViewController: UIViewController {
     private let authService: AuthService = Injector.sharedInjector.getAuthService()
     private let profileService: ProfileService = Injector.sharedInjector.getProfileService()
     
-    @IBOutlet weak var splashImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUser()

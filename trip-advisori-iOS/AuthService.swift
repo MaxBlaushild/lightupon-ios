@@ -12,7 +12,9 @@ import FBSDKLoginKit
 import Alamofire
 
 class AuthService: NSObject {
+    
     func setToken(token: String) {
+        
         do {
             
             try Locksmith.updateData(["token": token], forUserAccount: "myUserAccount")
@@ -25,6 +27,7 @@ class AuthService: NSObject {
     }
     
     func setFacebookId(facebookId: String) {
+        
         do {
             
             try Locksmith.updateData(["facebookId": facebookId], forUserAccount: "myFacebookAccount")
@@ -38,12 +41,11 @@ class AuthService: NSObject {
     
     func getToken() -> String {
         var token = ""
+        
         if let tokenWrapper = Locksmith.loadDataForUserAccount("myUserAccount") as? Dictionary<String, String> {
             token = tokenWrapper["token"]!
         }
 
-        
-        
         return token
     }
     

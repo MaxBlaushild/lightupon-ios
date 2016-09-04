@@ -27,7 +27,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     var delegate: MainViewControllerDelegate?
     var numberOfCards: Int = 0
     var partyState: PartyState!
-    var party: Party!
+    var _party: Party!
     var cardCount: Int = 0
     
     var compassView: CompassView!
@@ -43,8 +43,8 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         partyService.getUsersParty(self.onPartyRecieved)
     }
     
-    func onPartyRecieved(_party_: Party) {
-        party = _party_
+    func onPartyRecieved(party: Party) {
+        _party = party
         bindParty()
     }
     
@@ -92,15 +92,8 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     func openCompass() {
         compassView = CompassView.fromNib("CompassView")
         compassView.pointCompassTowardScene(partyState.nextScene!)
-        animateCompassViewIn()
+        compassView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         tuncCompassViewUnderMenuButton()
-    }
-    
-    func animateCompassViewIn() {
-        compassView.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: self.view.frame.width)
-        UIView.animateWithDuration(0.5, animations: {
-            self.compassView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-        })
     }
     
     func tuncCompassViewUnderMenuButton() {
@@ -165,8 +158,13 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
                 // do trip endy stuff
                 // oh ok awesome the read and write pump are dying so it's never getting here
             }
-            
+        } else if (newPartyState.nextSceneAvailable!) {
+            addNextSceneButton()
         }
+    }
+    
+    func goToNextScene() {
+        partyService.startNextScene(_party.id!)
     }
     
     func hasMovedToNextScene(newPartyState: PartyState) -> Bool {
@@ -214,6 +212,27 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
             maskImage: nil
         )!
     }
+    
+    func addNextSceneButton() {
+        let nextSceneButton = UIButton(type: .Custom)
+        nextSceneButton.frame = CGRectMake(view.frame.width / 2, view.frame.height * 0.7 + 30, 0, 0)
+
+        nextSceneButton.addTarget(self, action: #selector(goToNextScene), forControlEvents: .TouchUpInside)
+        view.addSubview(nextSceneButton)
+        animateInNextSceneButton(nextSceneButton)
+    }
+    
+    func animateInNextSceneButton(nextSceneButton: UIButton) {
+        UIView.animateWithDuration(0.5, animations: {
+            nextSceneButton.frame = CGRectMake(self.view.frame.width / 2 - 30, self.view.frame.height * 0.7, 60, 60)
+            nextSceneButton.layer.cornerRadius = 0.5 * nextSceneButton.bounds.size.width
+            nextSceneButton.backgroundColor = UIColor.whiteColor()
+            nextSceneButton.layer.borderColor = UIColor.blackColor().CGColor
+            nextSceneButton.layer.borderWidth = 2
+            nextSceneButton.clipsToBounds = true
+        })
+    }
+    
     
     func setSwipeOptions()  {
         let options = MDCSwipeToChooseViewOptions()

@@ -9,6 +9,7 @@
 import UIKit
 
 class TextHero: UIView, IAmCardContents {
+    
     @IBOutlet weak var textHero: UILabel!
     
     func bindCard(card: Card) {
