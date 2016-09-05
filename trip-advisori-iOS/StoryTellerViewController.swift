@@ -170,16 +170,20 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func onResponseReceived(newPartyState: PartyState) {
+        print("response recieved, yo!")
         if (partyState == nil) {
+            print("time to do the storyteller thing")
             initStoryTeller(newPartyState)
         } else if (hasMovedToNextScene(newPartyState)) {
             if (newPartyState.scene!.id! != 0) {
+                print("new scene for shiggles")
                 loadNewScene(newPartyState)
             } else {
                 removeCompass()
                 openEndOfTripView()
             }
         } else if (newPartyState.nextSceneAvailable!) {
+            print("youre at the scene, homie")
             addNextSceneButton()
         }
     }

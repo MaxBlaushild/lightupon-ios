@@ -29,7 +29,7 @@ class Injector: Service {
         _apiAmbassador = AmbassadorToTheAPI(_authService_: _authService)
         _tripsService = TripsService(_apiAmbassador_: _apiAmbassador)
         _partyService = PartyService(_apiAmbassador_: _apiAmbassador)
-        _socketService = SocketService(_authService_: _authService, _currentLocation_: _currentLocationService)
+        _socketService = SocketService(authService: _authService, currentLocationService: _currentLocationService)
         _navigationService = NavigationService()
         super.init()
     }

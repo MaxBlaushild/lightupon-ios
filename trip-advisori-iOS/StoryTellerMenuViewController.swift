@@ -53,12 +53,17 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func onResponseReceived(_partyState_: PartyState) {
+        print("menu response")
         partyState = _partyState_
+        togglePartyView()
+        bindParty()
+        configurePartyCollectionView()
+    }
+    
+    func togglePartyView() {
         if (self.partyState != nil) {
             leavePartyButton.hidden = false
         }
-        bindParty()
-        configurePartyCollectionView()
     }
     
     func bindParty() {

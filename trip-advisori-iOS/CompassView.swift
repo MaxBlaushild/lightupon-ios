@@ -27,7 +27,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate  {
         _nextScene = nextScene
         
         sceneMapView.delegate = self
-        currentLocationService.delegate = self
+        currentLocationService.registerDelegate(self)
         
         centerMapOnLocation()
         configureMapView()

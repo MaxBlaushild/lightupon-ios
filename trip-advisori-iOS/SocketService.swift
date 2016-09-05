@@ -16,30 +16,31 @@ protocol SocketServiceDelegate {
 }
 
 class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate {
-    private var socket: WebSocket!
-    var authService: AuthService!
-    var headers:Dictionary<String, String>!
-    var currentLocation: CurrentLocationService!
-    var delegates:[SocketServiceDelegate] = [SocketServiceDelegate]()
+    private let _authService: AuthService
+    private let _currentLocationService: CurrentLocationService
     
-    init(_authService_: AuthService, _currentLocation_: CurrentLocationService) {
-        super.init()
-        currentLocation = _currentLocation_
-        authService = _authService_
+    private var _socket: WebSocket!
+
+    internal var delegates:[SocketServiceDelegate] = [SocketServiceDelegate]()
+    
+    init(authService: AuthService, currentLocationService: CurrentLocationService) {
         
-        currentLocation.delegate = self
+        _currentLocationService = currentLocationService
+        _authService = authService
+        
+        super.init()
+        
+        _currentLocationService.registerDelegate(self)
         
         openSocket()
     }
     
     private func setSocketHeaders() {
-        let token = authService.getToken()
+        let token = _authService.getToken()
         
-        let headers = [
+        _socket.headers = [
             "Authorization": "bearer \(token)"
         ]
-        
-        socket.headers = headers
     }
     
     func registerDelegate(delegate: SocketServiceDelegate) {
@@ -49,11 +50,11 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     func onHeadingUpdated() {}
     
     func openSocket() {
-        socket = WebSocket(url: NSURL(string: "\(wsURL)/pull")!, protocols: ["chat", "superchat"])
-        socket.delegate = self
-        socket.voipEnabled = true
+        _socket = WebSocket(url: NSURL(string: "\(wsURL)/pull")!, protocols: ["chat", "superchat"])
+        _socket.delegate = self
+        _socket.voipEnabled = true
         setSocketHeaders()
-        socket.connect()
+        _socket.connect()
     }
         
     func websocketDidConnect(ws: WebSocket) {
@@ -65,11 +66,9 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     }
     
     func updateLocation() {
-        let location:Location = currentLocation.location
+        let location:Location = _currentLocationService.location
         let jsonLocation = Mapper().toJSONString(location, prettyPrint: true)
-        if socket != nil {
-            socket.writeString(jsonLocation!)
-        }
+        _socket.writeString(jsonLocation!)
     }
     
     func websocketDidDisconnect(ws: WebSocket, error: NSError?) {

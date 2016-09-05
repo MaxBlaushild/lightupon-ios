@@ -23,7 +23,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     private var _course:Double
     private var _heading:Double
     
-    internal var delegate: CurrentLocationServiceDelegate!
+    var delegates:[CurrentLocationServiceDelegate] = [CurrentLocationServiceDelegate]()
     
     override init (){
         
@@ -48,7 +48,6 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Location services stoppped polling.")
         locationManager.stopUpdatingLocation()
     }
     
@@ -60,9 +59,13 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         _longitude = coord.longitude
         _course = locationObj.course
         
-        if delegate != nil {
+        for delegate in delegates {
             delegate.onLocationUpdated()
         }
+    }
+    
+    func registerDelegate(delegate: CurrentLocationServiceDelegate) {
+        delegates.append(delegate)
     }
     
     func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading ) {
@@ -73,7 +76,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         let theHeading = (newHeading.trueHeading > 0) ? newHeading.trueHeading : newHeading.magneticHeading
         self._heading = theHeading
         
-        if delegate != nil {
+        for delegate in delegates {
             delegate.onHeadingUpdated()
         }
     }
@@ -94,14 +97,6 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
             _locationStatus = (code: 1, message: "Allowed to location Access")
             
         }
-        
-        // TODO: add a notification for the status changed event
-        let data:[NSObject: AnyObject] = ["status": DataWrapper(element: _locationStatus)]
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("updatedLocations",
-            object: nil,
-            userInfo: data)
-        
     }
     
     // MARK: LocationInfo implementation
