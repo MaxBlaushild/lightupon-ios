@@ -209,10 +209,10 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mc9-9u-aXS" id="Afm-FE-OD3">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="139"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="139.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wTt-mB-I0i">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wTt-mB-I0i">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="140"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfX-WT-mUV">
@@ -230,7 +230,7 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6M-TO-jhg">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6M-TO-jhg">
                                                     <rect key="frame" x="283" y="89" width="35" height="21"/>
                                                     <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -595,11 +595,12 @@
                     <connections>
                         <outlet property="menuButton" destination="Gck-k1-Isd" id="fZH-h3-bHg"/>
                         <outlet property="storyBackground" destination="0lh-4A-IxJ" id="nwb-0B-XCG"/>
+                        <segue destination="zM7-UW-UFv" kind="show" identifier="StoryTellerToInitial" id="UVG-gO-Dut"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hix-lK-SbE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-904" y="-867"/>
+            <point key="canvasLocation" x="-2138" y="-723"/>
         </scene>
         <!--Initial Loading View Controller-->
         <scene sceneID="KWa-es-hyg">
@@ -652,7 +653,7 @@
         <image name="user_menu" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="UVG-gO-Dut"/>
         <segue reference="n8e-Qh-4NE"/>
-        <segue reference="gY1-t0-Oa9"/>
     </inferredMetricsTieBreakers>
 </document>

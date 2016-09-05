@@ -51,6 +51,12 @@ class PartyService: Service {
         })
     }
     
+    func finishParty(callback: () -> Void) {
+        _apiAmbassador.get(apiURL + "/parties/finishParty", success: { response in
+            callback()
+        })
+    }
+    
     func createParty(tripId: Int, callback: (Party) -> Void) {
         let parameters = [
             "ID": tripId

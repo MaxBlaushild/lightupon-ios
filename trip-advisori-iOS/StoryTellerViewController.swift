@@ -18,7 +18,7 @@ protocol MainViewControllerDelegate {
     func toggleRightPanel()
 }
 
-class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwipeToChooseDelegate {
+class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwipeToChooseDelegate, EndOfTripDelegate {
     private let partyService = Injector.sharedInjector.getPartyService()
     private let socketService = Injector.sharedInjector.getSocketService()
     
@@ -33,6 +33,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     var cardCount: Int = 0
     
     var compassView: CompassView!
+    var endOfTripView: EndOfTripView!
     
     @IBOutlet var storyBackground: UIView!
     @IBOutlet weak var menuButton: UIButton!
@@ -89,8 +90,24 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     func view(view: UIView, wasChosenWithDirection: MDCSwipeDirection) -> Void{
         cardCount -= 1
         if (cardCount == 0) {
-            openCompass()
+            if (partyState.nextScene!.id == 0) {
+                openEndOfTripView()
+            } else {
+                openCompass()
+            }
+
         }
+    }
+    
+    func onTripEnds() {
+        performSegueWithIdentifier("StoryTellerToInitial", sender: nil)
+    }
+    
+    func openEndOfTripView() {
+        endOfTripView = EndOfTripView.fromNib("EndOfTripView")
+        endOfTripView.frame = CGRect(x: 25, y: 80, width: self.view.frame.width - 50, height: self.view.frame.height - 120)
+        endOfTripView.delegate = self
+        self.view.addSubview(endOfTripView)
     }
     
     func openCompass() {
@@ -159,8 +176,8 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
             if (newPartyState.scene!.id! != 0) {
                 loadNewScene(newPartyState)
             } else {
-                // do trip endy stuff
-                // oh ok awesome the read and write pump are dying so it's never getting here
+                removeCompass()
+                openEndOfTripView()
             }
         } else if (newPartyState.nextSceneAvailable!) {
             addNextSceneButton()

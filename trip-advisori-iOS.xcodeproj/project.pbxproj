@@ -38,6 +38,9 @@
 		1E22A7D61D2C6FD200163785 /* birdhouse@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D31D2C6FD200163785 /* birdhouse@1x.png */; };
 		1E22A7DA1D2C763300163785 /* CompassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D91D2C763300163785 /* CompassView.xib */; };
 		1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22C6741C70232200B13A1B /* LoginViewController.swift */; };
+		1E30E7AB1D7CDF5400BB547F /* LastTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E30E7AA1D7CDF5400BB547F /* LastTripViewController.swift */; };
+		1E30E7AD1D7CE91100BB547F /* EndOfTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E30E7AC1D7CE91100BB547F /* EndOfTripView.swift */; };
+		1E30E7AF1D7CEC6300BB547F /* EndOfTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E30E7AE1D7CEC6300BB547F /* EndOfTripView.xib */; };
 		1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6B9F1D0C8A1F00D5793A /* owl.png */; };
 		1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6981CA6307F00D9F90C /* PartyService.swift */; };
 		1E7032AD1CE8F53A00B1C18D /* PartyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7032AC1CE8F53A00B1C18D /* PartyState.swift */; };
@@ -146,6 +149,9 @@
 		1E22A7D91D2C763300163785 /* CompassView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompassView.xib; sourceTree = "<group>"; };
 		1E22C6711C701AE000B13A1B /* -Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "-Bridging-Header.h"; sourceTree = "<group>"; };
 		1E22C6741C70232200B13A1B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1E30E7AA1D7CDF5400BB547F /* LastTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastTripViewController.swift; sourceTree = "<group>"; };
+		1E30E7AC1D7CE91100BB547F /* EndOfTripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndOfTripView.swift; sourceTree = "<group>"; };
+		1E30E7AE1D7CEC6300BB547F /* EndOfTripView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EndOfTripView.xib; sourceTree = "<group>"; };
 		1E5F6B9F1D0C8A1F00D5793A /* owl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owl.png; sourceTree = "<group>"; };
 		1E64A6981CA6307F00D9F90C /* PartyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyService.swift; sourceTree = "<group>"; };
 		1E7032AC1CE8F53A00B1C18D /* PartyState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyState.swift; sourceTree = "<group>"; };
@@ -359,6 +365,8 @@
 				1EEBE09F1D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift */,
 				1E22A7D91D2C763300163785 /* CompassView.xib */,
 				1EBBFC1D1D734C6000697894 /* CompassView.swift */,
+				1E30E7AC1D7CE91100BB547F /* EndOfTripView.swift */,
+				1E30E7AE1D7CEC6300BB547F /* EndOfTripView.xib */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -376,6 +384,7 @@
 				1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */,
 				1E22A7CF1D2C491C00163785 /* StoryTellerMenuViewController.swift */,
 				1E935F1C1D4C249200CB070B /* MainContainerViewController.swift */,
+				1E30E7AA1D7CDF5400BB547F /* LastTripViewController.swift */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -565,6 +574,7 @@
 				1E1ED1BF1D4C18CE00B49C64 /* user_menu@1x.png in Resources */,
 				1EF783AD1D00940100860510 /* PictureHero.xib in Resources */,
 				1ED69B371D07A96800CF2172 /* Dosis-ExtraLight.otf in Resources */,
+				1E30E7AF1D7CEC6300BB547F /* EndOfTripView.xib in Resources */,
 				1E22A7D41D2C6FD200163785 /* birdhouse@3x.png in Resources */,
 				1EEA2DA01D3AA9C900F53A86 /* arrow.png in Resources */,
 				1E9373AF1D6D05BF00A7AE50 /* logo_white@2x.svg in Resources */,
@@ -661,6 +671,7 @@
 				1E1A1A9B1CEE9D1A00A3A812 /* StoryTellerViewController.swift in Sources */,
 				1EBBFC201D734EB100697894 /* NavigationService.swift in Sources */,
 				1E1763AB1D403E6F00C3FBCE /* StringEscaping.swift in Sources */,
+				1E30E7AB1D7CDF5400BB547F /* LastTripViewController.swift in Sources */,
 				1E22A7CA1D2C37BA00163785 /* CardView.swift in Sources */,
 				1E7032B11CE8F7B200B1C18D /* User.swift in Sources */,
 				1ED69B4B1D0C836000CF2172 /* GetTopViewController.swift in Sources */,
@@ -672,6 +683,7 @@
 				1E841C581C66DA0C00AD638E /* TripsService.swift in Sources */,
 				1EBBFC221D73545F00697894 /* AddShadow.swift in Sources */,
 				1E20149F1C72B7730012B863 /* AuthService.swift in Sources */,
+				1E30E7AD1D7CE91100BB547F /* EndOfTripView.swift in Sources */,
 				1ED4D5A61CEA8D9500722695 /* Card.swift in Sources */,
 				1E841C5C1C6704A600AD638E /* TripListTableViewController.swift in Sources */,
 				1E05B8BB1C5D1566009E37BA /* Location.swift in Sources */,
