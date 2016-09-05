@@ -12,6 +12,8 @@ import Alamofire
 import SwiftyJSON
 
 class AmbassadorToTheAPI: Service {
+    private let _authService:AuthService
+    
     internal typealias NetworkSuccessHandler = (Response<AnyObject, NSError>) -> Void
     internal typealias NetworkFailureHandler = (NSHTTPURLResponse?, AnyObject?, NSError) -> Void
     internal typealias Header = (Dictionary<String, String>)
@@ -20,17 +22,19 @@ class AmbassadorToTheAPI: Service {
 
     private var RequestQueue = Array<QueuedRequest>()
     private var isRefreshing = false
-    private var authService:AuthService!
+
     var headers:Dictionary<String, String>?
     
-    init(_authService_: AuthService) {
+    init(authService: AuthService) {
+        _authService = authService
+        
         super.init()
-        authService = _authService_
+
         setHeaders()
     }
     
     private func setHeaders() {
-        let token = authService.getToken()
+        let token = _authService.getToken()
         
         let headers = [
             "Authorization": "bearer \(token)"
@@ -86,12 +90,12 @@ class AmbassadorToTheAPI: Service {
     }
     
     private func refreshToken(URLString: URLStringConvertible, success: NetworkSuccessHandler?) {
-        let facebookId:String = authService.getFacebookId()
+        let facebookId:String = _authService.getFacebookId()
         Alamofire.request(.PATCH, apiURL + "/users/\(facebookId)/token")
             .responseJSON { response in
                 let json = JSON(response.result.value!)
                 let token:String = json.string!
-                self.authService.setToken(token)
+                self._authService.setToken(token)
                 self.setHeaders()
                 self.get(URLString, success: success)
         }

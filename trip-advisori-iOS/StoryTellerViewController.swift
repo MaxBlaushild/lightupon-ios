@@ -34,6 +34,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     var compassView: CompassView!
     var endOfTripView: EndOfTripView!
+    var nextSceneButton: UIButton!
     
     @IBOutlet var storyBackground: UIView!
     @IBOutlet weak var menuButton: UIButton!
@@ -114,10 +115,10 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         compassView = CompassView.fromNib("CompassView")
         compassView.pointCompassTowardScene(partyState.nextScene!)
         compassView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-        tuncCompassViewUnderMenuButton()
+        tuckCompassViewUnderMenuButton()
     }
     
-    func tuncCompassViewUnderMenuButton() {
+    func tuckCompassViewUnderMenuButton() {
         self.menuButton.layer.zPosition = 100000
         self.compassView.layer.zPosition = 0
         self.view.insertSubview(compassView, atIndex: 0)
@@ -170,26 +171,24 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func onResponseReceived(newPartyState: PartyState) {
-        print("response recieved, yo!")
         if (partyState == nil) {
-            print("time to do the storyteller thing")
             initStoryTeller(newPartyState)
         } else if (hasMovedToNextScene(newPartyState)) {
             if (newPartyState.scene!.id! != 0) {
-                print("new scene for shiggles")
                 loadNewScene(newPartyState)
             } else {
                 removeCompass()
                 openEndOfTripView()
             }
         } else if (newPartyState.nextSceneAvailable!) {
-            print("youre at the scene, homie")
             addNextSceneButton()
         }
     }
     
     func goToNextScene() {
         partyService.startNextScene(_party.id!)
+        removeCompass()
+        removeNextSceneButton()
     }
     
     func hasMovedToNextScene(newPartyState: PartyState) -> Bool {
@@ -203,17 +202,20 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func loadNewScene(newPartyState: PartyState) {
-        removeCompass()
         partyState = newPartyState
         loadSwipeViews()
         loadBackgroundPicture()
     }
     
     func removeCompass() {
-        for subview in self.view.subviews {
-            if let mapHero = subview as? CompassView {
-                mapHero.removeFromSuperview()
-            }
+        compassView.removeFromSuperview()
+        compassView = nil
+    }
+    
+    func removeNextSceneButton() {
+        if (nextSceneButton != nil) {
+            nextSceneButton.removeFromSuperview()
+            nextSceneButton = nil
         }
     }
     
@@ -239,12 +241,21 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func addNextSceneButton() {
-        let nextSceneButton = UIButton(type: .Custom)
+        if (shouldAddNextSceneButton()) {
+            createNextSceneButton()
+            view.addSubview(nextSceneButton)
+            animateInNextSceneButton(nextSceneButton)
+        }
+    }
+    
+    func shouldAddNextSceneButton() -> Bool {
+        return (nextSceneButton == nil && compassView != nil)
+    }
+    
+    func createNextSceneButton() {
+        nextSceneButton = UIButton(type: .Custom)
         nextSceneButton.frame = CGRectMake(view.frame.width / 2, view.frame.height * 0.7 + 30, 0, 0)
-
         nextSceneButton.addTarget(self, action: #selector(goToNextScene), forControlEvents: .TouchUpInside)
-        view.addSubview(nextSceneButton)
-        animateInNextSceneButton(nextSceneButton)
     }
     
     func animateInNextSceneButton(nextSceneButton: UIButton) {
@@ -257,7 +268,6 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
             nextSceneButton.clipsToBounds = true
         })
     }
-    
     
     func setSwipeOptions()  {
         let options = MDCSwipeToChooseViewOptions()

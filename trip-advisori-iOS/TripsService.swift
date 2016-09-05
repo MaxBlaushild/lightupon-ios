@@ -12,23 +12,23 @@ import ObjectMapper
 import Locksmith
 
 class TripsService: Service {
-    private var apiAmbassador: AmbassadorToTheAPI!
+    private let _apiAmbassador: AmbassadorToTheAPI
     
-    init(_apiAmbassador_: AmbassadorToTheAPI){
-        apiAmbassador = _apiAmbassador_
+    init(apiAmbassador: AmbassadorToTheAPI){
+        _apiAmbassador = apiAmbassador
     }
     
     func getTrips(callback: ([Trip]) -> Void, latitude: Double, longitude: Double){
         let strLatitude = String(latitude)
         let strLongitude = String(longitude)
-        apiAmbassador.get(apiURL + "/trips?lat=" + strLatitude + "&lon=" + strLongitude, success: { response in
+        _apiAmbassador.get(apiURL + "/trips?lat=" + strLatitude + "&lon=" + strLongitude, success: { response in
             let trips = Mapper<Trip>().mapArray(response.result.value)
             callback(trips!)
         })
     }
     
     func getTrip(tripId: Int, callback: (Trip) -> Void) {
-        apiAmbassador.get(apiURL + "/trips/\(tripId)", success: { response in
+        _apiAmbassador.get(apiURL + "/trips/\(tripId)", success: { response in
             let trip = Mapper<Trip>().map(response.result.value)
             callback(trip!)
         })

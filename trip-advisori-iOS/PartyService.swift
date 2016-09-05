@@ -14,8 +14,8 @@ class PartyService: Service {
     
     private let _apiAmbassador:AmbassadorToTheAPI
     
-    init(_apiAmbassador_: AmbassadorToTheAPI){
-        _apiAmbassador = _apiAmbassador_
+    init(apiAmbassador: AmbassadorToTheAPI){
+        _apiAmbassador = apiAmbassador
     }
     
     func joinParty(passcode: String, successCallback: () -> Void, failureCallback: () -> Void) {

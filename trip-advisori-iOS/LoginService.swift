@@ -13,10 +13,10 @@ import Locksmith
 
 class LoginService: Service {
     
-    private var authService:AuthService!
+    private let _authService: AuthService
     
-    init(_authService_: AuthService) {
-      authService = _authService_
+    init(authService: AuthService) {
+      _authService = authService
     }
     
     func upsertUser(profile: FacebookProfile, callback: () -> Void) {
@@ -33,12 +33,11 @@ class LoginService: Service {
             let json = JSON(response.result.value!)
             let token:String = json.string!
             
-            self.authService.setToken(token)
-            self.authService.setFacebookId(profile.id!)
+            self._authService.setToken(token)
+            self._authService.setFacebookId(profile.id!)
                 
             callback()
 
         }
     }
-
 }
