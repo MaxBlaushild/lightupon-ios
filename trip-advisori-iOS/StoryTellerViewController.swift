@@ -19,18 +19,20 @@ protocol MainViewControllerDelegate {
 }
 
 class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwipeToChooseDelegate, EndOfTripDelegate {
-    private let partyService = Injector.sharedInjector.getPartyService()
-    private let socketService = Injector.sharedInjector.getSocketService()
+    private let _partyService = Injector.sharedInjector.getPartyService()
+    private let _socketService = Injector.sharedInjector.getSocketService()
     
     private var audioPlayer: AVAudioPlayer!
     private var player: AVAudioPlayer!
-    private var swipeOptions: MDCSwipeToChooseViewOptions!
     
-    var delegate: MainViewControllerDelegate?
-    var numberOfCards: Int = 0
-    var partyState: PartyState!
-    var _party: Party!
-    var cardCount: Int = 0
+    internal var delegate: MainViewControllerDelegate?
+    
+    private var _currentScene: Scene!
+    private var _partyState: PartyState!
+    private var _party: Party!
+    private var _cardCount: Int = 0
+    private var _swipeOptions = CardSwipeOptions()
+    private var _cardSize: CGRect!
     
     var compassView: CompassView!
     var endOfTripView: EndOfTripView!
@@ -41,63 +43,128 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        socketService.registerDelegate(self)
+        
+        _swipeOptions.delegate = self
+        _socketService.registerDelegate(self)
+        
         getParty()
-        setSwipeOptions()
+        createCardSize()
+    }
+    
+    func getParty() {
+        _partyService.getUsersParty(self.onPartyRecieved)
+    }
+    
+    func createCardSize() {
+        _cardSize = CGRect(x: 25, y: 80, width: self.view.frame.width - 50, height: self.view.frame.height - 120)
+    }
+    
+    func onPartyRecieved(party: Party) {
+        setParty(party)
+        loadScene()
+    }
+    
+    func loadNextScene() {
+        goToNextSceneInMemory()
+        loadScene()
+    }
+    
+    func loadScene() {
+        loadSwipeViews()
+        loadBackgroundPicture()
+    }
+    
+    func goToNextSceneInMemory() {
+        let nextSceneOrder = _currentScene.sceneOrder! + 1
+        _currentScene = _party.trip!.getSceneWithOrder(nextSceneOrder)
+    }
+    
+    func setParty(party: Party) {
+        _party = party
+        _currentScene = _party.trip!.getSceneWithOrder(_party.currentSceneOrder!)
+    }
+    
+    func onResponseReceived(partyState: PartyState) {
+        _partyState = partyState
+        addNextSceneButtonIfAvailable()
+    }
+    
+    func addNextSceneButtonIfAvailable() {
+        if (_partyState.nextSceneAvailable!) {
+            addNextSceneButton()
+        }
+    }
+    
+    func goToNextScene() {
+        _partyService.startNextScene(_party.id!, callback: {})
+        onWentToNextScene()
+    }
+    
+    func onWentToNextScene() {
+        removeCompass()
+        removeNextSceneButton()
+        loadNextScene()
+    }
+    
+    func removeCompass() {
+        compassView.removeFromSuperview()
+        compassView = nil
+    }
+    
+    func removeNextSceneButton() {
+        if (nextSceneButton != nil) {
+            nextSceneButton.removeFromSuperview()
+            nextSceneButton = nil
+        }
+    }
+    
+    func outOfCards() -> Bool {
+        return (_cardCount == 0)
+    }
+    
+    func handleNoMoreCards() {
+        if (endOfTrip()) {
+            openEndOfTripView()
+        } else {
+            openCompass()
+        }
     }
     
     @IBAction func openMenu(sender: AnyObject) {
         delegate!.toggleRightPanel()
     }
     
-    
-    func getParty() {
-        partyService.getUsersParty(self.onPartyRecieved)
-    }
-    
-    func onPartyRecieved(party: Party) {
-        _party = party
-        bindParty()
-    }
-    
-    func bindParty() {
-//        titleLabel.text = party.trip!.title
-    }
-    
     func loadSwipeViews() {
-//        playSound(partyState.scene!)
-        for card in partyState.scene!.cards!.reverse() {
-            cardCount += 1
+        for card in _currentScene.cards!.reverse() {
+            _cardCount += 1
             loadCardView(card)
         }
     }
     
     func loadCardView(card: Card) {
-        let frame = CGRect(x: 25, y: 80, width: self.view.frame.width - 50, height: self.view.frame.height - 120)
-        let cardView = CardView(card: card, options:self.swipeOptions, frame:frame)
+        let cardView = CardView(card: card, options:_swipeOptions, frame: _cardSize)
         self.view.addSubview(cardView)
     }
     
-    func viewDidCancelSwipe(view: UIView) -> Void{
-        print("Couldn't decide, huh?")
-    }
+    func viewDidCancelSwipe(view: UIView) -> Void {}
     
     // Sent before a choice is made. Cancel the choice by returning `false`. Otherwise return `true`.
     func view(view:UIView, shouldBeChosenWithDirection:MDCSwipeDirection) -> Bool {
         return true
     }
     
-    // This is called then a user swipes the view fully left or right.
     func view(view: UIView, wasChosenWithDirection: MDCSwipeDirection) -> Void{
-        cardCount -= 1
-        if (cardCount == 0) {
-            if (partyState.nextScene!.id == 0) {
-                openEndOfTripView()
-            } else {
-                openCompass()
-            }
-
+        _cardCount -= 1
+        
+        if (outOfCards()) {
+            handleNoMoreCards()
         }
+    }
+    
+    func endOfTrip() -> Bool {
+        let nextSceneOrder = _currentScene.sceneOrder! + 1
+        let nextScene = _party.trip!.getSceneWithOrder(nextSceneOrder)
+        return (nextScene.id == nil)
     }
     
     func onTripEnds() {
@@ -106,15 +173,15 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     func openEndOfTripView() {
         endOfTripView = EndOfTripView.fromNib("EndOfTripView")
-        endOfTripView.frame = CGRect(x: 25, y: 80, width: self.view.frame.width - 50, height: self.view.frame.height - 120)
+        endOfTripView.frame = _cardSize
         endOfTripView.delegate = self
         self.view.addSubview(endOfTripView)
     }
     
     func openCompass() {
         compassView = CompassView.fromNib("CompassView")
-        compassView.pointCompassTowardScene(partyState.nextScene!)
-        compassView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        compassView.pointCompassTowardScene(_partyState.nextScene!)
+        compassView.frame = self.view.frame
         tuckCompassViewUnderMenuButton()
     }
     
@@ -126,7 +193,6 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func shouldAutorotate() -> Bool {
@@ -170,74 +236,20 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         }
     }
     
-    func onResponseReceived(newPartyState: PartyState) {
-        if (partyState == nil) {
-            initStoryTeller(newPartyState)
-        } else if (hasMovedToNextScene(newPartyState)) {
-            if (newPartyState.scene!.id! != 0) {
-                loadNewScene(newPartyState)
-            } else {
-                removeCompass()
-                openEndOfTripView()
-            }
-        } else if (newPartyState.nextSceneAvailable!) {
-            addNextSceneButton()
-        }
-    }
-    
-    func goToNextScene() {
-        partyService.startNextScene(_party.id!)
-        removeCompass()
-        removeNextSceneButton()
-    }
-    
-    func hasMovedToNextScene(newPartyState: PartyState) -> Bool {
-        return (partyState.scene!.id! != newPartyState.scene!.id!)
-    }
-    
-    func initStoryTeller(newPartyState: PartyState) {
-        partyState = newPartyState
-        loadSwipeViews()
-        loadBackgroundPicture()
-    }
-    
-    func loadNewScene(newPartyState: PartyState) {
-        partyState = newPartyState
-        loadSwipeViews()
-        loadBackgroundPicture()
-    }
-    
-    func removeCompass() {
-        compassView.removeFromSuperview()
-        compassView = nil
-    }
-    
-    func removeNextSceneButton() {
-        if (nextSceneButton != nil) {
-            nextSceneButton.removeFromSuperview()
-            nextSceneButton = nil
-        }
-    }
-    
     func loadBackgroundPicture() {
-        let backgroundImage = getBackgroundPicture()
+        let backgroundImage = getBackgroundPicture(_currentScene)
         let blurredBackgroundImage = blurBackgroundImage(backgroundImage)
         storyBackground.backgroundColor = UIColor(patternImage: blurredBackgroundImage)
     }
     
-    func getBackgroundPicture() -> UIImage {
-        let url = NSURL(string: (partyState.scene?.backgroundUrl)!)
+    func getBackgroundPicture(scene: Scene) -> UIImage {
+        let url = NSURL(string: (scene.backgroundUrl)!)
         let data = NSData(contentsOfURL: url!)
         return UIImage(data: data!)!
     }
     
     func blurBackgroundImage(backgroundImage: UIImage) -> UIImage {
-        return backgroundImage.applyBlurWithRadius(
-            CGFloat(5),
-            tintColor: nil,
-            saturationDeltaFactor: 1.0,
-            maskImage: nil
-        )!
+        return backgroundImage.applyBlurWithRadius(CGFloat(5), tintColor: nil, saturationDeltaFactor: 1.0, maskImage: nil)!
     }
     
     func addNextSceneButton() {
@@ -263,24 +275,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
             nextSceneButton.frame = CGRectMake(self.view.frame.width / 2 - 30, self.view.frame.height * 0.7, 60, 60)
             nextSceneButton.layer.cornerRadius = 0.5 * nextSceneButton.bounds.size.width
             nextSceneButton.backgroundColor = UIColor.whiteColor()
-            nextSceneButton.layer.borderColor = UIColor.blackColor().CGColor
-            nextSceneButton.layer.borderWidth = 2
-            nextSceneButton.clipsToBounds = true
+            nextSceneButton.addShadow()
         })
-    }
-    
-    func setSwipeOptions()  {
-        let options = MDCSwipeToChooseViewOptions()
-        options.delegate = self
-        options.likedText = nil
-        options.likedColor = UIColor.clearColor()
-        options.nopeText = nil
-        options.nopeColor = UIColor.clearColor()
-        options.onPan = { state -> Void in
-            if state.thresholdRatio == 1 && state.direction == MDCSwipeDirection.Left {
-                print("Photo deleted!")
-            }
-        }
-        self.swipeOptions = options
     }
 }

@@ -20,6 +20,7 @@ class Scene: NSObject, Mappable {
     var cards: [Card]?
     var soundResource:String?
     var backgroundUrl: String?
+    var sceneOrder: Int?
     
     func mapping(map: Map) {
         id            <- map["ID"]
@@ -29,9 +30,15 @@ class Scene: NSObject, Mappable {
         cards         <- map["Cards"]
         soundResource <- map["SoundResource"]
         backgroundUrl <- map["BackgroundUrl"]
+        sceneOrder    <- map["SceneOrder"]
     }
     
-    required init?(_ map: Map) {
+    required init?(_ map: Map) {}
+    
+    override init() {
+        super.init()
     }
 }
+
+
 
