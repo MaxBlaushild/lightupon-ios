@@ -22,9 +22,6 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     private let _partyService = Injector.sharedInjector.getPartyService()
     private let _socketService = Injector.sharedInjector.getSocketService()
     
-    private var audioPlayer: AVAudioPlayer!
-    private var player: AVAudioPlayer!
-    
     internal var delegate: MainViewControllerDelegate?
     
     private var _currentScene: Scene!
@@ -33,6 +30,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     private var _cardCount: Int = 0
     private var _swipeOptions = CardSwipeOptions()
     private var _cardSize: CGRect!
+    private var _player: AVAudioPlayer!
     
     var compassView: CompassView!
     var endOfTripView: EndOfTripView!
@@ -75,8 +73,12 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func goToNextSceneInMemory() {
+        _currentScene = getNextScene()
+    }
+    
+    func getNextScene() -> Scene {
         let nextSceneOrder = _currentScene.sceneOrder! + 1
-        _currentScene = _party.trip!.getSceneWithOrder(nextSceneOrder)
+        return _party.trip!.getSceneWithOrder(nextSceneOrder)
     }
     
     func setParty(party: Party) {
@@ -148,7 +150,6 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     func viewDidCancelSwipe(view: UIView) -> Void {}
     
-    // Sent before a choice is made. Cancel the choice by returning `false`. Otherwise return `true`.
     func view(view:UIView, shouldBeChosenWithDirection:MDCSwipeDirection) -> Bool {
         return true
     }
@@ -162,8 +163,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func endOfTrip() -> Bool {
-        let nextSceneOrder = _currentScene.sceneOrder! + 1
-        let nextScene = _party.trip!.getSceneWithOrder(nextSceneOrder)
+        let nextScene = getNextScene()
         return (nextScene.id == nil)
     }
     
@@ -180,7 +180,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     func openCompass() {
         compassView = CompassView.fromNib("CompassView")
-        compassView.pointCompassTowardScene(_partyState.nextScene!)
+        compassView.pointCompassTowardScene(getNextScene())
         compassView.frame = self.view.frame
         tuckCompassViewUnderMenuButton()
     }
@@ -227,10 +227,10 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     func play(url:NSURL) {
         do {
-            self.player = try AVAudioPlayer(contentsOfURL: url)
-            player.prepareToPlay()
-            player.volume = 1.0
-            player.play()
+            _player = try AVAudioPlayer(contentsOfURL: url)
+            _player.prepareToPlay()
+            _player.volume = 1.0
+            _player.play()
         } catch let error as NSError {
             print(error.localizedDescription)
         }
