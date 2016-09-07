@@ -35,5 +35,16 @@ class Trip: NSObject, Mappable {
     required init?(_ map: Map) {
         
     }
+    
+    func getSceneWithOrder(sceneOrder: Int) -> Scene {
+        var sceneWithOrder: Scene = Scene()
+        
+        for scene in self.scenes! {
+            if scene.sceneOrder! == sceneOrder {
+                sceneWithOrder = scene
+            }
+        }
+        return sceneWithOrder
+    }
 }
 
