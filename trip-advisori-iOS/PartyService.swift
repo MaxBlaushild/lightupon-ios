@@ -57,14 +57,13 @@ class PartyService: Service {
         })
     }
     
-    func createParty(tripId: Int, callback: (Party) -> Void) {
+    func createParty(tripId: Int, callback: () -> Void) {
         let parameters = [
             "ID": tripId
         ]
         
         _apiAmbassador.post(apiURL + "/parties", parameters: parameters, success: { response in
-            let party = Mapper<Party>().map(response.result.value)
-            callback(party!)
+            callback()
         })
     }
 }

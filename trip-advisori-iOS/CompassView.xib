@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -19,14 +19,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vex-Dt-rY1" customClass="GMSMapView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="dickCompass.png" translatesAutoresizingMaskIntoConstraints="NO" id="9So-v4-BKH">
-                            <rect key="frame" x="274" y="275" width="50" height="49"/>
-                            <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="50" id="Ahf-OX-1SK"/>
-                                <constraint firstAttribute="height" constant="49" id="cV1-eB-sB0"/>
-                            </constraints>
-                        </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RnK-Kb-wlD">
                             <rect key="frame" x="25" y="75" width="550" height="120"/>
                             <subviews>
@@ -46,13 +38,17 @@
                                 <constraint firstAttribute="trailing" secondItem="B29-a9-7zz" secondAttribute="trailing" constant="25" id="gnH-yz-XzI"/>
                             </constraints>
                         </view>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="compass" translatesAutoresizingMaskIntoConstraints="NO" id="9So-v4-BKH">
+                            <rect key="frame" x="275" y="481" width="50" height="49"/>
+                            <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="0.0" colorSpace="calibratedRGB"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="RnK-Kb-wlD" firstAttribute="top" secondItem="vex-Dt-rY1" secondAttribute="top" constant="75" id="Mg2-fe-qee"/>
                         <constraint firstAttribute="trailing" secondItem="RnK-Kb-wlD" secondAttribute="trailing" constant="25" id="TEP-Hb-P5y"/>
                         <constraint firstItem="9So-v4-BKH" firstAttribute="centerX" secondItem="vex-Dt-rY1" secondAttribute="centerX" id="X5u-8w-DKh"/>
-                        <constraint firstItem="9So-v4-BKH" firstAttribute="centerY" secondItem="vex-Dt-rY1" secondAttribute="centerY" id="Xl4-6d-AoE"/>
+                        <constraint firstAttribute="bottom" secondItem="9So-v4-BKH" secondAttribute="bottom" constant="70" id="Ydn-iM-Ki0"/>
                         <constraint firstItem="RnK-Kb-wlD" firstAttribute="leading" secondItem="vex-Dt-rY1" secondAttribute="leading" constant="25" id="ZDZ-CN-Jea"/>
                         <constraint firstItem="RnK-Kb-wlD" firstAttribute="centerX" secondItem="vex-Dt-rY1" secondAttribute="centerX" id="xLq-bf-y27"/>
                     </constraints>
@@ -74,6 +70,6 @@
         </view>
     </objects>
     <resources>
-        <image name="dickCompass.png" width="670" height="670"/>
+        <image name="compass" width="28" height="28"/>
     </resources>
 </document>

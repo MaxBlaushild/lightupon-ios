@@ -27,13 +27,8 @@ private extension UIStoryboard {
     }
 }
 
-protocol MainContainerViewControllerDelegate {
-    func onResponseReceived(partyState: PartyState) -> Void
-}
-
-class MainContainerViewController: UIViewController, MainViewControllerDelegate, SocketServiceDelegate {
-    private let partyService: PartyService = Injector.sharedInjector.getPartyService()
-    private let socketService: SocketService = Injector.sharedInjector.getSocketService()
+class MainContainerViewController: UIViewController, MainViewControllerDelegate {
+    private let _partyService: PartyService = Injector.sharedInjector.getPartyService()
     
     var storyTellerViewController: StoryTellerViewController!
     var homeTabBarViewController: HomeTabBarViewController!
@@ -41,72 +36,55 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
     var menuViewController: StoryTellerMenuViewController!
     var shownViewController: UIViewController!
     
-    var partyState: PartyState!
-    var currentParty: Party!
+    var _party: Party!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         getParty()
-        socketService.registerDelegate(self)
     }
     
     func onPartyRetrieved(party: Party) {
-        currentParty = party
+        _party = party
         
-        if (party.id == 0) {
-            initHomeTabBarViewController()
-        } else {
+        if (userIsInParty()) {
             initStoryTeller()
+        } else {
+            initHomeTabBarViewController()
         }
     }
     
+    func userIsInParty() -> Bool {
+        return (_party.id != 0)
+    }
+    
     func getParty() {
-        partyService.getUsersParty(self.onPartyRetrieved)
+        _partyService.getUsersParty(self.onPartyRetrieved)
     }
     
     func initStoryTeller() {
         storyTellerViewController = UIStoryboard.storyTellerViewController()
-        
         storyTellerViewController.delegate = self
-        shownViewController = storyTellerViewController
-        
-        view.addSubview(storyTellerViewController.view)
-        addChildViewController(storyTellerViewController)
-        
-        storyTellerViewController.didMoveToParentViewController(self)
-        socketService.pokeSocket()
-        self.view.splashView()
+        showViewController(storyTellerViewController)
+        storyTellerViewController.bindParty(_party)
     }
     
     func initHomeTabBarViewController() {
         homeTabBarViewController = UIStoryboard.homeTabBarViewController()
-        
         homeTabBarViewController.assignDelegation(self)
-        
-        view.addSubview(homeTabBarViewController.view)
-        addChildViewController(homeTabBarViewController)
-        shownViewController = homeTabBarViewController
-        
-        homeTabBarViewController.didMoveToParentViewController(self)
-        self.view.splashView()
+        showViewController(homeTabBarViewController)
     }
     
-    func segueToStoryTeller() {
-        homeTabBarViewController.view.removeFromSuperview()
-        initStoryTeller()
+    func showViewController(viewController: UIViewController) {
+        view.addSubview(viewController.view)
+        addChildViewController(viewController)
+        shownViewController = viewController
+        viewController.didMoveToParentViewController(self)
+        self.view.splashView()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func onResponseReceived(_partyState_: PartyState) {
-        if let _ = shownViewController as? HomeTabBarViewController {
-            if (self.partyState == nil) {
-                segueToStoryTeller()
-            }
-        }
     }
     
     func toggleRightPanel() {
@@ -115,9 +93,16 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
         if (menuShouldOpen) {
             addRightPanelViewController()
         }
+        
+        if (userIsInParty()) {
+            menuViewController.bindParty(_party)
+        }
+        
         animateRightPanel(menuShouldOpen)
         menuOpen = menuShouldOpen
     }
+    
+    
     
     func addRightPanelViewController() {
         if (menuViewController == nil) {

@@ -45,19 +45,14 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         _swipeOptions.delegate = self
         _socketService.registerDelegate(self)
         
-        getParty()
         createCardSize()
-    }
-    
-    func getParty() {
-        _partyService.getUsersParty(self.onPartyRecieved)
     }
     
     func createCardSize() {
         _cardSize = CGRect(x: 25, y: 80, width: self.view.frame.width - 50, height: self.view.frame.height - 120)
     }
     
-    func onPartyRecieved(party: Party) {
+    func bindParty(party: Party) {
         setParty(party)
         loadScene()
     }
@@ -209,6 +204,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     func playSound(scene: Scene) {
         let urlstring = scene.soundResource
+        
         if urlstring?.characters.count > 0 {
             let url = NSURL(string: urlstring!)
             downloadFileFromURL(url!)
@@ -266,13 +262,13 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     func createNextSceneButton() {
         nextSceneButton = UIButton(type: .Custom)
-        nextSceneButton.frame = CGRectMake(view.frame.width / 2, view.frame.height * 0.7 + 30, 0, 0)
+        nextSceneButton.frame = CGRectMake(view.frame.width / 2, view.frame.height - 70, 0, 0)
         nextSceneButton.addTarget(self, action: #selector(goToNextScene), forControlEvents: .TouchUpInside)
     }
     
     func animateInNextSceneButton(nextSceneButton: UIButton) {
         UIView.animateWithDuration(0.5, animations: {
-            nextSceneButton.frame = CGRectMake(self.view.frame.width / 2 - 30, self.view.frame.height * 0.7, 60, 60)
+            nextSceneButton.frame = CGRectMake(self.view.frame.width / 2 - 30, self.view.frame.height - 130, 50, 50)
             nextSceneButton.layer.cornerRadius = 0.5 * nextSceneButton.bounds.size.width
             nextSceneButton.backgroundColor = UIColor.whiteColor()
             nextSceneButton.addShadow()

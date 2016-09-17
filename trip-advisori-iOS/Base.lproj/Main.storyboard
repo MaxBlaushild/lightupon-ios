@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zM7-UW-UFv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zM7-UW-UFv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Dosis-Regular.otf">
@@ -17,10 +16,8 @@
             <string>Dosis-Regular</string>
             <string>Dosis-Regular</string>
             <string>Dosis-Regular</string>
-            <string>Dosis-Regular</string>
         </mutableArray>
         <mutableArray key="Dosis-SemiBold.otf">
-            <string>Dosis-SemiBold</string>
             <string>Dosis-SemiBold</string>
             <string>Dosis-SemiBold</string>
         </mutableArray>
@@ -90,85 +87,12 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="SWV-37-CxM" id="f9H-Q3-b3i"/>
+                        <segue destination="0Y6-rN-5xt" kind="show" identifier="MapToContainer" id="igN-LA-eCX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1023" y="1219"/>
-        </scene>
-        <!--Trip Details View Controller-->
-        <scene sceneID="Bym-AX-5nS">
-            <objects>
-                <viewController restorationIdentifier="TripDetailsViewController" storyboardIdentifier="TripDetailsViewController" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="overCurrentContext" id="I9M-SL-JBT" customClass="TripDetailsViewController" customModule="trip_advisori_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Qay-bZ-e8n"/>
-                        <viewControllerLayoutGuide type="bottom" id="Q9h-aI-Upc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mIw-eD-PrL">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tv1-6K-7Ef">
-                                <rect key="frame" x="0.0" y="550" width="601" height="50"/>
-                                <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49.5" id="JAR-7M-9Gs"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="15"/>
-                                <state key="normal" title="Create Party">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="createParty:" destination="I9M-SL-JBT" eventType="touchUpInside" id="ui1-U9-bFm"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udr-Vq-dHz">
-                                <rect key="frame" x="20" y="330" width="560" height="191"/>
-                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="12"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nF0-MH-fKR">
-                                <rect key="frame" x="0.0" y="0.0" width="601" height="300"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sK-2U-vUw">
-                                <rect key="frame" x="570" y="0.0" width="30" height="30"/>
-                                <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="x">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="goBack:" destination="I9M-SL-JBT" eventType="touchUpInside" id="9gL-ih-tAg"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Udr-Vq-dHz" firstAttribute="leading" secondItem="mIw-eD-PrL" secondAttribute="leadingMargin" id="0Ed-yL-3Ek"/>
-                            <constraint firstItem="tv1-6K-7Ef" firstAttribute="leading" secondItem="mIw-eD-PrL" secondAttribute="leading" id="0yW-X8-e65"/>
-                            <constraint firstItem="Udr-Vq-dHz" firstAttribute="top" secondItem="nF0-MH-fKR" secondAttribute="bottom" constant="30" id="FhL-oZ-cUd"/>
-                            <constraint firstItem="nF0-MH-fKR" firstAttribute="height" secondItem="mIw-eD-PrL" secondAttribute="height" multiplier="0.5" id="PyJ-E4-woU"/>
-                            <constraint firstItem="Udr-Vq-dHz" firstAttribute="trailing" secondItem="mIw-eD-PrL" secondAttribute="trailingMargin" id="Ved-fF-NxG"/>
-                            <constraint firstItem="nF0-MH-fKR" firstAttribute="leading" secondItem="mIw-eD-PrL" secondAttribute="leading" id="XtH-U2-8Hs"/>
-                            <constraint firstAttribute="trailing" secondItem="4sK-2U-vUw" secondAttribute="trailing" id="bXz-Ac-OM1"/>
-                            <constraint firstAttribute="trailing" secondItem="tv1-6K-7Ef" secondAttribute="trailing" constant="-1" id="hGl-yq-hZO"/>
-                            <constraint firstItem="nF0-MH-fKR" firstAttribute="top" secondItem="mIw-eD-PrL" secondAttribute="top" id="mOi-jE-LYk"/>
-                            <constraint firstAttribute="trailing" secondItem="nF0-MH-fKR" secondAttribute="trailing" constant="-1" id="nhO-Cb-3fE"/>
-                            <constraint firstItem="tv1-6K-7Ef" firstAttribute="top" secondItem="Udr-Vq-dHz" secondAttribute="bottom" constant="30" id="tR0-3x-5Av"/>
-                            <constraint firstItem="4sK-2U-vUw" firstAttribute="top" secondItem="mIw-eD-PrL" secondAttribute="top" id="vja-qQ-9Qw"/>
-                            <constraint firstItem="Q9h-aI-Upc" firstAttribute="top" secondItem="tv1-6K-7Ef" secondAttribute="bottom" id="wkm-fI-Tvb"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="tripDetailsLabel" destination="Udr-Vq-dHz" id="R6w-a8-xB2"/>
-                        <outlet property="tripDetailsPicture" destination="nF0-MH-fKR" id="FfE-f3-xq6"/>
-                        <outlet property="tripTitle" destination="Udr-Vq-dHz" id="OZo-bN-T34"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B2g-bn-Dyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-286" y="1549"/>
+            <point key="canvasLocation" x="-2969" y="-1419"/>
         </scene>
         <!--Home Tab Bar View Controller-->
         <scene sceneID="R4F-ck-1cn">
@@ -187,7 +111,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWH-os-GCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1803" y="1495"/>
+            <point key="canvasLocation" x="-3781" y="-1219"/>
         </scene>
         <!--Trips-->
         <scene sceneID="xLY-vt-tgi">
@@ -215,6 +139,10 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wTt-mB-I0i">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="140"/>
                                                 </imageView>
+                                                <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cLf-sN-nGf">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="139.5"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfX-WT-mUV" customClass="TitleLabel" customModule="trip_advisori_iOS" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="100" height="23"/>
                                                     <constraints>
@@ -245,8 +173,12 @@
                                                 <constraint firstItem="wTt-mB-I0i" firstAttribute="top" secondItem="Afm-FE-OD3" secondAttribute="top" id="Vt8-zG-7qK"/>
                                                 <constraint firstAttribute="bottom" secondItem="wTt-mB-I0i" secondAttribute="bottom" id="bTQ-Xc-6XN"/>
                                                 <constraint firstItem="J6M-TO-jhg" firstAttribute="centerX" secondItem="Afm-FE-OD3" secondAttribute="centerX" id="bjR-zY-hpR"/>
+                                                <constraint firstAttribute="bottom" secondItem="cLf-sN-nGf" secondAttribute="bottom" id="bwU-Pg-yO0"/>
+                                                <constraint firstAttribute="trailing" secondItem="cLf-sN-nGf" secondAttribute="trailing" id="cnp-fj-LKu"/>
+                                                <constraint firstItem="cLf-sN-nGf" firstAttribute="leading" secondItem="Afm-FE-OD3" secondAttribute="leading" id="dFM-5l-5Hu"/>
                                                 <constraint firstItem="AfX-WT-mUV" firstAttribute="leading" secondItem="Afm-FE-OD3" secondAttribute="leadingMargin" id="ej5-Dx-nKg"/>
                                                 <constraint firstItem="AfX-WT-mUV" firstAttribute="top" secondItem="Afm-FE-OD3" secondAttribute="topMargin" id="iM3-k8-iWJ"/>
+                                                <constraint firstItem="cLf-sN-nGf" firstAttribute="top" secondItem="Afm-FE-OD3" secondAttribute="top" id="lRh-Ok-oXi"/>
                                                 <constraint firstItem="gH2-G2-WAL" firstAttribute="top" secondItem="Afm-FE-OD3" secondAttribute="topMargin" id="rMH-pN-Jbn"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -313,11 +245,12 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="Pll-lj-CkX" id="qoW-g5-wkm"/>
+                        <segue destination="0Y6-rN-5xt" kind="show" identifier="ListToContainer" id="hf2-En-4BL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZ3-Ta-dyo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1023" y="1927"/>
+            <point key="canvasLocation" x="-2969" y="-723"/>
         </scene>
         <!--Profile-->
         <scene sceneID="mgf-QZ-Mu6">
@@ -412,7 +345,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xBz-2o-16s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1453" y="-954"/>
+            <point key="canvasLocation" x="-307" y="-662"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="AKr-vG-EU6">
@@ -552,7 +485,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vAt-v1-R1J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="753" y="-962"/>
+            <point key="canvasLocation" x="-1139" y="-690"/>
         </scene>
         <!--Story Teller View Controller-->
         <scene sceneID="3B9-xQ-YYo">
@@ -600,7 +533,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hix-lK-SbE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2138" y="-723"/>
+            <point key="canvasLocation" x="-1361" y="-1364"/>
         </scene>
         <!--Initial Loading View Controller-->
         <scene sceneID="KWa-es-hyg">
@@ -640,7 +573,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ALP-ov-bVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1129" y="82"/>
+            <point key="canvasLocation" x="-2140" y="-904"/>
         </scene>
     </scenes>
     <resources>
@@ -653,7 +586,8 @@
         <image name="user_menu" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="hf2-En-4BL"/>
+        <segue reference="5gH-Uh-KtK"/>
         <segue reference="UVG-gO-Dut"/>
-        <segue reference="n8e-Qh-4NE"/>
     </inferredMetricsTieBreakers>
 </document>

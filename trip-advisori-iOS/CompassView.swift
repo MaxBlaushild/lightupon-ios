@@ -11,10 +11,11 @@ import Foundation
 import GoogleMaps
 import Darwin
 
-class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate  {
+class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, SocketServiceDelegate  {
     
     private let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
     private let navigationService = Injector.sharedInjector.getNavigationService()
+    private let socketService = Injector.sharedInjector.getSocketService()
     
     @IBOutlet weak var sceneMapView: GMSMapView!
     @IBOutlet weak var compass: UIImageView!
@@ -28,6 +29,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate  {
         
         sceneMapView.delegate = self
         currentLocationService.registerDelegate(self)
+        socketService.registerDelegate(self)
         
         centerMapOnLocation()
         configureMapView()
@@ -52,6 +54,23 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate  {
     
     func createCenteredCameraPostion() -> GMSCameraPosition {
         return GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 17, bearing: currentLocationService.heading, viewingAngle: 0)
+    }
+    
+    func onResponseReceived(_partyState_: PartyState) {
+        if (_partyState_.nextSceneAvailable!) {
+            animateOutCompass()
+        }
+    }
+    
+    func animateOutCompass() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.compass.frame = CGRect(
+                x: self.compass.frame.origin.x + self.compass.frame.width / 2,
+                y: self.compass.frame.origin.y + self.compass.frame.height / 2,
+                width: 0,
+                height: 0
+            )
+        })
     }
     
     func bindTitleToInstructions() {

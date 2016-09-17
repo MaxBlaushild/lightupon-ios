@@ -8,36 +8,19 @@
 
 import UIKit
 
-private extension UIStoryboard {
-    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
-    
-    class func tripDetailsViewController() -> TripDetailsViewController? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("TripDetailsViewController") as? TripDetailsViewController
-    }
-}
-
-class HalfSizePresentationController : UIPresentationController {
-    override func frameOfPresentedViewInContainerView() -> CGRect {
-        let viewWidth = containerView!.bounds.width / 1.33
-        let viewHeight = containerView!.bounds.height / 2
-        let xOrigin = (containerView!.bounds.width - viewWidth) / 2
-        let yOrigin = (containerView!.bounds.height - viewHeight) / 2
-        return CGRect(x: xOrigin, y: yOrigin, width: viewWidth, height: viewHeight)
-    }
-}
-
-protocol DismissalDelegate {
-    func onDismissed() -> Void
-}
-
-class TripListTableViewController: UIViewController, UIViewControllerTransitioningDelegate, DismissalDelegate, UITableViewDelegate, UITableViewDataSource {
+class TripListTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TripDetailsViewDelegate {
     private let tripsService: TripsService = Injector.sharedInjector.getTripsService()
     private let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
     
     var trips:[Trip]!
     var delegate: MainViewControllerDelegate!
+    
+    var tripDetailsView:TripDetailsView!
+    var blurView: BlurView!
+    var xBackButton: XBackButton!
 
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getTrips()
@@ -91,34 +74,41 @@ class TripListTableViewController: UIViewController, UIViewControllerTransitioni
         return cell
     }
     
-    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
-        return HalfSizePresentationController(presentedViewController: presented, presentingViewController: presentingViewController!)
-    }
-    
-    func onDismissed() {
-        for subview in self.view.subviews {
-            if let blur = subview as? UIVisualEffectView {
-                blur.removeFromSuperview()
-            }
-        }
+    func dismissTripDetails() {
+        tripDetailsView.removeFromSuperview()
+        blurView.removeFromSuperview()
+        xBackButton.removeFromSuperview()
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        obfuscateBackground()
+        tripDetailsView = TripDetailsView.fromNib("TripDetailsView")
+        tripDetailsView.delegate = self
+        tripDetailsView.size(self)
+        tripDetailsView.bindTrip(trips[indexPath.row])
+        view.addSubview(tripDetailsView)
+    }
+    
+    func obfuscateBackground() {
         blurBackground()
-        let tripDetailsViewController = UIStoryboard.tripDetailsViewController()
-        tripDetailsViewController!.modalPresentationStyle = UIModalPresentationStyle.Custom
-        tripDetailsViewController!.transitioningDelegate = self
-        tripDetailsViewController!.dismissalDelegate = self
-        tripDetailsViewController!.tripId = trips[indexPath.row].id
-        self.presentViewController(tripDetailsViewController!, animated: true, completion: {})
+        addXBackButton()
+    }
+    
+    func segueToContainer() {
+        performSegueWithIdentifier("ListToContainer", sender: self)
     }
     
     func blurBackground() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
-        view.addSubview(blurEffectView)
+        blurView = BlurView(onClick: dismissTripDetails)
+        blurView.frame = view.bounds
+        view.addSubview(blurView)
+    }
+    
+    func addXBackButton() {
+        let frame = CGRect(x: view.bounds.width - 45, y: 30, width: 30, height: 30)
+        xBackButton = XBackButton(frame: frame)
+        xBackButton.addTarget(self, action: #selector(dismissTripDetails), forControlEvents: .TouchUpInside)
+        view.addSubview(xBackButton)
     }
 
 }

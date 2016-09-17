@@ -40,6 +40,6 @@ class NavigationService: Service {
         let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
         let radiansBearing = atan2(y, x);
         
-        return CGFloat(radiansToDegrees(radiansBearing - 45))
+        return CGFloat(radiansToDegrees(radiansBearing))
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import Starscream
 import ObjectMapper
 import SwiftyJSON
@@ -16,15 +17,16 @@ protocol SocketServiceDelegate {
 }
 
 class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate {
+    
     private let _authService: AuthService
     private let _currentLocationService: CurrentLocationService
     
+    private var _socketPolling: NSTimer!
     private var _socket: WebSocket!
 
     internal var delegates:[SocketServiceDelegate] = [SocketServiceDelegate]()
     
     init(authService: AuthService, currentLocationService: CurrentLocationService) {
-        
         _currentLocationService = currentLocationService
         _authService = authService
         
@@ -33,6 +35,19 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
         _currentLocationService.registerDelegate(self)
         
         openSocket()
+        keepSocketOpen()
+    }
+    
+    func openSocket() {
+        _socket = WebSocket(url: NSURL(string: "\(wsURL)/pull")!, protocols: ["chat", "superchat"])
+        _socket.delegate = self
+        _socket.voipEnabled = true
+        setSocketHeaders()
+        _socket.connect()
+    }
+    
+    func keepSocketOpen() {
+        _socketPolling = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: #selector(SocketService.checkOnSocket), userInfo: nil, repeats: true)
     }
     
     private func setSocketHeaders() {
@@ -48,21 +63,15 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     }
     
     func onHeadingUpdated() {}
-    
-    func openSocket() {
-        _socket = WebSocket(url: NSURL(string: "\(wsURL)/pull")!, protocols: ["chat", "superchat"])
-        _socket.delegate = self
-        _socket.voipEnabled = true
-        setSocketHeaders()
-        _socket.connect()
-    }
         
     func websocketDidConnect(ws: WebSocket) {
         updateLocation()
     }
     
-    func pokeSocket() {
-        updateLocation()
+    func checkOnSocket() {
+        if !_socket.isConnected {
+            _socket.connect()
+        }
     }
     
     func updateLocation() {

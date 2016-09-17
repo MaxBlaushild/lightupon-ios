@@ -20,7 +20,10 @@ class TripListTableViewCell: UITableViewCell {
     }
     
     func decorateCell(trip: Trip) {
+//        let overlay: UIView = UIView(frame: CGRectMake(0, 0, tripImage.frame.size.width, tripImage.frame.size.height))
+//        overlay.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.4)
         tripImage.imageFromUrl(trip.imageUrl!)
+//        tripImage.addSubview(overlay)
         tripTitle.text = trip.title
         tripDescription.text = trip.descriptionText
         tag = trip.id!

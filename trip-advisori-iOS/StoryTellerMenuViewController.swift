@@ -12,6 +12,7 @@ import UIKit
 private let reuseIdentifier = "PartyMemberCollectionViewCell"
 
 class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, SocketServiceDelegate {
+    
     private let partyService: PartyService = Injector.sharedInjector.getPartyService()
     private let profileService: ProfileService = Injector.sharedInjector.getProfileService()
     private let socketService: SocketService = Injector.sharedInjector.getSocketService()
@@ -22,8 +23,8 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var leavePartyButton: UIButton!
     
-    var partyState: PartyState!
-    var currentParty: Party!
+    private var _partyState: PartyState!
+    private var _party: Party!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,30 +53,15 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         profilePicture.makeCircle()
     }
     
-    func onResponseReceived(_partyState_: PartyState) {
-        print("menu response")
-        partyState = _partyState_
-        togglePartyView()
-        bindParty()
+    func onResponseReceived(partyState: PartyState) {
+        _partyState = partyState
         configurePartyCollectionView()
     }
     
-    func togglePartyView() {
-        if (self.partyState != nil) {
-            leavePartyButton.hidden = false
-        }
+    func bindParty(party: Party) {
+        _party = party
+        leavePartyButton.hidden = false
     }
-    
-    func bindParty() {
-//        tripTitle.text = partyState.party!.trip!.title
-//        passcode.text = partyState.party!.passcode
-    }
-    
-    func bindPartyState(_partyState_: PartyState) {
-        partyState = _partyState_
-        configurePartyCollectionView()
-    }
-    
     func configurePartyCollectionView() {
         partyMemberCollectionView.dataSource = self
         partyMemberCollectionView.delegate = self
@@ -83,9 +69,9 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func removeUserFromPartyList() {
-        for (index, partyMember) in partyState.users!.enumerate() {
+        for (index, partyMember) in _partyState.users!.enumerate() {
             if partyMember.email == profileService.profile.email {
-                partyState.users?.removeAtIndex(index)
+                _partyState.users?.removeAtIndex(index)
             }
         }
     }
@@ -117,15 +103,11 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         removeUserFromPartyList()
-        return partyState.users!.count
-    }
-    
-    func loadNewScene() {
-//        collectionView.reloadData()
+        return _partyState.users!.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let user: User = partyState.users![indexPath.row]
+        let user: User = _partyState.users![indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PartyMemberCollectionViewCell
         
         cell.bindCell(user)

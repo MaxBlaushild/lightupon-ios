@@ -9,20 +9,17 @@
 import UIKit
 import GoogleMaps
 
-private extension UIStoryboard {
-    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
+class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDelegate, TripDetailsViewDelegate {
     
-    class func tripDetailsViewController() -> TripDetailsViewController? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("TripDetailsViewController") as? TripDetailsViewController
-    }
-}
-
-class MapViewController: UIViewController, GMSMapViewDelegate, DismissalDelegate, SocketServiceDelegate, UIViewControllerTransitioningDelegate {
     private let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
     private let socketService: SocketService = Injector.sharedInjector.getSocketService()
     private let tripsService:TripsService = Injector.sharedInjector.getTripsService()
     
     var trips:[Trip]!
+    
+    var blurView: BlurView!
+    var tripDetailsView:TripDetailsView!
+    var xBackButton:XBackButton!
     
     var delegate: MainViewControllerDelegate!
     
@@ -32,6 +29,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, DismissalDelegate
     }
     
     @IBOutlet weak var mapView: GMSMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         socketService.registerDelegate(self)
@@ -82,57 +80,53 @@ class MapViewController: UIViewController, GMSMapViewDelegate, DismissalDelegate
     
     func placeTripOnMap(trip: Trip, mapView: GMSMapView) {
         let colorForTrip = getRandomColor()
-        let path = GMSMutablePath()
-        for scene in trip.scenes! {
-            path.addCoordinate(CLLocationCoordinate2D(latitude: scene.latitude!, longitude: scene.longitude!))
-        }
-        
-        let polyline = GMSPolyline(path: path)
-        polyline.strokeColor = colorForTrip
-        polyline.map = mapView
-
-        // Add one marker at the beginning of each trip
         let marker = GMSMarker()
         marker.icon = GMSMarker.markerImageWithColor(colorForTrip)
         marker.position = CLLocationCoordinate2DMake(trip.scenes![0].latitude!, trip.scenes![0].longitude!)
         marker.title = trip.title
         marker.snippet = trip.descriptionText
-        marker.userData = trip.id
+        marker.userData = trip
         marker.map = mapView
     }
     
     func onDismissed() {
-        for subview in self.view.subviews {
-            if let blur = subview as? UIVisualEffectView {
-                blur.removeFromSuperview()
-            }
-        }
+        tripDetailsView.removeFromSuperview()
+        blurView.removeFromSuperview()
+        xBackButton.removeFromSuperview()
     }
     
     func onResponseReceived(partyState: PartyState) {}
     
     func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
-        blurBackground()
-        let tripDetailsViewController = UIStoryboard.tripDetailsViewController()
-        tripDetailsViewController!.modalPresentationStyle = UIModalPresentationStyle.Custom
-        tripDetailsViewController!.transitioningDelegate = self
-        tripDetailsViewController!.dismissalDelegate = self
-        tripDetailsViewController!.tripId = marker.userData as! Int
-        self.presentViewController(tripDetailsViewController!, animated: true, completion: {})
-        
+        obscureBackground()
+        tripDetailsView = TripDetailsView.fromNib("TripDetailsView")
+        tripDetailsView.delegate = self
+        tripDetailsView.size(self)
+        tripDetailsView.bindTrip(marker.userData as! Trip)
+        view.addSubview(tripDetailsView)
         return true
     }
     
-    func blurBackground() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
-        view.addSubview(blurEffectView)
+    func segueToContainer() {
+        performSegueWithIdentifier("MapToContainer", sender: self)
     }
     
-    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
-        return HalfSizePresentationController(presentedViewController: presented, presentingViewController: presentingViewController!)
+    func obscureBackground() {
+        blurBackground()
+        addXBackButton()
+    }
+    
+    func addXBackButton() {
+        let frame = CGRect(x: view.bounds.width - 45, y: 30, width: 30, height: 30)
+        xBackButton = XBackButton(frame: frame)
+        xBackButton.addTarget(self, action: #selector(onDismissed), forControlEvents: .TouchUpInside)
+        view.addSubview(xBackButton)
+    }
+    
+    func blurBackground() {
+        blurView = BlurView(onClick: onDismissed)
+        blurView.frame = view.bounds
+        view.addSubview(blurView)
     }
 
 }
