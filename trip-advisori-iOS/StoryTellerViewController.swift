@@ -18,7 +18,7 @@ protocol MainViewControllerDelegate {
     func toggleRightPanel()
 }
 
-class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwipeToChooseDelegate, EndOfTripDelegate {
+class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwipeToChooseDelegate, EndOfTripDelegate, CompassViewDelegate {
     private let _partyService = Injector.sharedInjector.getPartyService()
     private let _socketService = Injector.sharedInjector.getSocketService()
     
@@ -54,12 +54,23 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     func bindParty(party: Party) {
         setParty(party)
-        loadScene()
+        setScene()
+        
+        if (_currentScene.id != nil) {
+            loadScene()
+        } else {
+            openCompass(_party.trip!.getSceneWithOrder(1))
+        }
+
     }
     
     func loadNextScene() {
         goToNextSceneInMemory()
         loadScene()
+    }
+    
+    func setScene() {
+        _currentScene = _party.trip?.getSceneWithOrder(_party.currentSceneOrder!)
     }
     
     func loadScene() {
@@ -72,24 +83,20 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func getNextScene() -> Scene {
-        let nextSceneOrder = _currentScene.sceneOrder! + 1
-        return _party.trip!.getSceneWithOrder(nextSceneOrder)
+        if (_currentScene.id != nil) {
+            let nextSceneOrder = _currentScene.sceneOrder! + 1
+            return _party.trip!.getSceneWithOrder(nextSceneOrder)
+        } else {
+            return _party.trip!.getSceneWithOrder(1)
+        }
     }
     
     func setParty(party: Party) {
         _party = party
-        _currentScene = _party.trip!.getSceneWithOrder(_party.currentSceneOrder!)
     }
     
     func onResponseReceived(partyState: PartyState) {
         _partyState = partyState
-        addNextSceneButtonIfAvailable()
-    }
-    
-    func addNextSceneButtonIfAvailable() {
-        if (_partyState.nextSceneAvailable!) {
-            addNextSceneButton()
-        }
     }
     
     func goToNextScene() {
@@ -99,20 +106,12 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     func onWentToNextScene() {
         removeCompass()
-        removeNextSceneButton()
         loadNextScene()
     }
     
     func removeCompass() {
         compassView.removeFromSuperview()
         compassView = nil
-    }
-    
-    func removeNextSceneButton() {
-        if (nextSceneButton != nil) {
-            nextSceneButton.removeFromSuperview()
-            nextSceneButton = nil
-        }
     }
     
     func outOfCards() -> Bool {
@@ -123,7 +122,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         if (endOfTrip()) {
             openEndOfTripView()
         } else {
-            openCompass()
+            openCompass(getNextScene())
         }
     }
     
@@ -173,9 +172,10 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         self.view.addSubview(endOfTripView)
     }
     
-    func openCompass() {
+    func openCompass(nextScene: Scene) {
         compassView = CompassView.fromNib("CompassView")
-        compassView.pointCompassTowardScene(getNextScene())
+        compassView.delegate = self
+        compassView.pointCompassTowardScene(nextScene)
         compassView.frame = self.view.frame
         tuckCompassViewUnderMenuButton()
     }
@@ -246,32 +246,5 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     func blurBackgroundImage(backgroundImage: UIImage) -> UIImage {
         return backgroundImage.applyBlurWithRadius(CGFloat(5), tintColor: nil, saturationDeltaFactor: 1.0, maskImage: nil)!
-    }
-    
-    func addNextSceneButton() {
-        if (shouldAddNextSceneButton()) {
-            createNextSceneButton()
-            view.addSubview(nextSceneButton)
-            animateInNextSceneButton(nextSceneButton)
-        }
-    }
-    
-    func shouldAddNextSceneButton() -> Bool {
-        return (nextSceneButton == nil && compassView != nil)
-    }
-    
-    func createNextSceneButton() {
-        nextSceneButton = UIButton(type: .Custom)
-        nextSceneButton.frame = CGRectMake(view.frame.width / 2, view.frame.height - 70, 0, 0)
-        nextSceneButton.addTarget(self, action: #selector(goToNextScene), forControlEvents: .TouchUpInside)
-    }
-    
-    func animateInNextSceneButton(nextSceneButton: UIButton) {
-        UIView.animateWithDuration(0.5, animations: {
-            nextSceneButton.frame = CGRectMake(self.view.frame.width / 2 - 30, self.view.frame.height - 130, 50, 50)
-            nextSceneButton.layer.cornerRadius = 0.5 * nextSceneButton.bounds.size.width
-            nextSceneButton.backgroundColor = UIColor.whiteColor()
-            nextSceneButton.addShadow()
-        })
     }
 }

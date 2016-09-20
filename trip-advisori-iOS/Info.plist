@@ -21,6 +21,16 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>lightupon.lightupon-iOS</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>Lightupon</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb939202066178832</string>
@@ -28,7 +38,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.03</string>
+	<string>1.05</string>
 	<key>FacebookAppID</key>
 	<string>939202066178832</string>
 	<key>FacebookDisplayName</key>

@@ -14,29 +14,58 @@ import FBSDKLoginKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var loadedEnoughToDeepLink:Bool = false
+    var invite:String!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyBS-y6hKLFKiM5yUWIO0AYR5-lrkCZSvp0")
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        //Optionally add to ensure your credentials are valid:
         FBSDKLoginManager.renewSystemCredentials { (result:ACAccountCredentialRenewResult, error:NSError!) -> Void in
-            //
         }
         return true
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        //Even though the Facebook SDK can make this determinitaion on its own,
-        //let's make sure that the facebook SDK only sees urls intended for it,
-        //facebook has enough info already!
+        if url.host == nil {
+            return true
+        }
+        
         let isFacebookURL = url.scheme.hasPrefix("fb\(FBSDKSettings.appID())") && url.host == "authorize"
         if isFacebookURL {
             return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
         }
+        
+//        let urlString = url.absoluteString
+//        let queryArray = urlString.componentsSeparatedByString("/")
+//        let query = queryArray[2]
+//        
+//        if query.rangeOfString("invite") != nil {
+//            if queryArray.count >= 3 {
+//                let partyId = queryArray[3]
+//                let userInfo = ["invite": partyId]
+//                self.applicationHandleRemoteNotification(application, didReceiveRemoteNotification: userInfo)
+//            }
+//        }
         return false
     }
+    
+    func applicationHandleRemoteNotification(application: UIApplication, didReceiveRemoteNotification userInfo: [String : String]) {
+//        if application.applicationState == UIApplicationState.Background || application.applicationState == UIApplicationState.Inactive {
+//            self.invite = userInfo["invite"]
+//            
+//            if loadedEnoughToDeepLink {
+//                self.triggerDeepLinkIfPresent()
+//            }
+//        }
+    }
+    
+//    func triggerDeepLinkIfPresent() -> Bool {
+//        self.loadedEnoughToDeepLink = true
+//        var ret = (self.deepLink?.trigger() != nil)
+//        self.invite = nil
+//        return ret
+//    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

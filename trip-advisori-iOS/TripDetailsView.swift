@@ -41,13 +41,13 @@ class TripDetailsView: UIView {
         tripDetailsPicture.imageFromUrl(trip.imageUrl!)
     }
     
-    @IBAction func createParty(sender: AnyObject) {
+    @IBAction func createParty(sender: UIButton) {
+        sender.enabled = false
         partyService.createParty(_trip.id!, callback: self.onPartyCreated)
         
     }
     
     func onPartyCreated() {
-        
         delegate.segueToContainer()
     }
     

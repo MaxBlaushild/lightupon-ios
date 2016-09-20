@@ -17,7 +17,8 @@ class EndOfTripView: UIView {
     
     var delegate: EndOfTripDelegate!
     
-    @IBAction func endTrip(sender: AnyObject) {
+    @IBAction func endTrip(sender: UIButton) {
+        sender.enabled = false
         partyService.finishParty(self.goBackHome)
     }
     

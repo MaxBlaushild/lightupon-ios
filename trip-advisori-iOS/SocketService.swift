@@ -47,7 +47,12 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     }
     
     func keepSocketOpen() {
-        _socketPolling = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: #selector(SocketService.checkOnSocket), userInfo: nil, repeats: true)
+        _socketPolling = NSTimer.scheduledTimerWithTimeInterval(3.0,
+            target: self,
+            selector: #selector(SocketService.checkOnSocket),
+            userInfo: nil,
+            repeats: true
+        )
     }
     
     private func setSocketHeaders() {
@@ -93,6 +98,7 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     }
     
     func websocketDidReceiveMessage(ws: WebSocket, text: String) {
+        
         if let partyState:PartyState = Mapper<PartyState>().map(text) {
             for delegate in delegates {
                 delegate.onResponseReceived(partyState)
@@ -100,7 +106,5 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
         }
     }
     
-    func websocketDidReceiveData(ws: WebSocket, data: NSData) {
-        print("Received data: \(data.length)")
-    }
+    func websocketDidReceiveData(ws: WebSocket, data: NSData) {}
 }

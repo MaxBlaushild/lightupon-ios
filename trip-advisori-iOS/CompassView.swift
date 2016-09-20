@@ -11,6 +11,10 @@ import Foundation
 import GoogleMaps
 import Darwin
 
+@objc protocol CompassViewDelegate {
+    func goToNextScene() -> Void
+}
+
 class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, SocketServiceDelegate  {
     
     private let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
@@ -21,8 +25,13 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     @IBOutlet weak var compass: UIImageView!
     @IBOutlet weak var instructionsView: UIView!
     @IBOutlet weak var instructionsLabel: UILabel!
+    var nextSceneButton: UIButton!
+    
+    internal var delegate: CompassViewDelegate!
     
     private var _nextScene: Scene!
+    private var _isAtNextScene: Bool = false
+    private var _ogCompassFrame: CGRect!
     
     func pointCompassTowardScene(nextScene: Scene) {
         _nextScene = nextScene
@@ -31,6 +40,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
         currentLocationService.registerDelegate(self)
         socketService.registerDelegate(self)
         
+        setCompassSize()
         centerMapOnLocation()
         configureMapView()
         twirlCompass()
@@ -39,6 +49,10 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
         applyInstructionsView()
         
         sceneMapView.bringSubviewToFront(compass)
+    }
+    
+    func setCompassSize() {
+        _ogCompassFrame = compass.frame
     }
     
     func configureMapView() {
@@ -56,21 +70,17 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
         return GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 17, bearing: currentLocationService.heading, viewingAngle: 0)
     }
     
-    func onResponseReceived(_partyState_: PartyState) {
-        if (_partyState_.nextSceneAvailable!) {
-            animateOutCompass()
+    func onResponseReceived(partyState: PartyState) {
+        
+        if (partyState.nextSceneAvailable! != _isAtNextScene) {
+            if (partyState.nextSceneAvailable!) {
+                animateOutCompass()
+            } else {
+                animateOutNextSceneButton()
+            }
         }
-    }
-    
-    func animateOutCompass() {
-        UIView.animateWithDuration(0.5, animations: {
-            self.compass.frame = CGRect(
-                x: self.compass.frame.origin.x + self.compass.frame.width / 2,
-                y: self.compass.frame.origin.y + self.compass.frame.height / 2,
-                width: 0,
-                height: 0
-            )
-        })
+        _isAtNextScene = partyState.nextSceneAvailable!
+
     }
     
     func bindTitleToInstructions() {
@@ -94,6 +104,69 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     func onLocationUpdated() {
         centerMapOnLocation()
         twirlCompass()
+    }
+    
+    func addNextSceneButton() {
+        createNextSceneButton()
+        addSubview(nextSceneButton)
+        animateInNextSceneButton()
+    }
+    
+    func createNextSceneButton() {
+        nextSceneButton = UIButton(type: .Custom)
+        nextSceneButton.frame = compassCenter()
+        nextSceneButton.addTarget(delegate, action: #selector(delegate.goToNextScene), forControlEvents: .TouchUpInside)
+    }
+    
+    func animateInNextSceneButton() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.nextSceneButton.frame = self.compassSize()
+            self.nextSceneButton.layer.cornerRadius = 0.5 * self.nextSceneButton.bounds.size.width
+            self.nextSceneButton.backgroundColor = UIColor.whiteColor()
+            self.nextSceneButton.addShadow()
+        })
+    }
+    
+    func animateOutNextSceneButton() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.nextSceneButton.frame = self.compassCenter()
+        },
+        completion: { truth in
+            self.animateInCompass()
+        })
+    }
+    
+    func animateOutCompass() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.compass.transform = CGAffineTransformMakeScale(0.01, 0.01);
+        },
+        completion: { truth in
+            self.addNextSceneButton()
+        })
+    }
+    
+    func animateInCompass() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.compass.transform = CGAffineTransformMakeScale(1.0,1.0);
+        })
+    }
+    
+    func compassSize() -> CGRect {
+        return CGRect(
+            x: self.frame.width / 2 - self._ogCompassFrame.width / 2,
+            y: self.frame.height - (self._ogCompassFrame.height + 70),
+            width: self._ogCompassFrame.width,
+            height: self._ogCompassFrame.height
+        )
+    }
+    
+    func compassCenter() -> CGRect {
+        return CGRect(
+            x: frame.width / 2,
+            y: frame.height - (70 + _ogCompassFrame.height / 2),
+            width: 0,
+            height: 0
+        )
     }
     
     func onHeadingUpdated() {

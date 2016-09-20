@@ -38,18 +38,17 @@
                                 <constraint firstAttribute="trailing" secondItem="B29-a9-7zz" secondAttribute="trailing" constant="25" id="gnH-yz-XzI"/>
                             </constraints>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="compass" translatesAutoresizingMaskIntoConstraints="NO" id="9So-v4-BKH">
-                            <rect key="frame" x="275" y="481" width="50" height="49"/>
-                            <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="0.0" colorSpace="calibratedRGB"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="compass" translatesAutoresizingMaskIntoConstraints="NO" id="maq-eG-YV5">
+                            <rect key="frame" x="273.5" y="476" width="54" height="54"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="RnK-Kb-wlD" firstAttribute="top" secondItem="vex-Dt-rY1" secondAttribute="top" constant="75" id="Mg2-fe-qee"/>
                         <constraint firstAttribute="trailing" secondItem="RnK-Kb-wlD" secondAttribute="trailing" constant="25" id="TEP-Hb-P5y"/>
-                        <constraint firstItem="9So-v4-BKH" firstAttribute="centerX" secondItem="vex-Dt-rY1" secondAttribute="centerX" id="X5u-8w-DKh"/>
-                        <constraint firstAttribute="bottom" secondItem="9So-v4-BKH" secondAttribute="bottom" constant="70" id="Ydn-iM-Ki0"/>
                         <constraint firstItem="RnK-Kb-wlD" firstAttribute="leading" secondItem="vex-Dt-rY1" secondAttribute="leading" constant="25" id="ZDZ-CN-Jea"/>
+                        <constraint firstItem="maq-eG-YV5" firstAttribute="centerX" secondItem="vex-Dt-rY1" secondAttribute="centerX" id="dI7-Yl-uVo"/>
+                        <constraint firstAttribute="bottom" secondItem="maq-eG-YV5" secondAttribute="bottom" constant="70" id="hak-hG-Udz"/>
                         <constraint firstItem="RnK-Kb-wlD" firstAttribute="centerX" secondItem="vex-Dt-rY1" secondAttribute="centerX" id="xLq-bf-y27"/>
                     </constraints>
                 </view>
@@ -62,7 +61,7 @@
                 <constraint firstItem="vex-Dt-rY1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sRI-tc-fwr"/>
             </constraints>
             <connections>
-                <outlet property="compass" destination="9So-v4-BKH" id="hPz-ok-9ZP"/>
+                <outlet property="compass" destination="maq-eG-YV5" id="w2x-QF-w7B"/>
                 <outlet property="instructionsLabel" destination="B29-a9-7zz" id="aZx-Te-MbK"/>
                 <outlet property="instructionsView" destination="RnK-Kb-wlD" id="qKq-kt-n39"/>
                 <outlet property="sceneMapView" destination="vex-Dt-rY1" id="gcp-ky-Rwj"/>
@@ -70,6 +69,6 @@
         </view>
     </objects>
     <resources>
-        <image name="compass" width="28" height="28"/>
+        <image name="compass" width="54" height="54"/>
     </resources>
 </document>
