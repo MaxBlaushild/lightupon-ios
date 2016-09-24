@@ -18,12 +18,14 @@ class Card: NSObject, Mappable {
     var universal: Bool?
     var identifier: String?
     var nibId: String?
+    var textTwo: String?
     
     
     func mapping(map: Map) {
         id         <- map["ID"]
         cardType   <- map["CardType"]
         text       <- map["Text"]
+        textTwo    <- map["TextTwo"]
         imageUrl   <- map["ImageURL"]
         cardOrder  <- map["CardOrder"]
         universal  <- map["Universal"]

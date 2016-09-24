@@ -15,6 +15,7 @@ target 'trip-advisori-iOS' do
   pod 'HanekeSwift'
   pod 'MDCSwipeToChoose'
   pod 'CBZSplashView', '~> 1.0.0'
+  pod 'PocketSVG'
 end
 
 target 'trip-advisori-iOS' do

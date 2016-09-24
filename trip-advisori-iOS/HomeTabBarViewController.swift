@@ -13,6 +13,11 @@ class HomeTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UITabBar.appearance().barTintColor = UIColor.whiteColor()
+        for tabBarItem in tabBar.items! {
+            tabBarItem.title = ""
+            tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
+        }
     }
     
     override func shouldAutorotate() -> Bool {

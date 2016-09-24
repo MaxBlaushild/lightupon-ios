@@ -32,6 +32,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     private var _nextScene: Scene!
     private var _isAtNextScene: Bool = false
     private var _ogCompassFrame: CGRect!
+    private var _readyToReceiveResponses: Bool = false
     
     func pointCompassTowardScene(nextScene: Scene) {
         _nextScene = nextScene
@@ -47,6 +48,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
         bindTitleToInstructions()
         addNextScene()
         applyInstructionsView()
+        createNextSceneButton()
         
         sceneMapView.bringSubviewToFront(compass)
     }
@@ -71,15 +73,17 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     }
     
     func onResponseReceived(partyState: PartyState) {
-        
         if (partyState.nextSceneAvailable! != _isAtNextScene) {
             if (partyState.nextSceneAvailable!) {
+                _isAtNextScene = partyState.nextSceneAvailable!
                 animateOutCompass()
+                checkInTextBoxState()
             } else {
+                _isAtNextScene = partyState.nextSceneAvailable!
                 animateOutNextSceneButton()
+                undoCheckInTextBoxState()
             }
         }
-        _isAtNextScene = partyState.nextSceneAvailable!
 
     }
     
@@ -106,19 +110,14 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
         twirlCompass()
     }
     
-    func addNextSceneButton() {
-        createNextSceneButton()
-        addSubview(nextSceneButton)
-        animateInNextSceneButton()
-    }
-    
     func createNextSceneButton() {
         nextSceneButton = UIButton(type: .Custom)
-        nextSceneButton.frame = compassCenter()
         nextSceneButton.addTarget(delegate, action: #selector(delegate.goToNextScene), forControlEvents: .TouchUpInside)
+        addSubview(nextSceneButton)
     }
     
     func animateInNextSceneButton() {
+        nextSceneButton.frame = compassCenter()
         UIView.animateWithDuration(0.5, animations: {
             self.nextSceneButton.frame = self.compassSize()
             self.nextSceneButton.layer.cornerRadius = 0.5 * self.nextSceneButton.bounds.size.width
@@ -131,23 +130,27 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
         UIView.animateWithDuration(0.5, animations: {
             self.nextSceneButton.frame = self.compassCenter()
         },
-        completion: { truth in
-            self.animateInCompass()
-        })
+        completion: animateInCompass)
     }
     
     func animateOutCompass() {
         UIView.animateWithDuration(0.5, animations: {
-            self.compass.transform = CGAffineTransformMakeScale(0.01, 0.01);
+            self.compass.transform = CGAffineTransformMakeScale(0.01, 0.01)
         },
         completion: { truth in
-            self.addNextSceneButton()
+            self.compass.hidden = true
+            self.animateInNextSceneButton()
         })
     }
     
-    func animateInCompass() {
+    func animateInCompass(truth: Bool) {
+        self.compass.transform = CGAffineTransformMakeScale(0.01, 0.01)
+        self.compass.hidden = false
         UIView.animateWithDuration(0.5, animations: {
-            self.compass.transform = CGAffineTransformMakeScale(1.0,1.0);
+            self.compass.transform = CGAffineTransformMakeScale(1.0, 1.0)
+        },
+        completion: { truth in
+            self.compass.transform = CGAffineTransformIdentity
         })
     }
     
@@ -167,6 +170,30 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
             width: 0,
             height: 0
         )
+    }
+    
+    func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+    
+    func checkInTextBoxState() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.instructionsView.backgroundColor = Colors.basePurple
+            self.instructionsLabel.textColor = UIColor.whiteColor()
+            self.instructionsLabel.text = "Check in!"
+            self.instructionsLabel.font = self.instructionsLabel.font.fontWithSize(34)
+            self.instructionsLabel.textAlignment = NSTextAlignment.Center
+        })
+    }
+    
+    func undoCheckInTextBoxState() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.instructionsView.backgroundColor = UIColor.whiteColor()
+            self.instructionsLabel.textColor = UIColor.blackColor()
+            self.bindTitleToInstructions()
+            self.instructionsLabel.textAlignment = NSTextAlignment.Left
+            self.instructionsLabel.font = self.instructionsLabel.font.fontWithSize(16)
+        })
     }
     
     func onHeadingUpdated() {

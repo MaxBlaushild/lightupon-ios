@@ -30,11 +30,6 @@ class TripDetailsView: UIView {
         roundCorners()
     }
     
-    func roundCorners() {
-        layer.cornerRadius = 6
-        layer.masksToBounds = true
-    }
-    
     func bindTrip(trip: Trip) {
         _trip = trip
         tripDetailsLabel.text = trip.descriptionText

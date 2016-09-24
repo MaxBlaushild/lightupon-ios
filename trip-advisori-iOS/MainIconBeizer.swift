@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PocketSVG
 
 
 extension UIBezierPath {
@@ -106,8 +107,9 @@ extension UIBezierPath {
         bezierPath.closePath()
         fillColor2.setFill()
         bezierPath.fill()
-
+        
         return bezierPath
     }
+    
 }
 

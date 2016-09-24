@@ -29,6 +29,8 @@ class CardView: MDCSwipeToChooseView {
             return TextHero.fromNib("TextHero")
         case "PictureHero":
             return PictureHero.fromNib("PictureHero")
+        case "ComboTitle":
+            return ComboTitle.fromNib("ComboTitle")
         default:
             return TextHero.fromNib("TextHero")
         }

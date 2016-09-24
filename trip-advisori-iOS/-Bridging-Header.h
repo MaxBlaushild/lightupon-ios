@@ -15,5 +15,4 @@
 #import <MDCSwipeToChoose/MDCSwipeToChoose.h>
 #import <CBZSplashView/CBZSplashView.h>
 
-
 #endif /* _Bridging_Header_h */
