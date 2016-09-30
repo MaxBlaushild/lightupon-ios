@@ -2,4 +2,4 @@ Pods/
 Podfile.lock
 trip-advisori-iOS.xcodeproj/xcuserdata/
 trip-advisori-iOS.xcworkspace/xcuserdata/
-
+.DS_Store
