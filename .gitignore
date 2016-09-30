@@ -1,5 +1,5 @@
 Pods/
 Podfile.lock
-trip-advisori-iOS.xcodeproj/
-trip-advisori-iOS.xcworkspace/
-
+trip-advisori-iOS.xcodeproj/xcuserdata/
+trip-advisori-iOS.xcworkspace/xcuserdata/
+.DS_Store
