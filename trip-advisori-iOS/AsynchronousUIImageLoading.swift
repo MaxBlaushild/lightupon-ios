@@ -17,4 +17,5 @@ extension UIImageView {
         let nsurl = NSURL(string: urlString)
         self.hnk_setImageFromURL(nsurl!)
     }
+    
 }

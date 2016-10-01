@@ -75,7 +75,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     
     func loadScene() {
         loadSwipeViews()
-        loadBackgroundPicture()
+//        loadBackgroundPicture()
     }
     
     func goToNextSceneInMemory() {

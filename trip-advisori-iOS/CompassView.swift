@@ -175,12 +175,13 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
     }
+
     
     func checkInTextBoxState() {
         UIView.animateWithDuration(0.5, animations: {
             self.instructionsView.backgroundColor = Colors.basePurple
             self.instructionsLabel.textColor = UIColor.whiteColor()
-            self.instructionsLabel.text = "Check in!"
+            self.instructionsLabel.text = "Check it out!"
             self.instructionsLabel.font = self.instructionsLabel.font.fontWithSize(34)
             self.instructionsLabel.textAlignment = NSTextAlignment.Center
         })

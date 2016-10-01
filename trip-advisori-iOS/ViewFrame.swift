@@ -9,7 +9,7 @@
 import Foundation
 
 extension UIImage {
-    static func frame(size: CGSize) -> UIImage {
+    static func frame(size: CGSize, color: CGColor) -> UIImage {
         let bounds = CGRect(origin: CGPoint.zero, size: size)
         let opaque = false
         let scale: CGFloat = 0
@@ -17,7 +17,7 @@ extension UIImage {
         let context = UIGraphicsGetCurrentContext()
         
         // Setup complete, do drawing here
-        CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
+        CGContextSetStrokeColorWithColor(context, color)
         CGContextSetLineWidth(context, 12.0)
         
         CGContextStrokeRect(context, bounds)

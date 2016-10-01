@@ -13,8 +13,6 @@ class ProfileViewController: UIViewController {
     private let authService: AuthService = Injector.sharedInjector.getAuthService()
     private let profileService: ProfileService = Injector.sharedInjector.getProfileService()
 
-    @IBOutlet weak var profilePic: UIImageView!
-    @IBOutlet weak var profileBanner: UIImageView!
     
     @IBAction func goBack(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: {});
@@ -37,8 +35,10 @@ class ProfileViewController: UIViewController {
     }
     
     func bindProfileToView(profile: FacebookProfile){
-        profileBanner.imageFromUrl(profile.coverPhoto!)
-        profilePic.imageFromUrl(profile.profilePictureURL!)
+        let profileView = ProfileView.fromNib("ProfileView")
+        profileView.frame = view.frame
+        profileView.initializeView(profile)
+        view.addSubview(profileView)
     }
     
     override func didReceiveMemoryWarning() {

@@ -12,6 +12,7 @@ target 'trip-advisori-iOS' do
   pod 'Starscream', '~> 1.1.3'
   pod 'ObjectMapper'
   pod 'AlamofireObjectMapper', '~> 3.0'
+  pod "PromiseKit", "~> 3.5"
   pod 'HanekeSwift'
   pod 'MDCSwipeToChoose'
   pod 'CBZSplashView', '~> 1.0.0'

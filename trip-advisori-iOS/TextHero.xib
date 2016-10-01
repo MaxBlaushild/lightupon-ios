@@ -3,7 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Dosis-SemiBold.otf">
+            <string>Dosis-SemiBold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -11,26 +17,31 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCH-4e-z3t">
-                    <rect key="frame" x="100" y="0.0" width="400" height="600"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="birdhouse" translatesAutoresizingMaskIntoConstraints="NO" id="xL7-gd-Dwu">
+                    <rect key="frame" x="200" y="345" width="200" height="200"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCH-4e-z3t">
+                    <rect key="frame" x="100" y="243.5" width="400" height="44.5"/>
+                    <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="24"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="WCH-4e-z3t" firstAttribute="top" secondItem="A9n-Uj-9ly" secondAttribute="top" id="5H1-Tf-khM"/>
-                <constraint firstItem="WCH-4e-z3t" firstAttribute="leading" secondItem="A9n-Uj-9ly" secondAttribute="leading" constant="100" id="DrV-m5-3hz"/>
-                <constraint firstItem="WCH-4e-z3t" firstAttribute="top" secondItem="A9n-Uj-9ly" secondAttribute="top" id="FbK-aV-2Z1"/>
-                <constraint firstAttribute="trailing" secondItem="WCH-4e-z3t" secondAttribute="trailing" constant="100" id="bC5-K1-cvM"/>
-                <constraint firstAttribute="bottom" secondItem="WCH-4e-z3t" secondAttribute="bottom" id="c1J-Ld-RDs"/>
-                <constraint firstAttribute="bottom" secondItem="WCH-4e-z3t" secondAttribute="bottom" id="qwu-3B-mQe"/>
+                <constraint firstItem="xL7-gd-Dwu" firstAttribute="centerX" secondItem="A9n-Uj-9ly" secondAttribute="centerX" id="1fy-vr-ZaH"/>
+                <constraint firstAttribute="trailing" secondItem="WCH-4e-z3t" secondAttribute="trailing" constant="100" id="AFf-vG-6rt"/>
+                <constraint firstItem="xL7-gd-Dwu" firstAttribute="top" secondItem="WCH-4e-z3t" secondAttribute="bottom" multiplier="1.2" id="i62-qW-rUg"/>
+                <constraint firstItem="WCH-4e-z3t" firstAttribute="leading" secondItem="A9n-Uj-9ly" secondAttribute="leading" constant="100" id="iE5-9i-AKG"/>
+                <constraint firstAttribute="bottom" secondItem="xL7-gd-Dwu" secondAttribute="bottom" multiplier="1.1" id="sHG-hY-gcW"/>
             </constraints>
             <connections>
                 <outlet property="textHero" destination="WCH-4e-z3t" id="gcI-Cp-ddi"/>
             </connections>
-            <point key="canvasLocation" x="785" y="446"/>
+            <point key="canvasLocation" x="666" y="440"/>
         </view>
     </objects>
+    <resources>
+        <image name="birdhouse" width="200" height="200"/>
+    </resources>
 </document>

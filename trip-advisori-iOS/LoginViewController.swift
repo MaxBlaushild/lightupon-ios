@@ -26,7 +26,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         let size = CGSize(width: view.frame.width - offset * 2, height: view.frame.height - offset * 2)
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: offset), size: size))
         self.view.addSubview(imageView)
-        imageView.image = UIImage.frame(size)
+        imageView.image = UIImage.frame(size, color: UIColor.whiteColor().CGColor)
     }
     
     override func shouldAutorotate() -> Bool {
@@ -56,6 +56,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         } else if result.isCancelled {
             // Handle cancellations
         } else {
+            loginView.hidden = true
             profileService.getLoginInfo(self.onLoginInfoRecieved)
         }
     }
