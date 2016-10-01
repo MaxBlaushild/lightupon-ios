@@ -42,6 +42,9 @@
                             <exclude reference="wwx-80-4cE"/>
                         </mask>
                     </variation>
+                    <variation key="widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="200" y="33" width="0.0" height="90"/>
+                    </variation>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FULLNAME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JQ-Pa-4MJ">
                     <rect key="frame" x="35" y="138" width="530" height="22"/>
@@ -65,7 +68,7 @@
                     <rect key="frame" x="0.0" y="195" width="600" height="56"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QT7-mk-kfc">
-                            <rect key="frame" x="291" y="5" width="18" height="38"/>
+                            <rect key="frame" x="291" y="5" width="18" height="46"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="42" id="uIU-Cq-iFZ"/>
                             </constraints>
@@ -89,7 +92,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOLLOWERS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ap0-V9-BPc">
-                            <rect key="frame" x="171" y="31" width="80" height="12"/>
+                            <rect key="frame" x="171" y="31" width="80" height="20"/>
                             <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -104,7 +107,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JOURNEYS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TkP-rG-tNW">
-                            <rect key="frame" x="349" y="31" width="68" height="12"/>
+                            <rect key="frame" x="349" y="31" width="68" height="20"/>
                             <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -122,6 +125,7 @@
                         <constraint firstItem="TkP-rG-tNW" firstAttribute="leading" secondItem="A56-IF-tsR" secondAttribute="leading" id="PAE-ns-wtZ"/>
                         <constraint firstItem="QT7-mk-kfc" firstAttribute="top" secondItem="Xeg-Hc-1W9" secondAttribute="top" id="RCo-ob-SmJ"/>
                         <constraint firstItem="Ap0-V9-BPc" firstAttribute="bottom" secondItem="QT7-mk-kfc" secondAttribute="bottom" id="RY0-iv-uwF"/>
+                        <constraint firstItem="QT7-mk-kfc" firstAttribute="centerY" secondItem="GYB-dM-Q4x" secondAttribute="centerY" id="Y9k-KS-9h7"/>
                         <constraint firstItem="QT7-mk-kfc" firstAttribute="leading" secondItem="Xeg-Hc-1W9" secondAttribute="trailing" constant="40" id="ZmT-r2-rob"/>
                         <constraint firstItem="QT7-mk-kfc" firstAttribute="centerX" secondItem="GYB-dM-Q4x" secondAttribute="centerX" id="ojv-Uv-K9D"/>
                         <constraint firstItem="Ap0-V9-BPc" firstAttribute="top" secondItem="Xeg-Hc-1W9" secondAttribute="bottom" constant="5" id="qGg-g5-7Kr"/>
@@ -145,6 +149,9 @@
                             <state key="normal" title="LOGOUT">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="onActionPackedButtonPress:" destination="iN0-l3-epB" eventType="touchUpInside" id="YKq-K8-GUL"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

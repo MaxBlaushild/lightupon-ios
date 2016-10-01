@@ -9,8 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 
-class ProfileViewController: UIViewController {
-    private let authService: AuthService = Injector.sharedInjector.getAuthService()
+class ProfileViewController: UIViewController, ProfileViewDelegate {
     private let profileService: ProfileService = Injector.sharedInjector.getProfileService()
 
     
@@ -22,8 +21,7 @@ class ProfileViewController: UIViewController {
         profileService.getMyProfile(self.bindProfileToView)
     }
     
-    @IBAction func logOut(sender: AnyObject) {
-        authService.logout()
+    func onLoggedOut() {
         performSegueWithIdentifier("ProfileToLogin", sender: nil)
     }
     override func shouldAutorotate() -> Bool {
@@ -37,6 +35,7 @@ class ProfileViewController: UIViewController {
     func bindProfileToView(profile: FacebookProfile){
         let profileView = ProfileView.fromNib("ProfileView")
         profileView.frame = view.frame
+        profileView.delegate = self
         profileView.initializeView(profile)
         view.addSubview(profileView)
     }

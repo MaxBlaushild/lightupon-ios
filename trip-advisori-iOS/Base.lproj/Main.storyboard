@@ -51,13 +51,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-DM-b4G">
                                 <rect key="frame" x="0.0" y="20" width="600" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SERENDIPITY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BM1-kl-vNr" customClass="TitleLabel" customModule="trip_advisori_iOS" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SERENDIPITY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BM1-kl-vNr" customClass="TitleLabel" customModule="trip_advisori_iOS" customModuleProvider="target">
                                         <rect key="frame" x="18" y="13" width="134" height="33"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="26"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uld-uB-WGq" customClass="MenuButton" customModule="trip_advisori_iOS" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uld-uB-WGq" customClass="MenuButton" customModule="trip_advisori_iOS" customModuleProvider="target">
                                         <rect key="frame" x="545" y="15" width="30" height="30"/>
                                         <state key="normal" image="user_menu"/>
                                         <connections>
@@ -153,7 +153,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="140"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfX-WT-mUV" customClass="TitleLabel" customModule="trip_advisori_iOS" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfX-WT-mUV" customClass="TitleLabel" customModule="trip_advisori_iOS" customModuleProvider="target">
                                                     <rect key="frame" x="18" y="18" width="564" height="31"/>
                                                     <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="24"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -205,7 +205,7 @@
                                             <action selector="openMenu:" destination="HOi-Ee-twU" eventType="touchUpInside" id="YLu-7d-MWx"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TRIPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcB-wy-Qh6" customClass="TitleLabel" customModule="trip_advisori_iOS" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TRIPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcB-wy-Qh6" customClass="TitleLabel" customModule="trip_advisori_iOS" customModuleProvider="target">
                                         <rect key="frame" x="18" y="5" width="59" height="50"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="26"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -267,7 +267,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lyo-Xb-1RE">
                                 <rect key="frame" x="0.0" y="20" width="600" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFC-sd-MA4">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFC-sd-MA4">
                                         <rect key="frame" x="18" y="15" width="30" height="31"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="15"/>
                                         <state key="normal" title="Back">
@@ -285,7 +285,7 @@
                                     <constraint firstItem="dFC-sd-MA4" firstAttribute="centerY" secondItem="lyo-Xb-1RE" secondAttribute="centerY" id="d80-5d-ZiR"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SwC-jH-BS9">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SwC-jH-BS9">
                                 <rect key="frame" x="0.0" y="570" width="600" height="30"/>
                                 <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -351,7 +351,7 @@
                                     <constraint firstAttribute="height" constant="79" id="ixr-qU-Txa"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="lightupon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7D-ch-9g5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lightupon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7D-ch-9g5">
                                 <rect key="frame" x="254" y="155" width="93" height="33"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="26"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -450,7 +450,7 @@
                                     <constraint firstAttribute="width" constant="70" id="vsr-pp-3BZ"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyQ-fW-HO4">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyQ-fW-HO4">
                                 <rect key="frame" x="505" y="547" width="75" height="33"/>
                                 <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="16"/>
                                 <state key="normal" title="Leave Story">
@@ -565,7 +565,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNB-j1-gEP">
                                 <rect key="frame" x="0.0" y="20" width="600" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gck-k1-Isd" customClass="MenuButton" customModule="trip_advisori_iOS" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gck-k1-Isd" customClass="MenuButton" customModule="trip_advisori_iOS" customModuleProvider="target">
                                         <rect key="frame" x="545" y="15" width="30" height="30"/>
                                         <state key="normal" image="user_menu"/>
                                         <connections>
@@ -651,9 +651,9 @@
         <image name="whiteLogo" width="79" height="79"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UVG-gO-Dut"/>
-        <segue reference="ND3-rS-vOm"/>
-        <segue reference="igN-LA-eCX"/>
+        <segue reference="UTU-s5-NHN"/>
+        <segue reference="gY1-t0-Oa9"/>
         <segue reference="5gH-Uh-KtK"/>
+        <segue reference="igN-LA-eCX"/>
     </inferredMetricsTieBreakers>
 </document>
