@@ -13,7 +13,7 @@ protocol ProfileViewDelegate {
 }
 
 enum ProfileContext {
-    case isUser, following, notFollowing
+    case isUser, following, notFollowing, pending
 }
 
 class ProfileView: UIView {
@@ -69,10 +69,17 @@ class ProfileView: UIView {
         case .isUser:
             setIsUserState()
         case .following:
-            unfollow()
+            setFollowingState()
         case .notFollowing:
-            follow()
+            setNotFollowingState()
+        case .pending:
+            setPendingState()
         }
+    }
+    
+    func setPendingState() {
+        actionPackButtonHandler = {}
+        actionPackedButton.setTitle("PENDING", forState: .Normal)
     }
     
     func setIsUserState() {

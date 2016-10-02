@@ -24,7 +24,10 @@ class LoginService: Service {
         
         let user = [
             "FacebookId": profile.id!,
-            "Email": profile.email!
+            "Email": profile.email!,
+            "FullName": profile.fullName!,
+            "FirstName": profile.firstName!,
+            "ProfilePictureURL": profile.profilePictureURL!
         ]
         
         Alamofire.request(.POST, url, parameters: user, encoding: .JSON)

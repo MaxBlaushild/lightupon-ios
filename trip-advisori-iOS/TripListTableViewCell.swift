@@ -12,14 +12,23 @@ class TripListTableViewCell: UITableViewCell {
     @IBOutlet weak var tripTitle: UILabel!
     @IBOutlet weak var tripDescription: UILabel!
     @IBOutlet weak var tripImage: UIImageView!
+    @IBOutlet weak var profileImage: UIImageView!
     
+    @IBOutlet weak var daysSince: UILabel!
+    @IBOutlet weak var userName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
     func decorateCell(trip: Trip) {
+        contentView.layer.borderColor = UIColor(red: CGFloat(153.00)/255, green: CGFloat(153.00)/255, blue: CGFloat(153.00)/255, alpha: 0.5).CGColor;
+        contentView.layer.borderWidth = 1;
         tripImage.imageFromUrl(trip.imageUrl!)
+        profileImage.imageFromUrl((trip.owner?.profilePictureURL)!)
+        profileImage.makeCircle()
+        userName.text = trip.owner?.fullName
+        daysSince.text = trip.prettyTimeSinceCreation()
         tripTitle.text = trip.title
         tripDescription.text = trip.descriptionText
         tag = trip.id!

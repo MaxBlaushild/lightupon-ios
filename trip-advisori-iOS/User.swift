@@ -14,14 +14,20 @@ class User: NSObject, Mappable {
     var id:Int?
     var email: String?
     var facebookId:String?
+    var fullName:String?
+    var firstName:String?
+    var profilePictureURL:String?
     var location: Location?
     var facebookProfile: FacebookProfile?
     
     func mapping(map: Map) {
-        id         <- map["ID"]
-        email      <- map["Email"]
-        facebookId <- map["FacebookId"]
-        location   <- map["Location"]
+        id                <- map["ID"]
+        email             <- map["Email"]
+        facebookId        <- map["FacebookId"]
+        location          <- map["Location"]
+        fullName          <- map["FullName"]
+        firstName         <- map["FirstName"]
+        profilePictureURL <- map["ProfilePictureURL"]
     }
     
     required init?(_ map: Map) {}
