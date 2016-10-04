@@ -13,8 +13,8 @@ extension UIView {
     func splashView() {
         let icon = UIBezierPath.mainLogo()
         let splashView = CBZSplashView(bezierPath: icon, backgroundColor: Colors.basePurple)
-        splashView.animationDuration = 3
-        self.addSubview(splashView)
-        splashView.startAnimation()
+        splashView?.animationDuration = 3
+        self.addSubview(splashView!)
+        splashView?.startAnimation()
     }
 }

@@ -16,12 +16,12 @@ protocol CurrentLocationServiceDelegate {
 
 class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo {
     
-    private var locationManager:CLLocationManager
-    private var _locationStatus:(code: Int, message: String)
-    private var _longitude:Double
-    private var _latitude:Double
-    private var _course:Double
-    private var _heading:Double
+    fileprivate var locationManager:CLLocationManager
+    fileprivate var _locationStatus:(code: Int, message: String)
+    fileprivate var _longitude:Double
+    fileprivate var _latitude:Double
+    fileprivate var _course:Double
+    fileprivate var _heading:Double
     
     var delegates:[CurrentLocationServiceDelegate] = [CurrentLocationServiceDelegate]()
     
@@ -47,11 +47,11 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         locationManager.startUpdatingHeading()
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationManager.stopUpdatingLocation()
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let locationObj:CLLocation = locations.last!
         let coord = locationObj.coordinate
 
@@ -64,11 +64,11 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         }
     }
     
-    func registerDelegate(delegate: CurrentLocationServiceDelegate) {
+    func registerDelegate(_ delegate: CurrentLocationServiceDelegate) {
         delegates.append(delegate)
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading ) {
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading ) {
         if (newHeading.headingAccuracy < 0) {
             return
         }
@@ -81,16 +81,16 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         }
     }
     
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
             
-        case CLAuthorizationStatus.Restricted:
+        case CLAuthorizationStatus.restricted:
             _locationStatus = (code: 1, message: "Restricted access to location")
             
-        case CLAuthorizationStatus.Denied:
+        case CLAuthorizationStatus.denied:
             _locationStatus = (code: 0, message: "User denied access to location")
             
-        case CLAuthorizationStatus.NotDetermined:
+        case CLAuthorizationStatus.notDetermined:
             _locationStatus = (code: 0, message: "Status not determined")
             
         default:

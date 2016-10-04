@@ -13,8 +13,8 @@ class CardSwipeOptions: MDCSwipeToChooseViewOptions {
     override init() {
         super.init()
         self.likedText = nil
-        self.likedColor = UIColor.clearColor()
+        self.likedColor = UIColor.clear
         self.nopeText = nil
-        self.nopeColor = UIColor.clearColor()
+        self.nopeColor = UIColor.clear
     }
 }

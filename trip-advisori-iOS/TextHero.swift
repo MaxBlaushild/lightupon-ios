@@ -12,7 +12,7 @@ class TextHero: UIView, IAmCardContents {
     
     @IBOutlet weak var textHero: UILabel!
     
-    func bindCard(card: Card) {
+    func bindCard(_ card: Card) {
         textHero.text = card.text
     }
     
@@ -21,7 +21,7 @@ class TextHero: UIView, IAmCardContents {
         let size = CGSize(width: frame.width - offset * 2, height: frame.height - offset * 2)
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: offset), size: size))
         addSubview(imageView)
-        imageView.image = UIImage.frame(size, color: UIColor.blackColor().CGColor)
+        imageView.image = UIImage.frame(size, color: UIColor.black.cgColor)
     }
 
 }

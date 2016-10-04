@@ -11,8 +11,22 @@ import FBSDKLoginKit
 import Locksmith
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
-    private let  profileService:ProfileService = Injector.sharedInjector.getProfileService()
-    private let loginService:LoginService = Injector.sharedInjector.getLoginService()
+
+    public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        print("User Logged In")
+        
+        if ((error) != nil) {
+            // Process error
+        } else if result.isCancelled {
+            // Handle cancellations
+        } else {
+            loginView.isHidden = true
+            profileService.getLoginInfo(self.onLoginInfoRecieved)
+        }
+    }
+
+    fileprivate let  profileService:ProfileService = Injector.sharedInjector.getProfileService()
+    fileprivate let loginService:LoginService = Injector.sharedInjector.getLoginService()
 
     @IBOutlet weak var loginView: FBSDKLoginButton!
     override func viewDidLoad() {
@@ -26,15 +40,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         let size = CGSize(width: view.frame.width - offset * 2, height: view.frame.height - offset * 2)
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: offset), size: size))
         self.view.addSubview(imageView)
-        imageView.image = UIImage.frame(size, color: UIColor.whiteColor().CGColor)
+        imageView.image = UIImage.frame(size, color: UIColor.white.cgColor)
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
     }
     
     func setLoginButton() {
@@ -48,31 +62,18 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        print("User Logged In")
-        
-        if ((error) != nil) {
-            // Process error
-        } else if result.isCancelled {
-            // Handle cancellations
-        } else {
-            loginView.hidden = true
-            profileService.getLoginInfo(self.onLoginInfoRecieved)
-        }
-    }
-    
 
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("User Logged Out")
     }
     
-    func onLoginInfoRecieved(profile: FacebookProfile) {
+    func onLoginInfoRecieved(_ profile: FacebookProfile) {
         loginService.upsertUser(profile, callback: self.onLogin)
     }
     
     func onLogin() {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-            self.performSegueWithIdentifier("LoginToInitial", sender: self)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+            self.performSegue(withIdentifier: "LoginToInitial", sender: self)
         }
     }
 }

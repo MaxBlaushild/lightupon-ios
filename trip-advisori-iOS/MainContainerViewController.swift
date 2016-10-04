@@ -12,23 +12,23 @@ import CBZSplashView
 private let centerPanelExpandedOffset: CGFloat = 60
 
 private extension UIStoryboard {
-    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
+    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: Bundle.main) }
     
     class func menuViewController() -> StoryTellerMenuViewController? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("StoryTellerMenuViewController") as? StoryTellerMenuViewController
+        return mainStoryboard().instantiateViewController(withIdentifier: "StoryTellerMenuViewController") as? StoryTellerMenuViewController
     }
     
     class func storyTellerViewController() -> StoryTellerViewController? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("StoryTellerViewController") as? StoryTellerViewController
+        return mainStoryboard().instantiateViewController(withIdentifier: "StoryTellerViewController") as? StoryTellerViewController
     }
     
     class func homeTabBarViewController() -> HomeTabBarViewController? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("HomeTabBarViewController") as? HomeTabBarViewController
+        return mainStoryboard().instantiateViewController(withIdentifier: "HomeTabBarViewController") as? HomeTabBarViewController
     }
 }
 
 class MainContainerViewController: UIViewController, MainViewControllerDelegate {
-    private let _partyService: PartyService = Injector.sharedInjector.getPartyService()
+    fileprivate let _partyService: PartyService = Injector.sharedInjector.getPartyService()
     
     var storyTellerViewController: StoryTellerViewController!
     var homeTabBarViewController: HomeTabBarViewController!
@@ -43,7 +43,7 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate 
         getParty()
     }
     
-    func onPartyRetrieved(party: Party) {
+    func onPartyRetrieved(_ party: Party) {
         _party = party
         
         if (userIsInParty()) {
@@ -74,11 +74,11 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate 
         showViewController(homeTabBarViewController)
     }
     
-    func showViewController(viewController: UIViewController) {
+    func showViewController(_ viewController: UIViewController) {
         view.addSubview(viewController.view)
         addChildViewController(viewController)
         shownViewController = viewController
-        viewController.didMoveToParentViewController(self)
+        viewController.didMove(toParentViewController: self)
         self.view.splashView()
     }
 
@@ -111,27 +111,27 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate 
         }
     }
     
-    func addChildMenuController(menuViewController: StoryTellerMenuViewController) {
-        view.insertSubview(menuViewController.view, atIndex: 0)
+    func addChildMenuController(_ menuViewController: StoryTellerMenuViewController) {
+        view.insertSubview(menuViewController.view, at: 0)
         addChildViewController(menuViewController)
-        menuViewController.didMoveToParentViewController(self)
+        menuViewController.didMove(toParentViewController: self)
     }
     
-    func animateCenterPanelXPosition(targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
-        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
+    func animateCenterPanelXPosition(_ targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIViewAnimationOptions(), animations: {
             self.shownViewController.view.frame.origin.x = targetPosition
             }, completion: completion)
     }
     
-    func animateRightPanel(shouldExpand: Bool) {
+    func animateRightPanel(_ shouldExpand: Bool) {
         if (shouldExpand) {
-            animateCenterPanelXPosition(-CGRectGetWidth(shownViewController.view.frame) + centerPanelExpandedOffset)
+            animateCenterPanelXPosition(-shownViewController.view.frame.width + centerPanelExpandedOffset)
         } else {
             animateCenterPanelXPosition(0) { _ in }
         }
     }
     
-    func showShadowForCenterViewController(shouldShowShadow: Bool) {
+    func showShadowForCenterViewController(_ shouldShowShadow: Bool) {
         if (shouldShowShadow) {
             storyTellerViewController.view.layer.shadowOpacity = 0.8
         } else {

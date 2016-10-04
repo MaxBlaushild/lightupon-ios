@@ -20,8 +20,8 @@ class Trip: NSObject, Mappable {
     var details:String?
     var scenes: [Scene]?
     var owner: User?
-    var createdAt: NSDate?
-    var updatedAt: NSDate?
+    var createdAt: Date?
+    var updatedAt: Date?
     
     func mapping(map: Map) {
         imageUrl        <- map["ImageUrl"]
@@ -38,7 +38,7 @@ class Trip: NSObject, Mappable {
         updatedAt       <- (map["UpdatedAt"], ISO8601MilliDateTransform())
     }
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
@@ -72,7 +72,7 @@ class Trip: NSObject, Mappable {
         }
     }
     
-    func getSceneWithOrder(sceneOrder: Int) -> Scene {
+    func getSceneWithOrder(_ sceneOrder: Int) -> Scene {
         var sceneWithOrder: Scene = Scene()
         
         for scene in self.scenes! {

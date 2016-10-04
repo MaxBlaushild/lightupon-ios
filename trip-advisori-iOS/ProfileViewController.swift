@@ -10,11 +10,11 @@ import UIKit
 import FBSDKLoginKit
 
 class ProfileViewController: UIViewController, ProfileViewDelegate {
-    private let profileService: ProfileService = Injector.sharedInjector.getProfileService()
+    fileprivate let profileService: ProfileService = Injector.sharedInjector.getProfileService()
 
     
-    @IBAction func goBack(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: {});
+    @IBAction func goBack(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: {});
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,17 +22,17 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
     }
     
     func onLoggedOut() {
-        performSegueWithIdentifier("ProfileToLogin", sender: nil)
+        performSegue(withIdentifier: "ProfileToLogin", sender: nil)
     }
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
     }
     
-    func bindProfileToView(profile: FacebookProfile){
+    func bindProfileToView(_ profile: FacebookProfile){
         let profileView = ProfileView.fromNib("ProfileView")
         profileView.frame = view.frame
         profileView.delegate = self

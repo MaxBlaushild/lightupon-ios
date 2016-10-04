@@ -13,13 +13,13 @@ import Locksmith
 
 class LoginService: Service {
     
-    private let _authService: AuthService
+    fileprivate let _authService: AuthService
     
     init(authService: AuthService) {
       _authService = authService
     }
     
-    func upsertUser(profile: FacebookProfile, callback: () -> Void) {
+    func upsertUser(_ profile: FacebookProfile, callback: @escaping () -> Void) {
         let url:String = apiURL + "/users"
         
         let user = [
@@ -30,7 +30,7 @@ class LoginService: Service {
             "ProfilePictureURL": profile.profilePictureURL!
         ]
         
-        Alamofire.request(.POST, url, parameters: user, encoding: .JSON)
+        Alamofire.request(url, method: .post, parameters: user, encoding: JSONEncoding.default)
             .responseJSON { response in
                 
             let json = JSON(response.result.value!)

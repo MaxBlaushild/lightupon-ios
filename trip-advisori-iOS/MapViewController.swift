@@ -11,9 +11,9 @@ import GoogleMaps
 
 class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDelegate, TripDetailsViewDelegate {
     
-    private let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
-    private let socketService: SocketService = Injector.sharedInjector.getSocketService()
-    private let tripsService:TripsService = Injector.sharedInjector.getTripsService()
+    fileprivate let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
+    fileprivate let socketService: SocketService = Injector.sharedInjector.getSocketService()
+    fileprivate let tripsService:TripsService = Injector.sharedInjector.getTripsService()
     
     var trips:[Trip]!
     
@@ -24,7 +24,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDele
     var delegate: MainViewControllerDelegate!
     
     
-    @IBAction func openMenu(sender: AnyObject) {
+    @IBAction func openMenu(_ sender: AnyObject) {
         delegate.toggleRightPanel()
     }
     
@@ -38,8 +38,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDele
     }
     
     func configureMapView() {
-        mapView.camera = GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
-        mapView.myLocationEnabled = true
+        mapView.camera = GMSCameraPosition.camera(withLatitude: currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
+        mapView.isMyLocationEnabled = true
         mapView.delegate = self
     }
 
@@ -48,19 +48,19 @@ class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDele
         // Dispose of any resources that can be recreated.
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
     }
     
     func getTrips() {
         tripsService.getTrips(self.onTripsGotten, latitude: self.currentLocationService.latitude, longitude: self.currentLocationService.longitude)
     }
     
-    func onTripsGotten(_trips_: [Trip]) {
+    func onTripsGotten(_ _trips_: [Trip]) {
         trips = _trips_
         initMap()
     }
@@ -78,10 +78,10 @@ class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDele
         return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
     }
     
-    func placeTripOnMap(trip: Trip, mapView: GMSMapView) {
+    func placeTripOnMap(_ trip: Trip, mapView: GMSMapView) {
         let colorForTrip = getRandomColor()
         let marker = GMSMarker()
-        marker.icon = GMSMarker.markerImageWithColor(colorForTrip)
+        marker.icon = GMSMarker.markerImage(with: colorForTrip)
         marker.position = CLLocationCoordinate2DMake(trip.scenes![0].latitude!, trip.scenes![0].longitude!)
         marker.title = trip.title
         marker.snippet = trip.descriptionText
@@ -95,9 +95,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDele
         xBackButton.removeFromSuperview()
     }
     
-    func onResponseReceived(partyState: PartyState) {}
+    func onResponseReceived(_ partyState: PartyState) {}
     
-    func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         obscureBackground()
         tripDetailsView = TripDetailsView.fromNib("TripDetailsView")
         tripDetailsView.delegate = self
@@ -108,7 +108,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDele
     }
     
     func segueToContainer() {
-        performSegueWithIdentifier("MapToContainer", sender: self)
+        performSegue(withIdentifier: "MapToContainer", sender: self)
     }
     
     func obscureBackground() {
@@ -119,7 +119,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDele
     func addXBackButton() {
         let frame = CGRect(x: view.bounds.width - 45, y: 30, width: 30, height: 30)
         xBackButton = XBackButton(frame: frame)
-        xBackButton.addTarget(self, action: #selector(onDismissed), forControlEvents: .TouchUpInside)
+        xBackButton.addTarget(self, action: #selector(onDismissed), for: .touchUpInside)
         view.addSubview(xBackButton)
     }
     

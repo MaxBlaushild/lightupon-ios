@@ -12,16 +12,16 @@ import Alamofire
 import SwiftyJSON
 
 class AmbassadorToTheAPI: Service {
-    private let _authService:AuthService
+    fileprivate let _authService:AuthService
     
-    internal typealias NetworkSuccessHandler = (Response<AnyObject, NSError>) -> Void
-    internal typealias NetworkFailureHandler = (NSHTTPURLResponse?, AnyObject?, NSError) -> Void
+    internal typealias NetworkSuccessHandler = (DataResponse<Any>) -> Void
+    internal typealias NetworkFailureHandler = (HTTPURLResponse?, AnyObject?, NSError) -> Void
     internal typealias Header = (Dictionary<String, String>)
     
-    private typealias QueuedRequest = (NSHTTPURLResponse?, AnyObject?, NSError?) -> Void
+    fileprivate typealias QueuedRequest = (HTTPURLResponse?, AnyObject?, NSError?) -> Void
 
-    private var RequestQueue = Array<QueuedRequest>()
-    private var isRefreshing = false
+    fileprivate var RequestQueue = Array<QueuedRequest>()
+    fileprivate var isRefreshing = false
 
     var headers:Dictionary<String, String>?
     
@@ -33,7 +33,7 @@ class AmbassadorToTheAPI: Service {
         setHeaders()
     }
     
-    private func setHeaders() {
+    fileprivate func setHeaders() {
         let token = _authService.getToken()
         
         let headers = [
@@ -43,30 +43,30 @@ class AmbassadorToTheAPI: Service {
         self.headers = headers
     }
 
-    func get(URLString: URLStringConvertible, success: NetworkSuccessHandler?) {
+    func get(_ URLString: URLConvertible, success: NetworkSuccessHandler?) {
         setHeaders()
-        Alamofire.request(.GET, URLString, headers: headers).responseJSON { response in
+        Alamofire.request(URLString, method: .get, headers: headers).responseJSON { response in
             self.processResponse(response, success: success!, URLString: URLString)
         }
             
     }
     
-    func post(URLString: URLStringConvertible, parameters:[String:AnyObject], success: NetworkSuccessHandler?) {
+    func post(_ URLString: URLConvertible, parameters:[String:AnyObject], success: NetworkSuccessHandler?) {
         setHeaders()
-        Alamofire.request(.POST, URLString, parameters: parameters, headers: headers, encoding: .JSON).responseJSON { response in
+        Alamofire.request(URLString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             self.processResponse(response, success: success!, URLString: URLString)
         }
         
     }
     
-    func delete(URLString: URLStringConvertible, success: NetworkSuccessHandler?) {
+    func delete(_ URLString: URLConvertible, success: NetworkSuccessHandler?) {
         setHeaders()
-        Alamofire.request(.DELETE, URLString, headers: headers, encoding: .JSON).responseJSON { response in
+        Alamofire.request(URLString, method: .delete, headers: headers).responseJSON { response in
             self.processResponse(response, success: success!, URLString: URLString)
         }
     }
     
-    func processResponse(response: Response<AnyObject, NSError>, success: NetworkSuccessHandler, URLString: URLStringConvertible) {
+    func processResponse(_ response: DataResponse<Any>, success: @escaping NetworkSuccessHandler, URLString: URLConvertible) {
         if response.result.isFailure {
             if response.response!.statusCode == 401 {
                 self.refreshToken(URLString, success: success)
@@ -80,18 +80,18 @@ class AmbassadorToTheAPI: Service {
     
     func createNoInternetWarning() {
         let topView = UIApplication.topViewController()!.view
-        let label = UILabel(frame: CGRectMake(0, topView.frame.height - 40, topView.frame.width, 40))
-        label.textAlignment = NSTextAlignment.Center
+        let label = UILabel(frame: CGRect(x: 0, y: (topView?.frame.height)! - 40, width: (topView?.frame.width)!, height: 40))
+        label.textAlignment = NSTextAlignment.center
         label.text = "No Internet Connectivity"
         label.font = UIFont(name: Fonts.dosisBold, size: 16)
-        label.textColor = UIColor.whiteColor()
+        label.textColor = UIColor.white
         label.backgroundColor = Colors.basePurple
-        topView.addSubview(label)
+        topView?.addSubview(label)
     }
     
-    private func refreshToken(URLString: URLStringConvertible, success: NetworkSuccessHandler?) {
+    fileprivate func refreshToken(_ URLString: URLConvertible, success: NetworkSuccessHandler?) {
         let facebookId:String = _authService.getFacebookId()
-        Alamofire.request(.PATCH, apiURL + "/users/\(facebookId)/token")
+        Alamofire.request("\(apiURL)/users/\(facebookId)/token", method: .patch)
             .responseJSON { response in
                 let json = JSON(response.result.value!)
                 let token:String = json.string!

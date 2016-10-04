@@ -33,7 +33,7 @@ class Card: NSObject, Mappable {
         nibId      <- map["NibID"]
     }
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
 }

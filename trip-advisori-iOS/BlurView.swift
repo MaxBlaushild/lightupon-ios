@@ -10,18 +10,18 @@ import UIKit
 
 class BlurView: UIVisualEffectView {
     
-    private let _onClick:() -> Void
+    fileprivate let _onClick:() -> Void
     
-    init(onClick: () -> Void) {
+    init(onClick: @escaping () -> Void) {
         _onClick = onClick
-        super.init(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
+        super.init(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         _onClick()
     }
 

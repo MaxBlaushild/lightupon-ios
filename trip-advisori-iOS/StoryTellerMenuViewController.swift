@@ -13,9 +13,9 @@ private let reuseIdentifier = "PartyMemberCollectionViewCell"
 
 class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, SocketServiceDelegate, ProfileViewDelegate {
     
-    private let partyService: PartyService = Injector.sharedInjector.getPartyService()
-    private let profileService: ProfileService = Injector.sharedInjector.getProfileService()
-    private let socketService: SocketService = Injector.sharedInjector.getSocketService()
+    fileprivate let partyService: PartyService = Injector.sharedInjector.getPartyService()
+    fileprivate let profileService: ProfileService = Injector.sharedInjector.getProfileService()
+    fileprivate let socketService: SocketService = Injector.sharedInjector.getSocketService()
 
     @IBOutlet weak var partyMemberCollectionView: UICollectionView!
     @IBOutlet weak var profilePicture: UIImageView!
@@ -23,15 +23,15 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var leavePartyButton: UIButton!
     
-    private var _partyState: PartyState!
-    private var _party: Party!
+    fileprivate var _partyState: PartyState!
+    fileprivate var _party: Party!
     
-    private var profileView: ProfileView!
-    private var xBackButton:XBackButton!
+    fileprivate var profileView: ProfileView!
+    fileprivate var xBackButton:XBackButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        leavePartyButton.hidden = true
+        leavePartyButton.isHidden = true
         socketService.registerDelegate(self)
         bindProfile()
         makeProfileClickable()
@@ -42,12 +42,12 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         // Dispose of any resources that can be recreated.
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
     }
     
     func bindProfile() {
@@ -56,14 +56,14 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         profilePicture.makeCircle()
     }
     
-    func onResponseReceived(partyState: PartyState) {
+    func onResponseReceived(_ partyState: PartyState) {
         _partyState = partyState
         configurePartyCollectionView()
     }
     
-    func bindParty(party: Party) {
+    func bindParty(_ party: Party) {
         _party = party
-        leavePartyButton.hidden = false
+        leavePartyButton.isHidden = false
     }
     func configurePartyCollectionView() {
         partyMemberCollectionView.dataSource = self
@@ -72,24 +72,24 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func removeUserFromPartyList() {
-        for (index, partyMember) in _partyState.users!.enumerate() {
+        for (index, partyMember) in _partyState.users!.enumerated() {
             if partyMember.email == profileService.profile.email {
-                _partyState.users?.removeAtIndex(index)
+                _partyState.users?.remove(at: index)
             }
         }
     }
 
     func goBack(){
-        dismissViewControllerAnimated(true, completion: {})
+        dismiss(animated: true, completion: {})
     }
     
     func makeProfileClickable() {
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(StoryTellerMenuViewController.imageTapped(_:)))
-        profilePicture.userInteractionEnabled = true
+        profilePicture.isUserInteractionEnabled = true
         profilePicture.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    func imageTapped(img: AnyObject) {
+    func imageTapped(_ img: AnyObject) {
         profileView = ProfileView.fromNib("ProfileView")
         profileView.frame = view.frame
         profileView.delegate = self
@@ -98,22 +98,22 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         addXBackButton()
     }
     
-    @IBAction func leaveParty(sender: AnyObject) {
+    @IBAction func leaveParty(_ sender: AnyObject) {
         partyService.leaveParty({
-            self.performSegueWithIdentifier("StoryTellerMenuToHome", sender: nil)
+            self.performSegue(withIdentifier: "StoryTellerMenuToHome", sender: nil)
         })
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     func onLoggedOut() {
-            self.performSegueWithIdentifier("StoryTellerMenuToHome", sender: nil)
+            self.performSegue(withIdentifier: "StoryTellerMenuToHome", sender: nil)
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         removeUserFromPartyList()
         return _partyState.users!.count
     }
@@ -121,7 +121,7 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     func addXBackButton() {
         let frame = CGRect(x: view.bounds.width - 45, y: 30, width: 30, height: 30)
         xBackButton = XBackButton(frame: frame)
-        xBackButton.addTarget(self, action: #selector(dismissProfile), forControlEvents: .TouchUpInside)
+        xBackButton.addTarget(self, action: #selector(dismissProfile), for: .touchUpInside)
         view.addSubview(xBackButton)
     }
     
@@ -130,9 +130,9 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         xBackButton.removeFromSuperview()
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let user: User = _partyState.users![indexPath.row]
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PartyMemberCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let user: User = _partyState.users![(indexPath as NSIndexPath).row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PartyMemberCollectionViewCell
         
         cell.bindCell(user)
         

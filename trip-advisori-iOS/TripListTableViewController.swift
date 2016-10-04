@@ -9,8 +9,8 @@
 import UIKit
 
 class TripListTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TripDetailsViewDelegate {
-    private let tripsService: TripsService = Injector.sharedInjector.getTripsService()
-    private let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
+    fileprivate let tripsService: TripsService = Injector.sharedInjector.getTripsService()
+    fileprivate let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
     
     var trips:[Trip]!
     var delegate: MainViewControllerDelegate!
@@ -29,7 +29,7 @@ class TripListTableViewController: UIViewController, UITableViewDelegate, UITabl
     func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         tableView.reloadData()
     }
     
@@ -37,20 +37,20 @@ class TripListTableViewController: UIViewController, UITableViewDelegate, UITabl
         tripsService.getTrips(self.onTripsGotten, latitude: self.currentLocationService.latitude, longitude: self.currentLocationService.longitude)
     }
     
-    func onTripsGotten(_trips_: [Trip]) {
+    func onTripsGotten(_ _trips_: [Trip]) {
         trips = _trips_
         configureTableView()
     }
     
-    @IBAction func openMenu(sender: AnyObject) {
+    @IBAction func openMenu(_ sender: AnyObject) {
         delegate!.toggleRightPanel()
     }
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,18 +58,18 @@ class TripListTableViewController: UIViewController, UITableViewDelegate, UITabl
         // Dispose of any resources that can be recreated.
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return trips.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:TripListTableViewCell = tableView.dequeueReusableCellWithIdentifier("tripListTableViewCell", forIndexPath: indexPath) as! TripListTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:TripListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "tripListTableViewCell", for: indexPath) as! TripListTableViewCell
 
-        cell.decorateCell(trips[indexPath.row])
+        cell.decorateCell(trips[(indexPath as NSIndexPath).row])
         
         return cell
     }
@@ -80,12 +80,12 @@ class TripListTableViewController: UIViewController, UITableViewDelegate, UITabl
         xBackButton.removeFromSuperview()
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         obfuscateBackground()
         tripDetailsView = TripDetailsView.fromNib("TripDetailsView")
         tripDetailsView.delegate = self
         tripDetailsView.size(self)
-        tripDetailsView.bindTrip(trips[indexPath.row])
+        tripDetailsView.bindTrip(trips[(indexPath as NSIndexPath).row])
         view.addSubview(tripDetailsView)
     }
     
@@ -95,7 +95,7 @@ class TripListTableViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func segueToContainer() {
-        performSegueWithIdentifier("ListToContainer", sender: self)
+        performSegue(withIdentifier: "ListToContainer", sender: self)
     }
     
     func blurBackground() {
@@ -107,7 +107,7 @@ class TripListTableViewController: UIViewController, UITableViewDelegate, UITabl
     func addXBackButton() {
         let frame = CGRect(x: view.bounds.width - 45, y: 30, width: 30, height: 30)
         xBackButton = XBackButton(frame: frame)
-        xBackButton.addTarget(self, action: #selector(dismissTripDetails), forControlEvents: .TouchUpInside)
+        xBackButton.addTarget(self, action: #selector(dismissTripDetails), for: .touchUpInside)
         view.addSubview(xBackButton)
     }
 

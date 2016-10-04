@@ -30,5 +30,5 @@ class User: NSObject, Mappable {
         profilePictureURL <- map["ProfilePictureURL"]
     }
     
-    required init?(_ map: Map) {}
+    required init?(map: Map) {}
 }

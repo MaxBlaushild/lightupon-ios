@@ -11,22 +11,22 @@ import GoogleMaps
 
 class NavigationService: Service {
     
-    func adjustBearingForDeviceHeading(bearing: CGFloat, heading: Double) -> CGFloat {
+    func adjustBearingForDeviceHeading(_ bearing: CGFloat, heading: Double) -> CGFloat {
         let heading = CGFloat(heading)
         let delta = bearing - heading
         let normalizedDelta = delta + 360
-        return normalizedDelta % 360
+        return normalizedDelta.truncatingRemainder(dividingBy: 360)
     }
     
-    func degreesToRadians(degrees: Double) -> Double {
+    func degreesToRadians(_ degrees: Double) -> Double {
         return degrees * M_PI / 180.0
     }
     
-    func radiansToDegrees(radians: Double) -> Double {
+    func radiansToDegrees(_ radians: Double) -> Double {
         return radians * 180.0 / M_PI
     }
     
-    func getBearingBetweenTwoPoints1(point1 : CLLocation, point2 : CLLocation) -> CGFloat {
+    func getBearingBetweenTwoPoints1(_ point1 : CLLocation, point2 : CLLocation) -> CGFloat {
         
         let lat1 = degreesToRadians(point1.coordinate.latitude)
         let lon1 = degreesToRadians(point1.coordinate.longitude)

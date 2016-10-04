@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 import ObjectMapper
 
 class PartyService: Service {
@@ -18,12 +17,12 @@ class PartyService: Service {
         _apiAmbassador = apiAmbassador
     }
     
-    func joinParty(passcode: String, successCallback: () -> Void, failureCallback: () -> Void) {
+    func joinParty(passcode: String, successCallback: @escaping () -> Void, failureCallback: @escaping () -> Void) {
         let parameters = [
             "": ""
         ]
         
-        _apiAmbassador.post(apiURL + "/parties/\(passcode)/users", parameters: parameters, success: { response in
+        _apiAmbassador.post(apiURL + "/parties/\(passcode)/users", parameters: parameters as [String : AnyObject], success: { response in
             if (response.response!.statusCode == 200) {
                 successCallback()
             } else {
@@ -32,37 +31,37 @@ class PartyService: Service {
         })
     }
     
-    func startNextScene(partyID: Int, callback: () -> Void) {
+    func startNextScene(partyID: Int, callback: @escaping () -> Void) {
         _apiAmbassador.get(apiURL + "/parties/\(partyID)/nextScene", success: { response in
             callback()
         })
      }
     
-    func getUsersParty(callback: (Party) -> Void) {
+    func getUsersParty(_ callback: @escaping (Party) -> Void) {
         _apiAmbassador.get(apiURL + "/parties", success: { response in
-            let party = Mapper<Party>().map(response.result.value)
+            let party = Mapper<Party>().map(JSONObject: response.result.value)
             callback(party!)
         })
     }
     
-    func leaveParty(callback: () -> Void) {
+    func leaveParty(_ callback: @escaping () -> Void) {
         _apiAmbassador.delete(apiURL + "/parties", success: { response in
             callback()
         })
     }
     
-    func finishParty(callback: () -> Void) {
+    func finishParty(_ callback: @escaping () -> Void) {
         _apiAmbassador.get(apiURL + "/parties/finishParty", success: { response in
             callback()
         })
     }
     
-    func createParty(tripId: Int, callback: () -> Void) {
+    func createParty(_ tripId: Int, callback: @escaping () -> Void) {
         let parameters = [
             "ID": tripId
         ]
         
-        _apiAmbassador.post(apiURL + "/parties", parameters: parameters, success: { response in
+        _apiAmbassador.post(apiURL + "/parties", parameters: parameters as [String : AnyObject], success: { response in
             callback()
         })
     }

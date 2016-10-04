@@ -17,9 +17,9 @@ import Darwin
 
 class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, SocketServiceDelegate  {
     
-    private let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
-    private let navigationService = Injector.sharedInjector.getNavigationService()
-    private let socketService = Injector.sharedInjector.getSocketService()
+    fileprivate let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
+    fileprivate let navigationService = Injector.sharedInjector.getNavigationService()
+    fileprivate let socketService = Injector.sharedInjector.getSocketService()
     
     @IBOutlet weak var sceneMapView: GMSMapView!
     @IBOutlet weak var compass: UIImageView!
@@ -29,12 +29,12 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     
     internal var delegate: CompassViewDelegate!
     
-    private var _nextScene: Scene!
-    private var _isAtNextScene: Bool = false
-    private var _ogCompassFrame: CGRect!
-    private var _readyToReceiveResponses: Bool = false
+    fileprivate var _nextScene: Scene!
+    fileprivate var _isAtNextScene: Bool = false
+    fileprivate var _ogCompassFrame: CGRect!
+    fileprivate var _readyToReceiveResponses: Bool = false
     
-    func pointCompassTowardScene(nextScene: Scene) {
+    func pointCompassTowardScene(_ nextScene: Scene) {
         _nextScene = nextScene
         
         sceneMapView.delegate = self
@@ -50,7 +50,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
         applyInstructionsView()
         createNextSceneButton()
         
-        sceneMapView.bringSubviewToFront(compass)
+        sceneMapView.bringSubview(toFront: compass)
     }
     
     func setCompassSize() {
@@ -58,21 +58,21 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     }
     
     func configureMapView() {
-        sceneMapView.myLocationEnabled = true
+        sceneMapView.isMyLocationEnabled = true
         sceneMapView.settings.zoomGestures = false
         sceneMapView.settings.scrollGestures = false
     }
     
     func applyInstructionsView() {
         instructionsView.addShadow()
-        sceneMapView.bringSubviewToFront(instructionsView)
+        sceneMapView.bringSubview(toFront: instructionsView)
     }
     
     func createCenteredCameraPostion() -> GMSCameraPosition {
-        return GMSCameraPosition.cameraWithLatitude(currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 17, bearing: currentLocationService.heading, viewingAngle: 0)
+        return GMSCameraPosition.camera(withLatitude: currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 17, bearing: currentLocationService.heading, viewingAngle: 0)
     }
     
-    func onResponseReceived(partyState: PartyState) {
+    func onResponseReceived(_ partyState: PartyState) {
         if (partyState.nextSceneAvailable! != _isAtNextScene) {
             if (partyState.nextSceneAvailable!) {
                 _isAtNextScene = partyState.nextSceneAvailable!
@@ -94,7 +94,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     
     func centerMapOnLocation() {
         let newCenter = self.createCenteredCameraPostion()
-        sceneMapView.animateToCameraPosition(newCenter)
+        sceneMapView.animate(to: newCenter)
     }
     
     func addNextScene() {
@@ -111,46 +111,46 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     }
     
     func createNextSceneButton() {
-        nextSceneButton = UIButton(type: .Custom)
-        nextSceneButton.addTarget(delegate, action: #selector(delegate.goToNextScene), forControlEvents: .TouchUpInside)
+        nextSceneButton = UIButton(type: .custom)
+        nextSceneButton.addTarget(delegate, action: #selector(delegate.goToNextScene), for: .touchUpInside)
         addSubview(nextSceneButton)
     }
     
     func animateInNextSceneButton() {
         nextSceneButton.frame = compassCenter()
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.nextSceneButton.frame = self.compassSize()
             self.nextSceneButton.layer.cornerRadius = 0.5 * self.nextSceneButton.bounds.size.width
-            self.nextSceneButton.backgroundColor = UIColor.whiteColor()
+            self.nextSceneButton.backgroundColor = UIColor.white
             self.nextSceneButton.addShadow()
         })
     }
     
     func animateOutNextSceneButton() {
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.nextSceneButton.frame = self.compassCenter()
         },
         completion: animateInCompass)
     }
     
     func animateOutCompass() {
-        UIView.animateWithDuration(0.5, animations: {
-            self.compass.transform = CGAffineTransformMakeScale(0.01, 0.01)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.compass.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         },
         completion: { truth in
-            self.compass.hidden = true
+            self.compass.isHidden = true
             self.animateInNextSceneButton()
         })
     }
     
-    func animateInCompass(truth: Bool) {
-        self.compass.transform = CGAffineTransformMakeScale(0.01, 0.01)
-        self.compass.hidden = false
-        UIView.animateWithDuration(0.5, animations: {
-            self.compass.transform = CGAffineTransformMakeScale(1.0, 1.0)
+    func animateInCompass(_ truth: Bool) {
+        self.compass.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        self.compass.isHidden = false
+        UIView.animate(withDuration: 0.5, animations: {
+            self.compass.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         },
         completion: { truth in
-            self.compass.transform = CGAffineTransformIdentity
+            self.compass.transform = CGAffineTransform.identity
         })
     }
     
@@ -173,27 +173,27 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     }
     
     func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+        return UIInterfaceOrientationMask.portrait
     }
 
     
     func checkInTextBoxState() {
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.instructionsView.backgroundColor = Colors.basePurple
-            self.instructionsLabel.textColor = UIColor.whiteColor()
+            self.instructionsLabel.textColor = UIColor.white
             self.instructionsLabel.text = "Check it out!"
-            self.instructionsLabel.font = self.instructionsLabel.font.fontWithSize(34)
-            self.instructionsLabel.textAlignment = NSTextAlignment.Center
+            self.instructionsLabel.font = self.instructionsLabel.font.withSize(34)
+            self.instructionsLabel.textAlignment = NSTextAlignment.center
         })
     }
     
     func undoCheckInTextBoxState() {
-        UIView.animateWithDuration(0.5, animations: {
-            self.instructionsView.backgroundColor = UIColor.whiteColor()
-            self.instructionsLabel.textColor = UIColor.blackColor()
+        UIView.animate(withDuration: 0.5, animations: {
+            self.instructionsView.backgroundColor = UIColor.white
+            self.instructionsLabel.textColor = UIColor.black
             self.bindTitleToInstructions()
-            self.instructionsLabel.textAlignment = NSTextAlignment.Left
-            self.instructionsLabel.font = self.instructionsLabel.font.fontWithSize(16)
+            self.instructionsLabel.textAlignment = NSTextAlignment.left
+            self.instructionsLabel.font = self.instructionsLabel.font.withSize(16)
         })
     }
     
@@ -204,7 +204,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     
     func realignMapView() {
         let heading = currentLocationService.heading
-        sceneMapView.animateToBearing(heading)
+        sceneMapView.animate(toBearing: heading)
     }
     
     func twirlCompass() {
@@ -212,7 +212,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
         let destination = CLLocation(latitude: _nextScene!.latitude!, longitude: _nextScene!.longitude!)
         let bearing = navigationService.getBearingBetweenTwoPoints1(origin, point2: destination)
         let normalizedDelta = navigationService.adjustBearingForDeviceHeading(bearing, heading: currentLocationService.heading)
-        compass.transform = CGAffineTransformMakeRotation(normalizedDelta * CGFloat(M_PI)/180);
+        compass.transform = CGAffineTransform(rotationAngle: normalizedDelta * CGFloat(M_PI)/180);
     }
 
 }

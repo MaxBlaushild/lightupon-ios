@@ -21,8 +21,8 @@ class TripListTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func decorateCell(trip: Trip) {
-        contentView.layer.borderColor = UIColor(red: CGFloat(153.00)/255, green: CGFloat(153.00)/255, blue: CGFloat(153.00)/255, alpha: 0.5).CGColor;
+    func decorateCell(_ trip: Trip) {
+        contentView.layer.borderColor = UIColor(red: CGFloat(153.00)/255, green: CGFloat(153.00)/255, blue: CGFloat(153.00)/255, alpha: 0.5).cgColor;
         contentView.layer.borderWidth = 1;
         tripImage.imageFromUrl(trip.imageUrl!)
         profileImage.imageFromUrl((trip.owner?.profilePictureURL)!)
@@ -34,7 +34,7 @@ class TripListTableViewCell: UITableViewCell {
         tag = trip.id!
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 }

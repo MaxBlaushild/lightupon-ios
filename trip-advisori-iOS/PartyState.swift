@@ -28,7 +28,7 @@ class PartyState: NSObject, Mappable {
         nextScene          <- map["NextScene"]
     }
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
 }

@@ -82,6 +82,9 @@
 		1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */; };
 		1EA20DEC1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA20DEB1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift */; };
 		1EA20DEE1DA1995D00596CDE /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA20DED1DA1995D00596CDE /* DateExtensions.swift */; };
+		1EA20DF01DA2A40300596CDE /* trip-advisori-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */; };
+		1EA20DF11DA2A46500596CDE /* trip-advisori-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */; };
+		1EA20DF21DA2A46600596CDE /* trip-advisori-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */; };
 		1EA5AFD31D7E3E760024D6CD /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5AFD21D7E3E760024D6CD /* MenuButton.swift */; };
 		1EA5AFD51D7E430E0024D6CD /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */; };
 		1EAA89AF1D94A3EF009E9D03 /* ComboTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAA89AE1D94A3EF009E9D03 /* ComboTitle.swift */; };
@@ -223,6 +226,7 @@
 		1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		1EA20DEB1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO8601MilliDateTransform.swift; sourceTree = "<group>"; };
 		1EA20DED1DA1995D00596CDE /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "trip-advisori-iOS.entitlements"; sourceTree = "<group>"; };
 		1EA5AFD21D7E3E760024D6CD /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		1EAA89AE1D94A3EF009E9D03 /* ComboTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComboTitle.swift; sourceTree = "<group>"; };
@@ -326,6 +330,7 @@
 		1E05B8891C5D135D009E37BA /* trip-advisori-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */,
 				1ED69B4D1D0C850D00CF2172 /* services */,
 				1ED69B4C1D0C84EC00CF2172 /* viewControllers */,
 				1ED69B471D0C809C00CF2172 /* views */,
@@ -658,19 +663,27 @@
 					owl,
 				);
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Blaushild, Max";
 				TargetAttributes = {
 					1E05B8861C5D135D009E37BA = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = XLWZ7RAXK6;
+						LastSwiftMigration = 0810;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					1E05B89C1C5D135D009E37BA = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0810;
 						TestTargetID = 1E05B8861C5D135D009E37BA;
 					};
 					1E05B8A71C5D135D009E37BA = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0810;
 						TestTargetID = 1E05B8861C5D135D009E37BA;
 					};
 				};
@@ -733,6 +746,7 @@
 				1E1ED1BD1D4C18CE00B49C64 /* user_menu@3x.png in Resources */,
 				1E51D5CA1D9D96A70052DA6E /* GothamRounded-BookItalic.otf in Resources */,
 				1E1ED1BF1D4C18CE00B49C64 /* user_menu@1x.png in Resources */,
+				1EA20DF01DA2A40300596CDE /* trip-advisori-iOS.entitlements in Resources */,
 				1EF783AD1D00940100860510 /* PictureHero.xib in Resources */,
 				1ED69B371D07A96800CF2172 /* Dosis-ExtraLight.otf in Resources */,
 				1E30E7AF1D7CEC6300BB547F /* EndOfTripView.xib in Resources */,
@@ -755,6 +769,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EA20DF11DA2A46500596CDE /* trip-advisori-iOS.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,6 +777,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EA20DF21DA2A46600596CDE /* trip-advisori-iOS.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,8 +966,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -973,7 +991,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -995,8 +1013,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1012,9 +1032,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1024,16 +1045,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CC641C4C708F459BFB4B60B1 /* Pods-trip-advisori-iOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "trip-advisori-iOS/trip-advisori-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "lightupon.lightupon-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos10.1;
 				SWIFT_OBJC_BRIDGING_HEADER = "trip-advisori-iOS/-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1042,16 +1068,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7FFFEB7839A565E790733793 /* Pods-trip-advisori-iOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "trip-advisori-iOS/trip-advisori-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "lightupon.lightupon-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos10.1;
 				SWIFT_OBJC_BRIDGING_HEADER = "trip-advisori-iOS/-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1064,6 +1095,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/trip-advisori-iOS.app/trip-advisori-iOS";
 			};
 			name = Debug;
@@ -1076,6 +1108,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/trip-advisori-iOS.app/trip-advisori-iOS";
 			};
 			name = Release;
@@ -1087,6 +1120,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOSUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "trip-advisori-iOS";
 				USES_XCTRUNNER = YES;
 			};
@@ -1099,6 +1133,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOSUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "trip-advisori-iOS";
 				USES_XCTRUNNER = YES;
 			};

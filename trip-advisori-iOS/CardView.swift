@@ -11,7 +11,7 @@ import MDCSwipeToChoose
 
 class CardView: MDCSwipeToChooseView {
     
-    private var _card:Card
+    fileprivate var _card:Card
     
     init(card: Card, options: MDCSwipeToChooseViewOptions, frame: CGRect) {
         _card = card
@@ -23,7 +23,7 @@ class CardView: MDCSwipeToChooseView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    static func getCardContents(nibId: String) -> IAmCardContents {
+    static func getCardContents(_ nibId: String) -> IAmCardContents {
         switch nibId {
         case "TextHero":
             return TextHero.fromNib("TextHero")
@@ -36,7 +36,7 @@ class CardView: MDCSwipeToChooseView {
         }
     }
     
-    static func createCardContents(card: Card) -> UIView {
+    static func createCardContents(_ card: Card) -> UIView {
         let cardContents:IAmCardContents = CardView.getCardContents(card.nibId!)
         cardContents.bindCard(card)
         return cardContents as! UIView

@@ -27,7 +27,7 @@ class FacebookProfile: NSObject, Mappable {
         coverPhoto   <- map["cover.source"]
     }
     
-    required init?(_ map: Map) {}
+    required init?(map: Map) {}
 }
 
 

@@ -11,15 +11,15 @@ import UIKit
 class Injector: Service {
     static let sharedInjector: Injector = Injector()
     
-    private let _apiAmbassador: AmbassadorToTheAPI
-    private let _authService: AuthService
-    private let _tripsService: TripsService
-    private let _partyService: PartyService
-    private let _currentLocationService: CurrentLocationService
-    private let _profileService: ProfileService
-    private let _loginService: LoginService
-    private let _socketService: SocketService
-    private let _navigationService: NavigationService
+    fileprivate let _apiAmbassador: AmbassadorToTheAPI
+    fileprivate let _authService: AuthService
+    fileprivate let _tripsService: TripsService
+    fileprivate let _partyService: PartyService
+    fileprivate let _currentLocationService: CurrentLocationService
+    fileprivate let _profileService: ProfileService
+    fileprivate let _loginService: LoginService
+    fileprivate let _socketService: SocketService
+    fileprivate let _navigationService: NavigationService
 
     override init(){
         _authService = AuthService()

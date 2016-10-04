@@ -22,7 +22,7 @@ class Party: NSObject, Mappable {
         currentSceneOrder <- map["CurrentSceneOrderID"]
     }
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
 }

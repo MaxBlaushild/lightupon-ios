@@ -9,5 +9,5 @@
 import Foundation
 
 protocol IAmCardContents {
-    func bindCard(card: Card) -> Void
+    func bindCard(_ card: Card) -> Void
 }

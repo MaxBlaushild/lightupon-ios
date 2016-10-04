@@ -13,7 +13,7 @@ class XBackButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addShadow()
-        self.setBackgroundImage(UIImage(named: "backButton"), forState: .Normal)
+        self.setBackgroundImage(UIImage(named: "backButton"), for: UIControlState())
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -11,37 +11,40 @@ import ObjectMapper
 
 class ProfileService: Service {
     
-    private let queryParams = "fields=id,name,email,first_name,picture.width(800).height(800),cover"
+    fileprivate let queryParams = "fields=id,name,email,first_name,picture.width(800).height(800),cover"
     
     internal var profile:FacebookProfile!
     
-    func isUser(otherProfile: FacebookProfile) -> Bool {
+    func isUser(_ otherProfile: FacebookProfile) -> Bool {
         return profile.email == otherProfile.email
     }
 
-    func getMyProfile(callback: (FacebookProfile) -> Void){
+    func getMyProfile(_ callback: @escaping (FacebookProfile) -> Void){
         let graphRequest = FBSDKGraphRequest(graphPath: "me?\(queryParams)", parameters: nil)
         
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            self.profile = Mapper<FacebookProfile>().map(result)
+        graphRequest?.start(completionHandler: { (connection, result, error) -> Void in
+            self.profile = Mapper<FacebookProfile>().map(JSONObject:
+                result)
             callback(self.profile!)
         })
     }
     
-    func getProfile(facebookId: String, callback: (FacebookProfile) -> Void){
+    func getProfile(_ facebookId: String, callback: @escaping (FacebookProfile) -> Void){
         let graphRequest = FBSDKGraphRequest(graphPath: "\(facebookId)?\(queryParams)", parameters: nil)
         
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            let profile = Mapper<FacebookProfile>().map(result)
+        graphRequest?.start(completionHandler: { (connection, result, error) -> Void in
+            let profile = Mapper<FacebookProfile>().map(JSONObject:
+                result)
             callback(profile!)
         })
     }
     
-    func getLoginInfo(callback: (FacebookProfile) -> Void){
+    func getLoginInfo(_ callback: @escaping (FacebookProfile) -> Void){
         let graphRequest = FBSDKGraphRequest(graphPath: "me?\(queryParams)", parameters: nil)
         
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            let profile = Mapper<FacebookProfile>().map(result)
+        graphRequest?.start(completionHandler: { (connection, result, error) -> Void in
+            let profile = Mapper<FacebookProfile>().map(JSONObject:
+                result)
             callback(profile!)
 
         })

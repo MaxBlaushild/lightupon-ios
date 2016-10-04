@@ -8,80 +8,80 @@
 
 import Foundation
 
-extension NSDate {
+extension Date {
     func hour() -> Int {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.Hour, fromDate: self)
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components(.hour, from: self)
         let hour = components.hour
         
-        return hour
+        return hour!
     }
     
     
     func minute() -> Int {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.Minute, fromDate: self)
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components(.minute, from: self)
         let minute = components.minute
         
-        return minute
+        return minute!
     }
     
     func day() -> Int {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.Day, fromDate: self)
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components(.day, from: self)
         let day = components.day
         
-        return day
+        return day!
     }
     
     func month() -> Int {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.Month, fromDate: self)
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components(.month, from: self)
         let month = components.month
         
-        return month
+        return month!
     }
     
     func daysSince() -> Int {
-        let now = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Day], fromDate: self, toDate: now, options: [])
-        return components.day
+        let now = Date()
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components([.day], from: self, to: now, options: [])
+        return components.day!
     }
     
     func minutesSince() -> Int {
-        let now = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Minute], fromDate: self, toDate: now, options: [])
-        return components.minute
+        let now = Date()
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components([.minute], from: self, to: now, options: [])
+        return components.minute!
     }
     
     func secondsSince() -> Int {
-        let now = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Second], fromDate: self, toDate: now, options: [])
-        return components.second
+        let now = Date()
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components([.second], from: self, to: now, options: [])
+        return components.second!
     }
     
     func hoursSince() -> Int {
-        let now = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Hour], fromDate: self, toDate: now, options: [])
-        return components.hour
+        let now = Date()
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components([.hour], from: self, to: now, options: [])
+        return components.hour!
     }
     
     func monthsSince() -> Int {
-        let now = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Month], fromDate: self, toDate: now, options: [])
-        return components.month
+        let now = Date()
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components([.month], from: self, to: now, options: [])
+        return components.month!
     }
     
     func yearsSince() -> Int {
-        let now = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Year], fromDate: self, toDate: now, options: [])
-        return components.year
+        let now = Date()
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components([.year], from: self, to: now, options: [])
+        return components.year!
     }
 
 }

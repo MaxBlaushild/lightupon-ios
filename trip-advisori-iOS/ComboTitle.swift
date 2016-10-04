@@ -14,7 +14,7 @@ class ComboTitle: UIView, IAmCardContents {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var backgroundImage: UIImageView!
     
-    func bindCard(card: Card) {
+    func bindCard(_ card: Card) {
         title.text = card.text
         descriptionText.text = card.textTwo
         

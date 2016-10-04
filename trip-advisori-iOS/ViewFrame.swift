@@ -9,7 +9,7 @@
 import Foundation
 
 extension UIImage {
-    static func frame(size: CGSize, color: CGColor) -> UIImage {
+    static func frame(_ size: CGSize, color: CGColor) -> UIImage {
         let bounds = CGRect(origin: CGPoint.zero, size: size)
         let opaque = false
         let scale: CGFloat = 0
@@ -17,22 +17,22 @@ extension UIImage {
         let context = UIGraphicsGetCurrentContext()
         
         // Setup complete, do drawing here
-        CGContextSetStrokeColorWithColor(context, color)
-        CGContextSetLineWidth(context, 12.0)
+        context?.setStrokeColor(color)
+        context?.setLineWidth(12.0)
         
-        CGContextStrokeRect(context, bounds)
+        context?.stroke(bounds)
         
-        CGContextBeginPath(context)
-        CGContextMoveToPoint(context, CGRectGetMinX(bounds), CGRectGetMinY(bounds))
-        CGContextMoveToPoint(context, CGRectGetMaxX(bounds), CGRectGetMinY(bounds))
-        CGContextAddLineToPoint(context, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds))
-        CGContextAddLineToPoint(context, CGRectGetMinX(bounds), CGRectGetMaxY(bounds))
-        CGContextMoveToPoint(context, CGRectGetMinX(bounds), CGRectGetMinY(bounds))
-        CGContextStrokePath(context)
+        context?.beginPath()
+        context?.move(to: CGPoint(x: bounds.minX, y: bounds.minY))
+        context?.move(to: CGPoint(x: bounds.maxX, y: bounds.minY))
+        context?.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY))
+        context?.addLine(to: CGPoint(x: bounds.minX, y: bounds.maxY))
+        context?.move(to: CGPoint(x: bounds.minX, y: bounds.minY))
+        context?.strokePath()
         
         // Drawing complete, retrieve the finished image and cleanup
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image
+        return image!
     }
 }

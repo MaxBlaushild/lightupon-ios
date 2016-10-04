@@ -13,12 +13,12 @@ protocol EndOfTripDelegate {
 }
 
 class EndOfTripView: UIView {
-    private let partyService = Injector.sharedInjector.getPartyService()
+    fileprivate let partyService = Injector.sharedInjector.getPartyService()
     
     var delegate: EndOfTripDelegate!
     
-    @IBAction func endTrip(sender: UIButton) {
-        sender.enabled = false
+    @IBAction func endTrip(_ sender: UIButton) {
+        sender.isEnabled = false
         partyService.finishParty(self.goBackHome)
     }
     

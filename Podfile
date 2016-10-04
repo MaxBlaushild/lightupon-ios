@@ -9,13 +9,12 @@ target 'trip-advisori-iOS' do
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
   pod 'Locksmith'
-  pod 'Starscream', '~> 1.1.3'
+  pod 'Starscream'
   pod 'ObjectMapper'
-  pod 'AlamofireObjectMapper', '~> 3.0'
-  pod "PromiseKit", "~> 3.5"
-  pod 'HanekeSwift'
+  pod 'AlamofireObjectMapper'
+  pod 'HanekeSwift', :git => 'https://github.com/jasonnoahchoi/HanekeSwift', :branch => 'swift3'
   pod 'MDCSwipeToChoose'
-  pod 'CBZSplashView', '~> 1.0.0'
+  pod 'CBZSplashView'
   pod 'PocketSVG'
 end
 
@@ -33,6 +32,14 @@ post_install do |installer|
       config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ""
       config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
       config.build_settings['CODE_SIGNING_ALLOWED'] = "NO"
+    end
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_VERSION'] = '3.0'
     end
   end
 end

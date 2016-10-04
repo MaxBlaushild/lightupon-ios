@@ -33,7 +33,7 @@ class Scene: NSObject, Mappable {
         sceneOrder    <- map["SceneOrder"]
     }
     
-    required init?(_ map: Map) {}
+    required init?(map: Map) {}
     
     override init() {
         super.init()

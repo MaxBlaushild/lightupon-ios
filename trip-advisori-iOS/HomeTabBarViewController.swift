@@ -9,11 +9,11 @@
 import UIKit
 
 class HomeTabBarViewController: UITabBarController {
-    private let tripsService: TripsService = Injector.sharedInjector.getTripsService()
+    fileprivate let tripsService: TripsService = Injector.sharedInjector.getTripsService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UITabBar.appearance().barTintColor = UIColor.whiteColor()
+        UITabBar.appearance().barTintColor = UIColor.white
         UITabBar.appearance().tintColor = Colors.basePurple
         for tabBarItem in tabBar.items! {
             tabBarItem.title = ""
@@ -21,15 +21,15 @@ class HomeTabBarViewController: UITabBarController {
         }
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
     }
     
-    func assignDelegation(vc: MainContainerViewController) {
+    func assignDelegation(_ vc: MainContainerViewController) {
         for controller in viewControllers! {
             
             if let mapController = controller as? MapViewController {

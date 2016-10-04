@@ -13,11 +13,11 @@ import Alamofire
 
 class AuthService: NSObject {
     
-    func setToken(token: String) {
+    func setToken(_ token: String) {
         
         do {
             
-            try Locksmith.updateData(["token": token], forUserAccount: "myUserAccount")
+            try Locksmith.updateData(data: ["token": token], forUserAccount: "myUserAccount")
             
         } catch {
             
@@ -26,11 +26,11 @@ class AuthService: NSObject {
         }
     }
     
-    func setFacebookId(facebookId: String) {
+    func setFacebookId(_ facebookId: String) {
         
         do {
             
-            try Locksmith.updateData(["facebookId": facebookId], forUserAccount: "myFacebookAccount")
+            try Locksmith.updateData(data: ["facebookId": facebookId], forUserAccount: "myFacebookAccount")
             
         } catch {
             
@@ -42,7 +42,7 @@ class AuthService: NSObject {
     func getToken() -> String {
         var token = ""
         
-        if let tokenWrapper = Locksmith.loadDataForUserAccount("myUserAccount") as? Dictionary<String, String> {
+        if let tokenWrapper = Locksmith.loadDataForUserAccount(userAccount: "myUserAccount") as? Dictionary<String, String> {
             token = tokenWrapper["token"]!
         }
 
@@ -58,7 +58,7 @@ class AuthService: NSObject {
         
         do {
             
-            try Locksmith.deleteDataForUserAccount("myUserAccount")
+            try Locksmith.deleteDataForUserAccount(userAccount: "myUserAccount")
             
         } catch {
             
@@ -66,7 +66,7 @@ class AuthService: NSObject {
     }
     
     func getFacebookId() -> String {
-        let idWrapper = Locksmith.loadDataForUserAccount("myFacebookAccount")!
+        let idWrapper = Locksmith.loadDataForUserAccount(userAccount: "myFacebookAccount")!
         
         let facebookId = idWrapper["facebookId"] as! String
         
@@ -75,9 +75,9 @@ class AuthService: NSObject {
     
     func userIsLoggedIn() -> Bool {
         
-        let token = Locksmith.loadDataForUserAccount("myUserAccount")
+        let token = Locksmith.loadDataForUserAccount(userAccount: "myUserAccount")
         
-        if token != nil && FBSDKAccessToken.currentAccessToken() != nil {
+        if token != nil && FBSDKAccessToken.current() != nil {
             return true
         } else {
             return false

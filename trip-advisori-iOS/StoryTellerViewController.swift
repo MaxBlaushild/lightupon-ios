@@ -10,6 +10,26 @@ import UIKit
 import AVFoundation
 import Alamofire
 import MDCSwipeToChoose
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 private let reuseIdentifier = "cardCollectionViewCell"
 private let centerPanelExpandedOffset: CGFloat = 60
@@ -19,18 +39,18 @@ protocol MainViewControllerDelegate {
 }
 
 class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwipeToChooseDelegate, EndOfTripDelegate, CompassViewDelegate {
-    private let _partyService = Injector.sharedInjector.getPartyService()
-    private let _socketService = Injector.sharedInjector.getSocketService()
+    fileprivate let _partyService = Injector.sharedInjector.getPartyService()
+    fileprivate let _socketService = Injector.sharedInjector.getSocketService()
     
     internal var delegate: MainViewControllerDelegate?
     
-    private var _currentScene: Scene!
-    private var _partyState: PartyState!
-    private var _party: Party!
-    private var _cardCount: Int = 0
-    private var _swipeOptions = CardSwipeOptions()
-    private var _cardSize: CGRect!
-    private var _player: AVAudioPlayer!
+    fileprivate var _currentScene: Scene!
+    fileprivate var _partyState: PartyState!
+    fileprivate var _party: Party!
+    fileprivate var _cardCount: Int = 0
+    fileprivate var _swipeOptions = CardSwipeOptions()
+    fileprivate var _cardSize: CGRect!
+    fileprivate var _player: AVAudioPlayer!
     
     var compassView: CompassView!
     var endOfTripView: EndOfTripView!
@@ -52,7 +72,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         _cardSize = CGRect(x: 25, y: 80, width: self.view.frame.width - 50, height: self.view.frame.height - 120)
     }
     
-    func bindParty(party: Party) {
+    func bindParty(_ party: Party) {
         setParty(party)
         setScene()
         
@@ -91,16 +111,16 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         }
     }
     
-    func setParty(party: Party) {
+    func setParty(_ party: Party) {
         _party = party
     }
     
-    func onResponseReceived(partyState: PartyState) {
+    func onResponseReceived(_ partyState: PartyState) {
         _partyState = partyState
     }
     
     func goToNextScene() {
-        _partyService.startNextScene(_party.id!, callback: {})
+        _partyService.startNextScene(partyID: _party.id!, callback: {})
         onWentToNextScene()
     }
     
@@ -126,29 +146,29 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         }
     }
     
-    @IBAction func openMenu(sender: AnyObject) {
+    @IBAction func openMenu(_ sender: AnyObject) {
         delegate!.toggleRightPanel()
     }
     
     func loadSwipeViews() {
-        for card in _currentScene.cards!.reverse() {
+        for card in _currentScene.cards!.reversed() {
             _cardCount += 1
             loadCardView(card)
         }
     }
     
-    func loadCardView(card: Card) {
+    func loadCardView(_ card: Card) {
         let cardView = CardView(card: card, options:_swipeOptions, frame: _cardSize)
         self.view.addSubview(cardView)
     }
     
-    func viewDidCancelSwipe(view: UIView) -> Void {}
+    func viewDidCancelSwipe(_ view: UIView) -> Void {}
     
-    func view(view:UIView, shouldBeChosenWithDirection:MDCSwipeDirection) -> Bool {
+    func view(_ view:UIView, shouldBeChosenWith shouldBeChosenWithDirection:MDCSwipeDirection) -> Bool {
         return true
     }
     
-    func view(view: UIView, wasChosenWithDirection: MDCSwipeDirection) -> Void{
+    func view(_ view: UIView, wasChosenWith wasChosenWithDirection: MDCSwipeDirection) -> Void{
         _cardCount -= 1
         
         if (outOfCards()) {
@@ -162,7 +182,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func onTripEnds() {
-        performSegueWithIdentifier("StoryTellerToInitial", sender: nil)
+        performSegue(withIdentifier: "StoryTellerToInitial", sender: nil)
     }
     
     func openEndOfTripView() {
@@ -172,7 +192,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         self.view.addSubview(endOfTripView)
     }
     
-    func openCompass(nextScene: Scene) {
+    func openCompass(_ nextScene: Scene) {
         compassView = CompassView.fromNib("CompassView")
         compassView.delegate = self
         compassView.pointCompassTowardScene(nextScene)
@@ -183,47 +203,47 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     func tuckCompassViewUnderMenuButton() {
         self.menuButton.layer.zPosition = 100000
         self.compassView.layer.zPosition = 0
-        self.view.insertSubview(compassView, atIndex: 0)
+        self.view.insertSubview(compassView, at: 0)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
     }
     
     func onPartyLeft() {
-        performSegueWithIdentifier("StoryTellerToHome", sender: nil)
+        performSegue(withIdentifier: "StoryTellerToHome", sender: nil)
     }
     
-    func playSound(scene: Scene) {
+    func playSound(_ scene: Scene) {
         let urlstring = scene.soundResource
         
         if urlstring?.characters.count > 0 {
-            let url = NSURL(string: urlstring!)
+            let url = URL(string: urlstring!)
             downloadFileFromURL(url!)
         }
 
     }
     
-    func downloadFileFromURL(url:NSURL){
-        var downloadTask:NSURLSessionDownloadTask
-        downloadTask = NSURLSession.sharedSession().downloadTaskWithURL(url, completionHandler: { (URL, response, error) -> Void in
+    func downloadFileFromURL(_ url:URL){
+        var downloadTask:URLSessionDownloadTask
+        downloadTask = URLSession.shared.downloadTask(with: url, completionHandler: { (URL, response, error) -> Void in
             self.play(URL!)
             
         })
         downloadTask.resume()
     }
     
-    func play(url:NSURL) {
+    func play(_ url:URL) {
         do {
-            _player = try AVAudioPlayer(contentsOfURL: url)
+            _player = try AVAudioPlayer(contentsOf: url)
             _player.prepareToPlay()
             _player.volume = 1.0
             _player.play()
@@ -238,13 +258,13 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         storyBackground.backgroundColor = UIColor(patternImage: blurredBackgroundImage)
     }
     
-    func getBackgroundPicture(scene: Scene) -> UIImage {
-        let url = NSURL(string: (scene.backgroundUrl)!)
-        let data = NSData(contentsOfURL: url!)
+    func getBackgroundPicture(_ scene: Scene) -> UIImage {
+        let url = URL(string: (scene.backgroundUrl)!)
+        let data = try? Data(contentsOf: url!)
         return UIImage(data: data!)!
     }
     
-    func blurBackgroundImage(backgroundImage: UIImage) -> UIImage {
+    func blurBackgroundImage(_ backgroundImage: UIImage) -> UIImage {
         return backgroundImage.applyBlurWithRadius(CGFloat(5), tintColor: nil, saturationDeltaFactor: 1.0, maskImage: nil)!
     }
 }

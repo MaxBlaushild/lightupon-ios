@@ -10,7 +10,7 @@ class Location: NSObject, Mappable {
         longitude   <- map["Longitude"]
     }
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     

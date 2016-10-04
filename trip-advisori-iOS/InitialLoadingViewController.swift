@@ -10,20 +10,20 @@ import UIKit
 import CBZSplashView
 
 private extension UIStoryboard {
-    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
+    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: Bundle.main) }
     
     class func loginViewController() -> LoginViewController? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController
+        return mainStoryboard().instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
     }
     
     class func mainContainerViewController() -> MainContainerViewController? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("MainContainerViewController") as? MainContainerViewController
+        return mainStoryboard().instantiateViewController(withIdentifier: "MainContainerViewController") as? MainContainerViewController
     }
 }
 
 class InitialLoadingViewController: UIViewController {
-    private let authService: AuthService = Injector.sharedInjector.getAuthService()
-    private let profileService: ProfileService = Injector.sharedInjector.getProfileService()
+    fileprivate let authService: AuthService = Injector.sharedInjector.getAuthService()
+    fileprivate let profileService: ProfileService = Injector.sharedInjector.getProfileService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +34,12 @@ class InitialLoadingViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
     }
     
     func initializeUser() {
@@ -52,7 +52,7 @@ class InitialLoadingViewController: UIViewController {
         }
     }
     
-    func routeTo(segue: String){
+    func routeTo(_ segue: String){
         if (segue == "InitialToLogin") {
             presentLoginViewController()
         } else {
@@ -61,17 +61,16 @@ class InitialLoadingViewController: UIViewController {
     }
     
     func presentLoginViewController() {
-        let loginViewController = UIStoryboard.loginViewController()
-        self.presentViewController(loginViewController!, animated: false, completion: nil)
-        view.addSubview(loginViewController!.view)
-        loginViewController?.didMoveToParentViewController(self)
-        self.view.splashView()
+        OperationQueue.main.addOperation {
+            self.performSegue(withIdentifier: "InitialToLogin", sender: nil)
+        }
+        
     }
     
     func presentMainContainerViewController() {
         let mainContainerViewController = UIStoryboard.mainContainerViewController()
-        self.presentViewController(mainContainerViewController!, animated: false, completion: nil)
-        mainContainerViewController?.didMoveToParentViewController(self)
+        self.present(mainContainerViewController!, animated: false, completion: nil)
+        mainContainerViewController?.didMove(toParentViewController: self)
     }
     
     func onProfileGotten(_: FacebookProfile) {
