@@ -23,7 +23,7 @@ private extension UIStoryboard {
 
 class InitialLoadingViewController: UIViewController {
     fileprivate let authService: AuthService = Injector.sharedInjector.getAuthService()
-    fileprivate let profileService: ProfileService = Injector.sharedInjector.getProfileService()
+    fileprivate let userService: UserService = Injector.sharedInjector.getUserService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +46,7 @@ class InitialLoadingViewController: UIViewController {
         let loggedIn = authService.userIsLoggedIn()
         
         if (loggedIn) {
-            profileService.getMyProfile(self.onProfileGotten)
+            userService.getMyself(successCallback: self.onMyselfRetrieved)
         } else {
             routeTo("InitialToLogin")
         }
@@ -73,7 +73,7 @@ class InitialLoadingViewController: UIViewController {
         mainContainerViewController?.didMove(toParentViewController: self)
     }
     
-    func onProfileGotten(_: FacebookProfile) {
+    func onMyselfRetrieved() {
         routeTo("InitialToContainer")
     }
 }

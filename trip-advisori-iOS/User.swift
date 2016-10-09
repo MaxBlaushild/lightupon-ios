@@ -19,6 +19,9 @@ class User: NSObject, Mappable {
     var profilePictureURL:String?
     var location: Location?
     var facebookProfile: FacebookProfile?
+    var createdAt: Date?
+    var updatedAt: Date?
+    var lit: Bool?
     
     func mapping(map: Map) {
         id                <- map["ID"]
@@ -27,8 +30,17 @@ class User: NSObject, Mappable {
         location          <- map["Location"]
         fullName          <- map["FullName"]
         firstName         <- map["FirstName"]
+        lit               <- map["Lit"]
         profilePictureURL <- map["ProfilePictureURL"]
+        createdAt         <- (map["CreatedAt"], ISO8601MilliDateTransform())
+        updatedAt         <- (map["UpdatedAt"], ISO8601MilliDateTransform())
     }
     
     required init?(map: Map) {}
+    
+    var profile: FacebookProfile {
+        get {
+            return FacebookProfile(user: self)
+        }
+    }
 }

@@ -25,7 +25,7 @@
 		1E1ED1BD1D4C18CE00B49C64 /* user_menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1ED1BA1D4C18CE00B49C64 /* user_menu@3x.png */; };
 		1E1ED1BE1D4C18CE00B49C64 /* user_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1ED1BB1D4C18CE00B49C64 /* user_menu@2x.png */; };
 		1E1ED1BF1D4C18CE00B49C64 /* user_menu@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1ED1BC1D4C18CE00B49C64 /* user_menu@1x.png */; };
-		1E2014901C705C280012B863 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20148F1C705C280012B863 /* ProfileService.swift */; };
+		1E2014901C705C280012B863 /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20148F1C705C280012B863 /* FacebookService.swift */; };
 		1E2014961C70DB790012B863 /* FacebookProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2014951C70DB790012B863 /* FacebookProfile.swift */; };
 		1E2014981C71273B0012B863 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2014971C71273B0012B863 /* LoginService.swift */; };
 		1E20149C1C72B39D0012B863 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20149B1C72B39D0012B863 /* ProfileViewController.swift */; };
@@ -59,6 +59,8 @@
 		1E51D5D01D9D96A70052DA6E /* GothamRoundedBook_21018.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5C31D9D96A70052DA6E /* GothamRoundedBook_21018.ttf */; };
 		1E51D5D11D9D96A70052DA6E /* GothamRoundedLight_21020.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5C41D9D96A70052DA6E /* GothamRoundedLight_21020.ttf */; };
 		1E51D5D21D9D96A70052DA6E /* GothamRoundedMedium_21022.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5C51D9D96A70052DA6E /* GothamRoundedMedium_21022.ttf */; };
+		1E5690541DA987B000872DDA /* LitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5690531DA987B000872DDA /* LitService.swift */; };
+		1E5690561DA9C46300872DDA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5690551DA9C46300872DDA /* UserService.swift */; };
 		1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6B9F1D0C8A1F00D5793A /* owl.png */; };
 		1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6981CA6307F00D9F90C /* PartyService.swift */; };
 		1E7032AD1CE8F53A00B1C18D /* PartyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7032AC1CE8F53A00B1C18D /* PartyState.swift */; };
@@ -168,7 +170,7 @@
 		1E1ED1BA1D4C18CE00B49C64 /* user_menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_menu@3x.png"; sourceTree = "<group>"; };
 		1E1ED1BB1D4C18CE00B49C64 /* user_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_menu@2x.png"; sourceTree = "<group>"; };
 		1E1ED1BC1D4C18CE00B49C64 /* user_menu@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_menu@1x.png"; sourceTree = "<group>"; };
-		1E20148F1C705C280012B863 /* ProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		1E20148F1C705C280012B863 /* FacebookService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		1E2014951C70DB790012B863 /* FacebookProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookProfile.swift; sourceTree = "<group>"; };
 		1E2014971C71273B0012B863 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		1E20149B1C72B39D0012B863 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +205,8 @@
 		1E51D5C31D9D96A70052DA6E /* GothamRoundedBook_21018.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedBook_21018.ttf; sourceTree = "<group>"; };
 		1E51D5C41D9D96A70052DA6E /* GothamRoundedLight_21020.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedLight_21020.ttf; sourceTree = "<group>"; };
 		1E51D5C51D9D96A70052DA6E /* GothamRoundedMedium_21022.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedMedium_21022.ttf; sourceTree = "<group>"; };
+		1E5690531DA987B000872DDA /* LitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LitService.swift; sourceTree = "<group>"; };
+		1E5690551DA9C46300872DDA /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		1E5F6B9F1D0C8A1F00D5793A /* owl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owl.png; sourceTree = "<group>"; };
 		1E64A6981CA6307F00D9F90C /* PartyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyService.swift; sourceTree = "<group>"; };
 		1E7032AC1CE8F53A00B1C18D /* PartyState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyState.swift; sourceTree = "<group>"; };
@@ -528,13 +532,15 @@
 				1E64A6981CA6307F00D9F90C /* PartyService.swift */,
 				1E1711921CD431D20083236C /* Injector.swift */,
 				1E2014971C71273B0012B863 /* LoginService.swift */,
-				1E20148F1C705C280012B863 /* ProfileService.swift */,
+				1E20148F1C705C280012B863 /* FacebookService.swift */,
 				1E20149E1C72B7730012B863 /* AuthService.swift */,
 				1EF93C061C605A5C00A5B463 /* Service.swift */,
 				1E05B8BC1C5D193B009E37BA /* CurrentLocationService.swift */,
 				1E0003C91C83954000B25C05 /* AmbassadorOfTheAPI.swift */,
 				1E841C571C66DA0C00AD638E /* TripsService.swift */,
 				1EBBFC1F1D734EB100697894 /* NavigationService.swift */,
+				1E5690531DA987B000872DDA /* LitService.swift */,
+				1E5690551DA9C46300872DDA /* UserService.swift */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -842,6 +848,7 @@
 				1E22A7D01D2C491C00163785 /* StoryTellerMenuViewController.swift in Sources */,
 				1E841C5A1C66DB8900AD638E /* Trip.swift in Sources */,
 				1EF93BFE1C6046F800A5B463 /* InitialLoadingViewController.swift in Sources */,
+				1E5690561DA9C46300872DDA /* UserService.swift in Sources */,
 				1E1711931CD431D20083236C /* Injector.swift in Sources */,
 				1E2014981C71273B0012B863 /* LoginService.swift in Sources */,
 				1EBBFC1E1D734C6000697894 /* CompassView.swift in Sources */,
@@ -873,6 +880,7 @@
 				1E841C5C1C6704A600AD638E /* TripListTableViewController.swift in Sources */,
 				1E05B8BB1C5D1566009E37BA /* Location.swift in Sources */,
 				1E20149C1C72B39D0012B863 /* ProfileViewController.swift in Sources */,
+				1E5690541DA987B000872DDA /* LitService.swift in Sources */,
 				1E841C5F1C679B5600AD638E /* TripListTableViewCell.swift in Sources */,
 				1E0920401D8A2B9900D32376 /* BlurView.swift in Sources */,
 				1E71136D1D96FA11004F151D /* ViewFrame.swift in Sources */,
@@ -892,7 +900,7 @@
 				1EAE6A2C1D85FD0100DA19A8 /* TripDetailsView.swift in Sources */,
 				1EA5AFD51D7E430E0024D6CD /* TitleLabel.swift in Sources */,
 				1E05B8C11C5D327A009E37BA /* MapViewController.swift in Sources */,
-				1E2014901C705C280012B863 /* ProfileService.swift in Sources */,
+				1E2014901C705C280012B863 /* FacebookService.swift in Sources */,
 				1EEBE0A01D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift in Sources */,
 				1E71136B1D96F7BF004F151D /* RoundCorners.swift in Sources */,
 				1EF93C071C605A5C00A5B463 /* Service.swift in Sources */,

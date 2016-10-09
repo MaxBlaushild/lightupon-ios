@@ -9,7 +9,7 @@
 import UIKit
 
 class PartyMemberCollectionViewCell: UICollectionViewCell {
-    let profileService: ProfileService = Injector.sharedInjector.getProfileService()
+    let facebookService: FacebookService = Injector.sharedInjector.getFacebookService()
     
     @IBOutlet weak var partyMemberProfilePicture: UIImageView!
     @IBOutlet weak var partyMemberFullName: UILabel!
@@ -20,7 +20,7 @@ class PartyMemberCollectionViewCell: UICollectionViewCell {
     }
     
     func bindCell(_ partyMember: User) {
-        profileService.getProfile(partyMember.facebookId!, callback: self.bindProfileToCell)
+        facebookService.getProfile(partyMember.facebookId!, callback: self.bindProfileToCell)
     }
     
     func bindProfileToCell(_ profile: FacebookProfile) {

@@ -21,11 +21,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             // Handle cancellations
         } else {
             loginView.isHidden = true
-            profileService.getLoginInfo(self.onLoginInfoRecieved)
+            facebookService.getMyProfile(self.onLoginInfoRecieved)
         }
     }
 
-    fileprivate let  profileService:ProfileService = Injector.sharedInjector.getProfileService()
+    fileprivate let  facebookService:FacebookService = Injector.sharedInjector.getFacebookService()
     fileprivate let loginService:LoginService = Injector.sharedInjector.getLoginService()
 
     @IBOutlet weak var loginView: FBSDKLoginButton!

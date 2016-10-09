@@ -21,6 +21,8 @@ class Scene: NSObject, Mappable {
     var soundResource:String?
     var backgroundUrl: String?
     var sceneOrder: Int?
+    var createdAt: Date?
+    var updatedAt: Date?
     
     func mapping(map: Map) {
         id            <- map["ID"]
@@ -31,6 +33,8 @@ class Scene: NSObject, Mappable {
         soundResource <- map["SoundResource"]
         backgroundUrl <- map["BackgroundUrl"]
         sceneOrder    <- map["SceneOrder"]
+        createdAt     <- (map["CreatedAt"], ISO8601MilliDateTransform())
+        updatedAt     <- (map["UpdatedAt"], ISO8601MilliDateTransform())
     }
     
     required init?(map: Map) {}

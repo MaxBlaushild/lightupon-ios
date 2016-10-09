@@ -22,6 +22,7 @@ class Trip: NSObject, Mappable {
     var owner: User?
     var createdAt: Date?
     var updatedAt: Date?
+    var locations: [Location]?
     
     func mapping(map: Map) {
         imageUrl        <- map["ImageUrl"]
@@ -34,6 +35,7 @@ class Trip: NSObject, Mappable {
         estimatedTime   <- map["EstimatedTime"]
         scenes          <- map["Scenes"]
         owner           <- map["User"]
+        locations       <- map["Locations"]
         createdAt       <- (map["CreatedAt"], ISO8601MilliDateTransform())
         updatedAt       <- (map["UpdatedAt"], ISO8601MilliDateTransform())
     }
@@ -43,6 +45,36 @@ class Trip: NSObject, Mappable {
     }
     
     func prettyTimeSinceCreation() -> String {
+        let yearsSince = self.createdAt!.yearsSince()
+        if yearsSince == 0 {
+            let monthsSince = self.createdAt!.monthsSince()
+            if monthsSince == 0 {
+                let daysSince = self.createdAt!.daysSince()
+                if daysSince == 0 {
+                    let hoursSince = self.createdAt!.hoursSince()
+                    if hoursSince == 0 {
+                        let minutesSince = self.createdAt!.minutesSince()
+                        if minutesSince == 0 {
+                            let secondsSince = self.createdAt!.secondsSince()
+                            return "\(secondsSince)s"
+                        } else {
+                            return "\(minutesSince)min"
+                        }
+                    } else {
+                        return "\(hoursSince)h"
+                    }
+                } else {
+                    return "\(daysSince)d"
+                }
+            } else {
+                return "\(monthsSince)mon"
+            }
+        } else {
+            return "\(yearsSince)y"
+        }
+    }
+    
+    func prettyTimeSinceLastWentOn() -> String {
         let yearsSince = self.updatedAt!.yearsSince()
         if yearsSince == 0 {
             let monthsSince = self.updatedAt!.monthsSince()

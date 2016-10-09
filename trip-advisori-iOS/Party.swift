@@ -14,12 +14,16 @@ class Party: NSObject, Mappable {
     var trip: Trip?
     var passcode: String?
     var currentSceneOrder: Int?
+    var createdAt: Date?
+    var updatedAt: Date?
     
     func mapping(map: Map) {
         id                <- map["ID"]
         trip              <- map["Trip"]
         passcode          <- map["Passcode"]
         currentSceneOrder <- map["CurrentSceneOrderID"]
+        createdAt         <- (map["CreatedAt"], ISO8601MilliDateTransform())
+        updatedAt         <- (map["UpdatedAt"], ISO8601MilliDateTransform())
     }
     
     required init?(map: Map) {

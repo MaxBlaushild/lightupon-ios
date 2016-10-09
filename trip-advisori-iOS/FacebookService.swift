@@ -9,15 +9,11 @@
 import UIKit
 import ObjectMapper
 
-class ProfileService: Service {
+class FacebookService: Service {
     
     fileprivate let queryParams = "fields=id,name,email,first_name,picture.width(800).height(800),cover"
     
     internal var profile:FacebookProfile!
-    
-    func isUser(_ otherProfile: FacebookProfile) -> Bool {
-        return profile.email == otherProfile.email
-    }
 
     func getMyProfile(_ callback: @escaping (FacebookProfile) -> Void){
         let graphRequest = FBSDKGraphRequest(graphPath: "me?\(queryParams)", parameters: nil)
@@ -38,16 +34,4 @@ class ProfileService: Service {
             callback(profile!)
         })
     }
-    
-    func getLoginInfo(_ callback: @escaping (FacebookProfile) -> Void){
-        let graphRequest = FBSDKGraphRequest(graphPath: "me?\(queryParams)", parameters: nil)
-        
-        graphRequest?.start(completionHandler: { (connection, result, error) -> Void in
-            let profile = Mapper<FacebookProfile>().map(JSONObject:
-                result)
-            callback(profile!)
-
-        })
-    }
-    
 }

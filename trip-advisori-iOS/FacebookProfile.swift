@@ -28,6 +28,14 @@ class FacebookProfile: NSObject, Mappable {
     }
     
     required init?(map: Map) {}
+    
+    init(user: User) {
+        self.firstName = user.firstName
+        self.fullName = user.fullName
+        self.email = user.email
+        self.id = user.facebookId
+        self.profilePictureURL = user.profilePictureURL
+    }
 }
 
 

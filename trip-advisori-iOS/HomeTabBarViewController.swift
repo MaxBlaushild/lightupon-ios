@@ -39,6 +39,10 @@ class HomeTabBarViewController: UITabBarController {
             if let tableController = controller as? TripListTableViewController {
                 tableController.delegate = vc
             }
+            
+            if let profileController = controller as? ProfileViewController {
+                profileController.initProfile()
+            }
         }
     }
 

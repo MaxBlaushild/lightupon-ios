@@ -19,6 +19,8 @@ class Card: NSObject, Mappable {
     var identifier: String?
     var nibId: String?
     var textTwo: String?
+    var createdAt: Date?
+    var updatedAt: Date?
     
     
     func mapping(map: Map) {
@@ -31,6 +33,8 @@ class Card: NSObject, Mappable {
         universal  <- map["Universal"]
         identifier <- map["Identifier"]
         nibId      <- map["NibID"]
+        createdAt  <- (map["CreatedAt"], ISO8601MilliDateTransform())
+        updatedAt  <- (map["UpdatedAt"], ISO8601MilliDateTransform())
     }
     
     required init?(map: Map) {

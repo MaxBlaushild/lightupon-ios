@@ -14,7 +14,7 @@ private let reuseIdentifier = "PartyMemberCollectionViewCell"
 class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, SocketServiceDelegate, ProfileViewDelegate {
     
     fileprivate let partyService: PartyService = Injector.sharedInjector.getPartyService()
-    fileprivate let profileService: ProfileService = Injector.sharedInjector.getProfileService()
+    fileprivate let userService: UserService = Injector.sharedInjector.getUserService()
     fileprivate let socketService: SocketService = Injector.sharedInjector.getSocketService()
 
     @IBOutlet weak var partyMemberCollectionView: UICollectionView!
@@ -51,8 +51,8 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func bindProfile() {
-        profilePicture.imageFromUrl(profileService.profile.profilePictureURL!)
-        nameLabel.text = profileService.profile.fullName
+        profilePicture.imageFromUrl(userService.currentUser.profilePictureURL!)
+        nameLabel.text = userService.currentUser.fullName
         profilePicture.makeCircle()
     }
     
@@ -73,7 +73,7 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     
     func removeUserFromPartyList() {
         for (index, partyMember) in _partyState.users!.enumerated() {
-            if partyMember.email == profileService.profile.email {
+            if partyMember.email == userService.currentUser.email {
                 _partyState.users?.remove(at: index)
             }
         }
@@ -93,7 +93,7 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         profileView = ProfileView.fromNib("ProfileView")
         profileView.frame = view.frame
         profileView.delegate = self
-        profileView.initializeView(profileService.profile)
+        profileView.initializeView(userService.currentUser.profile)
         view.addSubview(profileView)
         addXBackButton()
     }

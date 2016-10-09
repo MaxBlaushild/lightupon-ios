@@ -43,6 +43,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         locationManager.requestLocation()
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 20.00
         locationManager.startUpdatingLocation()
         locationManager.startUpdatingHeading()
     }

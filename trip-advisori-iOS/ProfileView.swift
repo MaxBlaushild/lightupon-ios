@@ -17,8 +17,9 @@ enum ProfileContext {
 }
 
 class ProfileView: UIView {
-    fileprivate let profileService = Injector.sharedInjector.getProfileService()
     fileprivate let authService = Injector.sharedInjector.getAuthService()
+    fileprivate let facebookService = Injector.sharedInjector.getFacebookService()
+    fileprivate let userService = Injector.sharedInjector.getUserService()
 
     @IBOutlet weak var actionPackedButton: UIButton!
     @IBOutlet weak var blurImage: UIImageView!
@@ -38,7 +39,7 @@ class ProfileView: UIView {
     }
     
     internal func initializeView(_ facebookId: String) {
-        profileService.getProfile(facebookId, callback: self.setProfile)
+        facebookService.getProfile(facebookId, callback: self.setProfile)
     }
     
     @nonobjc func initializeView(_ profile: FacebookProfile) {
@@ -59,7 +60,7 @@ class ProfileView: UIView {
     
     
     func setProfileContext(_ profile: FacebookProfile) {
-        let isUser = profileService.isUser(profile)
+        let isUser = userService.isUser(profile)
         profileContext = isUser ? .isUser : .notFollowing
         changeProfileContext()
     }

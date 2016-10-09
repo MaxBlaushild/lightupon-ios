@@ -9,11 +9,12 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDelegate, TripDetailsViewDelegate {
+class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDelegate {
     
     fileprivate let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
-    fileprivate let socketService: SocketService = Injector.sharedInjector.getSocketService()
     fileprivate let tripsService:TripsService = Injector.sharedInjector.getTripsService()
+    fileprivate let litService:LitService = Injector.sharedInjector.getLitService()
+    fileprivate let userService:UserService = Injector.sharedInjector.getUserService()
     
     var trips:[Trip]!
     
@@ -28,13 +29,34 @@ class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDele
         delegate.toggleRightPanel()
     }
     
+    @IBAction func toggleLitness(_ sender: AnyObject) {
+        litService.isLit ? extinguish() : light()
+    }
+    
+    func light() {
+        litService.light(successCallback: self.bindLitness)
+    }
+    
+    func extinguish() {
+        litService.extinguish(successCallback: self.bindLitness)
+    }
+    
+    func bindLitness() {
+        let title = litService.isLit ? "Get Unlit" : "Get Lit"
+        litButton.setTitle(title, for: .normal)
+    }
+    
+    
+    @IBOutlet weak var litButton: UIButton!
+    
     @IBOutlet weak var mapView: GMSMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        socketService.registerDelegate(self)
         getTrips()
         configureMapView()
+        bindLitness()
+        view.bringSubview(toFront: litButton)
     }
     
     func configureMapView() {
@@ -42,7 +64,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDele
         mapView.isMyLocationEnabled = true
         mapView.delegate = self
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -80,12 +101,39 @@ class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDele
     
     func placeTripOnMap(_ trip: Trip, mapView: GMSMapView) {
         let colorForTrip = getRandomColor()
+        placeLocations(trip: trip, color: colorForTrip)
+        placeMarkers(trip: trip, color: colorForTrip)
+
+    }
+    
+    func placeLocation(location: Location) {
         let marker = GMSMarker()
-        marker.icon = GMSMarker.markerImage(with: colorForTrip)
-        marker.position = CLLocationCoordinate2DMake(trip.scenes![0].latitude!, trip.scenes![0].longitude!)
-        marker.title = trip.title
-        marker.snippet = trip.descriptionText
-        marker.userData = trip
+        marker.position = CLLocationCoordinate2DMake(location.latitude!, location.longitude!)
+        marker.map = mapView
+    }
+    
+    func placeLocations(trip: Trip, color: UIColor) {
+        if trip.locations != nil {
+            for location in trip.locations! {
+                placeLocation(location: location)
+            }
+        }
+    }
+    
+    func placeMarkers(trip: Trip, color: UIColor) {
+        if trip.scenes != nil {
+            for scene in trip.scenes! {
+                placeMarker(scene: scene, color: color)
+            }
+        }
+    }
+    
+    func placeMarker(scene: Scene, color: UIColor) {
+        let marker = GMSMarker()
+        marker.icon = GMSMarker.markerImage(with: color)
+        marker.position = CLLocationCoordinate2DMake(scene.latitude!, scene.longitude!)
+        marker.title = scene.name
+        marker.userData = scene
         marker.map = mapView
     }
     
@@ -94,8 +142,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, SocketServiceDele
         blurView.removeFromSuperview()
         xBackButton.removeFromSuperview()
     }
-    
-    func onResponseReceived(_ partyState: PartyState) {}
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         obscureBackground()

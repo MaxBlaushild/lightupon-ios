@@ -16,19 +16,23 @@ class Injector: Service {
     fileprivate let _tripsService: TripsService
     fileprivate let _partyService: PartyService
     fileprivate let _currentLocationService: CurrentLocationService
-    fileprivate let _profileService: ProfileService
+    fileprivate let _facebookService: FacebookService
     fileprivate let _loginService: LoginService
     fileprivate let _socketService: SocketService
     fileprivate let _navigationService: NavigationService
+    fileprivate let _litService: LitService
+    fileprivate let _userService: UserService
 
     override init(){
         _authService = AuthService()
         _currentLocationService = CurrentLocationService()
-        _profileService = ProfileService()
+        _facebookService = FacebookService()
         _loginService = LoginService(authService: _authService)
         _apiAmbassador = AmbassadorToTheAPI(authService: _authService)
         _tripsService = TripsService(apiAmbassador: _apiAmbassador)
         _partyService = PartyService(apiAmbassador: _apiAmbassador)
+        _litService = LitService(apiAmbassador: _apiAmbassador)
+        _userService = UserService(apiAmbassador: _apiAmbassador, litService: _litService)
         _socketService = SocketService(authService: _authService, currentLocationService: _currentLocationService)
         _navigationService = NavigationService()
         super.init()
@@ -36,6 +40,14 @@ class Injector: Service {
     
     func getAuthService() -> AuthService {
         return _authService
+    }
+    
+    func getUserService() -> UserService {
+        return _userService
+    }
+    
+    func getLitService() -> LitService {
+        return _litService
     }
     
     func getSocketService() -> SocketService {
@@ -50,8 +62,8 @@ class Injector: Service {
         return _tripsService
     }
     
-    func getProfileService() -> ProfileService {
-        return _profileService
+    func getFacebookService() -> FacebookService {
+        return _facebookService
     }
     
     func getPartyService() -> PartyService {
