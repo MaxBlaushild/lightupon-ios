@@ -24,6 +24,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     fileprivate var _heading:Double
     
     var delegates:[CurrentLocationServiceDelegate] = [CurrentLocationServiceDelegate]()
+    var hasRecievedLocation:Bool = false
     
     override init (){
         
@@ -42,8 +43,8 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         locationManager.requestAlwaysAuthorization()
         locationManager.requestLocation()
         
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 20.00
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.distanceFilter = 10.00
         locationManager.startUpdatingLocation()
         locationManager.startUpdatingHeading()
     }
@@ -53,16 +54,66 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let locationObj:CLLocation = locations.last!
-        let coord = locationObj.coordinate
-
-        _latitude = coord.latitude
-        _longitude = coord.longitude
-        _course = locationObj.course
+        hasRecievedLocation = true
         
-        for delegate in delegates {
-            delegate.onLocationUpdated()
+        let newLocation = locations.last!
+        let coord = newLocation.coordinate
+        
+        var validLocation = true
+
+        if (locations.count > 1) {
+            let oldLocation = locations.secondLast
+            validLocation = isValidLocation(newLocation: newLocation, oldLocation: oldLocation)
         }
+        
+        if (validLocation) {
+            _latitude = coord.latitude
+            _longitude = coord.longitude
+            _course = newLocation.course
+            
+            for delegate in delegates {
+                delegate.onLocationUpdated()
+            }
+        }
+    }
+    
+    func isValidLocation(newLocation: CLLocation, oldLocation: CLLocation) -> Bool {
+        
+        if (newLocation.horizontalAccuracy < 0) {
+            return false
+        }
+        
+        if (newLocation.horizontalAccuracy > 50) {
+            return false
+        }
+        
+        if (oldLocation.coordinate.latitude > 90
+            && oldLocation.coordinate.latitude < -90
+            && oldLocation.coordinate.longitude > 180
+            && oldLocation.coordinate.longitude < -180) {
+            return false
+        }
+        
+        if (newLocation.coordinate.latitude > 90
+            || newLocation.coordinate.latitude < -90
+            || newLocation.coordinate.longitude > 180
+            || newLocation.coordinate.longitude < -180) {
+            return false
+        }
+        
+        let eventDate = newLocation.timestamp;
+        let eventinterval = eventDate.timeIntervalSinceNow;
+        
+        
+        if (abs(eventinterval) < 30.0) {
+            return false
+        }
+        
+        if (newLocation.horizontalAccuracy >= 0 && newLocation.horizontalAccuracy < 20) {
+            return false
+        }
+        
+        return true
     }
     
     func registerDelegate(_ delegate: CurrentLocationServiceDelegate) {
@@ -100,7 +151,6 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         }
     }
     
-    // MARK: LocationInfo implementation
     var locationStatus:String {
 
         get {

@@ -19,6 +19,7 @@
 		1E05B8C11C5D327A009E37BA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E05B8C01C5D327A009E37BA /* MapViewController.swift */; };
 		1E09203E1D8A1D2B00D32376 /* XBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E09203D1D8A1D2B00D32376 /* XBackButton.swift */; };
 		1E0920401D8A2B9900D32376 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E09203F1D8A2B9900D32376 /* BlurView.swift */; };
+		1E0B3E601DAA06E700F830D4 /* ArrayMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B3E5F1DAA06E700F830D4 /* ArrayMethod.swift */; };
 		1E1711931CD431D20083236C /* Injector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1711921CD431D20083236C /* Injector.swift */; };
 		1E1763AB1D403E6F00C3FBCE /* StringEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1763AA1D403E6F00C3FBCE /* StringEscaping.swift */; };
 		1E1A1A9B1CEE9D1A00A3A812 /* StoryTellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */; };
@@ -164,6 +165,7 @@
 		1E05B8C01C5D327A009E37BA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1E09203D1D8A1D2B00D32376 /* XBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XBackButton.swift; sourceTree = "<group>"; };
 		1E09203F1D8A2B9900D32376 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		1E0B3E5F1DAA06E700F830D4 /* ArrayMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayMethod.swift; sourceTree = "<group>"; };
 		1E1711921CD431D20083236C /* Injector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Injector.swift; sourceTree = "<group>"; };
 		1E1763AA1D403E6F00C3FBCE /* StringEscaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringEscaping.swift; sourceTree = "<group>"; };
 		1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTellerViewController.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				1EBBFC211D73545F00697894 /* AddShadow.swift */,
 				1E71136A1D96F7BF004F151D /* RoundCorners.swift */,
 				1EA20DED1DA1995D00596CDE /* DateExtensions.swift */,
+				1E0B3E5F1DAA06E700F830D4 /* ArrayMethod.swift */,
 			);
 			name = utilities;
 			sourceTree = "<group>";
@@ -866,6 +869,7 @@
 				1E22A7CA1D2C37BA00163785 /* CardView.swift in Sources */,
 				1E7032B11CE8F7B200B1C18D /* User.swift in Sources */,
 				1ED69B4B1D0C836000CF2172 /* GetTopViewController.swift in Sources */,
+				1E0B3E601DAA06E700F830D4 /* ArrayMethod.swift in Sources */,
 				1ED4881D1D98529C00C67516 /* ProfileView.swift in Sources */,
 				1ED69B401D07B19A00CF2172 /* colors.swift in Sources */,
 				1E0003CA1C83954000B25C05 /* AmbassadorOfTheAPI.swift in Sources */,

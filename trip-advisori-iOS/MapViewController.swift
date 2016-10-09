@@ -106,18 +106,20 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
 
     }
     
-    func placeLocation(location: Location) {
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(location.latitude!, location.longitude!)
-        marker.map = mapView
-    }
-    
     func placeLocations(trip: Trip, color: UIColor) {
         if trip.locations != nil {
+            let path = GMSMutablePath()
+            
             for location in trip.locations! {
-                placeLocation(location: location)
+                let coord = CLLocationCoordinate2D(latitude: location.latitude!, longitude: location.longitude!)
+                path.add(coord)
             }
+            
+            let polyline = GMSPolyline(path: path)
+            polyline.strokeColor = color
+            polyline.map = mapView
         }
+
     }
     
     func placeMarkers(trip: Trip, color: UIColor) {

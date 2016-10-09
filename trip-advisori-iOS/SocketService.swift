@@ -81,9 +81,11 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     }
     
     func updateLocation() {
-        let location:Location = _currentLocationService.location
-        let jsonLocation = Mapper().toJSONString(location, prettyPrint: true)
-        _socket.write(string: jsonLocation!)
+        if (_currentLocationService.hasRecievedLocation) {
+            let location:Location = _currentLocationService.location
+            let jsonLocation = Mapper().toJSONString(location, prettyPrint: true)
+            _socket.write(string: jsonLocation!)
+        }
     }
     
     func websocketDidDisconnect(socket ws: WebSocket, error: NSError?) {
