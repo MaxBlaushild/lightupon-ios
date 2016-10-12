@@ -56,64 +56,13 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         hasRecievedLocation = true
         
-        let newLocation = locations.last!
-        let coord = newLocation.coordinate
-        
-        var validLocation = true
-
-        if (locations.count > 1) {
-            let oldLocation = locations.secondLast
-            validLocation = isValidLocation(newLocation: newLocation, oldLocation: oldLocation)
-        }
-        
-        if (validLocation) {
-            _latitude = coord.latitude
-            _longitude = coord.longitude
-            _course = newLocation.course
+        _latitude = coord.latitude
+        _longitude = coord.longitude
+        _course = newLocation.course
             
-            for delegate in delegates {
-                delegate.onLocationUpdated()
-            }
+        for delegate in delegates {
+            delegate.onLocationUpdated()
         }
-    }
-    
-    func isValidLocation(newLocation: CLLocation, oldLocation: CLLocation) -> Bool {
-        
-        if (newLocation.horizontalAccuracy < 0) {
-            return false
-        }
-        
-        if (newLocation.horizontalAccuracy > 50) {
-            return false
-        }
-        
-        if (oldLocation.coordinate.latitude > 90
-            && oldLocation.coordinate.latitude < -90
-            && oldLocation.coordinate.longitude > 180
-            && oldLocation.coordinate.longitude < -180) {
-            return false
-        }
-        
-        if (newLocation.coordinate.latitude > 90
-            || newLocation.coordinate.latitude < -90
-            || newLocation.coordinate.longitude > 180
-            || newLocation.coordinate.longitude < -180) {
-            return false
-        }
-        
-        let eventDate = newLocation.timestamp;
-        let eventinterval = eventDate.timeIntervalSinceNow;
-        
-        
-        if (abs(eventinterval) < 30.0) {
-            return false
-        }
-        
-        if (newLocation.horizontalAccuracy >= 0 && newLocation.horizontalAccuracy < 20) {
-            return false
-        }
-        
-        return true
     }
     
     func registerDelegate(_ delegate: CurrentLocationServiceDelegate) {
