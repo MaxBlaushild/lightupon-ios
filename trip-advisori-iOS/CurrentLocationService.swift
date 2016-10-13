@@ -56,9 +56,12 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         hasRecievedLocation = true
         
+        let locationObj:CLLocation = locations.last!
+        let coord = locationObj.coordinate
+        
         _latitude = coord.latitude
         _longitude = coord.longitude
-        _course = newLocation.course
+        _course = locationObj.course
             
         for delegate in delegates {
             delegate.onLocationUpdated()
