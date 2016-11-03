@@ -18,4 +18,10 @@ class Location: NSObject, Mappable {
         self.latitude = latitude
         self.longitude = longitude
     }
+    
+    var queryParam: String {
+        get {
+            return "\(self.latitude!),\(self.longitude!)|"
+        }
+    }
 }

@@ -22,6 +22,8 @@ class Injector: Service {
     fileprivate let _navigationService: NavigationService
     fileprivate let _litService: LitService
     fileprivate let _userService: UserService
+    fileprivate let _searchService: SearchService
+    fileprivate let _followService: FollowService
 
     override init(){
         _authService = AuthService()
@@ -32,7 +34,9 @@ class Injector: Service {
         _tripsService = TripsService(apiAmbassador: _apiAmbassador)
         _partyService = PartyService(apiAmbassador: _apiAmbassador)
         _litService = LitService(apiAmbassador: _apiAmbassador)
-        _userService = UserService(apiAmbassador: _apiAmbassador, litService: _litService)
+        _searchService = SearchService(apiAmbassador: _apiAmbassador)
+        _followService = FollowService(apiAmbassador: _apiAmbassador)
+        _userService = UserService(apiAmbassador: _apiAmbassador, litService: _litService, followService: _followService)
         _socketService = SocketService(authService: _authService, currentLocationService: _currentLocationService)
         _navigationService = NavigationService()
         super.init()
@@ -40,6 +44,14 @@ class Injector: Service {
     
     func getAuthService() -> AuthService {
         return _authService
+    }
+    
+    func getFollowService() -> FollowService {
+        return _followService
+    }
+    
+    func getSearchService() -> SearchService {
+        return _searchService
     }
     
     func getUserService() -> UserService {

@@ -22,7 +22,7 @@ class Trip: NSObject, Mappable {
     var owner: User?
     var createdAt: Date?
     var updatedAt: Date?
-    var locations: [Location]?
+    var locations: [Location] = [Location]()
     
     func mapping(map: Map) {
         imageUrl        <- map["ImageUrl"]

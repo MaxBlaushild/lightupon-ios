@@ -33,7 +33,7 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
         super.init()
         
         _currentLocationService.registerDelegate(self)
-        
+            
         openSocket()
         keepSocketOpen()
     }
@@ -81,10 +81,12 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     }
     
     func updateLocation() {
-        if (_currentLocationService.hasRecievedLocation) {
-            let location:Location = _currentLocationService.location
-            let jsonLocation = Mapper().toJSONString(location, prettyPrint: true)
-            _socket.write(string: jsonLocation!)
+        if (_authService.userIsLoggedIn()) {
+            if (_currentLocationService.hasRecievedLocation) {
+                let location:Location = _currentLocationService.location
+                let jsonLocation = Mapper().toJSONString(location, prettyPrint: true)
+                _socket.write(string: jsonLocation!)
+            }
         }
     }
     

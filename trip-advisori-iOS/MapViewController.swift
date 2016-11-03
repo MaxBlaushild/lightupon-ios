@@ -110,7 +110,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
         if trip.locations != nil {
             let path = GMSMutablePath()
             
-            for location in trip.locations! {
+            for location in trip.locations {
                 let coord = CLLocationCoordinate2D(latitude: location.latitude!, longitude: location.longitude!)
                 path.add(coord)
             }

@@ -20,6 +20,7 @@ class ProfileView: UIView {
     fileprivate let authService = Injector.sharedInjector.getAuthService()
     fileprivate let facebookService = Injector.sharedInjector.getFacebookService()
     fileprivate let userService = Injector.sharedInjector.getUserService()
+    fileprivate let followService = Injector.sharedInjector.getFollowService()
 
     @IBOutlet weak var actionPackedButton: UIButton!
     @IBOutlet weak var blurImage: UIImageView!
@@ -31,6 +32,7 @@ class ProfileView: UIView {
     
     fileprivate var profileContext: ProfileContext = ProfileContext.isUser
     fileprivate var actionPackButtonHandler:(() -> Void)!
+    fileprivate var _user: User!
     
     internal var delegate: ProfileViewDelegate!
     
@@ -38,17 +40,22 @@ class ProfileView: UIView {
         actionPackButtonHandler()
     }
     
-    internal func initializeView(_ facebookId: String) {
-        facebookService.getProfile(facebookId, callback: self.setProfile)
+//    internal func initializeView(_ facebookId: String) {
+//        facebookService.getProfile(facebookId, callback: self.setProfile)
+//    }
+    
+//    @nonobjc func initializeView(_ profile: FacebookProfile) {
+//        setProfile(profile)
+//    }
+    
+    @nonobjc func initializeView(_ user: User) {
+        _user = user
+        setUser(user)
     }
     
-    @nonobjc func initializeView(_ profile: FacebookProfile) {
-        setProfile(profile)
-    }
-    
-    func setProfile(_ profile: FacebookProfile) {
-        setProfileContext(profile)
-        bindProfile(profile)
+    func setUser(_ user: User) {
+        setUserContext(user)
+        bindProfile(user.profile)
         style()
     }
     
@@ -59,9 +66,11 @@ class ProfileView: UIView {
     }
     
     
-    func setProfileContext(_ profile: FacebookProfile) {
-        let isUser = userService.isUser(profile)
+    func setUserContext(_ user: User) {
+        let isUser = userService.isUser(user.profile)
+        let isFollowing = followService.isFollowing(user: user)
         profileContext = isUser ? .isUser : .notFollowing
+        profileContext = isFollowing ? .following : profileContext
         changeProfileContext()
     }
     
@@ -105,11 +114,11 @@ class ProfileView: UIView {
     }
     
     func follow() {
-        
+        followService.follow(user: _user, callback: self.setFollowingState)
     }
     
     func unfollow() {
-        
+        followService.unfollow(user: _user, callback: self.setNotFollowingState)
     }
     
     func style() {

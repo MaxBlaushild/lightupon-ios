@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
         let profileView = ProfileView.fromNib("ProfileView")
         profileView.frame = view.frame
         profileView.delegate = self
-        profileView.initializeView(userService.currentUser.profile)
+        profileView.initializeView(userService.currentUser)
         view.addSubview(profileView)
     }
     

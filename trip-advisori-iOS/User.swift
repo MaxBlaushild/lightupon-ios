@@ -22,6 +22,7 @@ class User: NSObject, Mappable {
     var createdAt: Date?
     var updatedAt: Date?
     var lit: Bool?
+    var follows: [Follow]?
     
     func mapping(map: Map) {
         id                <- map["ID"]
@@ -34,6 +35,7 @@ class User: NSObject, Mappable {
         profilePictureURL <- map["ProfilePictureURL"]
         createdAt         <- (map["CreatedAt"], ISO8601MilliDateTransform())
         updatedAt         <- (map["UpdatedAt"], ISO8601MilliDateTransform())
+        follows           <- map["Follows"]
     }
     
     required init?(map: Map) {}

@@ -38,7 +38,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.18</string>
+	<string>1.19</string>
 	<key>FacebookAppID</key>
 	<string>939202066178832</string>
 	<key>FacebookDisplayName</key>
@@ -83,6 +83,11 @@
 		<string>Dosis-ExtraLight.otf</string>
 		<string>Dosis-Bold.otf</string>
 		<string>Dosis-ExtraBold.otf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

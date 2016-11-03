@@ -13,12 +13,14 @@ class UserService: Service {
     
     private let _apiAmbassador:AmbassadorToTheAPI
     private let _litService:LitService
+    private let _followService:FollowService
     
     fileprivate var _currentUser: User!
     
-    init(apiAmbassador: AmbassadorToTheAPI, litService:LitService){
+    init(apiAmbassador: AmbassadorToTheAPI, litService:LitService, followService: FollowService){
         _apiAmbassador = apiAmbassador
         _litService = litService
+        _followService = followService
     }
     
     func getMyself(successCallback: @escaping () -> Void) {
@@ -31,6 +33,7 @@ class UserService: Service {
     func setMyself(jsonObject: AnyObject) {
         let user = Mapper<User>().map(JSONObject: jsonObject)
         _currentUser = user
+        _followService.setFollows(follows: (user?.follows)!)
         _litService.setLitness(lit: _currentUser.lit!)
     }
     

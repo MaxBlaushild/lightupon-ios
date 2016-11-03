@@ -18,11 +18,11 @@
         <array key="Dosis-SemiBold.otf">
             <string>Dosis-SemiBold</string>
         </array>
+        <array key="GothamRounded-Light.otf">
+            <string>GothamRounded-Light</string>
+        </array>
         <array key="GothamRoundedBook_21018.ttf">
             <string>GothamRounded-Book</string>
-        </array>
-        <array key="GothamRoundedLight_21020.ttf">
-            <string>GothamRounded-Light</string>
         </array>
         <array key="GothamRoundedMedium_21022.ttf">
             <string>GothamRounded-Medium</string>
@@ -108,6 +108,94 @@
             </objects>
             <point key="canvasLocation" x="-2969" y="-1419"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="BfH-dP-wHn">
+            <objects>
+                <viewController id="nXO-VD-sny" customClass="SearchViewController" customModule="trip_advisori_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yME-gw-EYW"/>
+                        <viewControllerLayoutGuide type="bottom" id="3oJ-hV-yvc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ens-jp-U0W">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-7t-IYp">
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zy9-mn-TIJ">
+                                <state key="normal" title="Button" image="search"/>
+                                <connections>
+                                    <action selector="search:" destination="nXO-VD-sny" eventType="touchUpInside" id="3J6-gy-KXj"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="z3v-ar-ATx">
+                                <frame key="frameInset" minX="36" minY="78" width="303" height="540"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cv9-PZ-0Be">
+                                    <size key="itemSize" width="298" height="154"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PartyMemberCollectionViewCell" id="I1y-FN-KKW" customClass="PartyMemberCollectionViewCell" customModule="trip_advisori_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="3" y="0.0" width="298" height="154"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="298" height="154"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1wb-dA-4xD">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="70" id="cJD-cz-YXN"/>
+                                                        <constraint firstAttribute="height" constant="70" id="t3X-Ug-VE6"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fullName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7V-od-uvx">
+                                                    <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="17"/>
+                                                    <color key="textColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="o7V-od-uvx" firstAttribute="leading" secondItem="1wb-dA-4xD" secondAttribute="trailing" constant="10" id="BWE-lc-4ED"/>
+                                            <constraint firstItem="o7V-od-uvx" firstAttribute="centerY" secondItem="I1y-FN-KKW" secondAttribute="centerY" id="pHf-CT-0ua"/>
+                                            <constraint firstItem="1wb-dA-4xD" firstAttribute="centerY" secondItem="I1y-FN-KKW" secondAttribute="centerY" id="tHV-Ux-Y5a"/>
+                                            <constraint firstItem="1wb-dA-4xD" firstAttribute="leading" secondItem="I1y-FN-KKW" secondAttribute="leadingMargin" id="zng-Xg-Ktx"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="partyMemberFullName" destination="o7V-od-uvx" id="CA7-dF-96L"/>
+                                            <outlet property="partyMemberProfilePicture" destination="1wb-dA-4xD" id="bcr-77-ydV"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ab4-7t-IYp" firstAttribute="leading" secondItem="Ens-jp-U0W" secondAttribute="leadingMargin" constant="20" id="EJa-D6-aH0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ab4-7t-IYp" secondAttribute="trailing" constant="20" id="GaC-Fw-Ntb"/>
+                            <constraint firstItem="ab4-7t-IYp" firstAttribute="top" secondItem="yME-gw-EYW" secondAttribute="bottom" constant="20" id="SHE-q2-uQM"/>
+                            <constraint firstItem="zy9-mn-TIJ" firstAttribute="top" secondItem="yME-gw-EYW" secondAttribute="bottom" constant="20" id="l2S-vD-UB2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zy9-mn-TIJ" secondAttribute="trailing" constant="20" id="xdw-rl-8n2"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="search" selectedImage="search" id="0Go-Pj-4Mk"/>
+                    <connections>
+                        <outlet property="searchBar" destination="ab4-7t-IYp" id="PuA-5b-CFe"/>
+                        <outlet property="userCollectionView" destination="z3v-ar-ATx" id="c8T-bl-Pc4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pqr-Ay-5GD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4599.1999999999998" y="-931.48425787106453"/>
+        </scene>
         <!--Home Tab Bar View Controller-->
         <scene sceneID="R4F-ck-1cn">
             <objects>
@@ -122,6 +210,7 @@
                         <segue destination="HOi-Ee-twU" kind="relationship" relationship="viewControllers" id="cfT-uj-XCG"/>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="uVO-uJ-B3e"/>
                         <segue destination="MPG-Ne-4SO" kind="relationship" relationship="viewControllers" id="ND3-rS-vOm"/>
+                        <segue destination="nXO-VD-sny" kind="relationship" relationship="viewControllers" id="9o9-JC-TKf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWH-os-GCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -315,7 +404,7 @@
             </objects>
             <point key="canvasLocation" x="-2969" y="-723"/>
         </scene>
-        <!--Profile-->
+        <!--Profile View Controller-->
         <scene sceneID="mgf-QZ-Mu6">
             <objects>
                 <viewController id="MPG-Ne-4SO" customClass="ProfileViewController" customModule="trip_advisori_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -329,50 +418,20 @@
                         <subviews>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lyo-Xb-1RE">
                                 <frame key="frameInset" minY="20" width="600" height="60"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFC-sd-MA4">
-                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="15"/>
-                                        <state key="normal" title="Back">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="goBack:" destination="MPG-Ne-4SO" eventType="touchUpInside" id="5oE-Na-52B"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="2NZ-u2-sX2"/>
-                                    <constraint firstItem="dFC-sd-MA4" firstAttribute="leading" secondItem="lyo-Xb-1RE" secondAttribute="leadingMargin" constant="10" id="LML-Ln-EoA"/>
-                                    <constraint firstItem="dFC-sd-MA4" firstAttribute="centerY" secondItem="lyo-Xb-1RE" secondAttribute="centerY" id="d80-5d-ZiR"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SwC-jH-BS9">
-                                <frame key="frameInset" minY="570" width="600" height="30"/>
-                                <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="hLI-QP-3ye"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="15"/>
-                                <state key="normal" title="Log Out">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="logOut:" destination="MPG-Ne-4SO" eventType="touchUpInside" id="frM-PL-3xH"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="SwC-jH-BS9" firstAttribute="leading" secondItem="HVE-b4-QnK" secondAttribute="leading" id="4ND-SD-S9y"/>
                             <constraint firstAttribute="trailing" secondItem="lyo-Xb-1RE" secondAttribute="trailing" id="Dum-N2-IHK"/>
                             <constraint firstItem="lyo-Xb-1RE" firstAttribute="top" secondItem="guZ-aT-kdr" secondAttribute="bottom" id="XSI-VA-KbV"/>
                             <constraint firstItem="lyo-Xb-1RE" firstAttribute="leading" secondItem="HVE-b4-QnK" secondAttribute="leading" id="g3j-ci-cd0"/>
-                            <constraint firstItem="Qel-zQ-vBm" firstAttribute="top" secondItem="SwC-jH-BS9" secondAttribute="bottom" id="vaK-eH-0YQ"/>
-                            <constraint firstAttribute="trailing" secondItem="SwC-jH-BS9" secondAttribute="trailing" id="zeM-JM-Bmm"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="profile_unfilled" selectedImage="profile_filled" id="PdS-m6-mJA">
+                    <tabBarItem key="tabBarItem" title="" image="profile_unfilled" selectedImage="profile_filled" id="PdS-m6-mJA">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -705,6 +764,7 @@
         <image name="map_unfilled" width="30" height="30"/>
         <image name="profile_filled" width="30" height="30"/>
         <image name="profile_unfilled" width="30" height="30"/>
+        <image name="search" width="30" height="30"/>
         <image name="trips_filled" width="30" height="30"/>
         <image name="trips_unfilled" width="30" height="30"/>
         <image name="user_menu" width="30" height="30"/>
@@ -712,8 +772,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="igN-LA-eCX"/>
-        <segue reference="n8e-Qh-4NE"/>
-        <segue reference="goM-kh-zUe"/>
         <segue reference="UTU-s5-NHN"/>
+        <segue reference="gY1-t0-Oa9"/>
+        <segue reference="5gH-Uh-KtK"/>
     </inferredMetricsTieBreakers>
 </document>
