@@ -9,12 +9,13 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDelegate {
+class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     fileprivate let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
     fileprivate let tripsService:TripsService = Injector.sharedInjector.getTripsService()
     fileprivate let litService:LitService = Injector.sharedInjector.getLitService()
     fileprivate let userService:UserService = Injector.sharedInjector.getUserService()
+    fileprivate let postService:PostService = Injector.sharedInjector.getPostService()
     
     var trips:[Trip]!
     
@@ -31,6 +32,25 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     
     @IBAction func toggleLitness(_ sender: AnyObject) {
         litService.isLit ? extinguish() : light()
+    }
+    
+    @IBOutlet weak var ImagePicked: UIImageView!
+    
+    @IBAction func openCameraButton(sender: AnyObject) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    @IBAction func confirmSent(_ sender: AnyObject) {
+        postService.sendPicture(name: "farts", type: "images", callback: self.closeImageView)
+    }
+    
+    func closeImageView() {
+        
     }
     
     func light() {
