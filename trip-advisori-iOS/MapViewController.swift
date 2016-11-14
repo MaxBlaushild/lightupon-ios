@@ -24,6 +24,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     var xBackButton:XBackButton!
     
     var delegate: MainViewControllerDelegate!
+    var imagePicker = UIImagePickerController()
     
     
     @IBAction func openMenu(_ sender: AnyObject) {
@@ -33,19 +34,30 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     @IBAction func toggleLitness(_ sender: AnyObject) {
         litService.isLit ? extinguish() : light()
     }
-    
     @IBOutlet weak var ImagePicked: UIImageView!
+
     
     @IBAction func openCameraButton(sender: AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
-            imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        ImagePicked.image = image
+        self.dismiss(animated: true, completion: nil);
+    }
+    
     @IBAction func confirmSent(_ sender: AnyObject) {
+        let imageData = UIImageJPEGRepresentation(ImagePicked.image!, 0.6)
+        let compressedJPGImage = UIImage(data: imageData!)
+        UIImageWriteToSavedPhotosAlbum(compressedJPGImage!, nil, nil, nil)
+        
+//        let alert = UIAlertController(title: "Wow",
+//                                message: "Your image has been saved to Photo Library!",
+//                                delegate: nil,
+//                                cancelButtonTitle: "Ok")
+//        alert.show()
         postService.sendPicture(name: "farts", type: "images", callback: self.closeImageView)
     }
     
@@ -77,6 +89,11 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
         configureMapView()
         bindLitness()
         view.bringSubview(toFront: litButton)
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+        imagePicker.allowsEditing = false
+
     }
     
     func configureMapView() {
