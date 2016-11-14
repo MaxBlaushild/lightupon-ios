@@ -11,32 +11,58 @@ import GoogleMaps
 
 class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    fileprivate let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
-    fileprivate let tripsService:TripsService = Injector.sharedInjector.getTripsService()
-    fileprivate let litService:LitService = Injector.sharedInjector.getLitService()
-    fileprivate let userService:UserService = Injector.sharedInjector.getUserService()
-    fileprivate let postService:PostService = Injector.sharedInjector.getPostService()
+    fileprivate let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
+    fileprivate let tripsService = Injector.sharedInjector.getTripsService()
+    fileprivate let litService = Injector.sharedInjector.getLitService()
+    fileprivate let userService = Injector.sharedInjector.getUserService()
+    fileprivate let postService = Injector.sharedInjector.getPostService()
     
     var trips:[Trip]!
-    
     var blurView: BlurView!
     var tripDetailsView:TripDetailsView!
     var xBackButton:XBackButton!
-    
     var delegate: MainViewControllerDelegate!
+    var mapMenuView: UIView!
+    var mainButton: UIButton!
+    var postButton: UIButton!
+    var messageButton: UIButton!
+    var litButton: UIButton!
+    var menuOpen:Bool = false
+    
+    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var ImagePicked: UIImageView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        getTrips()
+        configureMapView()
+        addMainButton()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override var shouldAutorotate : Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
+    }
     
     
     @IBAction func openMenu(_ sender: AnyObject) {
         delegate.toggleRightPanel()
     }
     
-    @IBAction func toggleLitness(_ sender: AnyObject) {
+    func toggleLitness(_ sender: AnyObject) {
         litService.isLit ? extinguish() : light()
     }
     
-    @IBOutlet weak var ImagePicked: UIImageView!
-    
-    @IBAction func openCameraButton(sender: AnyObject) {
+    func openCameraButton(sender: AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
@@ -45,8 +71,182 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
+    
     @IBAction func confirmSent(_ sender: AnyObject) {
         postService.sendPicture(name: "farts", type: "images", callback: self.closeImageView)
+    }
+    
+    func addMainButton() {
+        mainButton = UIButton()
+        mainButton.frame = CGRect(x: view.frame.width / 2 - 30, y: view.frame.height - 167, width: 60, height: 60)
+        setUnopenedMainButtonState()
+        mainButton.makeCircle()
+        view.insertSubview(mainButton, at: 0)
+        view.bringSubview(toFront: mainButton)
+    }
+    
+    func setUnopenedMainButtonState() {
+        let image = UIImage(named: "whiteLogo") as UIImage?
+        mainButton.backgroundColor = Colors.basePurple
+        mainButton.setImage(image, for: .normal)
+        mainButton.removeTarget(self, action: #selector(closeMapMenu), for: .touchUpInside)
+        mainButton.addTarget(self, action: #selector(openMapMenu), for: .touchUpInside)
+    }
+    
+    func setOpenedMainButtonState() {
+        let image = UIImage(named: "mainCancel") as UIImage?
+        mainButton.setImage(image, for: .normal)
+        mainButton.removeTarget(self, action: #selector(openMapMenu), for: .touchUpInside)
+        mainButton.backgroundColor = UIColor.white
+        mainButton.addTarget(self, action: #selector(closeMapMenu), for: .touchUpInside)
+    }
+    
+    func openMapMenu(sender: UIButton!) {
+        toggleMainButton()
+        createMapMenu()
+        view.addSubview(mapMenuView)
+        view.bringSubview(toFront: mainButton)
+        animateInMapMenu()
+        addLitButton()
+        animateInLitButton()
+        addPostButton()
+        animateInPostButton()
+        addMessageButton()
+        animateInMessageButton()
+    }
+    
+    func closeMapMenu() {
+        mainButton.isEnabled = false
+        animateOutButtons()
+        animateOutMenu()
+    }
+    
+    func removeMapMenuViews() {
+        removeMapView()
+        removeLitButton()
+        removePostButton()
+        removeMessageButton()
+        toggleMainButton()
+    }
+    
+    func removeMapView() {
+        mapMenuView.removeFromSuperview()
+        mapMenuView = nil
+    }
+    
+    func removeLitButton() {
+        litButton.removeFromSuperview()
+        litButton = nil
+    }
+    
+    func removePostButton() {
+        postButton.removeFromSuperview()
+        postButton = nil
+    }
+    
+    func removeMessageButton() {
+        messageButton.removeFromSuperview()
+        messageButton = nil
+    }
+    
+    func toggleMainButton() {
+        menuOpen ? setUnopenedMainButtonState() : setOpenedMainButtonState()
+        menuOpen = !menuOpen
+        mainButton.isEnabled = true
+    }
+    
+    func createMapMenu() {
+        mapMenuView = UIView()
+        mapMenuView.frame = view.frame
+        mapMenuView.frame.origin.y = view.frame.height
+        mapMenuView.backgroundColor = Colors.basePurple
+        mapMenuView.alpha = 0.6
+    }
+    
+    func addPostButton() {
+        postButton = UIButton()
+        let image = UIImage(named: "post") as UIImage?
+        postButton.setImage(image, for: .normal)
+        postButton.addTarget(self, action: #selector(openCameraButton), for: .touchUpInside)
+        postButton.backgroundColor = UIColor.white
+        postButton.alpha = 1.0
+        postButton.frame = CGRect(x: view.frame.width / 2 - 20, y: view.frame.height - 147, width: 40, height: 40)
+        postButton.makeCircle()
+        view.addSubview(postButton)
+    }
+    
+    func addMessageButton() {
+        messageButton = UIButton()
+        let image = UIImage(named: "message") as UIImage?
+        messageButton.setImage(image, for: .normal)
+        messageButton.backgroundColor = UIColor.white
+        messageButton.alpha = 1.0
+        messageButton.frame = CGRect(x: view.frame.width / 2 - 20, y: view.frame.height - 147, width: 40, height: 40)
+        messageButton.makeCircle()
+        view.addSubview(messageButton)
+    }
+    
+    func addLitButton() {
+        litButton = UIButton()
+        litButton.backgroundColor = UIColor.white
+        litButton.alpha = 1.0
+        litButton.addTarget(self, action: #selector(toggleLitness), for: .touchUpInside)
+        bindLitness()
+        litButton.frame = CGRect(x: view.frame.width / 2 - 20, y: view.frame.height - 147, width: 40, height: 40)
+        litButton.makeCircle()
+        view.addSubview(litButton)
+    }
+    
+    func animateInPostButton() {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: ({
+            self.postButton.frame = CGRect(x: self.view.frame.width / 2 - 20, y: self.view.frame.height - 267, width: 40, height: 40)
+        }), completion: nil)
+    }
+    
+    func animateInLitButton() {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: ({
+            self.litButton.frame = CGRect(x: self.view.frame.width / 2 - 100, y: self.view.frame.height - 217, width: 40, height: 40)
+        }), completion: nil)
+    }
+    
+    func animateInMessageButton() {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: ({
+            self.messageButton.frame = CGRect(x: self.view.frame.width / 2 + 60, y: self.view.frame.height - 217, width: 40, height: 40)
+        }), completion: nil)
+    }
+    
+    func animateInMapMenu() {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 20.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: ({
+            self.mapMenuView.frame = self.view.frame
+        }), completion: nil)
+    }
+    
+    func animateOutMenu() {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 20.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: ({
+            self.mapMenuView.frame.origin.y = self.view.frame.height
+        }), completion: { truth in
+            self.removeMapMenuViews()
+        })
+    }
+    
+    func animateOutButtons() {
+        view.bringSubview(toFront: mainButton)
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 10.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: ({
+            let origin = CGRect(x: self.view.frame.width / 2 - 20, y: self.view.frame.height - 167, width: 40, height: 40)
+            self.messageButton.frame = origin
+            self.postButton.frame = origin
+            self.litButton.frame = origin
+        }), completion: nil)
+    }
+    
+    func configureMapView() {
+        mapView.camera = GMSCameraPosition.camera(withLatitude: currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
+        mapView.isMyLocationEnabled = true
+        mapView.delegate = self
+    }
+    
+    func getTrips() {
+        tripsService.getTrips(self.onTripsGotten, latitude: self.currentLocationService.latitude, longitude: self.currentLocationService.longitude)
     }
     
     func closeImageView() {
@@ -62,43 +262,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     }
     
     func bindLitness() {
-        let title = litService.isLit ? "Get Unlit" : "Get Lit"
+        let title = litService.isLit ? "Lit" : "Not"
+        litButton.setTitleColor(Colors.basePurple, for: UIControlState.normal)
         litButton.setTitle(title, for: .normal)
-    }
-    
-    
-    @IBOutlet weak var litButton: UIButton!
-    
-    @IBOutlet weak var mapView: GMSMapView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        getTrips()
-        configureMapView()
-        bindLitness()
-        view.bringSubview(toFront: litButton)
-    }
-    
-    func configureMapView() {
-        mapView.camera = GMSCameraPosition.camera(withLatitude: currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
-        mapView.isMyLocationEnabled = true
-        mapView.delegate = self
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override var shouldAutorotate : Bool {
-        return false
-    }
-    
-    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.portrait
-    }
-    
-    func getTrips() {
-        tripsService.getTrips(self.onTripsGotten, latitude: self.currentLocationService.latitude, longitude: self.currentLocationService.longitude)
     }
     
     func onTripsGotten(_ _trips_: [Trip]) {

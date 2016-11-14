@@ -18,14 +18,14 @@
         <array key="Dosis-SemiBold.otf">
             <string>Dosis-SemiBold</string>
         </array>
-        <array key="GothamRounded-Medium.otf">
-            <string>GothamRounded-Medium</string>
+        <array key="GothamRounded-Light.otf">
+            <string>GothamRounded-Light</string>
         </array>
         <array key="GothamRoundedBook_21018.ttf">
             <string>GothamRounded-Book</string>
         </array>
-        <array key="GothamRoundedLight_21020.ttf">
-            <string>GothamRounded-Light</string>
+        <array key="GothamRoundedMedium_21022.ttf">
+            <string>GothamRounded-Medium</string>
         </array>
     </customFonts>
     <scenes>
@@ -41,8 +41,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SWV-37-CxM" customClass="GMSMapView">
-                                <frame key="frameInset" minY="88" width="600" height="463"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWV-37-CxM" customClass="GMSMapView">
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9o7-lG-Ebr">
                                         <frame key="frameInset" minX="53" minY="70" width="240" height="128"/>
@@ -74,22 +73,6 @@
                                             <action selector="openMenu:" destination="9pv-A4-QxB" eventType="touchUpInside" id="tpy-rl-46Y"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kf1-rL-MRv">
-                                        <frame key="frameInset" minX="160" minY="17" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Get Lit"/>
-                                        <connections>
-                                            <action selector="toggleLitness:" destination="9pv-A4-QxB" eventType="touchUpInside" id="iyV-qv-KMz"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjT-k5-Znc">
-                                        <frame key="frameInset" minX="218" minY="17" width="39" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Selfie"/>
-                                        <connections>
-                                            <action selector="openCameraButtonWithSender:" destination="9pv-A4-QxB" eventType="touchUpInside" id="9nB-zC-cPi"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -101,7 +84,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.96712150890000004" blue="0.99612552610000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="SWV-37-CxM" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="Mo6-tL-yHy"/>
                             <constraint firstItem="fHf-DM-b4G" firstAttribute="top" secondItem="baG-0d-enO" secondAttribute="bottom" id="PX2-39-Scb"/>
@@ -122,14 +105,13 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="ImagePicked" destination="9o7-lG-Ebr" id="lBm-Mf-1FB"/>
-                        <outlet property="litButton" destination="kf1-rL-MRv" id="A0W-pv-qsi"/>
                         <outlet property="mapView" destination="SWV-37-CxM" id="f9H-Q3-b3i"/>
                         <segue destination="0Y6-rN-5xt" kind="show" identifier="MapToContainer" id="igN-LA-eCX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2969" y="-1419"/>
+            <point key="canvasLocation" x="-2970.4000000000001" y="-1419.04047976012"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="BfH-dP-wHn">
