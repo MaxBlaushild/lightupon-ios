@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "916AD6D6945838D581F668CB687FCD8C7B479C47",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "916AD6D6945838D581F668CB687FCD8C7B479C47" : 9223372036854775807,
+    "9FAA958B61E495BAF9B53E8EF6CFA4A12A63AA59" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4C73B92B-716A-4419-B75B-73756E4BEF92",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "916AD6D6945838D581F668CB687FCD8C7B479C47" : "lightupon-ios\/",
+    "9FAA958B61E495BAF9B53E8EF6CFA4A12A63AA59" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "trip-advisori-iOS",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "trip-advisori-iOS.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:MaxBlaushild\/lightupon-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "916AD6D6945838D581F668CB687FCD8C7B479C47"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.mheducation.com:MHEducation\/dimsum-db.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9FAA958B61E495BAF9B53E8EF6CFA4A12A63AA59"
+    }
+  ]
+}

@@ -118,6 +118,7 @@
 		1ED69B4B1D0C836000CF2172 /* GetTopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED69B4A1D0C836000CF2172 /* GetTopViewController.swift */; };
 		1EE009931D80514100E550CF /* CardSwipeOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE009921D80514100E550CF /* CardSwipeOptions.swift */; };
 		1EE14DF71D579F9C00364B9D /* InstantiateViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE14DF61D579F9C00364B9D /* InstantiateViewControllers.swift */; };
+		1EE68CF01DD408B50011167F /* MapMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE68CEF1DD408B50011167F /* MapMenuView.swift */; };
 		1EE9A2B31DCBB1EB00E7EC84 /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9A2B21DCBB1EB00E7EC84 /* Follow.swift */; };
 		1EE9A2B51DCC00CF00E7EC84 /* AwsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9A2B41DCC00CF00E7EC84 /* AwsService.swift */; };
 		1EE9A2B71DCC00E400E7EC84 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9A2B61DCC00E400E7EC84 /* PostService.swift */; };
@@ -269,6 +270,7 @@
 		1ED69B4A1D0C836000CF2172 /* GetTopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTopViewController.swift; sourceTree = "<group>"; };
 		1EE009921D80514100E550CF /* CardSwipeOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSwipeOptions.swift; sourceTree = "<group>"; };
 		1EE14DF61D579F9C00364B9D /* InstantiateViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantiateViewControllers.swift; sourceTree = "<group>"; };
+		1EE68CEF1DD408B50011167F /* MapMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapMenuView.swift; sourceTree = "<group>"; };
 		1EE9A2B21DCBB1EB00E7EC84 /* Follow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		1EE9A2B41DCC00CF00E7EC84 /* AwsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwsService.swift; sourceTree = "<group>"; };
 		1EE9A2B61DCC00E400E7EC84 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 		1ED69B471D0C809C00CF2172 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				1EE68CEE1DD408830011167F /* MapMenuView */,
 				1ED488171D98525600C67516 /* ProfileView */,
 				1EAE6A2D1D85FE6A00DA19A8 /* TripDetailsView */,
 				1EE009951D8052BA00E550CF /* EndOfTripView */,
@@ -581,6 +584,14 @@
 				1E30E7AC1D7CE91100BB547F /* EndOfTripView.swift */,
 			);
 			name = EndOfTripView;
+			sourceTree = "<group>";
+		};
+		1EE68CEE1DD408830011167F /* MapMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				1EE68CEF1DD408B50011167F /* MapMenuView.swift */,
+			);
+			name = MapMenuView;
 			sourceTree = "<group>";
 		};
 		1EF7839B1CFF46D100860510 /* cards */ = {
@@ -879,6 +890,7 @@
 				1E1711931CD431D20083236C /* Injector.swift in Sources */,
 				1E2014981C71273B0012B863 /* LoginService.swift in Sources */,
 				1EBBFC1E1D734C6000697894 /* CompassView.swift in Sources */,
+				1EE68CF01DD408B50011167F /* MapMenuView.swift in Sources */,
 				1EA20DEC1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift in Sources */,
 				1EE14DF71D579F9C00364B9D /* InstantiateViewControllers.swift in Sources */,
 				1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */,

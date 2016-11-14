@@ -14,3 +14,10 @@ extension UIImageView {
         self.clipsToBounds = true;
     }
 }
+
+extension UIButton {
+    func makeCircle() {
+        self.layer.cornerRadius = 0.5 * self.bounds.size.width
+        self.clipsToBounds = true
+    }
+}
