@@ -66,13 +66,17 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     @IBAction func openCameraButton(sender: AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             imagePicker.sourceType = .camera
-            present(imagePicker, animated: true, completion: nil)
+            self.present(imagePicker, animated: true, completion: nil)
         }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject], editingInfo: [NSObject : AnyObject]!) {
         ImagePicked.image = info[UIImagePickerControllerOriginalImage] as! UIImage?
         self.dismiss(animated: true, completion: nil);
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func confirmSent(_ sender: AnyObject) {
