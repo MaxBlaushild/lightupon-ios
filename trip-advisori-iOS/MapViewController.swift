@@ -35,10 +35,10 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         getTrips()
         configureMapView()
         addMainButton()
+        imagePicker.delegate = self;
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,12 +65,13 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     
     @IBAction func openCameraButton(sender: AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            self.present(imagePicker, animated: true, completion: nil)
+            imagePicker.sourceType = .camera
+            present(imagePicker, animated: true, completion: nil)
         }
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        ImagePicked.image = image
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject], editingInfo: [NSObject : AnyObject]!) {
+        ImagePicked.image = info[UIImagePickerControllerOriginalImage] as! UIImage?
         self.dismiss(animated: true, completion: nil);
     }
     

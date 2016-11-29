@@ -123,6 +123,6 @@
 	<key>CFBundleDisplayName</key>
 	<string></string>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera usage description</string>
+	<string>We need to import photos from users.</string>
 </dict>
 </plist>
