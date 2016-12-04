@@ -16,23 +16,19 @@ protocol SocketServiceDelegate {
     func onResponseReceived(_ _partyState_: PartyState) -> Void
 }
 
-class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate {
+class SocketService: Service, WebSocketDelegate {
     
     fileprivate let _authService: AuthService
-    fileprivate let _currentLocationService: CurrentLocationService
     
     fileprivate var _socketPolling: Timer!
     fileprivate var _socket: WebSocket!
 
     internal var delegates:[SocketServiceDelegate] = [SocketServiceDelegate]()
     
-    init(authService: AuthService, currentLocationService: CurrentLocationService) {
-        _currentLocationService = currentLocationService
+    init(authService: AuthService) {
         _authService = authService
         
         super.init()
-        
-        _currentLocationService.registerDelegate(self)
             
         openSocket()
         keepSocketOpen()
@@ -66,27 +62,13 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
     func registerDelegate(_ delegate: SocketServiceDelegate) {
         delegates.append(delegate)
     }
-    
-    func onHeadingUpdated() {}
         
-    func websocketDidConnect(socket ws: WebSocket) {
-        updateLocation()
-    }
+    func websocketDidConnect(socket ws: WebSocket) {}
     
     func checkOnSocket() {
         if !_socket.isConnected {
             setSocketHeaders()
             _socket.connect()
-        }
-    }
-    
-    func updateLocation() {
-        if (_authService.userIsLoggedIn()) {
-            if (_currentLocationService.hasRecievedLocation) {
-                let location:Location = _currentLocationService.location
-                let jsonLocation = Mapper().toJSONString(location, prettyPrint: true)
-                _socket.write(string: jsonLocation!)
-            }
         }
     }
     
@@ -98,12 +80,7 @@ class SocketService: Service, WebSocketDelegate, CurrentLocationServiceDelegate 
         }
     }
     
-    func onLocationUpdated() {
-        updateLocation()
-    }
-    
     func websocketDidReceiveMessage(socket ws: WebSocket, text: String) {
-        
         if let partyState:PartyState = Mapper<PartyState>().map(JSONString: text) {
             for delegate in delegates {
                 delegate.onResponseReceived(partyState)

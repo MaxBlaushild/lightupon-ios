@@ -1,5 +1,6 @@
 import UIKit
 import CoreLocation
+import APScheduledLocationManager
 
 protocol LocationInfo{
     
@@ -14,21 +15,22 @@ protocol CurrentLocationServiceDelegate {
     func onHeadingUpdated() -> Void
 }
 
-class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo {
+class CurrentLocationService: Service, CLLocationManagerDelegate, LocationInfo {
     
-    fileprivate var locationManager:CLLocationManager
+    fileprivate var _locationManager:CLLocationManager
     fileprivate var _locationStatus:(code: Int, message: String)
     fileprivate var _longitude:Double
     fileprivate var _latitude:Double
     fileprivate var _course:Double
     fileprivate var _heading:Double
+    fileprivate var _lastLocationDate:NSDate = NSDate()
     
     var delegates:[CurrentLocationServiceDelegate] = [CurrentLocationServiceDelegate]()
-    var hasRecievedLocation:Bool = false
     
-    override init (){
+    override init(){
         
-        self.locationManager = CLLocationManager()
+        self._locationManager = CLLocationManager()
+
         
         self._locationStatus = (code: 0, message: "")
         self._longitude = 50.0
@@ -38,27 +40,28 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         
         super.init()
         
-        locationManager.delegate = self
+        _locationManager.delegate = self
         
-        locationManager.requestAlwaysAuthorization()
-        locationManager.requestLocation()
+        if (CLLocationManager.authorizationStatus() != .authorizedAlways) {
+            _locationManager.requestAlwaysAuthorization()
+            
+        }
         
-        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        locationManager.distanceFilter = 10.00
-        locationManager.startUpdatingLocation()
-        locationManager.startUpdatingHeading()
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        _locationManager.distanceFilter = 10.00
+        _locationManager.startUpdatingHeading()
+        _locationManager.startUpdatingLocation()
     }
     
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        locationManager.stopUpdatingLocation()
+        _locationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        hasRecievedLocation = true
-        
         let locationObj:CLLocation = locations.last!
         let coord = locationObj.coordinate
-        
+    
         _latitude = coord.latitude
         _longitude = coord.longitude
         _course = locationObj.course

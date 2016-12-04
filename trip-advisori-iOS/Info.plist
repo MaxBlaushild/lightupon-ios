@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string></string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -38,11 +40,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.21</string>
+	<string>1.32</string>
 	<key>FacebookAppID</key>
 	<string>939202066178832</string>
 	<key>FacebookDisplayName</key>
 	<string>Pharus</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbshareextension</string>
@@ -72,8 +76,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera usage description</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Is it ok for us to track your location? Our app relies on it.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app does not require access to the microphone.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Dosis-SemiBold.otf</string>

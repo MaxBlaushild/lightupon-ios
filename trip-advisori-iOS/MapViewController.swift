@@ -16,6 +16,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     fileprivate let litService = Injector.sharedInjector.getLitService()
     fileprivate let userService = Injector.sharedInjector.getUserService()
     fileprivate let postService = Injector.sharedInjector.getPostService()
+    fileprivate let socketService = Injector.sharedInjector.getSocketService()
     
     var trips:[Trip]!
     var blurView: BlurView!
@@ -63,7 +64,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     }
 
     
-    @IBAction func openCameraButton(sender: AnyObject) {
+    func openCameraButton(sender: AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             imagePicker.sourceType = .camera
             self.present(imagePicker, animated: true, completion: nil)
@@ -209,10 +210,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
         litButton.addTarget(self, action: #selector(toggleLitness), for: .touchUpInside)
         bindLitness()
         view.bringSubview(toFront: litButton)
-        imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
-        imagePicker.allowsEditing = false
         litButton.frame = CGRect(x: view.frame.width / 2 - 20, y: view.frame.height - 147, width: 40, height: 40)
         litButton.makeCircle()
         view.addSubview(litButton)
@@ -357,7 +354,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
         tripDetailsView = TripDetailsView.fromNib("TripDetailsView")
         tripDetailsView.delegate = self
         tripDetailsView.size(self)
-        tripDetailsView.bindTrip(marker.userData as! Trip)
+        let scene = marker.userData as! Scene
+        tripDetailsView.bindCard((scene.cards?[0])!, tripId: scene.tripId!)
         view.addSubview(tripDetailsView)
         return true
     }
