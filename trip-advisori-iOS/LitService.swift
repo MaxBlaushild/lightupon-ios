@@ -15,26 +15,34 @@ enum Litness {
 class LitService: Service {
     
     private let _apiAmbassador:AmbassadorToTheAPI
+    private let _currentLocationService: CurrentLocationService
     private var _litness: Litness
     
-    init(apiAmbassador: AmbassadorToTheAPI){
+    init(apiAmbassador: AmbassadorToTheAPI, currentLocationService: CurrentLocationService){
         _apiAmbassador = apiAmbassador
+        _currentLocationService = currentLocationService
         _litness = Litness.notLit
     }
     
     func light(successCallback: @escaping () -> Void) {
-        let parameters = ["": ""]
+        let location = [
+            "Latitude": _currentLocationService.latitude,
+            "Longitude": _currentLocationService.longitude
+        ]
         
-        _apiAmbassador.post(apiURL + "/light", parameters: parameters as [String : AnyObject], success: { response in
+        _apiAmbassador.post(apiURL + "/light", parameters: location as [String : AnyObject], success: { response in
             self.toggleLitness()
             successCallback()
         })
     }
     
     func extinguish(successCallback: @escaping () -> Void) {
-        let parameters = ["": ""]
+        let location = [
+            "Latitude": _currentLocationService.latitude,
+            "Longitude": _currentLocationService.longitude
+        ]
         
-        _apiAmbassador.post(apiURL + "/extinguish", parameters: parameters as [String : AnyObject], success: { response in
+        _apiAmbassador.post(apiURL + "/extinguish", parameters: location as [String : AnyObject], success: { response in
             self.toggleLitness()
             successCallback()
         })

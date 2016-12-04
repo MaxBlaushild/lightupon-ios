@@ -29,17 +29,18 @@ class Injector: Service {
 
     override init(){
         _authService = AuthService()
-        _currentLocationService = CurrentLocationService()
+        
         _facebookService = FacebookService()
         _loginService = LoginService(authService: _authService)
         _apiAmbassador = AmbassadorToTheAPI(authService: _authService)
         _tripsService = TripsService(apiAmbassador: _apiAmbassador)
         _partyService = PartyService(apiAmbassador: _apiAmbassador)
-        _litService = LitService(apiAmbassador: _apiAmbassador)
+        _currentLocationService = CurrentLocationService()
+        _litService = LitService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService)
         _searchService = SearchService(apiAmbassador: _apiAmbassador)
         _followService = FollowService(apiAmbassador: _apiAmbassador)
         _userService = UserService(apiAmbassador: _apiAmbassador, litService: _litService, followService: _followService)
-        _socketService = SocketService(authService: _authService, currentLocationService: _currentLocationService)
+        _socketService = SocketService(authService: _authService)
         _navigationService = NavigationService()
         _awsService = AwsService(apiAmbassador: _apiAmbassador, currentLocationService:_currentLocationService)
         _postService = PostService(awsService: _awsService)

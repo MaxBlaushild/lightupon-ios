@@ -16,7 +16,7 @@ class TripDetailsView: UIView {
     fileprivate let tripsService: TripsService = Injector.sharedInjector.getTripsService()
     fileprivate let partyService: PartyService = Injector.sharedInjector.getPartyService()
     
-    fileprivate var _trip:Trip!
+    fileprivate var _tripId:Int!
     
     internal var delegate: TripDetailsViewDelegate!
     
@@ -31,14 +31,20 @@ class TripDetailsView: UIView {
     }
     
     func bindTrip(_ trip: Trip) {
-        _trip = trip
+        _tripId = trip.id!
         tripDetailsLabel.text = trip.descriptionText
         tripDetailsPicture.imageFromUrl(trip.imageUrl!)
     }
     
+    func bindCard(_ card: Card, tripId: Int) {
+        _tripId = tripId
+        tripDetailsLabel.text = card.text
+        tripDetailsPicture.imageFromUrl("https://flavorwire.files.wordpress.com/2015/03/kanye-west1.jpg?w=1389")
+    }
+    
     @IBAction func createParty(_ sender: UIButton) {
         sender.isEnabled = false
-        partyService.createParty(_trip.id!, callback: self.onPartyCreated)
+        partyService.createParty(_tripId!, callback: self.onPartyCreated)
         
     }
     

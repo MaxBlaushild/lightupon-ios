@@ -1,4 +1,6 @@
+platform :ios, '10.1'
 use_frameworks!
+inhibit_all_warnings!
 
 target 'trip-advisori-iOS' do
   pod 'Alamofire'
@@ -12,34 +14,17 @@ target 'trip-advisori-iOS' do
   pod 'Starscream'
   pod 'ObjectMapper'
   pod 'AlamofireObjectMapper'
+  pod 'APScheduledLocationManager'
   pod 'HanekeSwift', :git => 'https://github.com/jasonnoahchoi/HanekeSwift', :branch => 'swift3'
   pod 'MDCSwipeToChoose'
   pod 'CBZSplashView'
   pod 'PocketSVG'
 end
 
-target 'trip-advisori-iOS' do
-
-end
-
-target 'trip-advisori-iOS' do
-
-end
-
 post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ""
-      config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
-      config.build_settings['CODE_SIGNING_ALLOWED'] = "NO"
-    end
-  end
-end
-
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.0'
-    end
-  end
-end
+     installer.pods_project.targets.each do |target|
+         target.build_configurations.each do |config|
+             config.build_settings['ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES'] = 'NO -$(inherited)' 
+         end
+     end
+ end

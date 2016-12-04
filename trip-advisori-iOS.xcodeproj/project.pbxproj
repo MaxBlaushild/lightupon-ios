@@ -93,6 +93,7 @@
 		1EA5AFD31D7E3E760024D6CD /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5AFD21D7E3E760024D6CD /* MenuButton.swift */; };
 		1EA5AFD51D7E430E0024D6CD /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */; };
 		1EA5C6181DC00E1200918CA6 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5C6171DC00E1200918CA6 /* SearchViewController.swift */; };
+		1EA9E0A71DF49EB00022E730 /* BackgroundLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA9E0A61DF49EB00022E730 /* BackgroundLocationManager.swift */; };
 		1EAA89AF1D94A3EF009E9D03 /* ComboTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAA89AE1D94A3EF009E9D03 /* ComboTitle.swift */; };
 		1EAA89B61D94A7D0009E9D03 /* ComboTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EAA89B51D94A7D0009E9D03 /* ComboTitle.xib */; };
 		1EAE6A2C1D85FD0100DA19A8 /* TripDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE6A2B1D85FD0100DA19A8 /* TripDetailsView.swift */; };
@@ -132,7 +133,7 @@
 		1EF93BFE1C6046F800A5B463 /* InitialLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */; };
 		1EF93C001C604DA600A5B463 /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */; };
 		1EF93C071C605A5C00A5B463 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93C061C605A5C00A5B463 /* Service.swift */; };
-		9124443D98759B610CA027FA /* Pods_trip_advisori_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADB4A205645AF4BD20A06E0 /* Pods_trip_advisori_iOS.framework */; };
+		200342DE5A117218586CC6B6 /* Pods_trip_advisori_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 409FF193A4158197772FC7E2 /* Pods_trip_advisori_iOS.framework */; };
 		9C3F53181D4EB25300A6B3DE /* TestSound2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C3F53171D4EB25300A6B3DE /* TestSound2.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -245,6 +246,7 @@
 		1EA5AFD21D7E3E760024D6CD /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		1EA5C6171DC00E1200918CA6 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		1EA9E0A61DF49EB00022E730 /* BackgroundLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundLocationManager.swift; sourceTree = "<group>"; };
 		1EAA89AE1D94A3EF009E9D03 /* ComboTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComboTitle.swift; sourceTree = "<group>"; };
 		1EAA89B51D94A7D0009E9D03 /* ComboTitle.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComboTitle.xib; sourceTree = "<group>"; };
 		1EAE6A2B1D85FD0100DA19A8 /* TripDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDetailsView.swift; sourceTree = "<group>"; };
@@ -284,10 +286,10 @@
 		1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialLoadingViewController.swift; sourceTree = "<group>"; };
 		1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewController.swift; sourceTree = "<group>"; };
 		1EF93C061C605A5C00A5B463 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		2ADB4A205645AF4BD20A06E0 /* Pods_trip_advisori_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trip_advisori_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7FFFEB7839A565E790733793 /* Pods-trip-advisori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		409FF193A4158197772FC7E2 /* Pods_trip_advisori_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trip_advisori_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		474F1170A47864608D8F27EA /* Pods-trip-advisori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		5E97347AE9870EAA9C722028 /* Pods-trip-advisori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9C3F53171D4EB25300A6B3DE /* TestSound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TestSound2.mp3; sourceTree = "<group>"; };
-		CC641C4C708F459BFB4B60B1 /* Pods-trip-advisori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,7 +297,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9124443D98759B610CA027FA /* Pods_trip_advisori_iOS.framework in Frameworks */,
+				200342DE5A117218586CC6B6 /* Pods_trip_advisori_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,15 +318,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07F9C147E8B695E6C7D82523 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CC641C4C708F459BFB4B60B1 /* Pods-trip-advisori-iOS.debug.xcconfig */,
-				7FFFEB7839A565E790733793 /* Pods-trip-advisori-iOS.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		1E05B87E1C5D135D009E37BA = {
 			isa = PBXGroup;
 			children = (
@@ -332,8 +325,8 @@
 				1E05B8A01C5D135D009E37BA /* trip-advisori-iOSTests */,
 				1E05B8AB1C5D135D009E37BA /* trip-advisori-iOSUITests */,
 				1E05B8881C5D135D009E37BA /* Products */,
-				07F9C147E8B695E6C7D82523 /* Pods */,
-				400E7ED1A7B730941D0A381A /* Frameworks */,
+				6607556669A76EA469E29847 /* Pods */,
+				74763FD20A096C3AFE5CA4DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -564,6 +557,7 @@
 				1E1141D11DC674DD00ACAF67 /* FollowService.swift */,
 				1EE9A2B41DCC00CF00E7EC84 /* AwsService.swift */,
 				1EE9A2B61DCC00E400E7EC84 /* PostService.swift */,
+				1EA9E0A61DF49EB00022E730 /* BackgroundLocationManager.swift */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -624,10 +618,19 @@
 			name = models;
 			sourceTree = "<group>";
 		};
-		400E7ED1A7B730941D0A381A /* Frameworks */ = {
+		6607556669A76EA469E29847 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2ADB4A205645AF4BD20A06E0 /* Pods_trip_advisori_iOS.framework */,
+				5E97347AE9870EAA9C722028 /* Pods-trip-advisori-iOS.debug.xcconfig */,
+				474F1170A47864608D8F27EA /* Pods-trip-advisori-iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		74763FD20A096C3AFE5CA4DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				409FF193A4158197772FC7E2 /* Pods_trip_advisori_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -639,12 +642,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1E05B8B11C5D135D009E37BA /* Build configuration list for PBXNativeTarget "trip-advisori-iOS" */;
 			buildPhases = (
-				71E2B44F3B4F54E8D1C584F5 /* Check Pods Manifest.lock */,
+				70EB39945ECB618487726B97 /* [CP] Check Pods Manifest.lock */,
 				1E05B8831C5D135D009E37BA /* Sources */,
 				1E05B8841C5D135D009E37BA /* Frameworks */,
 				1E05B8851C5D135D009E37BA /* Resources */,
-				86F30828A58975953C782D9E /* Embed Pods Frameworks */,
-				341497D4C47D60E7310B6374 /* Copy Pods Resources */,
+				9000E27EF72682947C172E06 /* [CP] Embed Pods Frameworks */,
+				FC293918C478A0B7EE11ACBD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -706,7 +709,7 @@
 				TargetAttributes = {
 					1E05B8861C5D135D009E37BA = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 92XEB7J5BP;
+						DevelopmentTeam = XLWZ7RAXK6;
 						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -825,49 +828,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		341497D4C47D60E7310B6374 /* Copy Pods Resources */ = {
+		70EB39945ECB618487726B97 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		71E2B44F3B4F54E8D1C584F5 /* Check Pods Manifest.lock */ = {
+		9000E27EF72682947C172E06 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		86F30828A58975953C782D9E /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC293918C478A0B7EE11ACBD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -877,6 +880,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EA9E0A71DF49EB00022E730 /* BackgroundLocationManager.swift in Sources */,
 				1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */,
 				1EE9A2B51DCC00CF00E7EC84 /* AwsService.swift in Sources */,
 				1E09203E1D8A1D2B00D32376 /* XBackButton.swift in Sources */,
@@ -1094,17 +1098,82 @@
 		};
 		1E05B8B21C5D135D009E37BA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC641C4C708F459BFB4B60B1 /* Pods-trip-advisori-iOS.debug.xcconfig */;
+			baseConfigurationReference = 5E97347AE9870EAA9C722028 /* Pods-trip-advisori-iOS.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "trip-advisori-iOS/trip-advisori-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 92XEB7J5BP;
+				DEVELOPMENT_TEAM = XLWZ7RAXK6;
 				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"APScheduledLocationManager\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"AlamofireObjectMapper\"",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"CBZSplashView\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-framework",
+					"\"FBSDKShareKit\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"GoogleMapsBase\"",
+					"-framework",
+					"\"GoogleMapsCore\"",
+					"-framework",
+					"\"Haneke\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"Locksmith\"",
+					"-framework",
+					"\"MDCSwipeToChoose\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"PocketSVG\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Starscream\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "lightupon.lightupon-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1118,17 +1187,82 @@
 		};
 		1E05B8B31C5D135D009E37BA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FFFEB7839A565E790733793 /* Pods-trip-advisori-iOS.release.xcconfig */;
+			baseConfigurationReference = 474F1170A47864608D8F27EA /* Pods-trip-advisori-iOS.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "trip-advisori-iOS/trip-advisori-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 92XEB7J5BP;
+				DEVELOPMENT_TEAM = XLWZ7RAXK6;
 				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"APScheduledLocationManager\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"AlamofireObjectMapper\"",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"CBZSplashView\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-framework",
+					"\"FBSDKShareKit\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"GoogleMapsBase\"",
+					"-framework",
+					"\"GoogleMapsCore\"",
+					"-framework",
+					"\"Haneke\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"Locksmith\"",
+					"-framework",
+					"\"MDCSwipeToChoose\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"PocketSVG\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Starscream\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "lightupon.lightupon-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

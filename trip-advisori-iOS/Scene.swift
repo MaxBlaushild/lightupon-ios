@@ -14,6 +14,7 @@ import AVFoundation
 
 class Scene: NSObject, Mappable {
     var id:Int?
+    var tripId:Int?
     var name:String?
     var latitude: Double?
     var longitude: Double?
@@ -30,6 +31,7 @@ class Scene: NSObject, Mappable {
         latitude      <- map["Latitude"]
         longitude     <- map["Longitude"]
         cards         <- map["Cards"]
+        tripId        <- map["TripID"]
         soundResource <- map["SoundResource"]
         backgroundUrl <- map["BackgroundUrl"]
         sceneOrder    <- map["SceneOrder"]
