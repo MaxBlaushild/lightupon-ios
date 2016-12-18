@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import Alamofire
 
 class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -36,10 +37,10 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.imagePicker.delegate = self;
         getTrips()
         configureMapView()
         addMainButton()
-        imagePicker.delegate = self;
     }
     
     override func didReceiveMemoryWarning() {
@@ -71,7 +72,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
         }
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject], editingInfo: [NSObject : AnyObject]!) {
+    @nonobjc func imagePickerController(picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         ImagePicked.image = info[UIImagePickerControllerOriginalImage] as! UIImage?
         self.dismiss(animated: true, completion: nil);
     }
@@ -329,18 +331,49 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     func placeMarkers(trip: Trip, color: UIColor) {
         if trip.scenes != nil {
             for scene in trip.scenes! {
-                placeMarker(scene: scene, color: color)
+            let string = scene.backgroundUrl
+            placeMarker(scene: scene, image: string!)
             }
         }
     }
     
-    func placeMarker(scene: Scene, color: UIColor) {
-        let marker = GMSMarker()
-        marker.icon = GMSMarker.markerImage(with: color)
-        marker.position = CLLocationCoordinate2DMake(scene.latitude!, scene.longitude!)
-        marker.title = scene.name
-        marker.userData = scene
-        marker.map = mapView
+    func createRoundedMarker(image: UIImage, radius: Float) -> UIImage {
+        let imageView: UIImageView = UIImageView(image: image)
+        var layer: CALayer = CALayer()
+        layer = imageView.layer
+        
+        layer.masksToBounds = true
+        layer.cornerRadius = CGFloat(radius)
+        UIGraphicsBeginImageContext(imageView.bounds.size)
+        layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1.0).cgColor
+        layer.borderWidth = 4
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return roundedImage!
+    }
+    
+    func resizeImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
+        image.draw(in: CGRect(origin: CGPoint.zero, size: CGSize(width: newSize.width, height: newSize.height)))
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+    
+    func placeMarker(scene: Scene, image: String) {
+        Alamofire.request(image, method: .get, parameters: nil).responseJSON { (response) in
+            let marker = GMSMarker()
+            let loadedImage = self.resizeImage(image: UIImage(data: response.data!, scale:1)!, scaledToSize: CGSize(width: 60, height: 60))
+            marker.position = CLLocationCoordinate2DMake(scene.latitude!, scene.longitude!)
+            let roundedImage = self.createRoundedMarker(image: loadedImage, radius: 30)
+            marker.icon = roundedImage
+            marker.title = scene.name
+            marker.userData = scene
+            marker.map = self.mapView
+        }
+       
     }
     
     func onDismissed() {
