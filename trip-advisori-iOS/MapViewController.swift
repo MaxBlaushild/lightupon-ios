@@ -24,7 +24,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     var tripDetailsView:TripDetailsView!
     var xBackButton:XBackButton!
     var delegate: MainViewControllerDelegate!
-    var imagePicker = UIImagePickerController()
+//    var imagePicker = UIImagePickerController()
     var mapMenuView: UIView!
     var mainButton: UIButton!
     var postButton: UIButton!
@@ -66,17 +66,29 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
 
     
     func openCameraButton(sender: AnyObject) {
+//        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+//            imagePicker.sourceType = .camera
+//            self.present(imagePicker, animated: true, completion: nil)
+//        }
+        
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            imagePicker.sourceType = .camera
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+            imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
     
-    @nonobjc func imagePickerController(picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        ImagePicked.image = info[UIImagePickerControllerOriginalImage] as! UIImage?
-        self.dismiss(animated: true, completion: nil);
+    @objc(imagePickerController:didFinishPickingMediaWithInfo:) func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            postService.createSelfie(image: pickedImage, callback: {
+                self.dismiss(animated: true, completion: nil);
+            })
+        }
+    
     }
+    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
@@ -92,7 +104,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
 //                                delegate: nil,
 //                                cancelButtonTitle: "Ok")
 //        alert.show()
-        postService.sendPicture(name: "farts", type: "images", callback: self.closeImageView)
+
     }
     
     func addMainButton() {
