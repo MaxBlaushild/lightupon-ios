@@ -135,7 +135,7 @@
 		1EF93BFE1C6046F800A5B463 /* InitialLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */; };
 		1EF93C001C604DA600A5B463 /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */; };
 		1EF93C071C605A5C00A5B463 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93C061C605A5C00A5B463 /* Service.swift */; };
-		200342DE5A117218586CC6B6 /* Pods_trip_advisori_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 409FF193A4158197772FC7E2 /* Pods_trip_advisori_iOS.framework */; };
+		8279F16E4836D5720662809C /* Pods_trip_advisori_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B2F5F4E62714C2E6120AA4 /* Pods_trip_advisori_iOS.framework */; };
 		9C3F53181D4EB25300A6B3DE /* TestSound2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C3F53171D4EB25300A6B3DE /* TestSound2.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +157,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11B2F5F4E62714C2E6120AA4 /* Pods_trip_advisori_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trip_advisori_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E0003C91C83954000B25C05 /* AmbassadorOfTheAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbassadorOfTheAPI.swift; sourceTree = "<group>"; };
 		1E05B8871C5D135D009E37BA /* trip-advisori-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "trip-advisori-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E05B88A1C5D135D009E37BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -290,9 +291,8 @@
 		1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialLoadingViewController.swift; sourceTree = "<group>"; };
 		1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewController.swift; sourceTree = "<group>"; };
 		1EF93C061C605A5C00A5B463 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		409FF193A4158197772FC7E2 /* Pods_trip_advisori_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trip_advisori_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		474F1170A47864608D8F27EA /* Pods-trip-advisori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		5E97347AE9870EAA9C722028 /* Pods-trip-advisori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		66755F11CBD3FB79809ADBA9 /* Pods-trip-advisori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		750635AAF33A440FF06F8E2F /* Pods-trip-advisori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		9C3F53171D4EB25300A6B3DE /* TestSound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TestSound2.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -301,7 +301,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				200342DE5A117218586CC6B6 /* Pods_trip_advisori_iOS.framework in Frameworks */,
+				8279F16E4836D5720662809C /* Pods_trip_advisori_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,8 +329,8 @@
 				1E05B8A01C5D135D009E37BA /* trip-advisori-iOSTests */,
 				1E05B8AB1C5D135D009E37BA /* trip-advisori-iOSUITests */,
 				1E05B8881C5D135D009E37BA /* Products */,
-				6607556669A76EA469E29847 /* Pods */,
-				74763FD20A096C3AFE5CA4DA /* Frameworks */,
+				A56A4F0B7400A272A92E7274 /* Pods */,
+				A45623097A45558826830116 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -624,21 +624,21 @@
 			name = models;
 			sourceTree = "<group>";
 		};
-		6607556669A76EA469E29847 /* Pods */ = {
+		A45623097A45558826830116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5E97347AE9870EAA9C722028 /* Pods-trip-advisori-iOS.debug.xcconfig */,
-				474F1170A47864608D8F27EA /* Pods-trip-advisori-iOS.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		74763FD20A096C3AFE5CA4DA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				409FF193A4158197772FC7E2 /* Pods_trip_advisori_iOS.framework */,
+				11B2F5F4E62714C2E6120AA4 /* Pods_trip_advisori_iOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A56A4F0B7400A272A92E7274 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				66755F11CBD3FB79809ADBA9 /* Pods-trip-advisori-iOS.debug.xcconfig */,
+				750635AAF33A440FF06F8E2F /* Pods-trip-advisori-iOS.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -648,12 +648,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1E05B8B11C5D135D009E37BA /* Build configuration list for PBXNativeTarget "trip-advisori-iOS" */;
 			buildPhases = (
-				70EB39945ECB618487726B97 /* [CP] Check Pods Manifest.lock */,
+				3411383C665904CD8EB8C6E7 /* [CP] Check Pods Manifest.lock */,
 				1E05B8831C5D135D009E37BA /* Sources */,
 				1E05B8841C5D135D009E37BA /* Frameworks */,
 				1E05B8851C5D135D009E37BA /* Resources */,
-				9000E27EF72682947C172E06 /* [CP] Embed Pods Frameworks */,
-				FC293918C478A0B7EE11ACBD /* [CP] Copy Pods Resources */,
+				1533A865F8797B8346D6A972 /* [CP] Embed Pods Frameworks */,
+				4E7D71130F951632A5BF1FCE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -715,7 +715,7 @@
 				TargetAttributes = {
 					1E05B8861C5D135D009E37BA = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = XLWZ7RAXK6;
+						DevelopmentTeam = 92XEB7J5BP;
 						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -834,22 +834,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		70EB39945ECB618487726B97 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		9000E27EF72682947C172E06 /* [CP] Embed Pods Frameworks */ = {
+		1533A865F8797B8346D6A972 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -864,7 +849,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FC293918C478A0B7EE11ACBD /* [CP] Copy Pods Resources */ = {
+		3411383C665904CD8EB8C6E7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4E7D71130F951632A5BF1FCE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1106,16 +1106,16 @@
 		};
 		1E05B8B21C5D135D009E37BA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E97347AE9870EAA9C722028 /* Pods-trip-advisori-iOS.debug.xcconfig */;
+			baseConfigurationReference = 66755F11CBD3FB79809ADBA9 /* Pods-trip-advisori-iOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "trip-advisori-iOS/trip-advisori-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = XLWZ7RAXK6;
+				DEVELOPMENT_TEAM = 92XEB7J5BP;
 				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1195,16 +1195,16 @@
 		};
 		1E05B8B31C5D135D009E37BA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 474F1170A47864608D8F27EA /* Pods-trip-advisori-iOS.release.xcconfig */;
+			baseConfigurationReference = 750635AAF33A440FF06F8E2F /* Pods-trip-advisori-iOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "trip-advisori-iOS/trip-advisori-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = XLWZ7RAXK6;
+				DEVELOPMENT_TEAM = 92XEB7J5BP;
 				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",

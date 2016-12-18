@@ -37,7 +37,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imagePicker.delegate = self;
         getTrips()
         configureMapView()
         addMainButton()
@@ -377,7 +376,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     func placeMarker(scene: Scene, image: String) {
         Alamofire.request(image, method: .get, parameters: nil).responseJSON { (response) in
             let marker = GMSMarker()
-            let loadedImage = self.resizeImage(image: UIImage(data: response.data!, scale:1)!, scaledToSize: CGSize(width: 60, height: 60))
+            let image = response.response?.statusCode == 200 ? UIImage(data: response.data!, scale:1) : UIImage(named: "AppIcon")
+            let loadedImage = self.resizeImage(image: image!, scaledToSize: CGSize(width: 60, height: 60))
             marker.position = CLLocationCoordinate2DMake(scene.latitude!, scene.longitude!)
             let roundedImage = self.createRoundedMarker(image: loadedImage, radius: 30)
             marker.icon = roundedImage
