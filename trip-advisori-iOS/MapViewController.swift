@@ -37,7 +37,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imagePicker.delegate = self;
         getTrips()
         configureMapView()
         addMainButton()
