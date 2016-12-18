@@ -43,7 +43,7 @@ class Injector: Service {
         _socketService = SocketService(authService: _authService)
         _navigationService = NavigationService()
         _awsService = AwsService(apiAmbassador: _apiAmbassador, currentLocationService:_currentLocationService)
-        _postService = PostService(awsService: _awsService)
+        _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, litService: _litService, currentLocationService: _currentLocationService)
         super.init()
     }
     

@@ -85,6 +85,7 @@
 		1E9373B21D6D087400A7AE50 /* MainIconBeizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9373B11D6D087400A7AE50 /* MainIconBeizer.swift */; };
 		1E954EB71D50EA7A0021FDD8 /* BlurImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */; };
 		1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */; };
+		1E9942191DF78894003E0FAA /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9942181DF78894003E0FAA /* Helper.swift */; };
 		1EA20DEC1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA20DEB1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift */; };
 		1EA20DEE1DA1995D00596CDE /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA20DED1DA1995D00596CDE /* DateExtensions.swift */; };
 		1EA20DF01DA2A40300596CDE /* trip-advisori-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */; };
@@ -124,6 +125,7 @@
 		1EE9A2B51DCC00CF00E7EC84 /* AwsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9A2B41DCC00CF00E7EC84 /* AwsService.swift */; };
 		1EE9A2B71DCC00E400E7EC84 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9A2B61DCC00E400E7EC84 /* PostService.swift */; };
 		1EEBE0A01D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEBE09F1D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift */; };
+		1EF2A44B1DFF18BB00BBD823 /* LightuponResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2A44A1DFF18BB00BBD823 /* LightuponResponse.swift */; };
 		1EF49A871C990035001A32C2 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF49A861C990035001A32C2 /* Party.swift */; };
 		1EF783A11CFF5DAF00860510 /* TextHero.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EF783A01CFF5DAF00860510 /* TextHero.xib */; };
 		1EF783A51CFF666000860510 /* TextHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF783A41CFF666000860510 /* TextHero.swift */; };
@@ -240,6 +242,7 @@
 		1E9373B11D6D087400A7AE50 /* MainIconBeizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainIconBeizer.swift; sourceTree = "<group>"; };
 		1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurImage.swift; sourceTree = "<group>"; };
 		1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
+		1E9942181DF78894003E0FAA /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		1EA20DEB1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO8601MilliDateTransform.swift; sourceTree = "<group>"; };
 		1EA20DED1DA1995D00596CDE /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "trip-advisori-iOS.entitlements"; sourceTree = "<group>"; };
@@ -277,6 +280,7 @@
 		1EE9A2B41DCC00CF00E7EC84 /* AwsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwsService.swift; sourceTree = "<group>"; };
 		1EE9A2B61DCC00E400E7EC84 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		1EEBE09F1D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyMemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		1EF2A44A1DFF18BB00BBD823 /* LightuponResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightuponResponse.swift; sourceTree = "<group>"; };
 		1EF49A861C990035001A32C2 /* Party.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
 		1EF783A01CFF5DAF00860510 /* TextHero.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextHero.xib; sourceTree = "<group>"; };
 		1EF783A41CFF666000860510 /* TextHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextHero.swift; sourceTree = "<group>"; };
@@ -558,6 +562,7 @@
 				1EE9A2B41DCC00CF00E7EC84 /* AwsService.swift */,
 				1EE9A2B61DCC00E400E7EC84 /* PostService.swift */,
 				1EA9E0A61DF49EB00022E730 /* BackgroundLocationManager.swift */,
+				1E9942181DF78894003E0FAA /* Helper.swift */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -614,6 +619,7 @@
 				1EE009921D80514100E550CF /* CardSwipeOptions.swift */,
 				1EA20DEB1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift */,
 				1EE9A2B21DCBB1EB00E7EC84 /* Follow.swift */,
+				1EF2A44A1DFF18BB00BBD823 /* LightuponResponse.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -904,6 +910,7 @@
 				1EA5AFD31D7E3E760024D6CD /* MenuButton.swift in Sources */,
 				1E1A1A9B1CEE9D1A00A3A812 /* StoryTellerViewController.swift in Sources */,
 				1EBBFC201D734EB100697894 /* NavigationService.swift in Sources */,
+				1EF2A44B1DFF18BB00BBD823 /* LightuponResponse.swift in Sources */,
 				1E1763AB1D403E6F00C3FBCE /* StringEscaping.swift in Sources */,
 				1E30E7AB1D7CDF5400BB547F /* LastTripViewController.swift in Sources */,
 				1E22A7CA1D2C37BA00163785 /* CardView.swift in Sources */,
@@ -927,6 +934,7 @@
 				1E5690541DA987B000872DDA /* LitService.swift in Sources */,
 				1EE9A2B71DCC00E400E7EC84 /* PostService.swift in Sources */,
 				1EA5C6181DC00E1200918CA6 /* SearchViewController.swift in Sources */,
+				1E9942191DF78894003E0FAA /* Helper.swift in Sources */,
 				1E841C5F1C679B5600AD638E /* TripListTableViewCell.swift in Sources */,
 				1E0920401D8A2B9900D32376 /* BlurView.swift in Sources */,
 				1E71136D1D96FA11004F151D /* ViewFrame.swift in Sources */,
