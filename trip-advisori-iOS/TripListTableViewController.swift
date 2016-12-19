@@ -68,8 +68,16 @@ class TripListTableViewController: UIViewController, UITableViewDelegate, UITabl
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:TripListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "tripListTableViewCell", for: indexPath) as! TripListTableViewCell
-
-        cell.decorateCell(trips[(indexPath as NSIndexPath).row])
+        let trip = trips[(indexPath as NSIndexPath).row]
+        let pictureUrl = trip.owner?.profilePictureURL!
+        
+        cell.profileImage.imageFromUrl(pictureUrl!, success: { img in
+            cell.profileImage.image = img
+            cell.profileImage.makeCircle()
+        })
+        
+        cell.tripImage.imageFromUrl(trip.imageUrl!)
+        cell.decorateCell(trip)
         
         return cell
     }

@@ -25,8 +25,6 @@ class PartyMemberCollectionViewCell: UICollectionViewCell {
     
     func bindUser(user: User) {
         partyMemberFullName.text = user.fullName
-        partyMemberProfilePicture.imageFromUrl(user.profilePictureURL!)
-        partyMemberProfilePicture.makeCircle()
     }
     
     func bindProfileToCell(_ profile: FacebookProfile) {

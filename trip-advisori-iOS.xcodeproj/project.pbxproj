@@ -44,6 +44,7 @@
 		1E30E7AB1D7CDF5400BB547F /* LastTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E30E7AA1D7CDF5400BB547F /* LastTripViewController.swift */; };
 		1E30E7AD1D7CE91100BB547F /* EndOfTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E30E7AC1D7CE91100BB547F /* EndOfTripView.swift */; };
 		1E30E7AF1D7CEC6300BB547F /* EndOfTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E30E7AE1D7CEC6300BB547F /* EndOfTripView.xib */; };
+		1E3940081E07277D009D29B0 /* AddBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3940071E07277D009D29B0 /* AddBorder.swift */; };
 		1E51D5961D9D8B530052DA6E /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5941D9D87ED0052DA6E /* ProfileView.xib */; };
 		1E51D5B51D9D968B0052DA6E /* Brandon_bld.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5B11D9D968B0052DA6E /* Brandon_bld.otf */; };
 		1E51D5B61D9D968B0052DA6E /* Brandon_blk.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5B21D9D968B0052DA6E /* Brandon_blk.otf */; };
@@ -202,6 +203,7 @@
 		1E30E7AA1D7CDF5400BB547F /* LastTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastTripViewController.swift; sourceTree = "<group>"; };
 		1E30E7AC1D7CE91100BB547F /* EndOfTripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndOfTripView.swift; sourceTree = "<group>"; };
 		1E30E7AE1D7CEC6300BB547F /* EndOfTripView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EndOfTripView.xib; sourceTree = "<group>"; };
+		1E3940071E07277D009D29B0 /* AddBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBorder.swift; sourceTree = "<group>"; };
 		1E51D5941D9D87ED0052DA6E /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		1E51D5B11D9D968B0052DA6E /* Brandon_bld.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_bld.otf; sourceTree = "<group>"; };
 		1E51D5B21D9D968B0052DA6E /* Brandon_blk.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_blk.otf; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				1E71136A1D96F7BF004F151D /* RoundCorners.swift */,
 				1EA20DED1DA1995D00596CDE /* DateExtensions.swift */,
 				1E0B3E5F1DAA06E700F830D4 /* ArrayMethod.swift */,
+				1E3940071E07277D009D29B0 /* AddBorder.swift */,
 			);
 			name = utilities;
 			sourceTree = "<group>";
@@ -887,6 +890,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EA9E0A71DF49EB00022E730 /* BackgroundLocationManager.swift in Sources */,
+				1E3940081E07277D009D29B0 /* AddBorder.swift in Sources */,
 				1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */,
 				1EE9A2B51DCC00CF00E7EC84 /* AwsService.swift in Sources */,
 				1E09203E1D8A1D2B00D32376 /* XBackButton.swift in Sources */,

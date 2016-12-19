@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "PartyMemberCollectionViewCell"
 
-class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ProfileViewDelegate {
+class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ProfileViewDelegate, UITextFieldDelegate {
     fileprivate let _searchService = Injector.sharedInjector.getSearchService()
     fileprivate let _followService = Injector.sharedInjector.getFollowService()
     
@@ -20,13 +20,46 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     fileprivate var xBackButton:XBackButton!
 
     @IBOutlet weak var searchBar: UITextField!
+    @IBOutlet weak var buttonBarView: UIView!
     @IBOutlet weak var userCollectionView: UICollectionView!
+    @IBOutlet weak var resultsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         userCollectionView.dataSource = self
         userCollectionView.delegate = self
+        searchBar.delegate = self
+        
+        setLeftView()
+        watchForKeyTouch()
+        
+        styleBorders()
+    }
+    
+    func styleBorders() {
+        buttonBarView.layer.addBorder(edge: UIRectEdge.top, color: Colors.lightGray, thickness: 0.5)
+        buttonBarView.layer.addBorder(edge: UIRectEdge.bottom, color: Colors.lightGray, thickness: 0.5)
+        resultsButton.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.black, thickness: 2.0)
+    }
+    
+    func watchForKeyTouch() {
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(self,
+        selector: #selector(SearchViewController.onKeyPress),
+        name: NSNotification.Name.UITextFieldTextDidChange,
+        object: nil)
+    }
+    
+    func setLeftView() {
+        let image = UIImage(named: "search")
+        let imageView = UIImageView()
+        imageView.frame = CGRect(x: 0, y: 0, width: 34, height: 10)
+        imageView.contentMode = UIViewContentMode.right
+        imageView.image = image
+        searchBar.leftView = imageView
+        searchBar.leftViewMode = .always
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,8 +67,22 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func search(_ sender: AnyObject) {
+    func onKeyPress(sender: AnyObject) {
+        if let notification = sender as? NSNotification {
+            let textFieldChanged = notification.object as? UITextField
+            if textFieldChanged == self.searchBar && (self.searchBar.text?.characters.count)! > 1 {
+                search()
+            }
+        }
+    }
+    
+    func search() {
         _searchService.findUsers(query: searchBar.text!, callback: self.onUsersRecieved)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true;
     }
     
     func onUsersRecieved(users: [User]) {
@@ -56,6 +103,18 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         addXBackButton()
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let kWhateverHeightYouWant = 75
+        return CGSize(width: userCollectionView.bounds.size.width, height: CGFloat(kWhateverHeightYouWant))
+    }
+    
+    func giveOffsetBorder(cell: PartyMemberCollectionViewCell) {
+        let border = CALayer()
+        border.frame = CGRect.init(x: 94.5, y: cell.frame.height - 0.5, width: cell.frame.width - 94.5, height: 0.5)
+        border.backgroundColor = Colors.lightGray.cgColor
+        cell.layer.addSublayer(border)
+    }
+    
     func onLoggedOut() {}
     
     func addXBackButton() {
@@ -73,8 +132,12 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let user: User = _users[(indexPath as NSIndexPath).row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PartyMemberCollectionViewCell
+        cell.bindCell(user)
+        cell.partyMemberProfilePicture.imageFromUrl(user.profilePictureURL!, success: { img in
+            cell.partyMemberProfilePicture.makeCircle()
+        })
         
-        cell.bindUser(user: user)
+        giveOffsetBorder(cell: cell)
         
         return cell
     }

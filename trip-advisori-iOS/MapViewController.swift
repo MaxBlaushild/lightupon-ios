@@ -375,6 +375,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     
     func placeMarker(scene: Scene, image: String) {
         Alamofire.request(image, method: .get, parameters: nil).responseJSON { (response) in
+
             let marker = GMSMarker()
             let image = response.response!.statusCode == 200 ? UIImage(data: response.data!, scale: 1) : UIImage(named: "banner")
             let loadedImage = self.resizeImage(image: image!, scaledToSize: CGSize(width: 60, height: 60))
