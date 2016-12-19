@@ -24,9 +24,6 @@ class TripListTableViewCell: UITableViewCell {
     func decorateCell(_ trip: Trip) {
         contentView.layer.borderColor = UIColor(red: CGFloat(153.00)/255, green: CGFloat(153.00)/255, blue: CGFloat(153.00)/255, alpha: 0.5).cgColor;
         contentView.layer.borderWidth = 1;
-        tripImage.imageFromUrl(trip.imageUrl!)
-        profileImage.imageFromUrl((trip.owner?.profilePictureURL!)!)
-        profileImage.makeCircle()
         userName.text = trip.owner?.fullName
         daysSince.text = trip.prettyTimeSinceCreation()
         tripTitle.text = trip.title
