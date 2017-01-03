@@ -36,7 +36,7 @@ class HomeTabBarViewController: UITabBarController {
                 mapController.delegate = vc
             }
             
-            if let tableController = controller as? TripListTableViewController {
+            if let tableController = controller as? FeedViewController {
                 tableController.delegate = vc
             }
             

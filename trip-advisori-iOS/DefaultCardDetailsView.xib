@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="GothamRounded-Book.otf">
+            <string>GothamRounded-Book</string>
+        </array>
+        <array key="GothamRounded-Light.otf">
+            <string>GothamRounded-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DefaultCardDetailsView" customModule="trip_advisori_iOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Usk-UD-hTR">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="417"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5z-a5-691">
+                    <rect key="frame" x="0.0" y="327" width="375" height="90"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PF9-hJ-Hgv">
+                            <rect key="frame" x="25" y="25" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="3ld-lQ-bmW"/>
+                                <constraint firstAttribute="height" constant="40" id="pSE-dB-eFr"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6t-gR-u1s">
+                            <rect key="frame" x="75" y="27" width="43" height="16"/>
+                            <fontDescription key="fontDescription" name="GothamRounded-Light" family="Gotham Rounded" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFb-2x-vOg">
+                            <rect key="frame" x="75" y="47" width="33" height="12"/>
+                            <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWU-ga-xz6">
+                            <rect key="frame" x="322" y="27" width="33" height="12"/>
+                            <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
+                            <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.60140413851351349" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="SFb-2x-vOg" firstAttribute="leading" secondItem="e6t-gR-u1s" secondAttribute="leading" id="8KB-eH-lPJ"/>
+                        <constraint firstItem="SFb-2x-vOg" firstAttribute="top" secondItem="W5z-a5-691" secondAttribute="centerY" constant="2" id="9LF-eJ-kos"/>
+                        <constraint firstItem="e6t-gR-u1s" firstAttribute="leading" secondItem="PF9-hJ-Hgv" secondAttribute="trailing" constant="10" id="K99-aA-LCJ"/>
+                        <constraint firstAttribute="trailing" secondItem="vWU-ga-xz6" secondAttribute="trailing" constant="20" id="RvR-Sq-3FW"/>
+                        <constraint firstItem="PF9-hJ-Hgv" firstAttribute="leading" secondItem="W5z-a5-691" secondAttribute="leading" constant="25" id="SxW-ye-mfT"/>
+                        <constraint firstItem="e6t-gR-u1s" firstAttribute="bottom" secondItem="W5z-a5-691" secondAttribute="centerY" constant="-2" id="e7H-os-5h2"/>
+                        <constraint firstAttribute="height" constant="90" id="iD8-Vi-lpn"/>
+                        <constraint firstItem="PF9-hJ-Hgv" firstAttribute="centerY" secondItem="W5z-a5-691" secondAttribute="centerY" id="ls6-l8-S76"/>
+                        <constraint firstItem="vWU-ga-xz6" firstAttribute="top" secondItem="e6t-gR-u1s" secondAttribute="top" id="rzJ-aQ-lkj"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ny1-qL-uEg">
+                    <rect key="frame" x="0.0" y="406" width="375" height="261"/>
+                    <subviews>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="4pm-tH-qsh">
+                            <rect key="frame" x="0.0" y="10" width="375" height="251"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hA1-iM-pzG">
+                                <size key="itemSize" width="50" height="50"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="4pm-tH-qsh" firstAttribute="leading" secondItem="ny1-qL-uEg" secondAttribute="leading" id="IgC-ln-6HH"/>
+                        <constraint firstAttribute="trailing" secondItem="4pm-tH-qsh" secondAttribute="trailing" id="a7N-LG-bma"/>
+                        <constraint firstAttribute="bottom" secondItem="4pm-tH-qsh" secondAttribute="bottom" id="gKG-QE-57T"/>
+                        <constraint firstItem="4pm-tH-qsh" firstAttribute="top" secondItem="ny1-qL-uEg" secondAttribute="top" constant="10" id="gYo-EV-9s5"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="W5z-a5-691" firstAttribute="bottom" secondItem="Usk-UD-hTR" secondAttribute="bottom" id="532-OJ-oim"/>
+                <constraint firstItem="W5z-a5-691" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="AaI-EZ-ymq"/>
+                <constraint firstAttribute="trailing" secondItem="Usk-UD-hTR" secondAttribute="trailing" id="MMJ-pD-7Fc"/>
+                <constraint firstItem="4pm-tH-qsh" firstAttribute="top" secondItem="W5z-a5-691" secondAttribute="bottom" constant="-1" id="TnU-IW-MSV"/>
+                <constraint firstItem="ny1-qL-uEg" firstAttribute="leading" secondItem="W5z-a5-691" secondAttribute="leading" id="bOB-1Q-KbS"/>
+                <constraint firstAttribute="centerY" secondItem="Usk-UD-hTR" secondAttribute="bottom" multiplier="0.8" id="ldR-0k-Ubx"/>
+                <constraint firstAttribute="trailing" secondItem="W5z-a5-691" secondAttribute="trailing" id="nZ6-fN-btu"/>
+                <constraint firstItem="Usk-UD-hTR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oBx-TA-JIF"/>
+                <constraint firstItem="ny1-qL-uEg" firstAttribute="trailing" secondItem="W5z-a5-691" secondAttribute="trailing" id="tuq-dc-eht"/>
+                <constraint firstItem="Usk-UD-hTR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ugw-RT-dgm"/>
+                <constraint firstAttribute="bottom" secondItem="ny1-qL-uEg" secondAttribute="bottom" id="wLD-7l-o5l"/>
+            </constraints>
+            <connections>
+                <outlet property="cardImageView" destination="Usk-UD-hTR" id="sip-dm-Tyc"/>
+                <outlet property="cardText" destination="SFb-2x-vOg" id="hET-ue-IBd"/>
+                <outlet property="cardTimestamp" destination="vWU-ga-xz6" id="0HJ-LD-I1Z"/>
+                <outlet property="commentCollectionView" destination="4pm-tH-qsh" id="sLT-kD-HCD"/>
+                <outlet property="ownerImageView" destination="PF9-hJ-Hgv" id="Zg1-Hr-n7m"/>
+                <outlet property="ownerName" destination="e6t-gR-u1s" id="dBI-is-4Tw"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
+        </view>
+    </objects>
+</document>

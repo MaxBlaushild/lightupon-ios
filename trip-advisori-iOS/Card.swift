@@ -40,4 +40,64 @@ class Card: NSObject, Mappable {
     required init?(map: Map) {
         
     }
+    
+    func prettyTimeSinceCreation() -> String {
+        let yearsSince = self.createdAt!.yearsSince()
+        if yearsSince == 0 {
+            let monthsSince = self.createdAt!.monthsSince()
+            if monthsSince == 0 {
+                let daysSince = self.createdAt!.daysSince()
+                if daysSince == 0 {
+                    let hoursSince = self.createdAt!.hoursSince()
+                    if hoursSince == 0 {
+                        let minutesSince = self.createdAt!.minutesSince()
+                        if minutesSince == 0 {
+                            let secondsSince = self.createdAt!.secondsSince()
+                            return "\(secondsSince)s"
+                        } else {
+                            return "\(minutesSince)min"
+                        }
+                    } else {
+                        return "\(hoursSince)h"
+                    }
+                } else {
+                    return "\(daysSince)d"
+                }
+            } else {
+                return "\(monthsSince)mon"
+            }
+        } else {
+            return "\(yearsSince)y"
+        }
+    }
+    
+    func prettyTimeSinceLastWentOn() -> String {
+        let yearsSince = self.updatedAt!.yearsSince()
+        if yearsSince == 0 {
+            let monthsSince = self.updatedAt!.monthsSince()
+            if monthsSince == 0 {
+                let daysSince = self.updatedAt!.daysSince()
+                if daysSince == 0 {
+                    let hoursSince = self.updatedAt!.hoursSince()
+                    if hoursSince == 0 {
+                        let minutesSince = self.updatedAt!.minutesSince()
+                        if minutesSince == 0 {
+                            let secondsSince = self.updatedAt!.secondsSince()
+                            return "\(secondsSince)s"
+                        } else {
+                            return "\(minutesSince)min"
+                        }
+                    } else {
+                        return "\(hoursSince)h"
+                    }
+                } else {
+                    return "\(daysSince)d"
+                }
+            } else {
+                return "\(monthsSince)mon"
+            }
+        } else {
+            return "\(yearsSince)y"
+        }
+    }
 }

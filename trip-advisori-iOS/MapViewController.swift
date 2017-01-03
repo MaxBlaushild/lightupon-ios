@@ -21,7 +21,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     
     var trips:[Trip]!
     var blurView: BlurView!
-    var tripDetailsView:TripDetailsView!
     var xBackButton:XBackButton!
     var delegate: MainViewControllerDelegate!
 //    var imagePicker = UIImagePickerController()
@@ -40,6 +39,10 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
         getTrips()
         configureMapView()
         addMainButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getTrips()
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,10 +68,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
 
     
     func openCameraButton(sender: AnyObject) {
-//        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-//            imagePicker.sourceType = .camera
-//            self.present(imagePicker, animated: true, completion: nil)
-//        }
         
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             let imagePicker = UIImagePickerController()
@@ -88,22 +87,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     
     }
     
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func confirmSent(_ sender: AnyObject) {
-        let imageData = UIImageJPEGRepresentation(ImagePicked.image!, 0.6)
-        let compressedJPGImage = UIImage(data: imageData!)
-        UIImageWriteToSavedPhotosAlbum(compressedJPGImage!, nil, nil, nil)
-        
-//        let alert = UIAlertController(title: "Wow",
-//                                message: "Your image has been saved to Photo Library!",
-//                                delegate: nil,
-//                                cancelButtonTitle: "Ok")
-//        alert.show()
-
     }
     
     func addMainButton() {
@@ -216,6 +201,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
         view.addSubview(messageButton)
     }
     
+    
     func addLitButton() {
         litButton = UIButton()
         litButton.backgroundColor = UIColor.white
@@ -273,6 +259,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     func configureMapView() {
         mapView.camera = GMSCameraPosition.camera(withLatitude: currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
         mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
         mapView.delegate = self
     }
     
@@ -341,9 +328,10 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     
     func placeMarkers(trip: Trip, color: UIColor) {
         if trip.scenes != nil {
-            for scene in trip.scenes! {
-            let string = scene.backgroundUrl
-            placeMarker(scene: scene, image: string!)
+            for scene in trip.scenes {
+                scene.trip = trip
+                let string = scene.backgroundUrl
+                placeMarker(scene: scene, image: string!)
             }
         }
     }
@@ -389,43 +377,19 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
        
     }
     
-    func onDismissed() {
-        tripDetailsView.removeFromSuperview()
-        blurView.removeFromSuperview()
-        xBackButton.removeFromSuperview()
-    }
-    
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        obscureBackground()
-        tripDetailsView = TripDetailsView.fromNib("TripDetailsView")
-        tripDetailsView.delegate = self
-        tripDetailsView.size(self)
-        let scene = marker.userData as! Scene
-        tripDetailsView.bindCard((scene.cards?[0])!, tripId: scene.tripId!)
-        view.addSubview(tripDetailsView)
-        return true
+        let scene: Scene = marker.userData as! Scene
+        let tripDetailsViewController = TripDetailsViewController(scene: scene)
+        addChildViewController(tripDetailsViewController)
+        tripDetailsViewController.view.frame = view.frame
+        view.addSubview(tripDetailsViewController.view)
+        tripDetailsViewController.didMove(toParentViewController: self)
+            return true
+
     }
     
     func segueToContainer() {
         performSegue(withIdentifier: "MapToContainer", sender: self)
-    }
-    
-    func obscureBackground() {
-        blurBackground()
-        addXBackButton()
-    }
-    
-    func addXBackButton() {
-        let frame = CGRect(x: view.bounds.width - 45, y: 30, width: 30, height: 30)
-        xBackButton = XBackButton(frame: frame)
-        xBackButton.addTarget(self, action: #selector(onDismissed), for: .touchUpInside)
-        view.addSubview(xBackButton)
-    }
-    
-    func blurBackground() {
-        blurView = BlurView(onClick: onDismissed)
-        blurView.frame = view.bounds
-        view.addSubview(blurView)
     }
 
 }

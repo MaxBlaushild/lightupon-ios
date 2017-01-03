@@ -102,8 +102,6 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate 
         menuOpen = menuShouldOpen
     }
     
-    
-    
     func addRightPanelViewController() {
         if (menuViewController == nil) {
             menuViewController = UIStoryboard.menuViewController()

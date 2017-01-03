@@ -8,14 +8,15 @@
 
 import UIKit
 
-class TripListTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TripDetailsViewDelegate {
+class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TripDetailsViewDelegate {
     fileprivate let tripsService: TripsService = Injector.sharedInjector.getTripsService()
     fileprivate let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
+    fileprivate let feedService = Injector.sharedInjector.getFeedService()
     
     var trips:[Trip]!
+    var _scenes:[Scene] = [Scene]()
     var delegate: MainViewControllerDelegate!
     
-    var tripDetailsView:TripDetailsView!
     var blurView: BlurView!
     var xBackButton: XBackButton!
 
@@ -23,18 +24,32 @@ class TripListTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getTrips()
+        configureTableView()
+//        getTrips()
+        getFeed()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getFeed()
     }
     
     func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        tableView.reloadData()
     }
     
     func getTrips() {
         tripsService.getTrips(self.onTripsGotten, latitude: self.currentLocationService.latitude, longitude: self.currentLocationService.longitude)
+    }
+    
+    func getFeed() {
+        feedService.getFeed(success: self.onFeedGotten)
+    }
+    
+    func onFeedGotten(scenes: [Scene]) {
+        _scenes = scenes
+        tableView.reloadData()
     }
     
     func onTripsGotten(_ _trips_: [Trip]) {
@@ -63,60 +78,42 @@ class TripListTableViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return trips.count
+        return _scenes.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:TripListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "tripListTableViewCell", for: indexPath) as! TripListTableViewCell
-        let trip = trips[(indexPath as NSIndexPath).row]
-        let pictureUrl = trip.owner?.profilePictureURL!
-        
+        let scene = _scenes[(indexPath as NSIndexPath).row]
+        let pictureUrl = scene.trip?.owner?.profilePictureURL!
+        cell.decorateCell(scene: scene)
         cell.profileImage.imageFromUrl(pictureUrl!, success: { img in
             cell.profileImage.image = img
             cell.profileImage.makeCircle()
         })
         
-        cell.tripImage.imageFromUrl(trip.imageUrl!)
-        cell.decorateCell(trip)
+        cell.tripImage.imageFromUrl(scene.cards[0].imageUrl!)
+
         
         return cell
     }
     
-    func dismissTripDetails() {
-        tripDetailsView.removeFromSuperview()
-        blurView.removeFromSuperview()
-        xBackButton.removeFromSuperview()
-    }
+//    func dismissTripDetails() {
+//        tripDetailsView.removeFromSuperview()
+//        blurView.removeFromSuperview()
+//        xBackButton.removeFromSuperview()
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        obfuscateBackground()
-        tripDetailsView = TripDetailsView.fromNib("TripDetailsView")
-        tripDetailsView.delegate = self
-        tripDetailsView.size(self)
-        tripDetailsView.bindTrip(trips[(indexPath as NSIndexPath).row])
-        view.addSubview(tripDetailsView)
-    }
-    
-    func obfuscateBackground() {
-        blurBackground()
-        addXBackButton()
+        let scene: Scene = _scenes[indexPath.row]
+        let tripDetailsViewController = TripDetailsViewController(scene: scene)
+        addChildViewController(tripDetailsViewController)
+        tripDetailsViewController.view.frame = view.frame
+        view.addSubview(tripDetailsViewController.view)
+        tripDetailsViewController.didMove(toParentViewController: self)
     }
     
     func segueToContainer() {
         performSegue(withIdentifier: "ListToContainer", sender: self)
-    }
-    
-    func blurBackground() {
-        blurView = BlurView(onClick: dismissTripDetails)
-        blurView.frame = view.bounds
-        view.addSubview(blurView)
-    }
-    
-    func addXBackButton() {
-        let frame = CGRect(x: view.bounds.width - 45, y: 30, width: 30, height: 30)
-        xBackButton = XBackButton(frame: frame)
-        xBackButton.addTarget(self, action: #selector(dismissTripDetails), for: .touchUpInside)
-        view.addSubview(xBackButton)
     }
 
 }

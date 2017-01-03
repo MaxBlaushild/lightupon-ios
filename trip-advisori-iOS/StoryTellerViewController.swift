@@ -151,7 +151,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func loadSwipeViews() {
-        for card in _currentScene.cards!.reversed() {
+        for card in _currentScene.cards.reversed() {
             _cardCount += 1
             loadCardView(card)
         }
