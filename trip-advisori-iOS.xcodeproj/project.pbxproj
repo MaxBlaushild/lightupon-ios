@@ -66,6 +66,9 @@
 		1E51D5D21D9D96A70052DA6E /* GothamRoundedMedium_21022.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5C51D9D96A70052DA6E /* GothamRoundedMedium_21022.ttf */; };
 		1E5690541DA987B000872DDA /* LitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5690531DA987B000872DDA /* LitService.swift */; };
 		1E5690561DA9C46300872DDA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5690551DA9C46300872DDA /* UserService.swift */; };
+		1E5D15401E234F910020D9B5 /* FeedSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5D153F1E234F910020D9B5 /* FeedSceneCell.swift */; };
+		1E5D15461E2858DF0020D9B5 /* FeedSceneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E5D15451E2858DF0020D9B5 /* FeedSceneCell.xib */; };
+		1E5D15481E287CDE0020D9B5 /* LikeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5D15471E287CDE0020D9B5 /* LikeService.swift */; };
 		1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6B9F1D0C8A1F00D5793A /* owl.png */; };
 		1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6981CA6307F00D9F90C /* PartyService.swift */; };
 		1E66F1561E0F087D007EA08E /* ConstellationPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66F1551E0F087D007EA08E /* ConstellationPoint.swift */; };
@@ -83,7 +86,6 @@
 		1E841C581C66DA0C00AD638E /* TripsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C571C66DA0C00AD638E /* TripsService.swift */; };
 		1E841C5A1C66DB8900AD638E /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C591C66DB8900AD638E /* Trip.swift */; };
 		1E841C5C1C6704A600AD638E /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C5B1C6704A600AD638E /* FeedViewController.swift */; };
-		1E841C5F1C679B5600AD638E /* TripListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C5E1C679B5500AD638E /* TripListTableViewCell.swift */; };
 		1E841C651C67C48F00AD638E /* AsynchronousUIImageLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */; };
 		1E935F1D1D4C249200CB070B /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E935F1C1D4C249200CB070B /* MainContainerViewController.swift */; };
 		1E935F1F1D4C2F3300CB070B /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E935F1E1D4C2F3300CB070B /* CircularImageView.swift */; };
@@ -235,6 +237,9 @@
 		1E51D5C51D9D96A70052DA6E /* GothamRoundedMedium_21022.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedMedium_21022.ttf; sourceTree = "<group>"; };
 		1E5690531DA987B000872DDA /* LitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LitService.swift; sourceTree = "<group>"; };
 		1E5690551DA9C46300872DDA /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		1E5D153F1E234F910020D9B5 /* FeedSceneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedSceneCell.swift; sourceTree = "<group>"; };
+		1E5D15451E2858DF0020D9B5 /* FeedSceneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedSceneCell.xib; sourceTree = "<group>"; };
+		1E5D15471E287CDE0020D9B5 /* LikeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeService.swift; sourceTree = "<group>"; };
 		1E5F6B9F1D0C8A1F00D5793A /* owl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owl.png; sourceTree = "<group>"; };
 		1E64A6981CA6307F00D9F90C /* PartyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyService.swift; sourceTree = "<group>"; };
 		1E66F1551E0F087D007EA08E /* ConstellationPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstellationPoint.swift; sourceTree = "<group>"; };
@@ -252,7 +257,6 @@
 		1E841C571C66DA0C00AD638E /* TripsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripsService.swift; sourceTree = "<group>"; };
 		1E841C591C66DB8900AD638E /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		1E841C5B1C6704A600AD638E /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		1E841C5E1C679B5500AD638E /* TripListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListTableViewCell.swift; sourceTree = "<group>"; };
 		1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousUIImageLoading.swift; sourceTree = "<group>"; };
 		1E935F1C1D4C249200CB070B /* MainContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
 		1E935F1E1D4C2F3300CB070B /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
@@ -405,6 +409,15 @@
 			path = "trip-advisori-iOSUITests";
 			sourceTree = "<group>";
 		};
+		1E5D153E1E234EDF0020D9B5 /* FeedSceneCell */ = {
+			isa = PBXGroup;
+			children = (
+				1E5D153F1E234F910020D9B5 /* FeedSceneCell.swift */,
+				1E5D15451E2858DF0020D9B5 /* FeedSceneCell.xib */,
+			);
+			name = FeedSceneCell;
+			sourceTree = "<group>";
+		};
 		1E7779891E08F3A8005B883D /* CommentCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -540,6 +553,7 @@
 		1ED69B471D0C809C00CF2172 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				1E5D153E1E234EDF0020D9B5 /* FeedSceneCell */,
 				1E7779891E08F3A8005B883D /* CommentCollectionViewCell */,
 				1EE68CEE1DD408830011167F /* MapMenuView */,
 				1ED488171D98525600C67516 /* ProfileView */,
@@ -547,7 +561,6 @@
 				1EE009951D8052BA00E550CF /* EndOfTripView */,
 				1EE009941D8052A800E550CF /* CompassView */,
 				1EF7839B1CFF46D100860510 /* cards */,
-				1E841C5E1C679B5500AD638E /* TripListTableViewCell.swift */,
 				1EEBE09F1D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift */,
 				1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */,
 				1EA5AFD21D7E3E760024D6CD /* MenuButton.swift */,
@@ -602,6 +615,7 @@
 				1E9942181DF78894003E0FAA /* Helper.swift */,
 				1E9645EF1E085A2E00A0E88F /* FeedService.swift */,
 				1E9645F31E08807D00A0E88F /* CommentService.swift */,
+				1E5D15471E287CDE0020D9B5 /* LikeService.swift */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -765,6 +779,9 @@
 							com.apple.Keychain = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 					1E05B89C1C5D135D009E37BA = {
@@ -821,6 +838,7 @@
 				1E51D5B71D9D968B0052DA6E /* Brandon_light.otf in Resources */,
 				1E05B8971C5D135D009E37BA /* LaunchScreen.storyboard in Resources */,
 				1E05B8941C5D135D009E37BA /* Assets.xcassets in Resources */,
+				1E5D15461E2858DF0020D9B5 /* FeedSceneCell.xib in Resources */,
 				1E9373AE1D6D05BF00A7AE50 /* logo_white@1x.svg in Resources */,
 				1E51D5D21D9D96A70052DA6E /* GothamRoundedMedium_21022.ttf in Resources */,
 				1E51D5C81D9D96A70052DA6E /* GothamRounded-BoldItalic.otf in Resources */,
@@ -983,7 +1001,6 @@
 				1EE9A2B71DCC00E400E7EC84 /* PostService.swift in Sources */,
 				1EA5C6181DC00E1200918CA6 /* SearchViewController.swift in Sources */,
 				1E9942191DF78894003E0FAA /* Helper.swift in Sources */,
-				1E841C5F1C679B5600AD638E /* TripListTableViewCell.swift in Sources */,
 				1E0920401D8A2B9900D32376 /* BlurView.swift in Sources */,
 				1E71136D1D96FA11004F151D /* ViewFrame.swift in Sources */,
 				1E841C651C67C48F00AD638E /* AsynchronousUIImageLoading.swift in Sources */,
@@ -1005,10 +1022,12 @@
 				1E954EB71D50EA7A0021FDD8 /* BlurImage.swift in Sources */,
 				1EAE6A2C1D85FD0100DA19A8 /* DefaultCardDetailsView.swift in Sources */,
 				1EA5AFD51D7E430E0024D6CD /* TitleLabel.swift in Sources */,
+				1E5D15481E287CDE0020D9B5 /* LikeService.swift in Sources */,
 				1E9645F41E08807D00A0E88F /* CommentService.swift in Sources */,
 				1E05B8C11C5D327A009E37BA /* MapViewController.swift in Sources */,
 				1E2014901C705C280012B863 /* FacebookService.swift in Sources */,
 				1EEBE0A01D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift in Sources */,
+				1E5D15401E234F910020D9B5 /* FeedSceneCell.swift in Sources */,
 				1E71136B1D96F7BF004F151D /* RoundCorners.swift in Sources */,
 				1EF93C071C605A5C00A5B463 /* Service.swift in Sources */,
 				1EAA89AF1D94A3EF009E9D03 /* ComboTitle.swift in Sources */,

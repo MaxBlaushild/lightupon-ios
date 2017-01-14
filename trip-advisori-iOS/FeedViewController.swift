@@ -8,24 +8,22 @@
 
 import UIKit
 
-class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TripDetailsViewDelegate {
-    fileprivate let tripsService: TripsService = Injector.sharedInjector.getTripsService()
-    fileprivate let currentLocationService:CurrentLocationService = Injector.sharedInjector.getCurrentLocationService()
+class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TripDetailsViewDelegate, ProfileViewDelegate, ProfileViewCreator {
+    fileprivate let tripsService = Injector.sharedInjector.getTripsService()
+    fileprivate let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
     fileprivate let feedService = Injector.sharedInjector.getFeedService()
     
-    var trips:[Trip]!
     var _scenes:[Scene] = [Scene]()
     var delegate: MainViewControllerDelegate!
     
-    var blurView: BlurView!
-    var xBackButton: XBackButton!
+    var profileView: ProfileView!
+    var xBackButton:XBackButton!
 
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-//        getTrips()
         getFeed()
     }
     
@@ -33,14 +31,35 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         getFeed()
     }
     
+    func createProfileView(user: User) {
+        profileView = ProfileView.fromNib("ProfileView")
+        profileView.frame = view.frame
+        profileView.delegate = self
+        profileView.initializeView(user)
+        view.addSubview(profileView)
+        addXBackButton()
+    }
+    
+    func addXBackButton() {
+        let frame = CGRect(x: view.bounds.width - 45, y: 30, width: 30, height: 30)
+        xBackButton = XBackButton(frame: frame)
+        xBackButton.addTarget(self, action: #selector(dismissProfile), for: .touchUpInside)
+        view.addSubview(xBackButton)
+    }
+    
+    func dismissProfile() {
+        profileView.removeFromSuperview()
+        xBackButton.removeFromSuperview()
+    }
+    
+    func onLoggedOut() {}
+    
     func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-    }
-    
-    func getTrips() {
-        tripsService.getTrips(self.onTripsGotten, latitude: self.currentLocationService.latitude, longitude: self.currentLocationService.longitude)
+        let nibName = UINib(nibName: "FeedSceneCell", bundle:nil)
+        tableView.register(nibName, forCellReuseIdentifier: "FeedSceneCell")
     }
     
     func getFeed() {
@@ -50,11 +69,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func onFeedGotten(scenes: [Scene]) {
         _scenes = scenes
         tableView.reloadData()
-    }
-    
-    func onTripsGotten(_ _trips_: [Trip]) {
-        trips = _trips_
-        configureTableView()
     }
     
     @IBAction func openMenu(_ sender: AnyObject) {
@@ -82,7 +96,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:TripListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "tripListTableViewCell", for: indexPath) as! TripListTableViewCell
+        let cell:FeedSceneCell = tableView.dequeueReusableCell(withIdentifier: "FeedSceneCell", for: indexPath) as! FeedSceneCell
         let scene = _scenes[(indexPath as NSIndexPath).row]
         let pictureUrl = scene.trip?.owner?.profilePictureURL!
         cell.decorateCell(scene: scene)
@@ -92,16 +106,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         })
         
         cell.tripImage.imageFromUrl(scene.cards[0].imageUrl!)
-
-        
+        cell.delegate = self
         return cell
     }
-    
-//    func dismissTripDetails() {
-//        tripDetailsView.removeFromSuperview()
-//        blurView.removeFromSuperview()
-//        xBackButton.removeFromSuperview()
-//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let scene: Scene = _scenes[indexPath.row]
@@ -110,6 +117,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tripDetailsViewController.view.frame = view.frame
         view.addSubview(tripDetailsViewController.view)
         tripDetailsViewController.didMove(toParentViewController: self)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.frame.width + 120
     }
     
     func segueToContainer() {

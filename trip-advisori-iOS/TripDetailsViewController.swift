@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, ProfileViewCreator, ProfileViewDelegate {
     private let tripsService = Injector.sharedInjector.getTripsService()
     private let _tripId: Int
     
@@ -16,6 +16,9 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     private var overlay:UIView!
     private var constellationPoints: [UIView] = [UIView]()
     private var currentIndex: Int = 0
+    
+    var profileView: ProfileView!
+    var xBackButton:XBackButton!
     
     init(tripId: Int) {
         _tripId = tripId
@@ -69,12 +72,14 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     
     func dismissView(sender: AnyObject) {
        view.removeFromSuperview()
-        removeFromParentViewController()
+       removeFromParentViewController()
     }
     
     func setCardViewControllers(trip: Trip) {
         cardViewControllers = trip.scenes.map({ scene in
-            return CardViewController(card: scene.cards[0], owner: trip.owner!, scene: scene)
+            let viewController = CardViewController(card: scene.cards[0], owner: trip.owner!, scene: scene)
+            viewController.delegate = self
+            return viewController
         })
         
         dataSource = self
@@ -180,14 +185,27 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func createProfileView(user: User) {
+        profileView = ProfileView.fromNib("ProfileView")
+        profileView.frame = view.frame
+        profileView.delegate = self
+        profileView.initializeView(user)
+        view.addSubview(profileView)
+        addXBackButton()
     }
-    */
+    
+    func addXBackButton() {
+        let frame = CGRect(x: view.bounds.width - 45, y: 30, width: 30, height: 30)
+        xBackButton = XBackButton(frame: frame)
+        xBackButton.addTarget(self, action: #selector(dismissProfile), for: .touchUpInside)
+        view.addSubview(xBackButton)
+    }
+    
+    func dismissProfile() {
+        profileView.removeFromSuperview()
+        xBackButton.removeFromSuperview()
+    }
+    
+    func onLoggedOut() {}
 
 }

@@ -28,6 +28,7 @@ class Injector: Service {
     fileprivate let _postService: PostService
     fileprivate let _feedService: FeedService
     fileprivate let _commentService: CommentService
+    fileprivate let _likeService: LikeService
 
     override init(){
         _authService = AuthService()
@@ -48,7 +49,12 @@ class Injector: Service {
         _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, litService: _litService, currentLocationService: _currentLocationService)
         _feedService = FeedService(apiAmbassador: _apiAmbassador)
         _commentService = CommentService(apiAmbassador: _apiAmbassador)
+        _likeService = LikeService(apiAmbassador: _apiAmbassador)
         super.init()
+    }
+    
+    func getLikeService() -> LikeService {
+        return _likeService
     }
     
     func getCommentService() -> CommentService {

@@ -21,7 +21,7 @@ class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionView
     fileprivate var _owner: User!
     fileprivate var _comments: [Comment] = [Comment]()
     
-    internal var delegate: TripDetailsViewDelegate!
+    internal var delegate: ProfileViewCreator!
     
     @IBOutlet weak var cardImageView: UIImageView!
     @IBOutlet weak var ownerImageView: UIImageView!
@@ -35,6 +35,20 @@ class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionView
         getCommentsForCard(card)
         bindOwner(owner)
         bindCard(card)
+        makeProfileClickable()
+    }
+    
+    func makeProfileClickable() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(createProfileView))
+        let secondIdenticalRecognizerForSomeReason = UITapGestureRecognizer(target:self, action:#selector(createProfileView))
+        ownerImageView.isUserInteractionEnabled = true
+        ownerImageView.addGestureRecognizer(tapGestureRecognizer)
+        ownerName.isUserInteractionEnabled = true
+        ownerName.addGestureRecognizer(secondIdenticalRecognizerForSomeReason)
+    }
+    
+    func createProfileView(sender: AnyObject) {
+        delegate.createProfileView(user: _owner)
     }
     
     func bindCard(_ card: Card) {
@@ -44,12 +58,14 @@ class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionView
     }
     
     func bindOwner(_ owner: User) {
+        _owner = owner
         ownerName.text = owner.fullName
         ownerImageView.imageFromUrl((owner.profilePictureURL)!, success: { img in
             self.ownerImageView.image = img
             self.ownerImageView.makeCircle()
         })
     }
+    
     func configureCommentCollectionView() {
         commentCollectionView.dataSource = self
         commentCollectionView.delegate = self
@@ -71,15 +87,11 @@ class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionView
         commentCollectionView.reloadData()
     }
     
-    @IBAction func createParty(_ sender: UIButton) {
-        sender.isEnabled = false
-        partyService.createParty(_tripId!, callback: self.onPartyCreated)
-        
-    }
-    
-    func onPartyCreated() {
-        delegate.segueToContainer()
-    }
+//    @IBAction func createParty(_ sender: UIButton) {
+//        sender.isEnabled = false
+//        partyService.createParty(_tripId!, callback: self.onPartyCreated)
+//        
+//    }
     
     func shouldAutorotate() -> Bool {
         return false

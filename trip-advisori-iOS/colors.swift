@@ -11,5 +11,6 @@ import Foundation
 enum Colors {
     static let darkPurple = UIColor(netHex: 0x501194)
     static let basePurple = UIColor(netHex: 0x9A64CC)
+    static let mediumGrey = UIColor(red:204/255.0, green:204/255.0, blue:204/255.0, alpha:1)
     static let lightGray = UIColor(red:238/255.0, green:238/255.0, blue:238/255.0, alpha:1)
 }

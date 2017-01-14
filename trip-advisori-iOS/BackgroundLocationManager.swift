@@ -40,6 +40,7 @@ class BackgroundLocationManager: Service, APScheduledLocationManagerDelegate {
             "Latitude": coord.latitude,
             "Longitude": coord.longitude
         ]
+        
         _sessionManager.request(apiURL + "/locations", method: .post, parameters: location as [String : AnyObject], encoding: JSONEncoding.default, headers: _headers)
     }
     

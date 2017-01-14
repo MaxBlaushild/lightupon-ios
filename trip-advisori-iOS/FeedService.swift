@@ -22,5 +22,12 @@ class FeedService: Service {
             success(scenes!)
         })
     }
+    
+    func getUsersFeed(userID: Int, success: @escaping ([Scene]) -> Void) {
+        _apiAmbassador.get("\(apiURL)/users/\(userID)/scenes", success: { response in
+            let scenes = Mapper<Scene>().mapArray(JSONObject: response.result.value)
+            success(scenes!)
+        })
+    }
 
 }

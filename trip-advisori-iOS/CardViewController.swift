@@ -8,7 +8,9 @@
 
 import UIKit
 
-class CardViewController: UIViewController {
+class CardViewController: UIViewController, ProfileViewCreator {
+    
+    var delegate: ProfileViewCreator!
     
     init(card: Card, owner: User, scene: Scene) {
 
@@ -16,11 +18,16 @@ class CardViewController: UIViewController {
         let cardView = DefaultCardDetailsView.fromNib("DefaultCardDetailsView")
         cardView.initFrom(card: card, owner: owner, scene: scene)
         cardView.frame = self.view.frame
+        cardView.delegate = self
         self.view.addSubview(cardView)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func createProfileView(user: User) {
+        delegate.createProfileView(user: user)
     }
 
     override func viewDidLoad() {

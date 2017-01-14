@@ -10,7 +10,6 @@ import Foundation
 
 import UIKit
 import ObjectMapper
-import AVFoundation
 
 class Scene: NSObject, Mappable {
     var id:Int?
@@ -30,6 +29,7 @@ class Scene: NSObject, Mappable {
     var neighborhood: String?
     var constellationPoint: ConstellationPoint?
     var comments: [Comment] = [Comment]()
+    var liked: Bool?
     
     func mapping(map: Map) {
         id                 <- map["ID"]
@@ -49,6 +49,7 @@ class Scene: NSObject, Mappable {
         comments           <- map["Comments"]
         createdAt          <- (map["CreatedAt"], ISO8601MilliDateTransform())
         updatedAt          <- (map["UpdatedAt"], ISO8601MilliDateTransform())
+        liked              <- map["Liked"]
     }
     
     required init?(map: Map) {}

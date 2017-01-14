@@ -33,12 +33,18 @@ class UserService: Service {
     func setMyself(jsonObject: AnyObject) {
         let user = Mapper<User>().map(JSONObject: jsonObject)
         _currentUser = user
-        _followService.setFollows(follows: (user?.follows)!)
         _litService.setLitness(lit: _currentUser.lit!)
     }
     
     func isUser(_ otherProfile: FacebookProfile) -> Bool {
         return _currentUser.email == otherProfile.email
+    }
+    
+    func getUser(_ userID: Int, success: @escaping (User) -> Void) {
+        _apiAmbassador.get(apiURL + "/users/\(userID)", success: { response in
+            let user = Mapper<User>().map(JSONObject: response.result.value)
+            success(user!)
+        })
     }
     
     var currentUser:User {
