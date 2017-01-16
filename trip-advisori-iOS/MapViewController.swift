@@ -10,7 +10,9 @@ import UIKit
 import GoogleMaps
 import Alamofire
 
-class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    let reuseIdentifier = "MapSceneCell"
     
     fileprivate let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
     fileprivate let tripsService = Injector.sharedInjector.getTripsService()
@@ -18,12 +20,13 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     fileprivate let userService = Injector.sharedInjector.getUserService()
     fileprivate let postService = Injector.sharedInjector.getPostService()
     fileprivate let socketService = Injector.sharedInjector.getSocketService()
+    fileprivate let feedService = Injector.sharedInjector.getFeedService()
     
     var trips:[Trip]!
     var blurView: BlurView!
+    var scenes: [Scene] = [Scene]()
     var xBackButton:XBackButton!
     var delegate: MainViewControllerDelegate!
-//    var imagePicker = UIImagePickerController()
     var mapMenuView: UIView!
     var mainButton: UIButton!
     var postButton: UIButton!
@@ -33,9 +36,13 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var ImagePicked: UIImageView!
+    @IBOutlet weak var MapSceneCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getScenes()
+        MapSceneCollectionView.dataSource = self
+        MapSceneCollectionView.delegate = self
         getTrips()
         configureMapView()
         addMainButton()
@@ -64,6 +71,20 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     
     func toggleLitness(_ sender: AnyObject) {
         litService.isLit ? extinguish() : light()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return scenes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let scene: Scene = scenes[(indexPath as NSIndexPath).row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MapSceneCell
+        cell.MapSceneImage.imageFromUrl(scene.backgroundUrl!)
+        cell.layer.cornerRadius = 6
+        cell.layer.borderWidth = 2
+        cell.layer.borderColor = UIColor(red:0.61, green:0.38, blue:0.81, alpha:1.0).cgColor
+        return cell
     }
 
     
@@ -98,6 +119,21 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
         mainButton.makeCircle()
         view.insertSubview(mainButton, at: 0)
         view.bringSubview(toFront: mainButton)
+    }
+    
+    func getScenes() {
+        feedService.getFeed(success: self.addScenes)
+    }
+    
+    func addScenes(_scenes: [Scene]) {
+        scenes = _scenes
+        MapSceneCollectionView.reloadData()
+        self.bringMapSceneToFront()
+    }
+    
+    func bringMapSceneToFront() {
+        view.insertSubview(MapSceneCollectionView, at: 0)
+        view.bringSubview(toFront: MapSceneCollectionView)
     }
     
     func setUnopenedMainButtonState() {

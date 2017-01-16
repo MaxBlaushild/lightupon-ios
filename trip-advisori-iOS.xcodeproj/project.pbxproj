@@ -150,6 +150,7 @@
 		1EF93C071C605A5C00A5B463 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93C061C605A5C00A5B463 /* Service.swift */; };
 		8279F16E4836D5720662809C /* Pods_trip_advisori_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B2F5F4E62714C2E6120AA4 /* Pods_trip_advisori_iOS.framework */; };
 		9C3F53181D4EB25300A6B3DE /* TestSound2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C3F53171D4EB25300A6B3DE /* TestSound2.mp3 */; };
+		AEE1AC691E2D5A790043ADDE /* MapSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1AC681E2D5A790043ADDE /* MapSceneCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -320,6 +321,7 @@
 		66755F11CBD3FB79809ADBA9 /* Pods-trip-advisori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		750635AAF33A440FF06F8E2F /* Pods-trip-advisori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		9C3F53171D4EB25300A6B3DE /* TestSound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TestSound2.mp3; sourceTree = "<group>"; };
+		AEE1AC681E2D5A790043ADDE /* MapSceneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSceneCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -553,6 +555,7 @@
 		1ED69B471D0C809C00CF2172 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				AEE1AC681E2D5A790043ADDE /* MapSceneCell.swift */,
 				1E5D153E1E234EDF0020D9B5 /* FeedSceneCell */,
 				1E7779891E08F3A8005B883D /* CommentCollectionViewCell */,
 				1EE68CEE1DD408830011167F /* MapMenuView */,
@@ -963,6 +966,7 @@
 				1EBBFC1E1D734C6000697894 /* CompassView.swift in Sources */,
 				1EE68CF01DD408B50011167F /* MapMenuView.swift in Sources */,
 				1EA20DEC1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift in Sources */,
+				AEE1AC691E2D5A790043ADDE /* MapSceneCell.swift in Sources */,
 				1E9645F01E085A2E00A0E88F /* FeedService.swift in Sources */,
 				1EE14DF71D579F9C00364B9D /* InstantiateViewControllers.swift in Sources */,
 				1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */,
