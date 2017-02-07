@@ -3,7 +3,7 @@ import APScheduledLocationManager
 import CoreLocation
 import Alamofire
 
-class BackgroundLocationManager: Service, APScheduledLocationManagerDelegate {
+class BackgroundLocationManager: NSObject, APScheduledLocationManagerDelegate {
     fileprivate let configuration = URLSessionConfiguration.background(withIdentifier: "backgound_location_session")
     fileprivate let authService = AuthService()
     
@@ -37,9 +37,12 @@ class BackgroundLocationManager: Service, APScheduledLocationManagerDelegate {
         let coord = locationObj.coordinate
         
         let location = [
+            "Accuracy": locationObj.horizontalAccuracy,
+            "Floor": locationObj.floor?.level ?? 1,
+            "Course": locationObj.course,
             "Latitude": coord.latitude,
             "Longitude": coord.longitude
-        ]
+        ] as [String : Any]
         
         _sessionManager.request(apiURL + "/locations", method: .post, parameters: location as [String : AnyObject], encoding: JSONEncoding.default, headers: _headers)
     }

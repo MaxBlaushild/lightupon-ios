@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Injector: Service {
+class Injector: NSObject {
     static let sharedInjector: Injector = Injector()
     
     fileprivate let _apiAmbassador: AmbassadorToTheAPI
@@ -29,12 +29,14 @@ class Injector: Service {
     fileprivate let _feedService: FeedService
     fileprivate let _commentService: CommentService
     fileprivate let _likeService: LikeService
+    fileprivate let _googleMapsService: GoogleMapsService
+    fileprivate let _notificationService: NotificationService
 
     override init(){
         _authService = AuthService()
-        
+        _notificationService = NotificationService()
         _facebookService = FacebookService()
-        _loginService = LoginService(authService: _authService)
+        _loginService = LoginService(authService: _authService, notificationService: _notificationService)
         _apiAmbassador = AmbassadorToTheAPI(authService: _authService)
         _tripsService = TripsService(apiAmbassador: _apiAmbassador)
         _partyService = PartyService(apiAmbassador: _apiAmbassador)
@@ -50,7 +52,16 @@ class Injector: Service {
         _feedService = FeedService(apiAmbassador: _apiAmbassador)
         _commentService = CommentService(apiAmbassador: _apiAmbassador)
         _likeService = LikeService(apiAmbassador: _apiAmbassador)
+        _googleMapsService = GoogleMapsService()
         super.init()
+    }
+    
+    func getNotificationService() -> NotificationService {
+        return _notificationService
+    }
+    
+    func getGoogleMapsService() -> GoogleMapsService {
+        return _googleMapsService
     }
     
     func getLikeService() -> LikeService {

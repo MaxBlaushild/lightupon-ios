@@ -11,7 +11,12 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class AmbassadorToTheAPI: Service {
+let apiURL:String = "http://45.55.160.25/lightupon"
+let wsURL:String = "ws://45.55.160.25/lightupon"
+//     let apiURL:String = "http://localhost:5000/lightupon"
+//     let wsURL:String = "ws://localhost:5000/lightupon"
+
+class AmbassadorToTheAPI: NSObject {
     fileprivate let _authService:AuthService
     
     internal typealias NetworkSuccessHandler = (DataResponse<Any>) -> Void
@@ -43,26 +48,27 @@ class AmbassadorToTheAPI: Service {
         self.headers = headers
     }
 
-    func get(_ URLString: URLConvertible, success: NetworkSuccessHandler?) {
+    func get(_ uri: URLConvertible, success: NetworkSuccessHandler?) {
         setHeaders()
-        Alamofire.request(URLString, method: .get, headers: headers).responseJSON { response in
-            self.processResponse(response, success: success!, URLString: URLString)
+        
+        Alamofire.request("\(apiURL)\(uri)", method: .get, headers: headers).responseJSON { response in
+            self.processResponse(response, success: success!, URLString: "\(apiURL)\(uri)")
         }
             
     }
     
-    func post(_ URLString: URLConvertible, parameters:[String:AnyObject], success: NetworkSuccessHandler?) {
+    func post(_ uri: URLConvertible, parameters:[String:AnyObject], success: NetworkSuccessHandler?) {
         setHeaders()
-        Alamofire.request(URLString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            self.processResponse(response, success: success!, URLString: URLString)
+        Alamofire.request("\(apiURL)\(uri)", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            self.processResponse(response, success: success!, URLString: "\(apiURL)\(uri)")
         }
         
     }
     
-    func delete(_ URLString: URLConvertible, success: NetworkSuccessHandler?) {
+    func delete(_ uri: URLConvertible, success: NetworkSuccessHandler?) {
         setHeaders()
-        Alamofire.request(URLString, method: .delete, headers: headers).responseJSON { response in
-            self.processResponse(response, success: success!, URLString: URLString)
+        Alamofire.request("\(apiURL)\(uri)", method: .delete, headers: headers).responseJSON { response in
+            self.processResponse(response, success: success!, URLString: "\(apiURL)\(uri)")
         }
     }
     

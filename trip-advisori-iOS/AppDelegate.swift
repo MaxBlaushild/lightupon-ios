@@ -9,6 +9,9 @@
 import UIKit
 import GoogleMaps
 import FBSDKLoginKit
+import UserNotifications
+
+let googleMapsApiKey = "AIzaSyBS-y6hKLFKiM5yUWIO0AYR5-lrkCZSvp0"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,16 +20,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var loadedEnoughToDeepLink:Bool = false
     var invite:String!
     var backgroundLocationManager = BackgroundLocationManager()
-
+    var apiAmbassador: AmbassadorToTheAPI!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        GMSServices.provideAPIKey("AIzaSyBS-y6hKLFKiM5yUWIO0AYR5-lrkCZSvp0")
+        GMSServices.provideAPIKey(googleMapsApiKey)
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         FBSDKLoginManager.renewSystemCredentials { (result:ACAccountCredentialRenewResult, error:Error?) -> Void in
 
         }
+        
+        let authService = AuthService()
+        apiAmbassador = AmbassadorToTheAPI(authService: authService)
+        
         return true
     }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        var token = ""
+        for i in 0..<deviceToken.count {
+            token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
+        }
+        
+        let parameters = [
+            "DeviceToken": token
+        ]
+        
+        apiAmbassador.post("/deviceToken", parameters: parameters as [String : AnyObject], success: { reponse in
+        
+        })
+
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        
+        //        apiAmbassador.post()
+        
+    }
+    
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         

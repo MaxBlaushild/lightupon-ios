@@ -10,46 +10,42 @@ import UIKit
 import GoogleMaps
 import Alamofire
 
-class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class MapViewController: UIViewController, GMSMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, TripDetailsViewControllerDelegate {
     
     let reuseIdentifier = "MapSceneCell"
     
     fileprivate let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
     fileprivate let tripsService = Injector.sharedInjector.getTripsService()
-    fileprivate let litService = Injector.sharedInjector.getLitService()
-    fileprivate let userService = Injector.sharedInjector.getUserService()
-    fileprivate let postService = Injector.sharedInjector.getPostService()
-    fileprivate let socketService = Injector.sharedInjector.getSocketService()
     fileprivate let feedService = Injector.sharedInjector.getFeedService()
     
-    var trips:[Trip]!
-    var blurView: BlurView!
+    var trips:[Trip] = [Trip]()
     var scenes: [Scene] = [Scene]()
     var xBackButton:XBackButton!
     var delegate: MainViewControllerDelegate!
-    var mapMenuView: UIView!
-    var mainButton: UIButton!
-    var postButton: UIButton!
-    var messageButton: UIButton!
-    var litButton: UIButton!
-    var menuOpen:Bool = false
+    var mapDrawer: TripDetailsViewController!
+    var drawerOpen = false
+    var drawerHeight: CGFloat = 0.0
+    var scrollingUp = false
+    var constellationOverlayVisible = false
     
-    @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var ImagePicked: UIImageView!
+    @IBOutlet weak var litButton: LitButton!
+    @IBOutlet weak var mapView: LightuponGMSMapView!
     @IBOutlet weak var MapSceneCollectionView: UICollectionView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getScenes()
+
         MapSceneCollectionView.dataSource = self
         MapSceneCollectionView.delegate = self
-        getTrips()
         configureMapView()
-        addMainButton()
+        initDrawer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getTrips()
+        getScenes()
+        litButton.bindLitness()
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,16 +57,12 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
         return false
     }
     
-    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.portrait
     }
     
     @IBAction func openMenu(_ sender: AnyObject) {
         delegate.toggleRightPanel()
-    }
-    
-    func toggleLitness(_ sender: AnyObject) {
-        litService.isLit ? extinguish() : light()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -80,45 +72,142 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let scene: Scene = scenes[(indexPath as NSIndexPath).row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MapSceneCell
-        cell.MapSceneImage.imageFromUrl(scene.backgroundUrl!)
-        cell.layer.cornerRadius = 6
-        cell.layer.borderWidth = 2
-        cell.layer.borderColor = UIColor(red:0.61, green:0.38, blue:0.81, alpha:1.0).cgColor
+        
+        cell.MapSceneImage.imageFromUrl(scene.backgroundUrl!, success: { img in
+            scene.image = img
+            cell.MapSceneImage.image = img
+            cell.MapSceneImage.makeCircle()
+        })
+        
+        cell.profileImageView.imageFromUrl((scene.trip?.owner?.profilePictureURL)!, success: { img in
+            cell.profileImageView.image = img
+            cell.profileImageView.makeCircle()
+        })
+        
         return cell
     }
-
     
-    func openCameraButton(sender: AnyObject) {
-        
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
-            imagePicker.allowsEditing = false
-            self.present(imagePicker, animated: true, completion: nil)
-        }
+    func animateInDrawer(duration: TimeInterval, scene: Scene) {
+        mapDrawer.bindScene(scene: scene)
+        mapDrawer.setDrawerMode()
+        view.bringSubview(toFront: mapDrawer.view)
+        UIView.animate(withDuration: duration, animations: {
+            self.mapDrawer.view.frame.origin = CGPoint(x: 0, y: self.view.frame.height - (self.tabBarController?.tabBar.frame.size.height)! - 70)
+        }, completion: { _ in
+            self.drawerOpen = true
+        })
     }
     
-    @objc(imagePickerController:didFinishPickingMediaWithInfo:) func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            postService.createSelfie(image: pickedImage, callback: {
-                self.dismiss(animated: true, completion: nil);
+    func initDrawer() {
+        mapDrawer = TripDetailsViewController()
+        mapDrawer.view.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: self.view.frame.height)
+        addChildViewController(mapDrawer)
+        makeDrawerDraggable()
+        mapDrawer.tripDelegate = self
+        view.addSubview(mapDrawer.view)
+    }
+    
+    func makeDrawerDraggable() {
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(navViewDragged(gestureRecognizer:)))
+        mapDrawer.view.addGestureRecognizer(gesture)
+        mapDrawer.view.isUserInteractionEnabled = true
+    }
+    
+    func onDismissed() {
+        mapDrawer = nil
+        initDrawer()
+        drawerOpen = false
+        mapView.clearDirections()
+    }
+    
+    func navViewDragged(gestureRecognizer: UIPanGestureRecognizer){
+        let translation = gestureRecognizer.translation(in: self.view)
+        let newOrigin = CGPoint(x: gestureRecognizer.view!.frame.origin.x, y: gestureRecognizer.view!.frame.origin.y + translation.y)
+        
+        
+        if gestureRecognizer.state == .ended {
+            let height = scrollingUp ? UIApplication.shared.statusBarFrame.height : self.view.frame.height - (self.tabBarController?.tabBar.frame.size.height)! - 70
+            let beltHeight = scrollingUp ? view.frame.height / 2 : 0
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                self.mapDrawer.view.frame.origin.y = height
+                self.mapDrawer.setBeltOverlay(newHeight: beltHeight)
+                self.mapDrawer.setBottomViewHeight(newHeight: beltHeight + 70)
+            }, completion: { _ in
+                if (self.scrollingUp) {
+                    self.animateInOverlay()
+                }
             })
         }
-    
+        
+        if gestureRecognizer.state == UIGestureRecognizerState.began || gestureRecognizer.state == UIGestureRecognizerState.changed {
+            if (newOrigin.y > UIApplication.shared.statusBarFrame.size.height && newOrigin.y < self.view.frame.height - (self.tabBarController?.tabBar.frame.size.height)! - 70) {
+                if (constellationOverlayVisible) {
+                    animateOutOverlay()
+                }
+
+                gestureRecognizer.view!.frame.origin = newOrigin
+                gestureRecognizer.setTranslation(CGPoint(x: 0, y: 0), in: self.view)
+                scrollingUp = drawerHeight - newOrigin.y > 0
+                drawerHeight = newOrigin.y
+                var beltOverlayHeight = (self.view.frame.height - (70 + (self.tabBarController?.tabBar.frame.size.height)!)) - newOrigin.y
+                if (beltOverlayHeight <= view.frame.height / 2) {
+                    beltOverlayHeight = beltOverlayHeight - beltOverlayHeight * 0.1
+                    mapDrawer.setBeltOverlay(newHeight: beltOverlayHeight)
+                    mapDrawer.setBottomViewHeight(newHeight: beltOverlayHeight + 70)
+                }
+            }
+        }
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+    func animateOutOverlay() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.mapDrawer.setOverlayAlpha(alpha: 0.0)
+            self.constellationOverlayVisible = false
+        })
     }
     
-    func addMainButton() {
-        mainButton = UIButton()
-        mainButton.frame = CGRect(x: view.frame.width / 2 - 30, y: view.frame.height - 167, width: 60, height: 60)
-        setUnopenedMainButtonState()
-        mainButton.makeCircle()
-        view.insertSubview(mainButton, at: 0)
-        view.bringSubview(toFront: mainButton)
+    func animateInOverlay() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.mapDrawer.setOverlayAlpha(alpha: 1.0)
+            self.constellationOverlayVisible = true
+        })
+    }
+    
+    func animateOutDrawer(duration: TimeInterval) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: duration, animations: {
+                self.mapDrawer.view.frame.origin = CGPoint(x: 0, y: self.view.frame.height)
+            }, completion: { truth in
+                self.drawerOpen = false
+            })
+        }
+    }
+    
+    func toggleDrawer(_ scene: Scene) {
+        if (drawerOpen) {
+            animateOutDrawer(duration: 0.25, completion: { _ in
+                self.animateInDrawer(duration: 0.25, scene: scene)
+            })
+        } else {
+            animateInDrawer(duration: 0.5, scene: scene)
+        }
+    }
+    
+    func animateOutDrawer(duration: TimeInterval, completion: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: duration, animations: {
+                self.mapDrawer.view.frame.origin = CGPoint(x: 0, y: self.view.frame.height)
+            }, completion: completion)
+        }
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedScene = scenes[indexPath.row]
+        let marker = mapView.findOrCreateMarker(byScene: selectedScene)
+        mapView.selectMarker(marker!)
+        toggleDrawer(selectedScene)
     }
     
     func getScenes() {
@@ -128,170 +217,18 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
     func addScenes(_scenes: [Scene]) {
         scenes = _scenes
         MapSceneCollectionView.reloadData()
-        self.bringMapSceneToFront()
+        bringMapSceneToFront()
     }
     
     func bringMapSceneToFront() {
         view.insertSubview(MapSceneCollectionView, at: 0)
         view.bringSubview(toFront: MapSceneCollectionView)
+        
+        if mapDrawer != nil {
+            view.bringSubview(toFront: mapDrawer.view)
+        }
     }
-    
-    func setUnopenedMainButtonState() {
-        let image = UIImage(named: "whiteLogo") as UIImage?
-        mainButton.backgroundColor = Colors.basePurple
-        mainButton.setImage(image, for: .normal)
-        mainButton.removeTarget(self, action: #selector(closeMapMenu), for: .touchUpInside)
-        mainButton.addTarget(self, action: #selector(openMapMenu), for: .touchUpInside)
-    }
-    
-    func setOpenedMainButtonState() {
-        let image = UIImage(named: "mainCancel") as UIImage?
-        mainButton.setImage(image, for: .normal)
-        mainButton.removeTarget(self, action: #selector(openMapMenu), for: .touchUpInside)
-        mainButton.backgroundColor = UIColor.white
-        mainButton.addTarget(self, action: #selector(closeMapMenu), for: .touchUpInside)
-    }
-    
-    func openMapMenu(sender: UIButton!) {
-        toggleMainButton()
-        createMapMenu()
-        view.addSubview(mapMenuView)
-        view.bringSubview(toFront: mainButton)
-        animateInMapMenu()
-        addLitButton()
-        animateInLitButton()
-        addPostButton()
-        animateInPostButton()
-        addMessageButton()
-        animateInMessageButton()
-    }
-    
-    func closeMapMenu() {
-        mainButton.isEnabled = false
-        animateOutButtons()
-        animateOutMenu()
-    }
-    
-    func removeMapMenuViews() {
-        removeMapView()
-        removeLitButton()
-        removePostButton()
-        removeMessageButton()
-        toggleMainButton()
-    }
-    
-    func removeMapView() {
-        mapMenuView.removeFromSuperview()
-        mapMenuView = nil
-    }
-    
-    func removeLitButton() {
-        litButton.removeFromSuperview()
-        litButton = nil
-    }
-    
-    func removePostButton() {
-        postButton.removeFromSuperview()
-        postButton = nil
-    }
-    
-    func removeMessageButton() {
-        messageButton.removeFromSuperview()
-        messageButton = nil
-    }
-    
-    func toggleMainButton() {
-        menuOpen ? setUnopenedMainButtonState() : setOpenedMainButtonState()
-        menuOpen = !menuOpen
-        mainButton.isEnabled = true
-    }
-    
-    func createMapMenu() {
-        mapMenuView = UIView()
-        mapMenuView.frame = view.frame
-        mapMenuView.frame.origin.y = view.frame.height
-        mapMenuView.backgroundColor = Colors.basePurple
-        mapMenuView.alpha = 0.6
-    }
-    
-    func addPostButton() {
-        postButton = UIButton()
-        let image = UIImage(named: "post") as UIImage?
-        postButton.setImage(image, for: .normal)
-        postButton.addTarget(self, action: #selector(openCameraButton), for: .touchUpInside)
-        postButton.backgroundColor = UIColor.white
-        postButton.alpha = 1.0
-        postButton.frame = CGRect(x: view.frame.width / 2 - 20, y: view.frame.height - 147, width: 40, height: 40)
-        postButton.makeCircle()
-        view.addSubview(postButton)
-    }
-    
-    func addMessageButton() {
-        messageButton = UIButton()
-        let image = UIImage(named: "message") as UIImage?
-        messageButton.setImage(image, for: .normal)
-        messageButton.backgroundColor = UIColor.white
-        messageButton.alpha = 1.0
-        messageButton.frame = CGRect(x: view.frame.width / 2 - 20, y: view.frame.height - 147, width: 40, height: 40)
-        messageButton.makeCircle()
-        view.addSubview(messageButton)
-    }
-    
-    
-    func addLitButton() {
-        litButton = UIButton()
-        litButton.backgroundColor = UIColor.white
-        litButton.alpha = 1.0
-        litButton.addTarget(self, action: #selector(toggleLitness), for: .touchUpInside)
-        bindLitness()
-        view.bringSubview(toFront: litButton)
-        litButton.frame = CGRect(x: view.frame.width / 2 - 20, y: view.frame.height - 147, width: 40, height: 40)
-        litButton.makeCircle()
-        view.addSubview(litButton)
-    }
-    
-    func animateInPostButton() {
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: ({
-            self.postButton.frame = CGRect(x: self.view.frame.width / 2 - 20, y: self.view.frame.height - 267, width: 40, height: 40)
-        }), completion: nil)
-    }
-    
-    func animateInLitButton() {
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: ({
-            self.litButton.frame = CGRect(x: self.view.frame.width / 2 - 100, y: self.view.frame.height - 217, width: 40, height: 40)
-        }), completion: nil)
-    }
-    
-    func animateInMessageButton() {
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: ({
-            self.messageButton.frame = CGRect(x: self.view.frame.width / 2 + 60, y: self.view.frame.height - 217, width: 40, height: 40)
-        }), completion: nil)
-    }
-    
-    func animateInMapMenu() {
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 20.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: ({
-            self.mapMenuView.frame = self.view.frame
-        }), completion: nil)
-    }
-    
-    func animateOutMenu() {
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 20.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: ({
-            self.mapMenuView.frame.origin.y = self.view.frame.height
-        }), completion: { truth in
-            self.removeMapMenuViews()
-        })
-    }
-    
-    func animateOutButtons() {
-        view.bringSubview(toFront: mainButton)
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 10.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: ({
-            let origin = CGRect(x: self.view.frame.width / 2 - 20, y: self.view.frame.height - 167, width: 40, height: 40)
-            self.messageButton.frame = origin
-            self.postButton.frame = origin
-            self.litButton.frame = origin
-        }), completion: nil)
-    }
-    
+
     func configureMapView() {
         mapView.camera = GMSCameraPosition.camera(withLatitude: currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
         mapView.isMyLocationEnabled = true
@@ -303,125 +240,23 @@ class MapViewController: UIViewController, GMSMapViewDelegate, TripDetailsViewDe
         tripsService.getTrips(self.onTripsGotten, latitude: self.currentLocationService.latitude, longitude: self.currentLocationService.longitude)
     }
     
-    func closeImageView() {
-        
-    }
-    
-    func light() {
-        litService.light(successCallback: self.bindLitness)
-    }
-    
-    func extinguish() {
-        litService.extinguish(successCallback: self.bindLitness)
-    }
-    
-    func bindLitness() {
-        let title = litService.isLit ? "Lit" : "Not"
-        litButton.setTitleColor(Colors.basePurple, for: UIControlState.normal)
-        litButton.setTitle(title, for: .normal)
-    }
-    
     func onTripsGotten(_ _trips_: [Trip]) {
         trips = _trips_
-        initMap()
+        mapView.bindTrips(trips)
     }
     
-    func initMap() {
-        for trip in trips {
-            placeTripOnMap(trip, mapView: mapView)
-        }
-    }
-
-    func getRandomColor() -> UIColor{
-        let randomRed:CGFloat = CGFloat(drand48())
-        let randomGreen:CGFloat = CGFloat(drand48())
-        let randomBlue:CGFloat = CGFloat(drand48())
-        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
-    }
-    
-    func placeTripOnMap(_ trip: Trip, mapView: GMSMapView) {
-        let colorForTrip = getRandomColor()
-        placeLocations(trip: trip, color: colorForTrip)
-        placeMarkers(trip: trip, color: colorForTrip)
-
-    }
-    
-    func placeLocations(trip: Trip, color: UIColor) {
-        if trip.locations != nil {
-            let path = GMSMutablePath()
-            
-            for location in trip.locations {
-                let coord = CLLocationCoordinate2D(latitude: location.latitude!, longitude: location.longitude!)
-                path.add(coord)
-            }
-            
-            let polyline = GMSPolyline(path: path)
-            polyline.strokeColor = color
-            polyline.map = mapView
-        }
-
-    }
-    
-    func placeMarkers(trip: Trip, color: UIColor) {
-        if trip.scenes != nil {
-            for scene in trip.scenes {
-                scene.trip = trip
-                let string = scene.backgroundUrl
-                placeMarker(scene: scene, image: string!)
-            }
-        }
-    }
-    
-    func createRoundedMarker(image: UIImage, radius: Float) -> UIImage {
-        let imageView: UIImageView = UIImageView(image: image)
-        var layer: CALayer = CALayer()
-        layer = imageView.layer
-        
-        layer.masksToBounds = true
-        layer.cornerRadius = CGFloat(radius)
-        UIGraphicsBeginImageContext(imageView.bounds.size)
-        layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1.0).cgColor
-        layer.borderWidth = 4
-        layer.render(in: UIGraphicsGetCurrentContext()!)
-        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return roundedImage!
-    }
-    
-    func resizeImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
-        image.draw(in: CGRect(origin: CGPoint.zero, size: CGSize(width: newSize.width, height: newSize.height)))
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return newImage
-    }
-    
-    func placeMarker(scene: Scene, image: String) {
-        Alamofire.request(image, method: .get, parameters: nil).responseJSON { (response) in
-
-            let marker = GMSMarker()
-            let image = response.response!.statusCode == 200 ? UIImage(data: response.data!, scale: 1) : UIImage(named: "banner")
-            let loadedImage = self.resizeImage(image: image!, scaledToSize: CGSize(width: 60, height: 60))
-            marker.position = CLLocationCoordinate2DMake(scene.latitude!, scene.longitude!)
-            let roundedImage = self.createRoundedMarker(image: loadedImage, radius: 30)
-            marker.icon = roundedImage
-            marker.title = scene.name
-            marker.userData = scene
-            marker.map = self.mapView
-        }
-       
-    }
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {}
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        let scene: Scene = marker.userData as! Scene
-        let tripDetailsViewController = TripDetailsViewController(scene: scene)
-        addChildViewController(tripDetailsViewController)
-        tripDetailsViewController.view.frame = view.frame
-        view.addSubview(tripDetailsViewController.view)
-        tripDetailsViewController.didMove(toParentViewController: self)
-            return true
-
+        let lightuponMarker = marker as! LightuponGMSMarker
+        self.mapView.selectMarker(lightuponMarker)
+        toggleDrawer(lightuponMarker.scene)
+        return true
+    }
+    
+    func onSceneChanged(_ scene: Scene) {
+        let marker = mapView.findOrCreateMarker(byScene: scene)
+        mapView.selectMarker(marker!)
     }
     
     func segueToContainer() {

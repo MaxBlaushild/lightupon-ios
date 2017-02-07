@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class UserService: Service {
+class UserService: NSObject {
     
     private let _apiAmbassador:AmbassadorToTheAPI
     private let _litService:LitService
@@ -24,7 +24,7 @@ class UserService: Service {
     }
     
     func getMyself(successCallback: @escaping () -> Void) {
-        _apiAmbassador.get(apiURL + "/me", success: { response in
+        _apiAmbassador.get("/me", success: { response in
             self.setMyself(jsonObject: response.result.value as AnyObject)
             successCallback()
         })
@@ -41,7 +41,7 @@ class UserService: Service {
     }
     
     func getUser(_ userID: Int, success: @escaping (User) -> Void) {
-        _apiAmbassador.get(apiURL + "/users/\(userID)", success: { response in
+        _apiAmbassador.get("/users/\(userID)", success: { response in
             let user = Mapper<User>().map(JSONObject: response.result.value)
             success(user!)
         })

@@ -23,14 +23,16 @@ class FeedSceneCell: UITableViewCell {
     var delegate: ProfileViewCreator!
     
     func decorateCell(scene: Scene) {
-        contentView.layer.borderColor = UIColor(red: CGFloat(153.00)/255, green: CGFloat(153.00)/255, blue: CGFloat(153.00)/255, alpha: 0.5).cgColor;
-        contentView.layer.borderWidth = 1;
+        let borderColor = UIColor(red: CGFloat(153.00)/255, green: CGFloat(153.00)/255, blue: CGFloat(153.00)/255, alpha: 0.5)
+        let thickness = CGFloat(1)
+        contentView.layer.addBorder(edge: .bottom, color: borderColor, thickness: thickness)
         userName.text = scene.trip?.owner?.fullName
         daysSince.text = scene.prettyTimeSinceCreation()
         tripTitle.text = scene.name
         location.text = "\(scene.neighborhood!)"
         tag = (scene.trip?.id!)!
         _scene = scene
+        selectionStyle = .none
         setLikeButton()
         makeProfileClickable()
     }
@@ -54,7 +56,7 @@ class FeedSceneCell: UITableViewCell {
     }
     
     func setLikeButton() {
-        likeButton.backgroundColor = _scene.liked! ?  UIColor.red : UIColor.white
+        likeButton.imageView?.image = _scene.liked! ?  UIImage(named: "liked") : UIImage(named: "like")
     }
     
     

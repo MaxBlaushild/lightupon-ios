@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class FeedService: Service {
+class FeedService: NSObject {
     fileprivate let _apiAmbassador: AmbassadorToTheAPI
     
     init(apiAmbassador: AmbassadorToTheAPI) {
@@ -17,14 +17,14 @@ class FeedService: Service {
     }
     
     func getFeed(success: @escaping ([Scene]) -> Void) {
-        _apiAmbassador.get("\(apiURL)/scenes", success: { response in
+        _apiAmbassador.get("/scenes", success: { response in
             let scenes = Mapper<Scene>().mapArray(JSONObject: response.result.value)
             success(scenes!)
         })
     }
     
     func getUsersFeed(userID: Int, success: @escaping ([Scene]) -> Void) {
-        _apiAmbassador.get("\(apiURL)/users/\(userID)/scenes", success: { response in
+        _apiAmbassador.get("/users/\(userID)/scenes", success: { response in
             let scenes = Mapper<Scene>().mapArray(JSONObject: response.result.value)
             success(scenes!)
         })

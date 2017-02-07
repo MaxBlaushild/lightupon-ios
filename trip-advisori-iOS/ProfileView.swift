@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 protocol ProfileViewDelegate {
     func onLoggedOut() -> Void
@@ -24,12 +25,14 @@ enum TabBarContext {
     case lights, map
 }
 
-class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource {
+class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
     fileprivate let authService = Injector.sharedInjector.getAuthService()
     fileprivate let facebookService = Injector.sharedInjector.getFacebookService()
     fileprivate let userService = Injector.sharedInjector.getUserService()
     fileprivate let followService = Injector.sharedInjector.getFollowService()
     fileprivate let feedService = Injector.sharedInjector.getFeedService()
+    fileprivate let tripService = Injector.sharedInjector.getTripsService()
+    fileprivate let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
 
     @IBOutlet weak var tabBar: UIView!
     @IBOutlet weak var actionPackedButton: UIButton!
@@ -44,10 +47,12 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var mapTab: UIButton!
     @IBOutlet weak var numberOfFollowersLabel: UILabel!
     @IBOutlet weak var numberOfTripsLabel: UILabel!
+    @IBOutlet weak var mapView: LightuponGMSMapView!
     
     fileprivate var profileContext: ProfileContext = ProfileContext.isUser
     fileprivate var tabBarContext: TabBarContext = TabBarContext.lights
     fileprivate var actionPackButtonHandler:(() -> Void)!
+    
     fileprivate var _user: User!
     fileprivate var _scenes: [Scene] = [Scene]()
     
@@ -61,16 +66,28 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource {
         getUser(user.id!)
         tabBar.layer.addBorder(edge: .bottom, color: Colors.mediumGrey, thickness: 1.0)
         configureTableView()
+        configureMapView()
+        centerMap()
         setTabBar()
-//        scaleProfileView()
-//        fullnameLabel.sizeToFit()
+        style()
     }
     
-    func scaleProfileView() {
-        fullnameLabel.numberOfLines = 1
-        fullnameLabel.minimumScaleFactor=0.5
-        fullnameLabel.adjustsFontSizeToFitWidth = true
-        
+    func configureMapView() {
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
+        mapView.delegate = self
+    }
+    
+    func getUsersTrips() {
+        tripService.getUsersTrips(_user.id!, callback: self.onTripsReceived)
+    }
+    
+    func onTripsReceived(trips: [Trip]) {
+        mapView.bindTrips(trips)
+    }
+    
+    func centerMap() {
+        mapView.camera = GMSCameraPosition.camera(withLatitude: currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
     }
     
     func getUser(_ userID: Int) {
@@ -97,6 +114,7 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource {
             tableView.isHidden = false
         case .map:
             setTabBarButtonToActive(mapTab)
+            mapView.isHidden = false
         }
     }
     
@@ -106,14 +124,12 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func resetTabColors() {
         let tabs = [mapTab, lightTab]
-        tabs.forEach({ tab in
-            tab?.titleLabel?.textColor = UIColor.lightGray
-        })
+        tabs.forEach({ tab in tab?.titleLabel?.textColor = UIColor.lightGray })
     }
     
     func hideViews() {
-        let views = [tableView]
-        views.forEach({ view in view?.isHidden = true })
+        let views = [tableView, mapView] as [UIView]
+        views.forEach({ view in view.isHidden = true })
     }
 
     func getUsersFeed() {
@@ -128,9 +144,14 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource {
     func setUser(_ user: User) {
         _user = user
         getUsersFeed()
+        getUsersTrips()
         setUserContext(user)
         bindUser(user)
-        style()
+    }
+    
+    func refresh() {
+        getUser(_user.id!)
+        centerMap()
     }
     
     func bindUser(_ user: User) {
@@ -270,10 +291,17 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource {
         addSubview(tripDetailsViewController.view)
     }
     
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        let lightuponMarker = marker as! LightuponGMSMarker
+        self.mapView.selectMarker(lightuponMarker)
+        return true
+    }
+    
     func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.showsVerticalScrollIndicator = false
         let nibName = UINib(nibName: "FeedSceneCell", bundle:nil)
         tableView.register(nibName, forCellReuseIdentifier: "FeedSceneCell")
     }

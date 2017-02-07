@@ -27,7 +27,7 @@ private extension UIStoryboard {
     }
 }
 
-class MainContainerViewController: UIViewController, MainViewControllerDelegate {
+class MainContainerViewController: UIViewController, MainViewControllerDelegate, LoadingAnimationViewDelegate {
     fileprivate let _partyService: PartyService = Injector.sharedInjector.getPartyService()
     
     var storyTellerViewController: StoryTellerViewController!
@@ -35,6 +35,7 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate 
     var menuOpen: Bool = false
     var menuViewController: StoryTellerMenuViewController!
     var shownViewController: UIViewController!
+    var loadingAnimation: LoadingAnimationView!
     
     var _party: Party!
 
@@ -79,7 +80,15 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate 
         addChildViewController(viewController)
         shownViewController = viewController
         viewController.didMove(toParentViewController: self)
-        self.view.splashView()
+        loadingAnimation = LoadingAnimationView.fromNib("LoadingAnimationView")
+        loadingAnimation.initialize(parentView: self)
+        view.addSubview(loadingAnimation)
+        loadingAnimation.animate()
+    }
+    
+    func dismissLoadingView() {
+        loadingAnimation.removeFromSuperview()
+        loadingAnimation = nil
     }
 
     override func didReceiveMemoryWarning() {

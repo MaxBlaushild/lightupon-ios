@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class SearchService: Service {
+class SearchService: NSObject {
     
     private let _apiAmbassador:AmbassadorToTheAPI
     
@@ -18,7 +18,7 @@ class SearchService: Service {
     }
     
     func findUsers(query: String, callback: @escaping ([User]) -> Void) {
-        _apiAmbassador.get("\(apiURL)/users?full_name=\(query)", success: { response in
+        _apiAmbassador.get("/users?full_name=\(query)", success: { response in
             let users =  Mapper<User>().mapArray(JSONObject: response.result.value)
             callback(users!)
         })

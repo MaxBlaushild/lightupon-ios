@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TripDetailsViewDelegate, ProfileViewDelegate, ProfileViewCreator {
+class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ProfileViewDelegate, ProfileViewCreator {
     fileprivate let tripsService = Injector.sharedInjector.getTripsService()
     fileprivate let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
     fileprivate let feedService = Injector.sharedInjector.getFeedService()
@@ -20,6 +20,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var xBackButton:XBackButton!
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var litButton: LitButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillAppear(_ animated: Bool) {
         getFeed()
+        litButton.bindLitness()
     }
     
     func createProfileView(user: User) {
@@ -58,6 +60,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.showsVerticalScrollIndicator = false
         let nibName = UINib(nibName: "FeedSceneCell", bundle:nil)
         tableView.register(nibName, forCellReuseIdentifier: "FeedSceneCell")
     }

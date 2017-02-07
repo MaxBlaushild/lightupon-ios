@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FollowService: Service {
+class FollowService: NSObject {
     private let _apiAmbassador:AmbassadorToTheAPI
     
     init(apiAmbassador: AmbassadorToTheAPI){
@@ -16,13 +16,13 @@ class FollowService: Service {
     }
     
     func follow(user: User, callback: @escaping () -> Void) {
-        _apiAmbassador.post("\(apiURL)/users/\(user.id!)/follow", parameters: ["":"" as AnyObject], success: { response in
+        _apiAmbassador.post("/users/\(user.id!)/follow", parameters: ["":"" as AnyObject], success: { response in
             callback()
         })
     }
     
     func unfollow(user: User, callback: @escaping () -> Void) {
-        _apiAmbassador.delete("\(apiURL)/users/\(user.id!)/follow", success: { response in
+        _apiAmbassador.delete("/users/\(user.id!)/follow", success: { response in
             callback()
         })
     }

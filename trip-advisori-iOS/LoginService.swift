@@ -10,13 +10,16 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Locksmith
+import UserNotifications
 
-class LoginService: Service {
+class LoginService: NSObject {
     
     fileprivate let _authService: AuthService
+    fileprivate let _notificationService: NotificationService
     
-    init(authService: AuthService) {
-      _authService = authService
+    init(authService: AuthService, notificationService: NotificationService) {
+        _authService = authService
+        _notificationService = notificationService
     }
     
     func upsertUser(_ profile: FacebookProfile, callback: @escaping () -> Void) {
@@ -39,8 +42,9 @@ class LoginService: Service {
             self._authService.setToken(token)
             self._authService.setFacebookId(profile.id!)
                 
-            callback()
-
+            self._notificationService.requestNotificicationAuthorization(complete: {
+                callback()
+            })
         }
     }
 }

@@ -8,27 +8,88 @@
 
 import UIKit
 
+protocol TripDetailsViewControllerDelegate {
+    func onDismissed () -> Void
+    func onSceneChanged (_ scene: Scene) -> Void
+}
+
 class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, ProfileViewCreator, ProfileViewDelegate {
     private let tripsService = Injector.sharedInjector.getTripsService()
-    private let _tripId: Int
+    private var _tripId: Int!
+    private var _trip: Trip!
     
     private var cardViewControllers: [CardViewController] = [CardViewController]()
     private var overlay:UIView!
+    private var beltOverlay:BeltOverlayView!
     private var constellationPoints: [UIView] = [UIView]()
     private var currentIndex: Int = 0
     
     var profileView: ProfileView!
     var xBackButton:XBackButton!
     
+    var tripDelegate: TripDetailsViewControllerDelegate?
+    
     init(tripId: Int) {
         _tripId = tripId
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        getTrip()
+        addBeltOverlay()
     }
     
     init(scene: Scene) {
         _tripId = scene.tripId!
         currentIndex = scene.sceneOrder! - 1
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        getTrip()
+        addBeltOverlay()
+        beltOverlay.bindView(scene: scene, owner: (scene.trip?.owner!)!, card: scene.cards[0])
+    }
+    
+    init() {
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        addBeltOverlay()
+    }
+    
+    func setBeltOverlay(newHeight: CGFloat) {
+        self.beltOverlay.frame.origin.y = newHeight
+    }
+    
+    func setOverlayHeight(newHeight: CGFloat) {
+        self.overlay.frame.origin.y = newHeight
+    }
+    
+    func setStartingOverlayHeight() {
+        overlay.frame.origin.y = ((view.frame.height / 2) * 0.8) - 65
+    }
+    
+    func setOverlayAlpha(alpha: CGFloat) {
+        overlay.alpha = alpha
+    }
+    
+    func setBottomViewHeight(newHeight: CGFloat) {
+        if let topViewController = viewControllers?[0] as? CardViewController {
+            topViewController.setBottomViewHeight(newHeight: newHeight)
+        }
+    }
+    
+    func imageHeight() -> CGFloat {
+        return view.frame.height / 2
+    }
+    
+    func addBeltOverlay() {
+        beltOverlay = BeltOverlayView.fromNib()
+        beltOverlay.frame = CGRect(x: 0, y: view.frame.height - ((view.frame.height / 2) * 0.8 ) - 65, width: view.frame.width, height: 70)
+        beltOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        view.addSubview(beltOverlay)
+    }
+    
+    func bindScene(scene: Scene) {
+        clearConstellations()
+        _tripId = scene.tripId!
+        currentIndex = scene.sceneOrder! - 1
+        getTrip()
+        beltOverlay.bindView(scene: scene, owner: (scene.trip?.owner!)!, card: scene.cards[0])
+        
     }
     
     required init?(coder: NSCoder) {
@@ -37,8 +98,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getTrip()
-        addOverlay()
+        addOverlays()
         placeBackButton()
         // Do any additional setup after loading the view.
     }
@@ -48,7 +108,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         // Dispose of any resources that can be recreated.
     }
     
-    func addOverlay() {
+    func addOverlays() {
         overlay = UIView()
         overlay.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 70)
         overlay.backgroundColor = UIColor.black.withAlphaComponent(0.6)
@@ -66,6 +126,10 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         overlay.addSubview(backButton)
     }
     
+    func placeStartTripButton() {
+        
+    }
+    
     func getTrip() {
         tripsService.getTrip(_tripId, callback: self.setCardViewControllers)
     }
@@ -73,9 +137,14 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     func dismissView(sender: AnyObject) {
        view.removeFromSuperview()
        removeFromParentViewController()
+        
+        if delegate != nil {
+            tripDelegate?.onDismissed()
+        }
     }
     
     func setCardViewControllers(trip: Trip) {
+        _trip = trip
         cardViewControllers = trip.scenes.map({ scene in
             let viewController = CardViewController(card: scene.cards[0], owner: trip.owner!, scene: scene)
             viewController.delegate = self
@@ -90,6 +159,19 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         jumpToSelectedScene()
     }
     
+    func clearConstellations() {
+        constellationPoints.forEach({ view in
+            view.removeFromSuperview()
+        })
+    }
+    
+    func setDrawerMode() {
+        setBeltOverlay(newHeight: 0.0)
+        setOverlayHeight(newHeight: 0.0)
+        setOverlayAlpha(alpha: 0.0)
+        
+    }
+
     func jumpToSelectedScene() {
         let vc = cardViewControllers[currentIndex]
         setViewControllers([vc], direction: .forward, animated: true, completion: nil)
@@ -182,6 +264,12 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         }
         activateConstellation(constellationPoints[currentIndex])
         deactivateConstellation(constellationPoints[previousIndex])
+        let currentScene = _trip.scenes[currentIndex]
+        beltOverlay.bindView(scene: currentScene, owner: _trip!.owner!, card: currentScene.cards[0])
+        
+        if tripDelegate != nil {
+            tripDelegate?.onSceneChanged(_trip.scenes[currentIndex])
+        }
     
     }
 

@@ -9,6 +9,8 @@
 import UIKit
 
 class MapSceneCell: UICollectionViewCell {
+    
     @IBOutlet weak var MapSceneImage: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
     
 }

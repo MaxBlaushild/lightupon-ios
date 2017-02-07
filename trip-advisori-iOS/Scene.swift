@@ -30,6 +30,7 @@ class Scene: NSObject, Mappable {
     var constellationPoint: ConstellationPoint?
     var comments: [Comment] = [Comment]()
     var liked: Bool?
+    var image: UIImage?
     
     func mapping(map: Map) {
         id                 <- map["ID"]
@@ -53,6 +54,12 @@ class Scene: NSObject, Mappable {
     }
     
     required init?(map: Map) {}
+    
+    var location: Location {
+        get {
+            return Location(longitude: self.longitude!, latitude: self.latitude!)
+        }
+    }
     
     func prettyTimeSinceCreation() -> String {
         let yearsSince = self.createdAt!.yearsSince()

@@ -8,6 +8,7 @@
 
 import Foundation
 import CBZSplashView
+import PocketSVG
 
 extension UIView {
     func splashView() {
@@ -16,5 +17,11 @@ extension UIView {
         splashView?.animationDuration = 3
         self.addSubview(splashView!)
         splashView?.startAnimation()
+
+        
+        
+        
+        
+        
     }
 }

@@ -12,7 +12,7 @@ enum Litness {
     case lit, notLit
 }
 
-class LitService: Service {
+class LitService: NSObject {
     
     private let _apiAmbassador:AmbassadorToTheAPI
     private let _currentLocationService: CurrentLocationService
@@ -30,7 +30,7 @@ class LitService: Service {
             "Longitude": _currentLocationService.longitude
         ]
         
-        _apiAmbassador.post(apiURL + "/light", parameters: location as [String : AnyObject], success: { response in
+        _apiAmbassador.post("/light", parameters: location as [String : AnyObject], success: { response in
             self.toggleLitness()
             successCallback()
         })
@@ -42,7 +42,7 @@ class LitService: Service {
             "Longitude": _currentLocationService.longitude
         ]
         
-        _apiAmbassador.post(apiURL + "/extinguish", parameters: location as [String : AnyObject], success: { response in
+        _apiAmbassador.post("/extinguish", parameters: location as [String : AnyObject], success: { response in
             self.toggleLitness()
             successCallback()
         })

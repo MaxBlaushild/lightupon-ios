@@ -23,6 +23,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var buttonBarView: UIView!
     @IBOutlet weak var userCollectionView: UICollectionView!
     @IBOutlet weak var resultsButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,56 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         watchForKeyTouch()
         
         styleBorders()
+        makeKeyboardLeave()
+    }
+    
+    func makeKeyboardLeave() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dissmissKeyboard))
+        tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        animateInCancelButton()
+        return true
+    }
+    
+    func animateInCancelButton() {
+        let offset = self.cancelButton.frame.width + 10
+        UIView.animate(withDuration: 0.5, animations: {
+            self.searchBar.frame = CGRect(
+                x: self.searchBar.frame.origin.x,
+                y: self.searchBar.frame.origin.y,
+                width: self.searchBar.frame.width - offset,
+                height: self.searchBar.frame.height
+            )
+            self.cancelButton.frame.origin.x = self.cancelButton.frame.origin.x - offset
+        })
+    }
+
+    @IBAction func cancel(_ sender: Any) {
+        resetResults()
+        clearTextField()
+        dismissKeyboard()
+    }
+    
+    func resetResults() {
+        _users = [User]()
+        userCollectionView.reloadData()
+        self.view.endEditing(true)
+    }
+    
+    func clearTextField() {
+        searchBar.text = ""
+    }
+    
+    func dissmissKeyboard(sender: UITapGestureRecognizer) {
+        dismissKeyboard()
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     func styleBorders() {

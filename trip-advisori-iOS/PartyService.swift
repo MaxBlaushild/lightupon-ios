@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class PartyService: Service {
+class PartyService: NSObject {
     
     private let _apiAmbassador:AmbassadorToTheAPI
     
@@ -22,7 +22,7 @@ class PartyService: Service {
             "": ""
         ]
         
-        _apiAmbassador.post(apiURL + "/parties/\(passcode)/users", parameters: parameters as [String : AnyObject], success: { response in
+        _apiAmbassador.post("/parties/\(passcode)/users", parameters: parameters as [String : AnyObject], success: { response in
             if (response.response!.statusCode == 200) {
                 successCallback()
             } else {
@@ -32,26 +32,26 @@ class PartyService: Service {
     }
     
     func startNextScene(partyID: Int, callback: @escaping () -> Void) {
-        _apiAmbassador.get(apiURL + "/parties/\(partyID)/nextScene", success: { response in
+        _apiAmbassador.get("/parties/\(partyID)/nextScene", success: { response in
             callback()
         })
      }
     
     func getUsersParty(_ callback: @escaping (Party) -> Void) {
-        _apiAmbassador.get(apiURL + "/parties", success: { response in
+        _apiAmbassador.get("/parties", success: { response in
             let party = Mapper<Party>().map(JSONObject: response.result.value)
             callback(party!)
         })
     }
     
     func leaveParty(_ callback: @escaping () -> Void) {
-        _apiAmbassador.delete(apiURL + "/parties", success: { response in
+        _apiAmbassador.delete("/parties", success: { response in
             callback()
         })
     }
     
     func finishParty(_ callback: @escaping () -> Void) {
-        _apiAmbassador.get(apiURL + "/parties/finishParty", success: { response in
+        _apiAmbassador.get("/parties/finishParty", success: { response in
             callback()
         })
     }
@@ -61,7 +61,7 @@ class PartyService: Service {
             "ID": tripId
         ]
         
-        _apiAmbassador.post(apiURL + "/parties", parameters: parameters as [String : AnyObject], success: { response in
+        _apiAmbassador.post("/parties", parameters: parameters as [String : AnyObject], success: { response in
             callback()
         })
     }

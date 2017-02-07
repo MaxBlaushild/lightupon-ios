@@ -2,14 +2,16 @@ platform :ios, '10.1'
 use_frameworks!
 inhibit_all_warnings!
 
+
 target 'trip-advisori-iOS' do
-  pod 'Alamofire'
-  pod 'GoogleMaps' 
+  pod 'Alamofire' 
   pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
   pod 'Locksmith'
+  pod 'Toucan', :git => 'https://github.com/gavinbunney/Toucan'
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
+  pod 'GoogleMaps'
   pod 'Locksmith'
   pod 'Starscream'
   pod 'ObjectMapper'

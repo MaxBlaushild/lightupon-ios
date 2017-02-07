@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="GothamRounded-Light.otf">
+            <string>GothamRounded-Light</string>
+        </array>
+        <array key="GothamRoundedBook_21018.ttf">
+            <string>GothamRounded-Book</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BeltOverlayView" customModule="Lightupon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oJj-4S-1SM">
+                    <rect key="frame" x="25" y="313.5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="bH0-Xs-USb"/>
+                        <constraint firstAttribute="width" constant="40" id="nj6-EA-36b"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcI-B0-Dc0">
+                    <rect key="frame" x="75" y="315.5" width="43" height="16"/>
+                    <fontDescription key="fontDescription" name="GothamRounded-Light" family="Gotham Rounded" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAS-S1-dVJ">
+                    <rect key="frame" x="75" y="335.5" width="33" height="12"/>
+                    <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHR-Pi-Ppz">
+                    <rect key="frame" x="322" y="315.5" width="33" height="12"/>
+                    <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
+                    <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59902871621621623" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="mcI-B0-Dc0" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-2" id="633-x8-NPt"/>
+                <constraint firstItem="oJj-4S-1SM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="H0G-fp-OzX"/>
+                <constraint firstItem="oJj-4S-1SM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="J9h-6Y-BL3"/>
+                <constraint firstItem="mcI-B0-Dc0" firstAttribute="leading" secondItem="oJj-4S-1SM" secondAttribute="trailing" constant="10" id="cQT-a0-pvB"/>
+                <constraint firstItem="fAS-S1-dVJ" firstAttribute="leading" secondItem="mcI-B0-Dc0" secondAttribute="leading" id="dH4-S0-SZc"/>
+                <constraint firstAttribute="trailing" secondItem="bHR-Pi-Ppz" secondAttribute="trailing" constant="20" id="hJG-ye-YlF"/>
+                <constraint firstItem="bHR-Pi-Ppz" firstAttribute="top" secondItem="mcI-B0-Dc0" secondAttribute="top" id="oWu-0g-sHM"/>
+                <constraint firstItem="fAS-S1-dVJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="2" id="zkJ-eq-pTm"/>
+            </constraints>
+            <connections>
+                <outlet property="cardCaptionLabel" destination="fAS-S1-dVJ" id="48e-N1-oj9"/>
+                <outlet property="createdAtLabel" destination="bHR-Pi-Ppz" id="YOh-wi-tOI"/>
+                <outlet property="profileImageViw" destination="oJj-4S-1SM" id="OMz-yw-GOc"/>
+                <outlet property="sceneNameLabel" destination="mcI-B0-Dc0" id="TJ5-vE-DCY"/>
+            </connections>
+        </view>
+    </objects>
+</document>

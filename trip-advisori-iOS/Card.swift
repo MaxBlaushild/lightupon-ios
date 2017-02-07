@@ -12,7 +12,7 @@ import ObjectMapper
 class Card: NSObject, Mappable {
     var id:Int?
     var cardType:String?
-    var text: String?
+    var text: String = "Caption of the card"
     var imageUrl: String?
     var cardOrder: Int?
     var universal: Bool?

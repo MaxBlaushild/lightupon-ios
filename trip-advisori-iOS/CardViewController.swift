@@ -10,12 +10,14 @@ import UIKit
 
 class CardViewController: UIViewController, ProfileViewCreator {
     
+    var cardView: DefaultCardDetailsView!
+    
     var delegate: ProfileViewCreator!
     
     init(card: Card, owner: User, scene: Scene) {
 
         super.init(nibName: nil, bundle: nil)
-        let cardView = DefaultCardDetailsView.fromNib("DefaultCardDetailsView")
+        cardView = DefaultCardDetailsView.fromNib("DefaultCardDetailsView")
         cardView.initFrom(card: card, owner: owner, scene: scene)
         cardView.frame = self.view.frame
         cardView.delegate = self
@@ -28,6 +30,10 @@ class CardViewController: UIViewController, ProfileViewCreator {
     
     func createProfileView(user: User) {
         delegate.createProfileView(user: user)
+    }
+    
+    func setBottomViewHeight(newHeight: CGFloat) {
+        cardView.setBottomViewHeight(newHeight: newHeight)
     }
 
     override func viewDidLoad() {

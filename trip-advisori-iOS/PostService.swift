@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostService: Service {
+class PostService: NSObject {
     fileprivate let _awsService: AwsService
     fileprivate let _apiAmbassador: AmbassadorToTheAPI
     fileprivate let _litService: LitService
@@ -45,7 +45,7 @@ class PostService: Service {
             "ImageURL": getURL
         ] as [String : Any]
         
-        _apiAmbassador.post(apiURL + url, parameters: selfie as [String : AnyObject], success: { response in
+        _apiAmbassador.post(url, parameters: selfie as [String : AnyObject], success: { response in
             callback()
         })
         

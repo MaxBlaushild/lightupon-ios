@@ -16,7 +16,7 @@ protocol SocketServiceDelegate {
     func onResponseReceived(_ _partyState_: PartyState) -> Void
 }
 
-class SocketService: Service, WebSocketDelegate {
+class SocketService: NSObject, WebSocketDelegate {
     
     fileprivate let _authService: AuthService
     

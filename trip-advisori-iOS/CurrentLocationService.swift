@@ -15,7 +15,7 @@ protocol CurrentLocationServiceDelegate {
     func onHeadingUpdated() -> Void
 }
 
-class CurrentLocationService: Service, CLLocationManagerDelegate, LocationInfo {
+class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo {
     
     fileprivate var _locationManager:CLLocationManager
     fileprivate var _locationStatus:(code: Int, message: String)

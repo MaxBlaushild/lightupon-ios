@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol TripDetailsViewDelegate {
-    func segueToContainer() -> Void
-}
-
 class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     fileprivate let tripsService: TripsService = Injector.sharedInjector.getTripsService()
     fileprivate let partyService: PartyService = Injector.sharedInjector.getPartyService()
@@ -23,9 +19,11 @@ class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionView
     
     internal var delegate: ProfileViewCreator!
     
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var beltOverlay: UIView!
     @IBOutlet weak var cardImageView: UIImageView!
     @IBOutlet weak var ownerImageView: UIImageView!
-    @IBOutlet weak var ownerName: UILabel!
+    @IBOutlet weak var sceneName: UILabel!
     @IBOutlet weak var cardText: UILabel!
     @IBOutlet weak var cardTimestamp: UILabel!
     @IBOutlet weak var commentCollectionView: UICollectionView!
@@ -35,31 +33,43 @@ class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionView
         getCommentsForCard(card)
         bindOwner(owner)
         bindCard(card)
+        bindScene(scene)
         makeProfileClickable()
     }
     
     func makeProfileClickable() {
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(createProfileView))
-        let secondIdenticalRecognizerForSomeReason = UITapGestureRecognizer(target:self, action:#selector(createProfileView))
         ownerImageView.isUserInteractionEnabled = true
         ownerImageView.addGestureRecognizer(tapGestureRecognizer)
-        ownerName.isUserInteractionEnabled = true
-        ownerName.addGestureRecognizer(secondIdenticalRecognizerForSomeReason)
     }
     
     func createProfileView(sender: AnyObject) {
         delegate.createProfileView(user: _owner)
     }
     
+    func setBottomViewHeight(newHeight: CGFloat) {
+        bottomView.frame.origin.y = newHeight
+    }
+    
+    func slideBeltOverlay(newHeight: CGFloat) {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.beltOverlay.frame.origin.y = newHeight
+        })
+    }
+    
     func bindCard(_ card: Card) {
         cardImageView.imageFromUrl(card.imageUrl!)
         cardTimestamp.text = card.prettyTimeSinceCreation()
-        cardText.text = "Where does this come from?"
+        cardText.text = "Caption of the card"
+    }
+    
+    func bindScene(_ scene: Scene) {
+        sceneName.text = "Name of the scene"
     }
     
     func bindOwner(_ owner: User) {
         _owner = owner
-        ownerName.text = owner.fullName
+        
         ownerImageView.imageFromUrl((owner.profilePictureURL)!, success: { img in
             self.ownerImageView.image = img
             self.ownerImageView.makeCircle()

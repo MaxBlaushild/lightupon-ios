@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class CommentService: Service {
+class CommentService: NSObject {
     fileprivate let _apiAmbassador: AmbassadorToTheAPI
     
     init(apiAmbassador: AmbassadorToTheAPI) {
@@ -17,7 +17,7 @@ class CommentService: Service {
     }
     
     func getCommentsFor(scene: Scene, success: @escaping ([Comment]) -> Void) {
-        _apiAmbassador.get("\(apiURL)/scenes/\(scene.id!)/comments", success: { response in
+        _apiAmbassador.get("/scenes/\(scene.id!)/comments", success: { response in
             let comments = Mapper<Comment>().mapArray(JSONObject: response.result.value)
             success(comments!)
         })
@@ -25,7 +25,7 @@ class CommentService: Service {
     }
     
     func getCommentsFor(trip: Trip, success: @escaping ([Comment]) -> Void) {
-        _apiAmbassador.get("\(apiURL)/trips/\(trip.id!)/comments", success: { response in
+        _apiAmbassador.get("/trips/\(trip.id!)/comments", success: { response in
             let comments = Mapper<Comment>().mapArray(JSONObject: response.result.value)
             success(comments!)
         })
@@ -33,7 +33,7 @@ class CommentService: Service {
     }
     
     func getCommentsFor(card: Card, success : @escaping ([Comment]) -> Void) {
-        _apiAmbassador.get("\(apiURL)/cards/\(card.id!)/comments", success: { response in
+        _apiAmbassador.get("/cards/\(card.id!)/comments", success: { response in
             let comments = Mapper<Comment>().mapArray(JSONObject: response.result.value)
             success(comments!)
         })

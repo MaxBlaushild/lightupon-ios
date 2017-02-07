@@ -12,7 +12,7 @@ import Alamofire
 import ObjectMapper
 import Locksmith
 
-class AwsService: Service {
+class AwsService: NSObject {
     fileprivate let _apiAmbassador: AmbassadorToTheAPI
     fileprivate let _currentLocationService: CurrentLocationService
     fileprivate let _extension: String = "jpg"
@@ -28,7 +28,7 @@ class AwsService: Service {
         let paramaters = ["name": "\(name).\(_extension)",
                           "type": type]
         
-        _apiAmbassador.post(apiURL + "/admin/assets/uploadUrls", parameters: paramaters as [String : AnyObject], success: { response in
+        _apiAmbassador.post("/admin/assets/uploadUrls", parameters: paramaters as [String : AnyObject], success: { response in
             if (response.response!.statusCode == 202) {
                 let lightuponResponse = Mapper<LightuponResponse>().map(JSONObject: response.result.value)
                 let url = lightuponResponse?.message

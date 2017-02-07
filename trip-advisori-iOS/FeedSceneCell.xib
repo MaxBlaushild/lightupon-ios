@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="GothamRounded-Book.otf">
-            <string>GothamRounded-Book</string>
+        <array key="GothamRounded-Light.otf">
+            <string>GothamRounded-Light</string>
         </array>
         <array key="GothamRounded-Medium.otf">
             <string>GothamRounded-Medium</string>
         </array>
-        <array key="GothamRoundedLight_21020.ttf">
-            <string>GothamRounded-Light</string>
+        <array key="GothamRoundedBook_21018.ttf">
+            <string>GothamRounded-Book</string>
         </array>
     </customFonts>
     <objects>
@@ -31,6 +31,38 @@
                 <rect key="frame" x="0.0" y="0.0" width="453" height="572"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6V3-2X-lV2" userLabel="middleView">
+                        <rect key="frame" x="0.0" y="60" width="453" height="453"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fs2-id-k5f">
+                                <rect key="frame" x="0.0" y="0.0" width="453" height="453"/>
+                            </imageView>
+                            <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zzf-zm-c1z" userLabel="BlackView">
+                                <rect key="frame" x="0.0" y="0.0" width="453" height="453"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zj6-Z1-sXu" customClass="TitleLabel" customModule="trip_advisori_iOS" customModuleProvider="target">
+                                <rect key="frame" x="18" y="413" width="42" height="22"/>
+                                <fontDescription key="fontDescription" name="GothamRounded-Light" family="Gotham Rounded" pointSize="22"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="zj6-Z1-sXu" secondAttribute="bottom" constant="18" id="3Ap-vs-4WR"/>
+                            <constraint firstItem="zj6-Z1-sXu" firstAttribute="leading" secondItem="6V3-2X-lV2" secondAttribute="leading" constant="18" id="Cdq-DZ-Dso"/>
+                            <constraint firstAttribute="trailing" secondItem="fs2-id-k5f" secondAttribute="trailing" id="FEx-Xd-SUk"/>
+                            <constraint firstItem="fs2-id-k5f" firstAttribute="leading" secondItem="6V3-2X-lV2" secondAttribute="leading" id="KPG-dN-92c"/>
+                            <constraint firstItem="zzf-zm-c1z" firstAttribute="leading" secondItem="6V3-2X-lV2" secondAttribute="leading" id="MoE-pr-daf"/>
+                            <constraint firstItem="fs2-id-k5f" firstAttribute="top" secondItem="6V3-2X-lV2" secondAttribute="top" id="RFN-cS-Ra3"/>
+                            <constraint firstAttribute="width" secondItem="6V3-2X-lV2" secondAttribute="height" multiplier="1:1" id="Rhj-0u-HZv"/>
+                            <constraint firstAttribute="bottom" secondItem="fs2-id-k5f" secondAttribute="bottom" id="USX-Nq-KiO"/>
+                            <constraint firstItem="zzf-zm-c1z" firstAttribute="top" secondItem="6V3-2X-lV2" secondAttribute="top" id="Vwx-mr-qrf"/>
+                            <constraint firstAttribute="trailing" secondItem="zzf-zm-c1z" secondAttribute="trailing" id="Z3A-Wf-1xw"/>
+                            <constraint firstAttribute="bottom" secondItem="zzf-zm-c1z" secondAttribute="bottom" id="iiy-Qt-r99"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kys-wt-HVJ" userLabel="userDetailsBar">
                         <rect key="frame" x="0.0" y="0.0" width="453" height="60"/>
                         <subviews>
@@ -122,38 +154,6 @@
                             <constraint firstItem="w3m-Oj-TqS" firstAttribute="centerY" secondItem="gs4-jj-jsa" secondAttribute="centerY" id="hgV-9p-eF1"/>
                             <constraint firstAttribute="height" constant="60" id="tyd-Cm-YL5"/>
                             <constraint firstItem="w3m-Oj-TqS" firstAttribute="leading" secondItem="Ja1-ML-kml" secondAttribute="trailing" constant="20" id="zI4-Yj-VIA"/>
-                        </constraints>
-                    </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6V3-2X-lV2" userLabel="middleView">
-                        <rect key="frame" x="0.0" y="60" width="453" height="453"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fs2-id-k5f">
-                                <rect key="frame" x="0.0" y="0.0" width="453" height="453"/>
-                            </imageView>
-                            <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zzf-zm-c1z" userLabel="BlackView">
-                                <rect key="frame" x="0.0" y="0.0" width="453" height="453"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zj6-Z1-sXu" customClass="TitleLabel" customModule="trip_advisori_iOS" customModuleProvider="target">
-                                <rect key="frame" x="18" y="413" width="42" height="22"/>
-                                <fontDescription key="fontDescription" name="GothamRounded-Light" family="Gotham Rounded" pointSize="22"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="zj6-Z1-sXu" secondAttribute="bottom" constant="18" id="3Ap-vs-4WR"/>
-                            <constraint firstItem="zj6-Z1-sXu" firstAttribute="leading" secondItem="6V3-2X-lV2" secondAttribute="leading" constant="18" id="Cdq-DZ-Dso"/>
-                            <constraint firstAttribute="trailing" secondItem="fs2-id-k5f" secondAttribute="trailing" id="FEx-Xd-SUk"/>
-                            <constraint firstItem="fs2-id-k5f" firstAttribute="leading" secondItem="6V3-2X-lV2" secondAttribute="leading" id="KPG-dN-92c"/>
-                            <constraint firstItem="zzf-zm-c1z" firstAttribute="leading" secondItem="6V3-2X-lV2" secondAttribute="leading" id="MoE-pr-daf"/>
-                            <constraint firstItem="fs2-id-k5f" firstAttribute="top" secondItem="6V3-2X-lV2" secondAttribute="top" id="RFN-cS-Ra3"/>
-                            <constraint firstAttribute="width" secondItem="6V3-2X-lV2" secondAttribute="height" multiplier="1:1" id="Rhj-0u-HZv"/>
-                            <constraint firstAttribute="bottom" secondItem="fs2-id-k5f" secondAttribute="bottom" id="USX-Nq-KiO"/>
-                            <constraint firstItem="zzf-zm-c1z" firstAttribute="top" secondItem="6V3-2X-lV2" secondAttribute="top" id="Vwx-mr-qrf"/>
-                            <constraint firstAttribute="trailing" secondItem="zzf-zm-c1z" secondAttribute="trailing" id="Z3A-Wf-1xw"/>
-                            <constraint firstAttribute="bottom" secondItem="zzf-zm-c1z" secondAttribute="bottom" id="iiy-Qt-r99"/>
                         </constraints>
                     </view>
                 </subviews>

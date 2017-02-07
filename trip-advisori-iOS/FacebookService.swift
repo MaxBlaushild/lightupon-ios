@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class FacebookService: Service {
+class FacebookService: NSObject {
     
     fileprivate let queryParams = "fields=id,name,email,first_name,picture.width(800).height(800),cover"
     

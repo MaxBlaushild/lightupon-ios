@@ -12,6 +12,9 @@ import FBSDKLoginKit
 class ProfileViewController: UIViewController, ProfileViewDelegate {
     
     fileprivate let userService: UserService = Injector.sharedInjector.getUserService()
+    
+    var profileView: ProfileView!
+    var litButton: LitButton!
 
     @IBAction func goBack(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: {});
@@ -20,12 +23,25 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        litButton.bindLitness()
+        if let profileView = profileView {
+            profileView.refresh()
+        }
+    }
+    
     func initProfile() {
-        let profileView = ProfileView.fromNib("ProfileView")
+        profileView = ProfileView.fromNib("ProfileView")
+        litButton = LitButton(frame: CGRect(
+            x: self.view.frame.width - 45,
+            y: 32,
+            width: 25,
+            height: 25))
         profileView.frame = view.frame
         profileView.delegate = self
         profileView.initializeView(userService.currentUser)
         view.addSubview(profileView)
+        view.addSubview(litButton)
     }
     
     func onLoggedOut() {

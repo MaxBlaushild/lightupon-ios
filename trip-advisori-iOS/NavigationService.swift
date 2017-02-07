@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-class NavigationService: Service {
+class NavigationService: NSObject {
     
     func adjustBearingForDeviceHeading(_ bearing: CGFloat, heading: Double) -> CGFloat {
         let heading = CGFloat(heading)
