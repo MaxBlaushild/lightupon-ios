@@ -13,7 +13,7 @@ class Trip: NSObject, Mappable {
     var id:Int?
     var latitude: Double?
     var longitude: Double?
-    var title: String?
+    var title: String = ""
     var descriptionText: String?
     var imageUrl: String?
     var estimatedTime: String?
@@ -44,6 +44,11 @@ class Trip: NSObject, Mappable {
     
     required init?(map: Map) {
         
+    }
+    
+    init(title: String, details: String) {
+        self.title = title
+        self.details = details
     }
     
     func prettyTimeSinceCreation() -> String {

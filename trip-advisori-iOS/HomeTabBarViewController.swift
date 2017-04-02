@@ -10,11 +10,12 @@ import UIKit
 import Alamofire
 import Toucan
 
-class HomeTabBarViewController: UITabBarController, UITabBarControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    fileprivate let userService = Injector.sharedInjector.getUserService()
-    fileprivate let postService = Injector.sharedInjector.getPostService()
+class HomeTabBarViewController: UITabBarController, UITabBarControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CameraOverlayDelegate {
+    fileprivate let userService = Services.shared.getUserService()
+    fileprivate let postService = Services.shared.getPostService()
     
     var profileTabBarItem: UIImageView!
+    let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,7 @@ class HomeTabBarViewController: UITabBarController, UITabBarControllerDelegate, 
     
     func styleTabBar() {
         UITabBar.appearance().barTintColor = UIColor.white
-        UITabBar.appearance().tintColor = Colors.basePurple
+        UITabBar.appearance().tintColor = UIColor.basePurple
         tabBar.unselectedItemTintColor = UIColor.iconGrey
         UITabBar.appearance().layer.borderWidth = 0.0
         UITabBar.appearance().clipsToBounds = true
@@ -46,7 +47,7 @@ class HomeTabBarViewController: UITabBarController, UITabBarControllerDelegate, 
             let image = UIImage(data: response.data!)
             let profileItem = self.tabBar.items?.last
             let resizeImage = Toucan(image: image!).resize(profileItem!.image!.size, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse().image.withRenderingMode(.alwaysOriginal)
-            let selectedImage = Toucan(image: image!).resize(profileItem!.image!.size, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 3, borderColor: UIColor.white).resize(profileItem!.image!.size, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 2, borderColor: Colors.basePurple).image.withRenderingMode(.alwaysOriginal)
+            let selectedImage = Toucan(image: image!).resize(profileItem!.image!.size, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 3, borderColor: UIColor.white).resize(profileItem!.image!.size, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 2, borderColor: UIColor.basePurple).image.withRenderingMode(.alwaysOriginal)
             profileItem?.image = resizeImage
             profileItem?.selectedImage = selectedImage
         }
@@ -58,10 +59,15 @@ class HomeTabBarViewController: UITabBarController, UITabBarControllerDelegate, 
         button.center = CGPoint(x:view.center.x , y: button.center.y)
         button.backgroundColor = UIColor.white
         button.addTarget(self, action: #selector(openCameraButton), for: .touchUpInside)
-        button.layer.borderColor = Colors.basePurple.cgColor
+        button.layer.borderColor = UIColor.basePurple.cgColor
         button.layer.borderWidth = 3.0
         button.makeCircle()
         view.addSubview(button)
+    }
+    
+    func onPhotoConfirmed() {
+        dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "TabBarToSceneForm", sender: nil)
     }
     
     override var shouldAutorotate : Bool {
@@ -71,26 +77,16 @@ class HomeTabBarViewController: UITabBarController, UITabBarControllerDelegate, 
     func openCameraButton(sender: AnyObject) {
         
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
-            imagePicker.allowsEditing = false
+            let overlay = CameraOverlay.fromNib("CameraOverlay")
+            overlay.initialize(self, picker: imagePicker)
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
     
-    @objc(imagePickerController:didFinishPickingMediaWithInfo:) func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            postService.createSelfie(image: pickedImage, callback: {
-                self.dismiss(animated: true, completion: nil);
-            })
-        }
-        
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    func onCancelPressed() {
         dismiss(animated: true, completion: nil)
     }
+
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if let _ = viewController as? NotSelectingViewController {
@@ -141,6 +137,5 @@ class HomeTabBarViewController: UITabBarController, UITabBarControllerDelegate, 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 }

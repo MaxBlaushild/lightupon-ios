@@ -1,5 +1,5 @@
 //
-//  Injector.swift
+//  Services.swift
 //  trip-advisori-iOS
 //
 //  Created by Blaushild, Max on 4/29/16.
@@ -8,29 +8,29 @@
 
 import UIKit
 
-class Injector: NSObject {
-    static let sharedInjector: Injector = Injector()
+class Services: NSObject {
+    static let shared: Services = Services()
     
-    fileprivate let _apiAmbassador: AmbassadorToTheAPI
-    fileprivate let _authService: AuthService
-    fileprivate let _tripsService: TripsService
-    fileprivate let _partyService: PartyService
-    fileprivate let _currentLocationService: CurrentLocationService
-    fileprivate let _facebookService: FacebookService
-    fileprivate let _loginService: LoginService
-    fileprivate let _socketService: SocketService
-    fileprivate let _navigationService: NavigationService
-    fileprivate let _litService: LitService
-    fileprivate let _userService: UserService
-    fileprivate let _searchService: SearchService
-    fileprivate let _followService: FollowService
-    fileprivate let _awsService: AwsService
-    fileprivate let _postService: PostService
-    fileprivate let _feedService: FeedService
-    fileprivate let _commentService: CommentService
-    fileprivate let _likeService: LikeService
-    fileprivate let _googleMapsService: GoogleMapsService
-    fileprivate let _notificationService: NotificationService
+    private let _apiAmbassador: AmbassadorToTheAPI
+    private let _authService: AuthService
+    private let _tripsService: TripsService
+    private let _partyService: PartyService
+    private let _currentLocationService: CurrentLocationService
+    private let _facebookService: FacebookService
+    private let _loginService: LoginService
+    private let _socketService: SocketService
+    private let _navigationService: NavigationService
+    private let _litService: LitService
+    private let _userService: UserService
+    private let _searchService: SearchService
+    private let _followService: FollowService
+    private let _awsService: AwsService
+    private let _postService: PostService
+    private let _feedService: FeedService
+    private let _commentService: CommentService
+    private let _likeService: LikeService
+    private let _googleMapsService: GoogleMapsService
+    private let _notificationService: NotificationService
 
     override init(){
         _authService = AuthService()
@@ -39,13 +39,13 @@ class Injector: NSObject {
         _loginService = LoginService(authService: _authService, notificationService: _notificationService)
         _apiAmbassador = AmbassadorToTheAPI(authService: _authService)
         _tripsService = TripsService(apiAmbassador: _apiAmbassador)
-        _partyService = PartyService(apiAmbassador: _apiAmbassador)
         _currentLocationService = CurrentLocationService()
         _litService = LitService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService)
         _searchService = SearchService(apiAmbassador: _apiAmbassador)
         _followService = FollowService(apiAmbassador: _apiAmbassador)
         _userService = UserService(apiAmbassador: _apiAmbassador, litService: _litService, followService: _followService)
-        _socketService = SocketService(authService: _authService)
+        _socketService = SocketService(authService: _authService, currentLocationService: _currentLocationService)
+        _partyService = PartyService(apiAmbassador: _apiAmbassador, socketService: _socketService)
         _navigationService = NavigationService()
         _awsService = AwsService(apiAmbassador: _apiAmbassador, currentLocationService:_currentLocationService)
         _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, litService: _litService, currentLocationService: _currentLocationService)

@@ -3,7 +3,7 @@ use_frameworks!
 inhibit_all_warnings!
 
 
-target 'trip-advisori-iOS' do
+target 'Lightupon' do
   pod 'Alamofire' 
   pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
   pod 'Locksmith'

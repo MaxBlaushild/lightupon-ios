@@ -8,10 +8,10 @@
 
 import UIKit
 
-class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ProfileViewDelegate, ProfileViewCreator {
-    fileprivate let tripsService = Injector.sharedInjector.getTripsService()
-    fileprivate let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
-    fileprivate let feedService = Injector.sharedInjector.getFeedService()
+class FeedViewController: TripModalPresentingViewController, UITableViewDelegate, UITableViewDataSource, ProfileViewDelegate, ProfileViewCreator {
+    fileprivate let tripsService = Services.shared.getTripsService()
+    fileprivate let currentLocationService = Services.shared.getCurrentLocationService()
+    fileprivate let feedService = Services.shared.getFeedService()
     
     var _scenes:[Scene] = [Scene]()
     var delegate: MainViewControllerDelegate!
@@ -26,11 +26,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         configureTableView()
         getFeed()
+        
+        litButton.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getFeed()
-        litButton.bindLitness()
     }
     
     func createProfileView(user: User) {

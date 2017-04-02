@@ -29,5 +29,23 @@ class Party: NSObject, Mappable {
     required init?(map: Map) {
         
     }
+    
+    func nextScene() -> Scene? {
+        if let sceneOrder = currentSceneOrder {
+            let nextSceneOrder = sceneOrder + 1
+            if let partyTrip = trip {
+                if partyTrip.scenes.indices.contains(nextSceneOrder) {
+                    return partyTrip.scenes[nextSceneOrder]
+                }
+            }
+        }
+        return nil
+    }
+    
+    var currentScene: Scene {
+        get {
+            return trip!.getSceneWithOrder(currentSceneOrder!)
+        }
+    }
 }
 

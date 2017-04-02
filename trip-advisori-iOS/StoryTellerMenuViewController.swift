@@ -13,9 +13,9 @@ private let reuseIdentifier = "PartyMemberCollectionViewCell"
 
 class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, SocketServiceDelegate, ProfileViewDelegate {
     
-    fileprivate let partyService: PartyService = Injector.sharedInjector.getPartyService()
-    fileprivate let userService: UserService = Injector.sharedInjector.getUserService()
-    fileprivate let socketService: SocketService = Injector.sharedInjector.getSocketService()
+    fileprivate let partyService: PartyService = Services.shared.getPartyService()
+    fileprivate let userService: UserService = Services.shared.getUserService()
+    fileprivate let socketService: SocketService = Services.shared.getSocketService()
 
     @IBOutlet weak var partyMemberCollectionView: UICollectionView!
     @IBOutlet weak var profilePicture: UIImageView!
@@ -71,13 +71,13 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         partyMemberCollectionView.reloadData()
     }
     
-    func removeUserFromPartyList() {
-        for (index, partyMember) in _partyState.users!.enumerated() {
-            if partyMember.email == userService.currentUser.email {
-                _partyState.users?.remove(at: index)
-            }
-        }
-    }
+//    func removeUserFromPartyList() {
+//        for (index, partyMember) in _partyState.users!.enumerated() {
+//            if partyMember.email == userService.currentUser.email {
+//                _partyState.users?.remove(at: index)
+//            }
+//        }
+//    }
 
     func goBack(){
         dismiss(animated: true, completion: {})
@@ -114,8 +114,9 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        removeUserFromPartyList()
-        return _partyState.users!.count
+//        removeUserFromPartyList()
+//        return _partyState.users!.count
+        return 0
     }
     
     func addXBackButton() {
@@ -131,10 +132,10 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let user: User = _partyState.users![(indexPath as NSIndexPath).row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PartyMemberCollectionViewCell
-        
-        cell.bindCell(user)
+//        let user: User = _partyState.users![(indexPath as NSIndexPath).row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+//
+//        cell.bindCell(user)
         
         return cell
     }

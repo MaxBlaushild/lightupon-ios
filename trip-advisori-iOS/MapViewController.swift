@@ -10,23 +10,37 @@ import UIKit
 import GoogleMaps
 import Alamofire
 
-class MapViewController: UIViewController, GMSMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, TripDetailsViewControllerDelegate {
+class MapViewController: TripModalPresentingViewController,
+                         GMSMapViewDelegate,
+                         UIImagePickerControllerDelegate,
+                         UINavigationControllerDelegate,
+                         UICollectionViewDelegate,
+                         UICollectionViewDataSource,
+                         TripDetailsViewControllerDelegate,
+                         CurrentLocationServiceDelegate,
+                         LightuponGMSMapViewDelegate {
     
     let reuseIdentifier = "MapSceneCell"
     
-    fileprivate let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
-    fileprivate let tripsService = Injector.sharedInjector.getTripsService()
-    fileprivate let feedService = Injector.sharedInjector.getFeedService()
+    private let currentLocationService = Services.shared.getCurrentLocationService()
+    private let tripsService = Services.shared.getTripsService()
+    private let feedService = Services.shared.getFeedService()
+    private let partyService = Services.shared.getPartyService()
     
     var trips:[Trip] = [Trip]()
     var scenes: [Scene] = [Scene]()
+    
     var xBackButton:XBackButton!
+    var compasses:[Compass] = [Compass]()
+    
     var delegate: MainViewControllerDelegate!
     var mapDrawer: TripDetailsViewController!
+    
     var drawerOpen = false
     var drawerHeight: CGFloat = 0.0
     var scrollingUp = false
     var constellationOverlayVisible = false
+    var markerFour: GMSMarker?
     
     @IBOutlet weak var litButton: LitButton!
     @IBOutlet weak var mapView: LightuponGMSMapView!
@@ -38,14 +52,68 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UIImagePickerCont
 
         MapSceneCollectionView.dataSource = self
         MapSceneCollectionView.delegate = self
+        litButton.delegate = self
         configureMapView()
         initDrawer()
+        
+        let visibleRegion = mapView.projection.visibleRegion()
+        let nearleftPosition = visibleRegion.nearLeft
+        let markerOne = GMSMarker(position: nearleftPosition)
+        markerOne.title = "Hello World"
+        markerOne.map = mapView
+        let nearRightPosition = visibleRegion.nearRight
+        let markerTwo = GMSMarker(position: nearRightPosition)
+        markerTwo.title = "Hello World"
+        markerTwo.map = mapView
+        let farLeftPosition = visibleRegion.farLeft
+        let markerThree = GMSMarker(position: farLeftPosition)
+        markerThree.title = "Hello World"
+        markerThree.map = mapView
+        let farRightPosition = visibleRegion.farRight
+        markerFour = GMSMarker(position: farRightPosition)
+        markerFour?.title = "Hello World"
+        markerFour!.map = mapView
+        
+        currentLocationService.registerDelegate(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getTrips()
         getScenes()
-        litButton.bindLitness()
+        getParty()
+    }
+    
+    func getParty() {
+        partyService.getUsersParty(self.onPartyRetreived)
+    }
+    
+    func onPartyRetreived(party: Party?) {
+        if let _ = partyService.currentParty {
+            MapSceneCollectionView.isHidden = true
+            addCompass()
+//            view.bringSubview(toFront: mapView)
+        }
+    }
+    
+    func onLocationUpdated() {
+    
+    }
+    
+    func onHeadingUpdated() {
+        if let marker = markerFour {
+            print(mapView.projection.point(for: marker.position))
+            print(mapView.projection.contains(marker.position))
+        }
+
+    }
+    
+    func addCompass() {
+        let scene = partyService.currentScene()
+        let compass = Compass.fromNib("Compass")
+        let target = scene?.cllocation
+        compass.pointTowards(target: target!)
+        compasses.append(compass)
+        view.addSubview(compass)
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,6 +132,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UIImagePickerCont
     @IBAction func openMenu(_ sender: AnyObject) {
         delegate.toggleRightPanel()
     }
+
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return scenes.count
@@ -206,7 +275,12 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UIImagePickerCont
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedScene = scenes[indexPath.row]
         let marker = mapView.findOrCreateMarker(byScene: selectedScene)
-        mapView.selectMarker(marker!)
+        
+        if let selectedMarker = marker {
+            mapView.selectMarker(selectedMarker)
+        }
+
+        mapView.lockState = .unlocked
         toggleDrawer(selectedScene)
     }
     
@@ -230,14 +304,18 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UIImagePickerCont
     }
 
     func configureMapView() {
-        mapView.camera = GMSCameraPosition.camera(withLatitude: currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
         mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
         mapView.delegate = self
+        mapView.lightuponDelegate = self
+        mapView.centerMap()
     }
     
     func getTrips() {
-        tripsService.getTrips(self.onTripsGotten, latitude: self.currentLocationService.latitude, longitude: self.currentLocationService.longitude)
+        tripsService
+            .getTrips(self.onTripsGotten,
+                              latitude: self.currentLocationService.latitude,
+                              longitude: self.currentLocationService.longitude
+        )
     }
     
     func onTripsGotten(_ _trips_: [Trip]) {
@@ -245,11 +323,22 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UIImagePickerCont
         mapView.bindTrips(trips)
     }
     
-    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {}
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        self.mapView.unselect()
+        self.animateOutDrawer(duration: 0.25)
+        self.mapView.setCompassFrame()
+
+    }
+    
+    func onLocked() {
+        self.mapView.unselect()
+        self.animateOutDrawer(duration: 0.25)
+    }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         let lightuponMarker = marker as! LightuponGMSMarker
         self.mapView.selectMarker(lightuponMarker)
+        self.mapView.lockState = .unlocked
         toggleDrawer(lightuponMarker.scene)
         return true
     }

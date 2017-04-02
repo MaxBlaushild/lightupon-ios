@@ -17,18 +17,14 @@ private extension UIStoryboard {
     class func menuViewController() -> StoryTellerMenuViewController? {
         return mainStoryboard().instantiateViewController(withIdentifier: "StoryTellerMenuViewController") as? StoryTellerMenuViewController
     }
-    
-    class func storyTellerViewController() -> StoryTellerViewController? {
-        return mainStoryboard().instantiateViewController(withIdentifier: "StoryTellerViewController") as? StoryTellerViewController
-    }
-    
+
     class func homeTabBarViewController() -> HomeTabBarViewController? {
         return mainStoryboard().instantiateViewController(withIdentifier: "HomeTabBarViewController") as? HomeTabBarViewController
     }
 }
 
 class MainContainerViewController: UIViewController, MainViewControllerDelegate, LoadingAnimationViewDelegate {
-    fileprivate let _partyService: PartyService = Injector.sharedInjector.getPartyService()
+    fileprivate let _partyService: PartyService = Services.shared.getPartyService()
     
     var storyTellerViewController: StoryTellerViewController!
     var homeTabBarViewController: HomeTabBarViewController!
@@ -41,32 +37,7 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getParty()
-    }
-    
-    func onPartyRetrieved(_ party: Party) {
-        _party = party
-        
-        if (userIsInParty()) {
-            initStoryTeller()
-        } else {
-            initHomeTabBarViewController()
-        }
-    }
-    
-    func userIsInParty() -> Bool {
-        return (_party.id != 0)
-    }
-    
-    func getParty() {
-        _partyService.getUsersParty(self.onPartyRetrieved)
-    }
-    
-    func initStoryTeller() {
-        storyTellerViewController = UIStoryboard.storyTellerViewController()
-        storyTellerViewController.delegate = self
-        showViewController(storyTellerViewController)
-        storyTellerViewController.bindParty(_party)
+        initHomeTabBarViewController()
     }
     
     func initHomeTabBarViewController() {
@@ -101,10 +72,6 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
         
         if (menuShouldOpen) {
             addRightPanelViewController()
-        }
-        
-        if (userIsInParty()) {
-            menuViewController.bindParty(_party)
         }
         
         animateRightPanel(menuShouldOpen)

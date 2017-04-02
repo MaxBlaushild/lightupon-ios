@@ -13,19 +13,13 @@ import ObjectMapper
 
 class PartyState: NSObject, Mappable {
     var nextSceneAvailable: Bool?
-    var scene: Scene?
-    var nextScene: Scene?
-    var users: [User]?
-    var party: Party?
+    var currentSceneOrder: Int?
+    var event: String?
     
     func mapping(map: Map) {
-        
-        
         nextSceneAvailable <- map["NextSceneAvailable"]
-        scene              <- map["Scene"]
-        party              <- map["Party"]
-        users              <- map["Users"]
-        nextScene          <- map["NextScene"]
+        currentSceneOrder  <- map["CurrentSceneOrder"]
+        event              <- map["Event"]
     }
     
     required init?(map: Map) {

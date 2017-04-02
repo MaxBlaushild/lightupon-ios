@@ -9,7 +9,7 @@
 import UIKit
 
 class FeedSceneCell: UITableViewCell {
-    let likeService = Injector.sharedInjector.getLikeService()
+    let likeService = Services.shared.getLikeService()
     
     @IBOutlet weak var tripTitle: UILabel!
     @IBOutlet weak var tripImage: UIImageView!
@@ -29,7 +29,7 @@ class FeedSceneCell: UITableViewCell {
         userName.text = scene.trip?.owner?.fullName
         daysSince.text = scene.prettyTimeSinceCreation()
         tripTitle.text = scene.name
-        location.text = "\(scene.neighborhood!)"
+        location.text = "\(scene.neighborhood)"
         tag = (scene.trip?.id!)!
         _scene = scene
         selectionStyle = .none

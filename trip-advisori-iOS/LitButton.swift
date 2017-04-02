@@ -9,29 +9,29 @@
 import UIKit
 
 class LitButton: UIButton {
-    private let litService = Injector.sharedInjector.getLitService()
+    private let litService = Services.shared.getLitService()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.makeCircle()
-        self.bindLitness()
-        self.addTarget(self, action: #selector(self.toggleLitness), for: .touchUpInside)
-    }
-    
+    var delegate: TripModalPresentingViewController?
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        self.makeCircle()
-        self.bindLitness()
-        self.addTarget(self, action: #selector(self.toggleLitness), for: .touchUpInside)
+        bindLitness()
+        listenForLitStatusChange()
+        addTarget(self, action: #selector(self.toggleLitness), for: .touchUpInside)
+        
     }
     
     func toggleLitness(_ sender: Any) {
         litService.isLit ? extinguish() : light()
     }
     
+    func listenForLitStatusChange() {
+        NotificationCenter.default.addObserver(self, selector: #selector(bindLitness), name: litService.litStatusChangeNotificationName, object: nil)
+    }
+    
     func light() {
-        litService.light(successCallback: self.bindLitness)
+        delegate?.openTripModal()
     }
     
     func extinguish() {
@@ -39,7 +39,8 @@ class LitButton: UIButton {
     }
     
     func bindLitness() {
-        backgroundColor = litService.isLit ? UIColor.gold : Colors.basePurple
+        let color = litService.isLit ? UIColor.gold : UIColor.basePurple
+        setImageTint(imageName: "lit-unfilled", color: color)
     }
 
 }

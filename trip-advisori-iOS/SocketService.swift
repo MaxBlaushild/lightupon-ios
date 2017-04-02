@@ -13,22 +13,25 @@ import ObjectMapper
 import SwiftyJSON
 
 protocol SocketServiceDelegate {
-    func onResponseReceived(_ _partyState_: PartyState) -> Void
+    func onResponseReceived(_ partyState: PartyState) -> Void
 }
 
-class SocketService: NSObject, WebSocketDelegate {
-    
-    fileprivate let _authService: AuthService
+class SocketService: NSObject, WebSocketDelegate, CurrentLocationServiceDelegate {
+    private let _authService: AuthService
+    private let _currentLocationService: CurrentLocationService
     
     fileprivate var _socketPolling: Timer!
     fileprivate var _socket: WebSocket!
 
     internal var delegates:[SocketServiceDelegate] = [SocketServiceDelegate]()
     
-    init(authService: AuthService) {
+    init(authService: AuthService, currentLocationService: CurrentLocationService) {
         _authService = authService
+        _currentLocationService = currentLocationService
         
         super.init()
+        
+        _currentLocationService.registerDelegate(self)
             
         openSocket()
         keepSocketOpen()
@@ -51,6 +54,26 @@ class SocketService: NSObject, WebSocketDelegate {
         )
     }
     
+    func updateLocation() {
+        let location:Location = _currentLocationService.location
+        let jsonLocation = Mapper().toJSONString(location, prettyPrint: true)
+        if _socket != nil {
+            _socket.write(string: jsonLocation!)
+        }
+    }
+    
+    func websocketDidConnect(ws: WebSocket) {
+        updateLocation()
+    }
+    
+    func onLocationUpdated() {
+        updateLocation()
+    }
+    
+    func pokeSocket() {
+        updateLocation()
+    }
+    
     fileprivate func setSocketHeaders() {
         let token = _authService.getToken()
         
@@ -69,6 +92,8 @@ class SocketService: NSObject, WebSocketDelegate {
         if !_socket.isConnected {
             setSocketHeaders()
             _socket.connect()
+        } else {
+            updateLocation()
         }
     }
     

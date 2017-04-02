@@ -65,6 +65,14 @@ class AmbassadorToTheAPI: NSObject {
         
     }
     
+    func patch(_ uri: URLConvertible, parameters:[String:AnyObject], success: NetworkSuccessHandler?) {
+        setHeaders()
+        Alamofire.request("\(apiURL)\(uri)", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            self.processResponse(response, success: success!, URLString: "\(apiURL)\(uri)")
+        }
+        
+    }
+    
     func delete(_ uri: URLConvertible, success: NetworkSuccessHandler?) {
         setHeaders()
         Alamofire.request("\(apiURL)\(uri)", method: .delete, headers: headers).responseJSON { response in
@@ -91,7 +99,7 @@ class AmbassadorToTheAPI: NSObject {
         label.text = "No Internet Connectivity"
         label.font = UIFont(name: Fonts.dosisBold, size: 16)
         label.textColor = UIColor.white
-        label.backgroundColor = Colors.basePurple
+        label.backgroundColor = UIColor.basePurple
         topView?.addSubview(label)
     }
     

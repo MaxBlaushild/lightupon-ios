@@ -22,8 +22,8 @@ private extension UIStoryboard {
 }
 
 class InitialLoadingViewController: UIViewController {
-    fileprivate let authService: AuthService = Injector.sharedInjector.getAuthService()
-    fileprivate let userService: UserService = Injector.sharedInjector.getUserService()
+    fileprivate let authService: AuthService = Services.shared.getAuthService()
+    fileprivate let userService: UserService = Services.shared.getUserService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

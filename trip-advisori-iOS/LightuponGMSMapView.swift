@@ -10,14 +10,150 @@ import UIKit
 import GoogleMaps
 import Alamofire
 
-let selectedZoom: Float = 15.0
+enum LockState {
+    case locked, unlocked
+}
 
-class LightuponGMSMapView: GMSMapView {
-    let googleMapsService = Injector.sharedInjector.getGoogleMapsService()
+protocol LightuponGMSMapViewDelegate {
+    func onLocked() -> Void
+}
+let selectedZoom: Float = 15.0
+let unselectedZoom: Float = 18.0
+
+class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
+    private let googleMapsService = Services.shared.getGoogleMapsService()
+    private let currentLocationService = Services.shared.getCurrentLocationService()
     
-    var markers = [LightuponGMSMarker]()
-    var directions: [GMSPolyline] = [GMSPolyline]()
-    var selectedLightuponMarker: LightuponGMSMarker?
+    private var _initialFrame: CGRect!
+    private var _lockState: LockState
+    private var markers = [LightuponGMSMarker]()
+    private var directions: [GMSPolyline] = [GMSPolyline]()
+    private var lockButton: UIButton!
+    
+    public var selectedLightuponMarker: LightuponGMSMarker?
+    public var lightuponDelegate: LightuponGMSMapViewDelegate?
+    
+    public var lockState: LockState {
+        get {
+            return _lockState
+        }
+        
+        set {
+            _lockState = newValue
+            switch _lockState {
+            case .locked:
+                setLockedState()
+            case .unlocked:
+                setUnlockedState()
+            }
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        _lockState = .locked
+        
+        super.init(coder: aDecoder)
+        
+        currentLocationService.registerDelegate(self)
+        
+        addLockButton()
+        
+        _initialFrame = frame
+        lockState = .locked
+    }
+    
+    func setLockedState() {
+        selectedLightuponMarker?.setNotSelected()
+        settings.scrollGestures = false
+        settings.rotateGestures = false
+        settings.tiltGestures = false
+        settings.zoomGestures = false
+        centerMap()
+        lockButton.setImage(UIImage(named: "locked"), for: .normal)
+        setCompassFrame()
+        
+        if let lightDelegate = lightuponDelegate {
+            lightDelegate.onLocked()
+        }
+    }
+    
+    func setCompassFrame() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.frame = self._initialFrame
+        })
+    }
+    
+    func setUnlockedState() {
+        settings.scrollGestures = true
+        settings.rotateGestures = true
+        settings.tiltGestures = true
+        settings.zoomGestures = true
+        clearDirections()
+        lockButton.setImage(UIImage(named: "unlocked"), for: .normal)
+    }
+    
+    func addLockButton() {
+        lockButton = UIButton()
+        lockButton.backgroundColor = .white
+        lockButton.frame = CGRect(
+            x: frame.width - 70,
+            y: frame.height / 2,
+            width: 50,
+            height: 50
+        )
+        lockButton.addTarget(self, action: #selector(toggleLock), for: .touchUpInside)
+        lockButton.setImage(UIImage(named: "locked"), for: .normal)
+        addSubview(lockButton)
+    }
+    
+    func toggleLock() {
+        lockState = lockState == .locked ? .unlocked : .locked
+    }
+    
+    func onHeadingUpdated() {
+        realignMapView()
+    }
+    
+    func unselect() {
+        if let selectedScene = selectedLightuponMarker {
+            selectedScene.setNotSelected()
+            clearDirections()
+        }
+    }
+    
+    func centerMap() {
+        animate(to: GMSCameraPosition.camera(
+            withLatitude: currentLocationService.latitude,
+            longitude: currentLocationService.longitude,
+            zoom: unselectedZoom
+        ))
+    }
+    
+    func realignMapView() {
+        if lockState == .locked {
+            let heading = currentLocationService.heading
+            self.animate(toBearing: heading)
+        }
+    }
+    
+    func centerMapOnLocation() {
+        let newCenter = createCenteredCameraPostion()
+        self.animate(to: newCenter)
+    }
+    
+    func createCenteredCameraPostion() -> GMSCameraPosition {
+        return GMSCameraPosition.camera(
+            withLatitude: currentLocationService.latitude,
+            longitude: currentLocationService.longitude,
+            zoom: 15,
+            bearing: currentLocationService.heading,
+            viewingAngle: 0
+        )
+    }
+    
+    func onLocationUpdated() {
+        centerMapOnLocation()
+    }
     
     func bindTrips(_ trips: [Trip]) {
         clearMarkers()
@@ -47,7 +183,7 @@ class LightuponGMSMapView: GMSMapView {
     func drawLine(_ path: GMSPath) {
         let singleLine = GMSPolyline(path: path)
         singleLine.strokeWidth = 5
-        singleLine.strokeColor = Colors.basePurple
+        singleLine.strokeColor = UIColor.basePurple
         singleLine.map = self
         directions.append(singleLine)
     }
@@ -59,9 +195,14 @@ class LightuponGMSMapView: GMSMapView {
             let nextSceneIndex = index + 1
             if nextSceneIndex != totalScenes {
                 let nextScene = trip.scenes[nextSceneIndex]
-                googleMapsService.getDirections(origin: currentScene.location, destination: nextScene.location, callback: { path in
-                    self.drawLine(path)
-                })
+                
+                googleMapsService.getDirections(
+                    origin: currentScene.location,
+                    destination:
+                    nextScene.location,
+                    callback: { path in
+                        self.drawLine(path)
+                    })
             }
         }
     }
@@ -92,15 +233,19 @@ class LightuponGMSMapView: GMSMapView {
     }
     
     func selectMarker(_ marker: LightuponGMSMarker) {
-        if selectedLightuponMarker != nil {
-            selectedLightuponMarker?.setNotSelected()
-        }
-        
+        selectedLightuponMarker?.setNotSelected()
         marker.setSelected()
+        centerMapOnScreen()
         selectedLightuponMarker = marker
         clearDirections()
         updateFrame()
         drawDirections()
+    }
+    
+    func centerMapOnScreen() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.frame = UIScreen.main.bounds
+        })
     }
     
     func findOrCreateMarker(byScene scene: Scene)  -> LightuponGMSMarker? {
@@ -110,7 +255,7 @@ class LightuponGMSMapView: GMSMapView {
     
     private func createMarkerSync(scene: Scene) -> LightuponGMSMarker {
         let marker = LightuponGMSMarker(scene: scene)
-        marker.setImages(scene.image!, map: self)
+        marker.setImages()
         marker.setSelected()
         marker.map = self
         return marker
@@ -118,18 +263,16 @@ class LightuponGMSMapView: GMSMapView {
     }
     
     private func placeMarker(scene: Scene) {
-        Alamofire.request(scene.backgroundUrl!, method: .get, parameters: nil).responseJSON { (response) in
-            let image = response.response!.statusCode == 200 ? UIImage(data: response.data!, scale: 1) : UIImage(named: "banner")
-            let marker = LightuponGMSMarker(scene: scene)
-            DispatchQueue.global(qos: .background).async {
-                marker.setImages(image!, map: self)
-                DispatchQueue.main.async {
-                    self.markers.append(marker)
-                    marker.setNotSelected()
-                    marker.map = self
-                }
+        let marker = LightuponGMSMarker(scene: scene)
+        DispatchQueue.global(qos: .background).async {
+            marker.setImages()
+            DispatchQueue.main.async {
+                self.markers.append(marker)
+                marker.setNotSelected()
+                marker.map = self
             }
         }
     }
-
 }
+
+

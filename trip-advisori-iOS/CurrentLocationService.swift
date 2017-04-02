@@ -10,9 +10,9 @@ protocol LocationInfo{
     
 }
 
-protocol CurrentLocationServiceDelegate {
+@objc protocol CurrentLocationServiceDelegate {
     func onLocationUpdated() -> Void
-    func onHeadingUpdated() -> Void
+    @objc optional func onHeadingUpdated() -> Void
 }
 
 class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo {
@@ -84,7 +84,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         self._heading = theHeading
         
         for delegate in delegates {
-            delegate.onHeadingUpdated()
+            if let _ = delegate.onHeadingUpdated?() {}
         }
     }
     

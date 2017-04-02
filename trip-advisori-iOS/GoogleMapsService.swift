@@ -25,4 +25,21 @@ class GoogleMapsService: NSObject {
             }
         }
     }
+    
+    func getAddress(lat: Double, lon: Double, callback: @escaping (Address) -> Void) {
+        let url = "\(baseURL)/geocode/json?latlng=\(lat),\(lon)&key=\(googleMapsApiKey)"
+        
+        Alamofire.request(url, method: .get).responseJSON { response in
+            let parsedData = JSON(response.data as Any)
+            let address = Address()
+            address.streetNumber = parsedData["results"][0]["address_components"][0]["short_name"].string!
+            address.route = parsedData["results"][0]["address_components"][1]["short_name"].string!
+            address.neighborhood = parsedData["results"][0]["address_components"][2]["short_name"].string!
+            address.locality = parsedData["results"][0]["address_components"][3]["short_name"].string!
+            address.googlePlaceId = parsedData["results"][0]["place_id"].string!
+            address.latitude = lat
+            address.longitude = lon
+            callback(address)
+        }
+    }
 }

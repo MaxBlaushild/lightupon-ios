@@ -13,7 +13,7 @@ class TextHero: UIView, IAmCardContents {
     @IBOutlet weak var textHero: UILabel!
     
     func bindCard(_ card: Card) {
-        textHero.text = card.text
+//        textHero.text = card.text
     }
     
     func addFrame() {

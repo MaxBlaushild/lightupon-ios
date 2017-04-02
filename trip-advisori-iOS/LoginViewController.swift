@@ -25,8 +25,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
     }
 
-    fileprivate let  facebookService:FacebookService = Injector.sharedInjector.getFacebookService()
-    fileprivate let loginService:LoginService = Injector.sharedInjector.getLoginService()
+    fileprivate let  facebookService:FacebookService = Services.shared.getFacebookService()
+    fileprivate let loginService:LoginService = Services.shared.getLoginService()
 
     @IBOutlet weak var loginView: FBSDKLoginButton!
     override func viewDidLoad() {

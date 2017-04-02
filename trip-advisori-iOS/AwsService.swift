@@ -42,7 +42,7 @@ class AwsService: NSObject {
     }
     
     func uploadImage(name: String, image: UIImage, callback: @escaping (String) -> Void) {
-        getPutUrl(name: name, type: "image", callback: { url in
+        getPutUrl(name: name, type: "images", callback: { url in
             self.putImage(url: url, image: image, callback: {
                 let getURL = self.getGetURL(putURL: url)
                 callback(getURL)

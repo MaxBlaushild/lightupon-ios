@@ -6,6 +6,9 @@
 //  Copyright © 2016 Blaushild, Max. All rights reserved.
 //
 
+
+// ASGARD
+
 import UIKit
 import GoogleMaps
 
@@ -26,13 +29,13 @@ enum TabBarContext {
 }
 
 class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
-    fileprivate let authService = Injector.sharedInjector.getAuthService()
-    fileprivate let facebookService = Injector.sharedInjector.getFacebookService()
-    fileprivate let userService = Injector.sharedInjector.getUserService()
-    fileprivate let followService = Injector.sharedInjector.getFollowService()
-    fileprivate let feedService = Injector.sharedInjector.getFeedService()
-    fileprivate let tripService = Injector.sharedInjector.getTripsService()
-    fileprivate let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
+    fileprivate let authService = Services.shared.getAuthService()
+    fileprivate let facebookService = Services.shared.getFacebookService()
+    fileprivate let userService = Services.shared.getUserService()
+    fileprivate let followService = Services.shared.getFollowService()
+    fileprivate let feedService = Services.shared.getFeedService()
+    fileprivate let tripService = Services.shared.getTripsService()
+    fileprivate let currentLocationService = Services.shared.getCurrentLocationService()
 
     @IBOutlet weak var tabBar: UIView!
     @IBOutlet weak var actionPackedButton: UIButton!
@@ -48,10 +51,15 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     @IBOutlet weak var numberOfFollowersLabel: UILabel!
     @IBOutlet weak var numberOfTripsLabel: UILabel!
     @IBOutlet weak var mapView: LightuponGMSMapView!
+    @IBOutlet weak var fadedCoolGuyView: UIView!
+    @IBOutlet weak var userNoochView: UIView!
     
     fileprivate var profileContext: ProfileContext = ProfileContext.isUser
     fileprivate var tabBarContext: TabBarContext = TabBarContext.lights
     fileprivate var actionPackButtonHandler:(() -> Void)!
+    fileprivate var drawerIsOpen = false
+    fileprivate var scrollingUp = false
+    fileprivate var drawerHeight: CGFloat = 0.0
     
     fileprivate var _user: User!
     fileprivate var _scenes: [Scene] = [Scene]()
@@ -64,12 +72,90 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     
     @nonobjc func initializeView(_ user: User) {
         getUser(user.id!)
-        tabBar.layer.addBorder(edge: .bottom, color: Colors.mediumGrey, thickness: 1.0)
         configureTableView()
         configureMapView()
         centerMap()
         setTabBar()
         style()
+        makeViewsScrollUp()
+        makeViewScrollDown()
+        makeTabBarDraggable()
+    }
+    
+    func makeTabBarDraggable() {
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(navViewDragged(gestureRecognizer:)))
+        tabBar.addGestureRecognizer(gesture)
+        tabBar.isUserInteractionEnabled = true
+    }
+    
+    func navViewDragged(gestureRecognizer: UIPanGestureRecognizer){
+        let translation = gestureRecognizer.translation(in: self)
+        let translationY = drawerIsOpen ? fullnameLabel.frame.origin.y + translation.y: fadedCoolGuyView.frame.height + translation.y
+        let newOrigin = CGPoint(x: gestureRecognizer.view!.frame.origin.x, y: translationY)
+        
+        if gestureRecognizer.state == .ended {
+            let height = scrollingUp ? fullnameLabel.frame.origin.y : frame.height / 2
+            UIView.animate(withDuration: 0.25, animations: {
+                self.userNoochView.frame.origin.y = height
+                self.drawerIsOpen = self.scrollingUp
+            })
+        }
+        
+        if gestureRecognizer.state == UIGestureRecognizerState.began || gestureRecognizer.state == UIGestureRecognizerState.changed {
+            print(newOrigin.y)
+            if (newOrigin.y > fullnameLabel.frame.origin.y) && (newOrigin.y < frame.height / 2) {
+                scrollingUp = drawerHeight - newOrigin.y > 0
+                drawerHeight = newOrigin.y
+                userNoochView.frame.origin.y = newOrigin.y
+            }
+        }
+    }
+    
+    func makeViewsScrollUp() {
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector(onDrawerEngaged))
+        mapView.addGestureRecognizer(gesture)
+        tableView.addGestureRecognizer(gesture)
+    }
+    
+    func makeViewScrollDown() {
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector(onCoolGuyViewEngaged))
+        fadedCoolGuyView.addGestureRecognizer(gesture)
+    }
+    
+    func onCoolGuyViewEngaged() {
+        if drawerIsOpen {
+            drawerIsOpen = false
+            scrollDown()
+        }
+    }
+    
+    func scrollDown() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.userNoochView.frame = CGRect(
+                x: 0,
+                y: self.frame.height / 2,
+                width: self.frame.width,
+                height: self.frame.height - self.fullnameLabel.frame.origin.y
+            )
+        })
+    }
+    
+    func onDrawerEngaged() {
+        if !drawerIsOpen {
+            scrollUp()
+            drawerIsOpen = true
+        }
+    }
+    
+    func scrollUp() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.userNoochView.frame = CGRect(
+                x: 0,
+                y: self.fullnameLabel.frame.origin.y,
+                width: self.frame.width,
+                height: self.frame.height - self.fullnameLabel.frame.origin.y
+            )
+        })
     }
     
     func configureMapView() {
@@ -119,7 +205,7 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     }
     
     func setTabBarButtonToActive(_ button: UIButton) {
-        button.setTitleColor(Colors.basePurple, for: .normal)
+        button.setTitleColor(UIColor.basePurple, for: .normal)
     }
     
     func resetTabColors() {
@@ -186,7 +272,7 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     func setPendingState() {
         actionPackButtonHandler = {}
         actionPackedButton.setTitle("PENDING", for: UIControlState())
-        actionPackedButton.backgroundColor = Colors.basePurple
+        actionPackedButton.backgroundColor = UIColor.basePurple
         actionPackedButton.layer.borderWidth = 0.0
         
     }
@@ -194,14 +280,14 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     func setIsUserState() {
         actionPackButtonHandler = logout
         actionPackedButton.setTitle("LOGOUT", for: UIControlState())
-        actionPackedButton.backgroundColor = Colors.basePurple
+        actionPackedButton.backgroundColor = UIColor.basePurple
         actionPackedButton.layer.borderWidth = 0.0
     }
     
     func setFollowingState() {
         actionPackButtonHandler = unfollow
         actionPackedButton.setTitle("UNFOLLOW", for: UIControlState())
-        actionPackedButton.backgroundColor = Colors.basePurple
+        actionPackedButton.backgroundColor = UIColor.basePurple
         actionPackedButton.layer.borderWidth = 0.0
     }
     
@@ -241,6 +327,7 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     func style() {
         styleCircleImage()
         styleBlurImage()
+        tabBar.layer.addBorder(edge: .bottom, color: UIColor.mediumGrey, thickness: 1.0)
     }
     
     func styleCircleImage() {
@@ -250,13 +337,8 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     
     func styleBlurImage() {
         let blurView = BlurView(onClick: {})
-        blurView.frame = CGRect(x:0,y:0,width:frame.width,height:frame.height/2)
-        addSubview(blurView)
-        bringSubview(toFront: circleImage)
-        bringSubview(toFront: fullnameLabel)
-        bringSubview(toFront: locationLabel)
-        bringSubview(toFront: followerSection)
-        bringSubview(toFront: buttonView)
+        blurView.frame = fadedCoolGuyView.frame
+        fadedCoolGuyView.insertSubview(blurView, aboveSubview: blurImage)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -291,10 +373,20 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
         addSubview(tripDetailsViewController.view)
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        onDrawerEngaged()
+    }
+    
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         let lightuponMarker = marker as! LightuponGMSMarker
         self.mapView.selectMarker(lightuponMarker)
         return true
+    }
+    
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        DispatchQueue.main.async {
+            self.onDrawerEngaged()
+        }
     }
     
     func configureTableView() {

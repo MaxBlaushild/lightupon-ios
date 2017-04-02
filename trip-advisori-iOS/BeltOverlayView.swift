@@ -17,7 +17,7 @@ class BeltOverlayView: UIView {
     
     func bindView(scene: Scene, owner: User, card: Card) {
         sceneNameLabel.text = scene.name
-        cardCaptionLabel.text = card.text
+        cardCaptionLabel.text = card.caption
         createdAtLabel.text = card.prettyTimeSinceCreation()
         
         profileImageViw.imageFromUrl(owner.profilePictureURL!, success: { img in

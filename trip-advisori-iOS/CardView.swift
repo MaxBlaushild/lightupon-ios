@@ -24,16 +24,16 @@ class CardView: MDCSwipeToChooseView {
     }
     
     static func getCardContents(_ nibId: String) -> IAmCardContents {
-        switch nibId {
-        case "TextHero":
+//        switch nibId {
+//        case "TextHero":
+//            return TextHero.fromNib("TextHero")
+//        case "PictureHero":
+//            return PictureHero.fromNib("PictureHero")
+//        case "ComboTitle": break
+//            return ComboTitle.fromNib("ComboTitle")
+//        default:
             return TextHero.fromNib("TextHero")
-        case "PictureHero":
-            return PictureHero.fromNib("PictureHero")
-        case "ComboTitle":
-            return ComboTitle.fromNib("ComboTitle")
-        default:
-            return TextHero.fromNib("TextHero")
-        }
+//        }
     }
     
     static func createCardContents(_ card: Card) -> UIView {

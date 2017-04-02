@@ -11,8 +11,8 @@ import UIKit
 private let reuseIdentifier = "PartyMemberCollectionViewCell"
 
 class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ProfileViewDelegate, UITextFieldDelegate {
-    fileprivate let _searchService = Injector.sharedInjector.getSearchService()
-    fileprivate let _followService = Injector.sharedInjector.getFollowService()
+    fileprivate let _searchService = Services.shared.getSearchService()
+    fileprivate let _followService = Services.shared.getFollowService()
     
     fileprivate var _users = [User]()
     
@@ -87,10 +87,9 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     func dismissKeyboard() {
         view.endEditing(true)
     }
-    
     func styleBorders() {
-        buttonBarView.layer.addBorder(edge: UIRectEdge.top, color: Colors.lightGray, thickness: 0.5)
-        buttonBarView.layer.addBorder(edge: UIRectEdge.bottom, color: Colors.lightGray, thickness: 0.5)
+        buttonBarView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.lightGray, thickness: 0.5)
+        buttonBarView.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.lightGray, thickness: 0.5)
         resultsButton.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.black, thickness: 2.0)
     }
     
@@ -162,7 +161,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     func giveOffsetBorder(cell: PartyMemberCollectionViewCell) {
         let border = CALayer()
         border.frame = CGRect.init(x: 94.5, y: cell.frame.height - 0.5, width: cell.frame.width - 94.5, height: 0.5)
-        border.backgroundColor = Colors.lightGray.cgColor
+        border.backgroundColor = UIColor.lightGray.cgColor
         cell.layer.addSublayer(border)
     }
     

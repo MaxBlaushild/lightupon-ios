@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 
 class Follow: NSObject, Mappable {
-    private let userService = Injector.sharedInjector.getUserService()
+    private let userService = Services.shared.getUserService()
     
     var followedUserID: Int?
     var followingUserID: Int?

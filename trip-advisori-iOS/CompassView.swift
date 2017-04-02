@@ -12,16 +12,16 @@ import GoogleMaps
 import Darwin
 
 @objc protocol CompassViewDelegate {
-    func goToNextScene() -> Void
+    func openCards() -> Void
 }
 
-class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, SocketServiceDelegate  {
+class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, PartyServiceDelegate  {
     
-    fileprivate let currentLocationService = Injector.sharedInjector.getCurrentLocationService()
-    fileprivate let navigationService = Injector.sharedInjector.getNavigationService()
-    fileprivate let socketService = Injector.sharedInjector.getSocketService()
+    fileprivate let currentLocationService = Services.shared.getCurrentLocationService()
+    fileprivate let navigationService = Services.shared.getNavigationService()
+    fileprivate let partyService = Services.shared.getPartyService()
     
-    @IBOutlet weak var sceneMapView: GMSMapView!
+    @IBOutlet weak var sceneMapView: LightuponGMSMapView!
     @IBOutlet weak var compass: UIImageView!
     @IBOutlet weak var instructionsView: UIView!
     @IBOutlet weak var instructionsLabel: UILabel!
@@ -39,7 +39,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
         
         sceneMapView.delegate = self
         currentLocationService.registerDelegate(self)
-        socketService.registerDelegate(self)
+        partyService.registerDelegate(self)
         
         setCompassSize()
         centerMapOnLocation()
@@ -59,8 +59,6 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     
     func configureMapView() {
         sceneMapView.isMyLocationEnabled = true
-        sceneMapView.settings.zoomGestures = false
-        sceneMapView.settings.scrollGestures = false
     }
     
     func applyInstructionsView() {
@@ -69,17 +67,23 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     }
     
     func createCenteredCameraPostion() -> GMSCameraPosition {
-        return GMSCameraPosition.camera(withLatitude: currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 17, bearing: currentLocationService.heading, viewingAngle: 0)
+        return GMSCameraPosition.camera(
+            withLatitude: currentLocationService.latitude,
+            longitude: currentLocationService.longitude,
+            zoom: 17,
+            bearing: currentLocationService.heading,
+            viewingAngle: 0
+        )
     }
     
-    func onResponseReceived(_ partyState: PartyState) {
-        if (partyState.nextSceneAvailable! != _isAtNextScene) {
-            if (partyState.nextSceneAvailable!) {
-                _isAtNextScene = partyState.nextSceneAvailable!
+    func onNextSceneAvailableUpdated(_ nextSceneAvailable: Bool) {
+        if (nextSceneAvailable != _isAtNextScene) {
+            if (nextSceneAvailable) {
+                _isAtNextScene = nextSceneAvailable
                 animateOutCompass()
                 checkInTextBoxState()
             } else {
-                _isAtNextScene = partyState.nextSceneAvailable!
+                _isAtNextScene = nextSceneAvailable
                 animateOutNextSceneButton()
                 undoCheckInTextBoxState()
             }
@@ -88,7 +92,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     }
     
     func bindTitleToInstructions() {
-        let instructions = "Follow the arrow until you arrive at \(_nextScene!.name!)."
+        let instructions = "Follow the arrow until you arrive at \(_nextScene!.name)."
         instructionsLabel.text = instructions
     }
     
@@ -106,13 +110,12 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     }
     
     func onLocationUpdated() {
-        centerMapOnLocation()
         twirlCompass()
     }
     
     func createNextSceneButton() {
         nextSceneButton = UIButton(type: .custom)
-        nextSceneButton.addTarget(delegate, action: #selector(delegate.goToNextScene), for: .touchUpInside)
+        nextSceneButton.addTarget(delegate, action: #selector(delegate.openCards), for: .touchUpInside)
         addSubview(nextSceneButton)
     }
     
@@ -179,7 +182,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     
     func checkInTextBoxState() {
         UIView.animate(withDuration: 0.5, animations: {
-            self.instructionsView.backgroundColor = Colors.basePurple
+            self.instructionsView.backgroundColor = UIColor.basePurple
             self.instructionsLabel.textColor = UIColor.white
             self.instructionsLabel.text = "Check it out!"
             self.instructionsLabel.font = self.instructionsLabel.font.withSize(34)
@@ -198,21 +201,73 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, S
     }
     
     func onHeadingUpdated() {
-        realignMapView()
         twirlCompass()
-    }
-    
-    func realignMapView() {
-        let heading = currentLocationService.heading
-        sceneMapView.animate(toBearing: heading)
     }
     
     func twirlCompass() {
         let origin = CLLocation(latitude: currentLocationService.latitude, longitude: currentLocationService.longitude)
         let destination = CLLocation(latitude: _nextScene!.latitude!, longitude: _nextScene!.longitude!)
         let bearing = navigationService.getBearingBetweenTwoPoints1(origin, point2: destination)
-        let normalizedDelta = navigationService.adjustBearingForDeviceHeading(bearing, heading: currentLocationService.heading)
-        compass.transform = CGAffineTransform(rotationAngle: normalizedDelta * CGFloat(M_PI)/180);
+        var rotationAngle = navigationService.adjustBearingForDeviceHeading(bearing, heading: currentLocationService.heading)
+        let otherRotationAngle = rotationAngle * CGFloat(M_PI) / 180
+        print("Rotation Angle")
+        print(rotationAngle)
+//        compass.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        var xPosition = sin(rotationAngle) / 2 + 0.5
+        var yPosition = cos(rotationAngle) / 2 + 0.5
+        UIView.animate(withDuration: 0.25, animations: {
+//            if (rotationAngle > 0 && rotationAngle < 45) || (rotationAngle > 315 && rotationAngle < 360) {
+//                yPosition = 0
+//                if (315 < rotationAngle && rotationAngle < 360) {
+//                    rotationAngle = rotationAngle - 360
+//                }
+//                xPosition = (rotationAngle + 45) / 90
+//            } else if (45 < rotationAngle && rotationAngle < 135) {
+//                xPosition = 1
+//                yPosition = ((rotationAngle - 45) / 90)
+//            } else if (135 < rotationAngle && rotationAngle < 225) {
+//                yPosition = 1
+//                xPosition = ((135 - rotationAngle) / 90) + 1
+//            } else if (225 < rotationAngle && rotationAngle < 315) {
+//                xPosition = 0
+//                yPosition = (225 - rotationAngle) / 90 + 1
+//            }
+//            
+//            xPosition = 0.1 + (4/5) * xPosition
+//            yPosition = 0.1 + (4/5) * yPosition
+//
+//            self.compass.center.x = xPosition * self.frame.width
+//            self.compass.center.y = yPosition * self.frame.height
+            let offset = CGFloat(5)
+            
+            let a1 = CGFloat(45) - offset
+            let a2 = CGFloat(135) + offset
+            let a3 = CGFloat(225) - offset
+            let a4 = CGFloat(315) + offset
+            
+            if (rotationAngle > 0 && rotationAngle < a1) || (rotationAngle > a4 && rotationAngle < 360) {
+                yPosition = 0
+                if (a4 < rotationAngle && rotationAngle < 360) {
+                    rotationAngle = rotationAngle - 360
+                }
+                xPosition = (rotationAngle + a1) / (90 - 2 * offset)
+            } else if (a1 < rotationAngle && rotationAngle < a2) {
+                xPosition = 1
+                yPosition = ((rotationAngle - a1) / (90 + 2 * offset))
+            } else if (a2 < rotationAngle && rotationAngle < a3) {
+                yPosition = 1
+                xPosition = ((a2 - rotationAngle) / (90 - 2 * offset)) + 1
+            } else if (a3 < rotationAngle && rotationAngle < a4) {
+                xPosition = 0
+                yPosition = (a3 - rotationAngle) / (90 + 2 * offset) + 1
+            }
+            
+            xPosition = 0.1 + (4/5) * xPosition
+            yPosition = 0.1 + (4/5) * yPosition
+            self.compass.center.x = xPosition * self.frame.width
+            self.compass.center.y = yPosition * self.frame.height
+            self.compass.transform = CGAffineTransform(rotationAngle: otherRotationAngle)
+        })
     }
 
 }

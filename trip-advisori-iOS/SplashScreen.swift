@@ -13,7 +13,7 @@ import PocketSVG
 extension UIView {
     func splashView() {
         let icon = UIBezierPath.mainLogo()
-        let splashView = CBZSplashView(bezierPath: icon, backgroundColor: Colors.basePurple)
+        let splashView = CBZSplashView(bezierPath: icon, backgroundColor: UIColor.basePurple)
         splashView?.animationDuration = 3
         self.addSubview(splashView!)
         splashView?.startAnimation()

@@ -18,6 +18,8 @@ class LitService: NSObject {
     private let _currentLocationService: CurrentLocationService
     private var _litness: Litness
     
+    public let litStatusChangeNotificationName = Notification.Name("OnLitStatusChange")
+    
     init(apiAmbassador: AmbassadorToTheAPI, currentLocationService: CurrentLocationService){
         _apiAmbassador = apiAmbassador
         _currentLocationService = currentLocationService
@@ -25,25 +27,17 @@ class LitService: NSObject {
     }
     
     func light(successCallback: @escaping () -> Void) {
-        let location = [
-            "Latitude": _currentLocationService.latitude,
-            "Longitude": _currentLocationService.longitude
-        ]
-        
-        _apiAmbassador.post("/light", parameters: location as [String : AnyObject], success: { response in
+        _apiAmbassador.post("/light", parameters: ["":"" as AnyObject], success: { response in
             self.toggleLitness()
+            NotificationCenter.default.post(name: self.litStatusChangeNotificationName, object: nil)
             successCallback()
         })
     }
     
     func extinguish(successCallback: @escaping () -> Void) {
-        let location = [
-            "Latitude": _currentLocationService.latitude,
-            "Longitude": _currentLocationService.longitude
-        ]
-        
-        _apiAmbassador.post("/extinguish", parameters: location as [String : AnyObject], success: { response in
+        _apiAmbassador.post("/extinguish", parameters: ["":"" as AnyObject], success: { response in
             self.toggleLitness()
+            NotificationCenter.default.post(name: self.litStatusChangeNotificationName, object: nil)
             successCallback()
         })
     }

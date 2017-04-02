@@ -38,19 +38,17 @@ protocol MainViewControllerDelegate {
     func toggleRightPanel()
 }
 
-class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwipeToChooseDelegate, EndOfTripDelegate, CompassViewDelegate {
-    fileprivate let _partyService = Injector.sharedInjector.getPartyService()
-    fileprivate let _socketService = Injector.sharedInjector.getSocketService()
+class StoryTellerViewController: UIViewController, MDCSwipeToChooseDelegate, EndOfTripDelegate, CompassViewDelegate, PartyServiceDelegate {
+    private let _partyService = Services.shared.getPartyService()
     
     internal var delegate: MainViewControllerDelegate?
     
-    fileprivate var _currentScene: Scene!
-    fileprivate var _partyState: PartyState!
-    fileprivate var _party: Party!
-    fileprivate var _cardCount: Int = 0
-    fileprivate var _swipeOptions = CardSwipeOptions()
-    fileprivate var _cardSize: CGRect!
-    fileprivate var _player: AVAudioPlayer!
+    private var _cardCount: Int = 0
+    private var _swipeOptions = CardSwipeOptions()
+    private var _cardSize: CGRect!
+    private var _player: AVAudioPlayer!
+    private var _currentSceneId: Int!
+    
     
     var compassView: CompassView!
     var endOfTripView: EndOfTripView!
@@ -63,7 +61,7 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         super.viewDidLoad()
         
         _swipeOptions.delegate = self
-        _socketService.registerDelegate(self)
+        _partyService.registerDelegate(self)
         
         createCardSize()
     }
@@ -72,61 +70,29 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         _cardSize = CGRect(x: 25, y: 80, width: self.view.frame.width - 50, height: self.view.frame.height - 120)
     }
     
-    func bindParty(_ party: Party) {
-        setParty(party)
-        setScene()
-        
-        if (_currentScene.id != nil) {
-            loadScene()
-        } else {
-            openCompass(_party.trip!.getSceneWithOrder(1))
+    func initalize() {
+        if let currentScene = _partyService.currentScene() {
+            openCompass(currentScene)
         }
-
     }
     
-    func loadNextScene() {
-        goToNextSceneInMemory()
-        loadScene()
-    }
-    
-    func setScene() {
-        _currentScene = _party.trip?.getSceneWithOrder(_party.currentSceneOrder!)
-    }
     
     func loadScene() {
+        _currentSceneId = _partyService.currentScene()?.id
         loadSwipeViews()
         loadBackgroundPicture()
     }
     
-    func goToNextSceneInMemory() {
-        _currentScene = getNextScene()
+    func openCards() {
+        loadScene()
     }
     
-    func getNextScene() -> Scene {
-        if (_currentScene.id != nil) {
-            let nextSceneOrder = _currentScene.sceneOrder! + 1
-            return _party.trip!.getSceneWithOrder(nextSceneOrder)
-        } else {
-            return _party.trip!.getSceneWithOrder(1)
-        }
+    func onNextScene(_ scene: Scene) {
+        openCompass(scene)
     }
-    
-    func setParty(_ party: Party) {
-        _party = party
-    }
-    
-    func onResponseReceived(_ partyState: PartyState) {
-        _partyState = partyState
-    }
-    
-    func goToNextScene() {
-        _partyService.startNextScene(partyID: _party.id!, callback: {})
-        onWentToNextScene()
-    }
-    
+
     func onWentToNextScene() {
-        removeCompass()
-        loadNextScene()
+        loadScene()
     }
     
     func removeCompass() {
@@ -139,10 +105,10 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func handleNoMoreCards() {
-        if (endOfTrip()) {
+        if (_partyService.endOfTrip()) {
             openEndOfTripView()
         } else {
-            openCompass(getNextScene())
+            _partyService.startNextScene()
         }
     }
     
@@ -151,10 +117,13 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
     }
     
     func loadSwipeViews() {
-        for card in _currentScene.cards.reversed() {
-            _cardCount += 1
-            loadCardView(card)
+        if let currentScene = _partyService.currentScene() {
+            for card in currentScene.cards.reversed() {
+                _cardCount += 1
+                loadCardView(card)
+            }
         }
+ 
     }
     
     func loadCardView(_ card: Card) {
@@ -174,11 +143,6 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         if (outOfCards()) {
             handleNoMoreCards()
         }
-    }
-    
-    func endOfTrip() -> Bool {
-        let nextScene = getNextScene()
-        return (nextScene.id == nil)
     }
     
     func onTripEnds() {
@@ -222,40 +186,14 @@ class StoryTellerViewController: UIViewController, SocketServiceDelegate, MDCSwi
         performSegue(withIdentifier: "StoryTellerToHome", sender: nil)
     }
     
-    func playSound(_ scene: Scene) {
-        let urlstring = scene.soundResource
-        
-        if urlstring?.characters.count > 0 {
-            let url = URL(string: urlstring!)
-            downloadFileFromURL(url!)
-        }
-
-    }
-    
-    func downloadFileFromURL(_ url:URL){
-        var downloadTask:URLSessionDownloadTask
-        downloadTask = URLSession.shared.downloadTask(with: url, completionHandler: { (URL, response, error) -> Void in
-            self.play(URL!)
-            
-        })
-        downloadTask.resume()
-    }
-    
-    func play(_ url:URL) {
-        do {
-            _player = try AVAudioPlayer(contentsOf: url)
-            _player.prepareToPlay()
-            _player.volume = 1.0
-            _player.play()
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-    }
     
     func loadBackgroundPicture() {
-        let backgroundImage = getBackgroundPicture(_currentScene)
-        let blurredBackgroundImage = blurBackgroundImage(backgroundImage)
-        storyBackground.backgroundColor = UIColor(patternImage: blurredBackgroundImage)
+        if let currentScene = _partyService.currentScene() {
+            let backgroundImage = getBackgroundPicture(currentScene)
+            let blurredBackgroundImage = blurBackgroundImage(backgroundImage)
+            storyBackground.backgroundColor = UIColor(patternImage: blurredBackgroundImage)
+        }
+
     }
     
     func getBackgroundPicture(_ scene: Scene) -> UIImage {

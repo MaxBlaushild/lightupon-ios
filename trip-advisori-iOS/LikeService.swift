@@ -18,13 +18,13 @@ class LikeService: NSObject {
     
     func likeScene(scene: Scene, success: @escaping () -> Void) {
         let parameters = [ "": "" ]
-        _apiAmbassador.post("/scenes/\(scene.id!)/likes", parameters: parameters as [String : AnyObject] , success: { response in
+        _apiAmbassador.post("/scenes/\(scene.id)/likes", parameters: parameters as [String : AnyObject] , success: { response in
             success()
         })
     }
     
     func unlikeScene(scene: Scene, success: @escaping () -> Void) {
-        _apiAmbassador.delete("/scenes/\(scene.id!)/likes", success: { response in
+        _apiAmbassador.delete("/scenes/\(scene.id)/likes", success: { response in
             success()
         })
     }

@@ -9,22 +9,22 @@
 import UIKit
 import FBSDKLoginKit
 
-class ProfileViewController: UIViewController, ProfileViewDelegate {
+class ProfileViewController: TripModalPresentingViewController, ProfileViewDelegate {
     
-    fileprivate let userService: UserService = Injector.sharedInjector.getUserService()
+    fileprivate let userService: UserService = Services.shared.getUserService()
+    
+    @IBOutlet weak var tabBar: UIView!
+    @IBOutlet weak var litButton: LitButton!
     
     var profileView: ProfileView!
-    var litButton: LitButton!
 
     @IBAction func goBack(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: {});
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func viewDidAppear(_ animated: Bool) {
-        litButton.bindLitness()
+        litButton.delegate = self
+        
         if let profileView = profileView {
             profileView.refresh()
         }
@@ -32,16 +32,11 @@ class ProfileViewController: UIViewController, ProfileViewDelegate {
     
     func initProfile() {
         profileView = ProfileView.fromNib("ProfileView")
-        litButton = LitButton(frame: CGRect(
-            x: self.view.frame.width - 45,
-            y: 32,
-            width: 25,
-            height: 25))
         profileView.frame = view.frame
         profileView.delegate = self
         profileView.initializeView(userService.currentUser)
         view.addSubview(profileView)
-        view.addSubview(litButton)
+        view.bringSubview(toFront: tabBar)
     }
     
     func onLoggedOut() {

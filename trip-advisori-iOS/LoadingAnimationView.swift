@@ -22,10 +22,10 @@ class LoadingAnimationView: UIView {
     var delegate: LoadingAnimationViewDelegate!
 
     func initialize(parentView: LoadingAnimationViewDelegate) {
-        firstDot.backgroundColor = Colors.basePurple
-        secondDot.backgroundColor = Colors.basePurple
-        thirdDot.backgroundColor = Colors.basePurple
-        lightuponLabel.textColor = Colors.basePurple
+        firstDot.backgroundColor = UIColor.basePurple
+        secondDot.backgroundColor = UIColor.basePurple
+        thirdDot.backgroundColor = UIColor.basePurple
+        lightuponLabel.textColor = UIColor.basePurple
         firstDot.makeCircle()
         secondDot.makeCircle()
         thirdDot.makeCircle()

@@ -12,33 +12,37 @@ import ObjectMapper
 class Card: NSObject, Mappable {
     var id:Int?
     var cardType:String?
-    var text: String = "Caption of the card"
     var imageUrl: String?
     var cardOrder: Int?
     var universal: Bool?
     var identifier: String?
     var nibId: String?
-    var textTwo: String?
     var createdAt: Date?
+    var caption: String = "Caption of the card"
     var updatedAt: Date?
+    var sceneID: Int?
     
     
     func mapping(map: Map) {
         id         <- map["ID"]
         cardType   <- map["CardType"]
-        text       <- map["Text"]
-        textTwo    <- map["TextTwo"]
+        caption    <- map["Caption"]
         imageUrl   <- map["ImageURL"]
         cardOrder  <- map["CardOrder"]
         universal  <- map["Universal"]
         identifier <- map["Identifier"]
         nibId      <- map["NibID"]
+        sceneID    <- map["SceneID"]
         createdAt  <- (map["CreatedAt"], ISO8601MilliDateTransform())
         updatedAt  <- (map["UpdatedAt"], ISO8601MilliDateTransform())
     }
     
     required init?(map: Map) {
         
+    }
+    
+    init(caption: String) {
+        self.caption = caption
     }
     
     func prettyTimeSinceCreation() -> String {

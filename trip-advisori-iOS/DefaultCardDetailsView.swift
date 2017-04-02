@@ -9,9 +9,9 @@
 import UIKit
 
 class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    fileprivate let tripsService: TripsService = Injector.sharedInjector.getTripsService()
-    fileprivate let partyService: PartyService = Injector.sharedInjector.getPartyService()
-    fileprivate let commentService: CommentService = Injector.sharedInjector.getCommentService()
+    fileprivate let tripsService: TripsService = Services.shared.getTripsService()
+    fileprivate let partyService: PartyService = Services.shared.getPartyService()
+    fileprivate let commentService: CommentService = Services.shared.getCommentService()
     
     fileprivate var _tripId: Int!
     fileprivate var _owner: User!
@@ -27,6 +27,7 @@ class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionView
     @IBOutlet weak var cardText: UILabel!
     @IBOutlet weak var cardTimestamp: UILabel!
     @IBOutlet weak var commentCollectionView: UICollectionView!
+    @IBOutlet weak var checkItOutButton: UIButton!
     
     func initFrom(card: Card, owner: User, scene: Scene) {
         configureCommentCollectionView()
@@ -35,6 +36,19 @@ class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionView
         bindCard(card)
         bindScene(scene)
         makeProfileClickable()
+        
+        checkItOutButton.backgroundColor = UIColor.basePurple
+    }
+
+    @IBAction func goOnTrip(_ sender: UIButton) {
+        sender.isEnabled = false
+        partyService.createParty(_tripId!, callback: self.onPartyCreated)
+    }
+    
+    func onPartyCreated() {
+        if let cardViewController = delegate as? CardViewController {
+            cardViewController.onPartyCreated()
+        }
     }
     
     func makeProfileClickable() {
@@ -65,6 +79,7 @@ class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionView
     
     func bindScene(_ scene: Scene) {
         sceneName.text = "Name of the scene"
+        _tripId = scene.tripId
     }
     
     func bindOwner(_ owner: User) {

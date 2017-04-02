@@ -11,21 +11,14 @@ import UIKit
 class CardViewController: UIViewController, ProfileViewCreator {
     
     var cardView: DefaultCardDetailsView!
-    
     var delegate: ProfileViewCreator!
     
-    init(card: Card, owner: User, scene: Scene) {
-
-        super.init(nibName: nil, bundle: nil)
+    func bindContext(card: Card, owner: User, scene: Scene) {
         cardView = DefaultCardDetailsView.fromNib("DefaultCardDetailsView")
         cardView.initFrom(card: card, owner: owner, scene: scene)
         cardView.frame = self.view.frame
         cardView.delegate = self
         self.view.addSubview(cardView)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func createProfileView(user: User) {
@@ -34,6 +27,10 @@ class CardViewController: UIViewController, ProfileViewCreator {
     
     func setBottomViewHeight(newHeight: CGFloat) {
         cardView.setBottomViewHeight(newHeight: newHeight)
+    }
+    
+    func onPartyCreated() {
+        performSegue(withIdentifier: "CardToMain", sender: self)
     }
 
     override func viewDidLoad() {

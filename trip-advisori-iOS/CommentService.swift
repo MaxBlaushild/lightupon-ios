@@ -17,7 +17,7 @@ class CommentService: NSObject {
     }
     
     func getCommentsFor(scene: Scene, success: @escaping ([Comment]) -> Void) {
-        _apiAmbassador.get("/scenes/\(scene.id!)/comments", success: { response in
+        _apiAmbassador.get("/scenes/\(scene.id)/comments", success: { response in
             let comments = Mapper<Comment>().mapArray(JSONObject: response.result.value)
             success(comments!)
         })

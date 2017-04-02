@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/max_blaushild/projects/lightupon-ios/Lightupon.xcodeproj">
+      location = "group:Lightupon.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

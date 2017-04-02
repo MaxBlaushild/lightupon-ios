@@ -14,7 +14,7 @@ protocol TripDetailsViewControllerDelegate {
 }
 
 class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, ProfileViewCreator, ProfileViewDelegate {
-    private let tripsService = Injector.sharedInjector.getTripsService()
+    private let tripsService = Services.shared.getTripsService()
     private var _tripId: Int!
     private var _trip: Trip!
     
@@ -37,7 +37,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     }
     
     init(scene: Scene) {
-        _tripId = scene.tripId!
+        _tripId = scene.tripId
         currentIndex = scene.sceneOrder! - 1
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         getTrip()
@@ -85,7 +85,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     
     func bindScene(scene: Scene) {
         clearConstellations()
-        _tripId = scene.tripId!
+        _tripId = scene.tripId
         currentIndex = scene.sceneOrder! - 1
         getTrip()
         beltOverlay.bindView(scene: scene, owner: (scene.trip?.owner!)!, card: scene.cards[0])
@@ -145,16 +145,17 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     
     func setCardViewControllers(trip: Trip) {
         _trip = trip
+        
         cardViewControllers = trip.scenes.map({ scene in
-            let viewController = CardViewController(card: scene.cards[0], owner: trip.owner!, scene: scene)
-            viewController.delegate = self
-            return viewController
+            let cardViewController = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CardViewController") as! CardViewController
+            cardViewController.bindContext(card: scene.cards[0], owner: trip.owner!, scene: scene)
+            cardViewController.delegate = self
+            return cardViewController
         })
         
         dataSource = self
         delegate = self
 
-        
         drawConstellations(scenes: trip.scenes)
         jumpToSelectedScene()
     }

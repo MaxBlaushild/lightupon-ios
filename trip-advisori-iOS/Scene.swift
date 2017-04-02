@@ -7,15 +7,15 @@
 //
 
 import Foundation
-
+import GoogleMaps
 import UIKit
 import ObjectMapper
 
 class Scene: NSObject, Mappable {
-    var id:Int?
-    var tripId:Int?
+    var id:Int = 0
+    var tripId:Int = 0
     var trip: Trip?
-    var name:String?
+    var name:String = ""
     var latitude: Double?
     var longitude: Double?
     var cards: [Card] = [Card]()
@@ -24,13 +24,19 @@ class Scene: NSObject, Mappable {
     var sceneOrder: Int?
     var createdAt: Date?
     var updatedAt: Date?
-    var locality: String?
+    var locality: String = ""
     var state: String?
-    var neighborhood: String?
+    var neighborhood: String = ""
     var constellationPoint: ConstellationPoint?
     var comments: [Comment] = [Comment]()
     var liked: Bool?
     var image: UIImage?
+    var formattedAddress: String?
+    var streetNumber: String = ""
+    var route: String = ""
+    var googlePlaceID: String?
+    var pinUrl: String?
+    var selectedPinUrl: String?
     
     func mapping(map: Map) {
         id                 <- map["ID"]
@@ -42,23 +48,58 @@ class Scene: NSObject, Mappable {
         trip               <- map["Trip"]
         locality           <- map["Locality"]
         neighborhood       <- map["Neighborhood"]
+        googlePlaceID      <- map["GooglePlaceID"]
         state              <- map["AdministrativeLevelOne"]
         constellationPoint <- map["ConstellationPoint"]
         soundResource      <- map["SoundResource"]
         backgroundUrl      <- map["BackgroundUrl"]
         sceneOrder         <- map["SceneOrder"]
+        formattedAddress   <- map["FormattedAddress"]
+        streetNumber       <- map["StreetNumber"]
         comments           <- map["Comments"]
+        route              <- map["Route"]
         createdAt          <- (map["CreatedAt"], ISO8601MilliDateTransform())
         updatedAt          <- (map["UpdatedAt"], ISO8601MilliDateTransform())
         liked              <- map["Liked"]
+        pinUrl             <- map["PinUrl"]
+        selectedPinUrl     <- map["SelectedPinUrl"]
     }
     
     required init?(map: Map) {}
+    
+    var address: Address {
+        get {
+            let address = Address()
+            address.streetNumber = streetNumber
+            address.route = route
+            address.locality = locality
+            address.neighborhood = neighborhood
+            address.googlePlaceId = googlePlaceID
+            address.latitude = latitude
+            address.longitude = longitude
+            return address
+            
+        }
+        
+        set {
+            streetNumber = newValue.streetNumber!
+            route = newValue.route!
+            locality = newValue.locality!
+            neighborhood = newValue.neighborhood!
+            googlePlaceID = newValue.googlePlaceId
+            latitude = newValue.latitude
+            longitude = newValue.longitude
+        }
+    }
     
     var location: Location {
         get {
             return Location(longitude: self.longitude!, latitude: self.latitude!)
         }
+    }
+    
+    var cllocation: CLLocation {
+        return CLLocation(latitude: self.latitude!, longitude: self.longitude!)
     }
     
     func prettyTimeSinceCreation() -> String {

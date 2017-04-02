@@ -9,7 +9,7 @@
 import UIKit
 
 class PartyMemberCollectionViewCell: UICollectionViewCell {
-    let facebookService: FacebookService = Injector.sharedInjector.getFacebookService()
+    let facebookService: FacebookService = Services.shared.getFacebookService()
     
     @IBOutlet weak var partyMemberProfilePicture: UIImageView!
     @IBOutlet weak var partyMemberFullName: UILabel!
