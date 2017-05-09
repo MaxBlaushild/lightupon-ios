@@ -26,7 +26,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
     
     private var _initialFrame: CGRect!
     private var _lockState: LockState
-    private var markers = [LightuponGMSMarker]()
+    public var markers = [LightuponGMSMarker]()
     private var directions: [GMSPolyline] = [GMSPolyline]()
     private var lockButton: UIButton!
     
@@ -58,6 +58,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         
         addLockButton()
         
+        isMyLocationEnabled = true
         _initialFrame = frame
         lockState = .locked
     }
@@ -66,6 +67,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         selectedLightuponMarker?.setNotSelected()
         settings.scrollGestures = false
         settings.rotateGestures = false
+        settings.myLocationButton = true
         settings.tiltGestures = false
         settings.zoomGestures = false
         centerMap()
@@ -81,6 +83,20 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         UIView.animate(withDuration: 0.25, animations: {
             self.frame = self._initialFrame
         })
+    }
+    
+    func watercolored() {
+        let urls: GMSTileURLConstructor = {(x, y, zoom) in
+            let url = "http://tile.stamen.com/watercolor/\(zoom)/\(x)/\(y).jpg"
+            return URL(string: url)
+        }
+        
+        // Create the GMSTileLayer
+        let layer = GMSURLTileLayer(urlConstructor: urls)
+        
+        // Display on the map at a specific zIndex
+        layer.zIndex = 100
+        layer.map = self
     }
     
     func setUnlockedState() {
@@ -155,15 +171,11 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         centerMapOnLocation()
     }
     
-    func bindTrips(_ trips: [Trip]) {
+    func bindScenes(_ scenes: [Scene]) {
         clearMarkers()
-        for trip in trips {
-            placeTripOnMap(trip)
+        for scene in scenes {
+            placeMarker(scene: scene)
         }
-    }
-    
-    func bindTrip(_ trip: Trip) {
-        placeTripOnMap(trip)
     }
     
     func clearMarkers() {
@@ -206,18 +218,6 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
             }
         }
     }
-
-    
-    private func placeTripOnMap(_ trip: Trip) {
-        placeMarkers(trip: trip)
-    }
-    
-    private func placeMarkers(trip: Trip) {
-        for scene in trip.scenes {
-            scene.trip = trip
-            placeMarker(scene: scene)
-        }
-    }
     
     func updateFrame() {
         let scene = selectedLightuponMarker!.scene
@@ -237,9 +237,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         marker.setSelected()
         centerMapOnScreen()
         selectedLightuponMarker = marker
-        clearDirections()
         updateFrame()
-        drawDirections()
     }
     
     func centerMapOnScreen() {
@@ -248,30 +246,21 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         })
     }
     
-    func findOrCreateMarker(byScene scene: Scene)  -> LightuponGMSMarker? {
+    func findOrCreateMarker(scene: Scene)  -> LightuponGMSMarker? {
         let marker = markers.first(where:{$0.scene.id == scene.id})
         return marker == nil ? createMarkerSync(scene: scene) : marker
     }
     
     private func createMarkerSync(scene: Scene) -> LightuponGMSMarker {
         let marker = LightuponGMSMarker(scene: scene)
-        marker.setImages()
-        marker.setSelected()
-        marker.map = self
+        marker.setImages(mapView: self, selected: true)
         return marker
         
     }
     
-    private func placeMarker(scene: Scene) {
+    func placeMarker(scene: Scene) {
         let marker = LightuponGMSMarker(scene: scene)
-        DispatchQueue.global(qos: .background).async {
-            marker.setImages()
-            DispatchQueue.main.async {
-                self.markers.append(marker)
-                marker.setNotSelected()
-                marker.map = self
-            }
-        }
+        marker.setImages(mapView: self, selected: false)
     }
 }
 

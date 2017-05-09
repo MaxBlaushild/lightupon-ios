@@ -34,7 +34,7 @@ class ProfileViewController: TripModalPresentingViewController, ProfileViewDeleg
         profileView = ProfileView.fromNib("ProfileView")
         profileView.frame = view.frame
         profileView.delegate = self
-        profileView.initializeView(userService.currentUser)
+        profileView.initializeView(userService.currentUser.id)
         view.addSubview(profileView)
         view.bringSubview(toFront: tabBar)
     }

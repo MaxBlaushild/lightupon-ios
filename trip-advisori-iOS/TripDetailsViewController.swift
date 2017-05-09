@@ -33,7 +33,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         _tripId = tripId
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         getTrip()
-        addBeltOverlay()
+//        addBeltOverlay()
     }
     
     init(scene: Scene) {
@@ -42,7 +42,11 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         getTrip()
         addBeltOverlay()
-        beltOverlay.bindView(scene: scene, owner: (scene.trip?.owner!)!, card: scene.cards[0])
+        
+        if scene.trip?.owner != nil && scene.cards.indices.contains(0) {
+            let beltConfig = BeltConfig(scene: scene, card: scene.cards[0], owner: scene.trip!.owner!)
+            beltOverlay.config = beltConfig
+        }
     }
     
     init() {
@@ -88,8 +92,11 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         _tripId = scene.tripId
         currentIndex = scene.sceneOrder! - 1
         getTrip()
-        beltOverlay.bindView(scene: scene, owner: (scene.trip?.owner!)!, card: scene.cards[0])
         
+        if scene.trip?.owner != nil && scene.cards.indices.contains(0) {
+            let beltConfig = BeltConfig(scene: scene, card: scene.cards[0], owner: scene.trip!.owner!)
+            beltOverlay.config = beltConfig
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -115,6 +122,10 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         view.addSubview(overlay)
     }
     
+    func onPartyCreated() {
+        dismissView(sender: {} as AnyObject)
+    }
+    
     func placeBackButton() {
         let statusBarHeight = UIApplication.shared.statusBarFrame.height * 0.66
         let xPosition = view.frame.width - 45
@@ -125,10 +136,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         backButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         overlay.addSubview(backButton)
     }
-    
-    func placeStartTripButton() {
-        
-    }
+
     
     func getTrip() {
         tripsService.getTrip(_tripId, callback: self.setCardViewControllers)
@@ -259,14 +267,21 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
             return
         }
         
-        let previousIndex = cardViewControllers.index(of: previousViewControllers[0] as! CardViewController)!
         guard let currentIndex = cardViewControllers.index(of: pageViewController.viewControllers?.first as! CardViewController) else {
             return
         }
+        
+        constellationPoints.forEach(deactivateConstellation)
         activateConstellation(constellationPoints[currentIndex])
-        deactivateConstellation(constellationPoints[previousIndex])
+        
         let currentScene = _trip.scenes[currentIndex]
-        beltOverlay.bindView(scene: currentScene, owner: _trip!.owner!, card: currentScene.cards[0])
+        
+        if _trip?.owner != nil && currentScene.cards.indices.contains(0) {
+            let owner = _trip.owner!
+            let beltConfig = BeltConfig(scene: currentScene, card: currentScene.cards[0], owner: owner)
+            beltOverlay.config = beltConfig
+        }
+
         
         if tripDelegate != nil {
             tripDelegate?.onSceneChanged(_trip.scenes[currentIndex])
@@ -274,11 +289,11 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     
     }
 
-    func createProfileView(user: User) {
+    func createProfileView(_ userId: Int) {
         profileView = ProfileView.fromNib("ProfileView")
         profileView.frame = view.frame
         profileView.delegate = self
-        profileView.initializeView(user)
+        profileView.initializeView(userId)
         view.addSubview(profileView)
         addXBackButton()
     }

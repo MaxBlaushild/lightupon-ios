@@ -10,6 +10,25 @@
 import UIKit
 import Accelerate
 
+public extension UIView {
+    public func blur() {
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+        self.addSubview(blurView)
+        self.bringSubview(toFront: blurView)
+        blurView.frame = CGRect(x: 0, y:0, width: self.frame.width, height: self.frame.height)
+    }
+}
+
+extension UIImage {
+    convenience init(view: UIView) {
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        self.init(cgImage: (image?.cgImage!)!)
+    }
+}
+
 public extension UIImage {
     public func applyLightEffect() -> UIImage? {
         return applyBlurWithRadius(30, tintColor: UIColor(white: 1.0, alpha: 0.3), saturationDeltaFactor: 1.8)

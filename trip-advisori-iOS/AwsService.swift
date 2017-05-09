@@ -51,7 +51,7 @@ class AwsService: NSObject {
     }
     
     func putImage(url: String, image: UIImage, callback: @escaping () -> Void) {
-        let imageData = UIImageJPEGRepresentation(image, 0.6)
+        let imageData = UIImageJPEGRepresentation(image, 0.8)
         
         
         Alamofire.upload(imageData!, to: url, method: .put, headers: ["Content-Type":"image/\(_extension)", "x-amz-acl": "public-read"]).response { response in

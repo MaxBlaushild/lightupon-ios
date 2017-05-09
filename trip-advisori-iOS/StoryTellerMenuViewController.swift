@@ -11,11 +11,10 @@ import UIKit
 
 private let reuseIdentifier = "PartyMemberCollectionViewCell"
 
-class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, SocketServiceDelegate, ProfileViewDelegate {
+class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ProfileViewDelegate {
     
     fileprivate let partyService: PartyService = Services.shared.getPartyService()
     fileprivate let userService: UserService = Services.shared.getUserService()
-    fileprivate let socketService: SocketService = Services.shared.getSocketService()
 
     @IBOutlet weak var partyMemberCollectionView: UICollectionView!
     @IBOutlet weak var profilePicture: UIImageView!
@@ -31,10 +30,24 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        leavePartyButton.isHidden = true
-        socketService.registerDelegate(self)
         bindProfile()
         makeProfileClickable()
+        toggleLeavePartyButton()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(toggleLeavePartyButton),
+            name: partyService.partyChangeNotificationName,
+            object: nil
+        )
+    }
+    
+    func toggleLeavePartyButton() {
+        if let _ = partyService.currentParty {
+            leavePartyButton.isHidden = false
+        } else {
+            leavePartyButton.isHidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,15 +69,7 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         profilePicture.makeCircle()
     }
     
-    func onResponseReceived(_ partyState: PartyState) {
-        _partyState = partyState
-        configurePartyCollectionView()
-    }
-    
-    func bindParty(_ party: Party) {
-        _party = party
-        leavePartyButton.isHidden = false
-    }
+
     func configurePartyCollectionView() {
         partyMemberCollectionView.dataSource = self
         partyMemberCollectionView.delegate = self
@@ -93,15 +98,13 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         profileView = ProfileView.fromNib("ProfileView")
         profileView.frame = view.frame
         profileView.delegate = self
-        profileView.initializeView(userService.currentUser)
+        profileView.initializeView(userService.currentUser.id)
         view.addSubview(profileView)
         addXBackButton()
     }
     
     @IBAction func leaveParty(_ sender: AnyObject) {
-        partyService.leaveParty({
-            self.performSegue(withIdentifier: "StoryTellerMenuToHome", sender: nil)
-        })
+        partyService.leaveParty({})
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

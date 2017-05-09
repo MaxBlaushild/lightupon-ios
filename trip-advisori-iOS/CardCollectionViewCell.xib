@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CardCollectionViewCell" id="LyI-8h-c8v" customClass="CardCollectionViewCell" customModule="Lightupon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="422" height="297"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="422" height="297"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SVw-Lg-NjC">
+                        <rect key="frame" x="0.0" y="0.0" width="422" height="297"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="SVw-Lg-NjC" secondAttribute="bottom" id="GDA-70-5B8"/>
+                <constraint firstItem="SVw-Lg-NjC" firstAttribute="leading" secondItem="LyI-8h-c8v" secondAttribute="leading" id="SQC-Uu-EuS"/>
+                <constraint firstItem="SVw-Lg-NjC" firstAttribute="top" secondItem="LyI-8h-c8v" secondAttribute="top" id="ekW-Qk-sN5"/>
+                <constraint firstAttribute="trailing" secondItem="SVw-Lg-NjC" secondAttribute="trailing" id="xs9-2d-Aes"/>
+            </constraints>
+            <size key="customSize" width="422" height="297"/>
+            <connections>
+                <outlet property="previewImageView" destination="SVw-Lg-NjC" id="9Bz-V7-aaQ"/>
+            </connections>
+            <point key="canvasLocation" x="32" y="-13.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

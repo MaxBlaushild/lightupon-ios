@@ -16,13 +16,13 @@ class FollowService: NSObject {
     }
     
     func follow(user: User, callback: @escaping () -> Void) {
-        _apiAmbassador.post("/users/\(user.id!)/follow", parameters: ["":"" as AnyObject], success: { response in
+        _apiAmbassador.post("/users/\(user.id)/follow", parameters: ["":"" as AnyObject], success: { response in
             callback()
         })
     }
     
     func unfollow(user: User, callback: @escaping () -> Void) {
-        _apiAmbassador.delete("/users/\(user.id!)/follow", success: { response in
+        _apiAmbassador.delete("/users/\(user.id)/follow", success: { response in
             callback()
         })
     }

@@ -10,19 +10,48 @@ import UIKit
 
 class CardViewController: UIViewController, ProfileViewCreator {
     
+    private let partyService = Services.shared.getPartyService()
+    
     var cardView: DefaultCardDetailsView!
-    var delegate: ProfileViewCreator!
+    var delegate: TripDetailsViewController!
+    
+    var tripId: Int = 0
+    
+    var startPartyButton: UIButton?
     
     func bindContext(card: Card, owner: User, scene: Scene) {
-        cardView = DefaultCardDetailsView.fromNib("DefaultCardDetailsView")
-        cardView.initFrom(card: card, owner: owner, scene: scene)
-        cardView.frame = self.view.frame
-        cardView.delegate = self
-        self.view.addSubview(cardView)
+        tripId = scene.tripId
+        addCardView(card: card, owner: owner, scene: scene)
+        addStartPartyButton()
     }
     
-    func createProfileView(user: User) {
-        delegate.createProfileView(user: user)
+    func addCardView(card: Card, owner: User, scene: Scene) {
+        cardView = DefaultCardDetailsView.fromNib("DefaultCardDetailsView")
+        cardView.initFrom(card: card, hidden: false)
+        cardView.frame = self.view.frame
+        cardView.delegate = self
+        view.addSubview(cardView)
+    }
+    
+    func addStartPartyButton() {
+        startPartyButton = UIButton()
+        startPartyButton?.backgroundColor = .basePurple
+        startPartyButton?.frame = CGRect(x: view.frame.width / 2 - 70, y: view.frame.height  - 160, width: 140, height: 40)
+        startPartyButton?.setTitle("CREATE PARTY", for: .normal)
+        startPartyButton?.setTitleColor(.white, for: .normal)
+        startPartyButton?.addTarget(self, action: #selector(goOnTrip), for: .touchUpInside)
+        view.addSubview(startPartyButton!)
+        view.bringSubview(toFront: startPartyButton!)
+    }
+    
+    func goOnTrip(_ sender: UIButton) {
+        sender.isEnabled = false
+        partyService.createParty(tripId, callback: self.onPartyCreated)
+    }
+
+    
+    func createProfileView(_ userId: Int) {
+        delegate.createProfileView(userId)
     }
     
     func setBottomViewHeight(newHeight: CGFloat) {
@@ -30,7 +59,7 @@ class CardViewController: UIViewController, ProfileViewCreator {
     }
     
     func onPartyCreated() {
-        performSegue(withIdentifier: "CardToMain", sender: self)
+        delegate.onPartyCreated()
     }
 
     override func viewDidLoad() {

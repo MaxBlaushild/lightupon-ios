@@ -49,7 +49,7 @@ class Services: NSObject {
         _navigationService = NavigationService()
         _awsService = AwsService(apiAmbassador: _apiAmbassador, currentLocationService:_currentLocationService)
         _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, litService: _litService, currentLocationService: _currentLocationService)
-        _feedService = FeedService(apiAmbassador: _apiAmbassador)
+        _feedService = FeedService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService)
         _commentService = CommentService(apiAmbassador: _apiAmbassador)
         _likeService = LikeService(apiAmbassador: _apiAmbassador)
         _googleMapsService = GoogleMapsService()

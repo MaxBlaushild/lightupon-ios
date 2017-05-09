@@ -23,6 +23,10 @@ private extension UIStoryboard {
     }
 }
 
+protocol MainViewControllerDelegate {
+    func toggleRightPanel()
+}
+
 class MainContainerViewController: UIViewController, MainViewControllerDelegate, LoadingAnimationViewDelegate {
     fileprivate let _partyService: PartyService = Services.shared.getPartyService()
     

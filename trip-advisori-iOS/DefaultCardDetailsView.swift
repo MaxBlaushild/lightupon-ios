@@ -8,57 +8,77 @@
 
 import UIKit
 
-class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class DefaultCardDetailsView: UIView, BeltOverlayDelegate {
     fileprivate let tripsService: TripsService = Services.shared.getTripsService()
     fileprivate let partyService: PartyService = Services.shared.getPartyService()
     fileprivate let commentService: CommentService = Services.shared.getCommentService()
     
-    fileprivate var _tripId: Int!
-    fileprivate var _owner: User!
-    fileprivate var _comments: [Comment] = [Comment]()
+    fileprivate var tripId: Int?
+    fileprivate var ownerId: Int?
     
     internal var delegate: ProfileViewCreator!
     
     @IBOutlet weak var bottomView: UIView!
-    @IBOutlet weak var beltOverlay: UIView!
+    @IBOutlet weak var beltOverlayFrame: BeltOverlayView!
     @IBOutlet weak var cardImageView: UIImageView!
-    @IBOutlet weak var ownerImageView: UIImageView!
-    @IBOutlet weak var sceneName: UILabel!
-    @IBOutlet weak var cardText: UILabel!
-    @IBOutlet weak var cardTimestamp: UILabel!
-    @IBOutlet weak var commentCollectionView: UICollectionView!
-    @IBOutlet weak var checkItOutButton: UIButton!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    var beltOverlay: BeltOverlayView!
     
     func initFrom(card: Card, owner: User, scene: Scene) {
-        configureCommentCollectionView()
-        getCommentsForCard(card)
-        bindOwner(owner)
-        bindCard(card)
-        bindScene(scene)
-        makeProfileClickable()
-        
-        checkItOutButton.backgroundColor = UIColor.basePurple
-    }
+        cardImageView.imageFromUrl(card.imageUrl)
 
-    @IBAction func goOnTrip(_ sender: UIButton) {
-        sender.isEnabled = false
-        partyService.createParty(_tripId!, callback: self.onPartyCreated)
+        let formattedString = createBylineText(username: "blaushmild", caption: card.caption)
+        descriptionLabel.attributedText = formattedString
+        
+        let beltConfig = BeltConfig(scene: scene, card: card, owner: owner)
+        initBelt(config: beltConfig)
     }
     
-    func onPartyCreated() {
-        if let cardViewController = delegate as? CardViewController {
-            cardViewController.onPartyCreated()
-        }
+    func initBelt(config: BeltConfig) {
+        beltOverlay = BeltOverlayView.fromNib()
+        beltOverlayFrame.addSubview(beltOverlay)
+        beltOverlay.frame = CGRect(x: 0, y: 0, width: beltOverlayFrame.frame.width, height: beltOverlayFrame.frame.height)
+        beltOverlay.config = config
+        beltOverlay.isHidden = false
+        bringSubview(toFront: beltOverlay)
     }
     
-    func makeProfileClickable() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(createProfileView))
-        ownerImageView.isUserInteractionEnabled = true
-        ownerImageView.addGestureRecognizer(tapGestureRecognizer)
+    func initFrom(card: Card, hidden: Bool) {
+        cardImageView.imageFromUrl(card.imageUrl, success: { img in
+            var image = img
+            if hidden {
+                image = img.applyDarkEffect()!
+            }
+            self.cardImageView.image = image
+        })
+        
+        let formattedString = createBylineText(username: "blaushmild", caption: card.caption)
+        descriptionLabel.attributedText = formattedString
     }
     
+    func createBylineText(username: String, caption: String) -> NSMutableAttributedString {
+        let formattedString = NSMutableAttributedString()
+        let bold = [NSFontAttributeName : UIFont(name: "GothamRounded-Medium", size: 17)!]
+        let boldPart = NSMutableAttributedString(string:"\(username) ", attributes:bold)
+        
+        formattedString.append(boldPart)
+        let normal = [NSFontAttributeName : descriptionLabel.font]
+        let normalPart = NSMutableAttributedString(string: caption, attributes: normal)
+        formattedString.append(normalPart)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 3
+        
+        formattedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, formattedString.length))
+        return formattedString
+    }
+//
+
     func createProfileView(sender: AnyObject) {
-        delegate.createProfileView(user: _owner)
+        if let userId = ownerId {
+            delegate.createProfileView(userId)
+        }
     }
     
     func setBottomViewHeight(newHeight: CGFloat) {
@@ -71,53 +91,6 @@ class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionView
         })
     }
     
-    func bindCard(_ card: Card) {
-        cardImageView.imageFromUrl(card.imageUrl!)
-        cardTimestamp.text = card.prettyTimeSinceCreation()
-        cardText.text = "Caption of the card"
-    }
-    
-    func bindScene(_ scene: Scene) {
-        sceneName.text = "Name of the scene"
-        _tripId = scene.tripId
-    }
-    
-    func bindOwner(_ owner: User) {
-        _owner = owner
-        
-        ownerImageView.imageFromUrl((owner.profilePictureURL)!, success: { img in
-            self.ownerImageView.image = img
-            self.ownerImageView.makeCircle()
-        })
-    }
-    
-    func configureCommentCollectionView() {
-        commentCollectionView.dataSource = self
-        commentCollectionView.delegate = self
-        let nibName = UINib(nibName: "CommentCollectionViewCell", bundle:nil)
-        commentCollectionView.register(nibName, forCellWithReuseIdentifier: "CommentCollectionViewCell")
-        commentCollectionView.reloadData()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: commentCollectionView.bounds.size.width, height: 40);
-    }
-    
-    func getCommentsForCard(_ card: Card) {
-        commentService.getCommentsFor(card: card, success: self.onCommentsReceived)
-    }
-    
-    func onCommentsReceived(comments: [Comment]) {
-        _comments = comments
-        commentCollectionView.reloadData()
-    }
-    
-//    @IBAction func createParty(_ sender: UIButton) {
-//        sender.isEnabled = false
-//        partyService.createParty(_tripId!, callback: self.onPartyCreated)
-//        
-//    }
-    
     func shouldAutorotate() -> Bool {
         return false
     }
@@ -126,27 +99,5 @@ class DefaultCardDetailsView: UIView, UICollectionViewDelegate, UICollectionView
         return UIInterfaceOrientationMask.portrait
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return _comments.count
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let comment = _comments[(indexPath as NSIndexPath).row]
-        let cell = commentCollectionView.dequeueReusableCell(withReuseIdentifier: "CommentCollectionViewCell", for: indexPath) as! CommentCollectionViewCell
-        
-        cell.profilePictureView.imageFromUrl((comment.owner?.profilePictureURL!)!, success: { img in
-            cell.profilePictureView.image = img
-            cell.profilePictureView.makeCircle()
-        })
-        
-        cell.setComment(comment: comment)
-        
-        return cell
-    }
-
 
 }

@@ -37,6 +37,7 @@ class Scene: NSObject, Mappable {
     var googlePlaceID: String?
     var pinUrl: String?
     var selectedPinUrl: String?
+    var hidden: Bool = false
     
     func mapping(map: Map) {
         id                 <- map["ID"]
@@ -63,6 +64,7 @@ class Scene: NSObject, Mappable {
         liked              <- map["Liked"]
         pinUrl             <- map["PinUrl"]
         selectedPinUrl     <- map["SelectedPinUrl"]
+        hidden             <- map["Hidden"]
     }
     
     required init?(map: Map) {}

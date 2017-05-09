@@ -12,7 +12,7 @@ import ObjectMapper
 class Card: NSObject, Mappable {
     var id:Int?
     var cardType:String?
-    var imageUrl: String?
+    var imageUrl: String = "http://p.fod4.com/p/channels/legacy/profile/1212782/a196f26e7efc0fc9c3890cdc748ce61d.jpg"
     var cardOrder: Int?
     var universal: Bool?
     var identifier: String?
@@ -21,6 +21,7 @@ class Card: NSObject, Mappable {
     var caption: String = "Caption of the card"
     var updatedAt: Date?
     var sceneID: Int?
+    var pending: Bool?
     
     
     func mapping(map: Map) {
@@ -43,6 +44,10 @@ class Card: NSObject, Mappable {
     
     init(caption: String) {
         self.caption = caption
+    }
+    
+    init(pending: Bool) {
+        self.pending = pending
     }
     
     func prettyTimeSinceCreation() -> String {

@@ -140,6 +140,19 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         userCollectionView.reloadData()
     }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let user: User = _users[(indexPath as NSIndexPath).row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PartyMemberCollectionViewCell
+        cell.bindCell(user)
+        cell.partyMemberProfilePicture.imageFromUrl(user.profilePictureURL!, success: { img in
+            cell.partyMemberProfilePicture.makeCircle()
+        })
+        
+        giveOffsetBorder(cell: cell)
+        
+        return cell
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return _users.count
     }
@@ -148,7 +161,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         profileView = ProfileView.fromNib("ProfileView")
         profileView.frame = view.frame
         profileView.delegate = self
-        profileView.initializeView(_users[indexPath.row])
+        profileView.initializeView(_users[indexPath.row].id)
         view.addSubview(profileView)
         addXBackButton()
     }
@@ -177,19 +190,6 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     func dismissProfile() {
         profileView.removeFromSuperview()
         xBackButton.removeFromSuperview()
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let user: User = _users[(indexPath as NSIndexPath).row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PartyMemberCollectionViewCell
-        cell.bindCell(user)
-        cell.partyMemberProfilePicture.imageFromUrl(user.profilePictureURL!, success: { img in
-            cell.partyMemberProfilePicture.makeCircle()
-        })
-        
-        giveOffsetBorder(cell: cell)
-        
-        return cell
     }
 
 }

@@ -13,7 +13,7 @@ class PictureHero: UIView, IAmCardContents {
     @IBOutlet weak var pictureHero: UIImageView!
     
     func bindCard(_ card: Card) {
-        pictureHero.imageFromUrl(card.imageUrl!)
+        pictureHero.imageFromUrl(card.imageUrl)
     }
 
 }

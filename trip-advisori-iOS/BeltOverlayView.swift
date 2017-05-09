@@ -8,22 +8,62 @@
 
 import UIKit
 
+class BeltConfig {
+    var sceneName: String
+    var address: String
+    var profilePictureUrl: String
+    var createdAt: String
+    
+    init(scene: Scene, card: Card, owner: User) {
+        sceneName = scene.name
+        address = "\(scene.streetNumber) \(scene.route)"
+        profilePictureUrl = owner.profilePictureURL!
+        createdAt = card.prettyTimeSinceCreation()
+    }
+}
+
+@objc protocol BeltOverlayDelegate {
+    @objc func createProfileView(sender: AnyObject)
+}
+
 class BeltOverlayView: UIView {
+    
+    let xibName = "BeltOverlayView"
 
     @IBOutlet weak var profileImageViw: UIImageView!
     @IBOutlet weak var sceneNameLabel: UILabel!
-    @IBOutlet weak var cardCaptionLabel: UILabel!
+
+    @IBOutlet weak var sceneAddressLabel: UILabel!
     @IBOutlet weak var createdAtLabel: UILabel!
     
-    func bindView(scene: Scene, owner: User, card: Card) {
-        sceneNameLabel.text = scene.name
-        cardCaptionLabel.text = card.caption
-        createdAtLabel.text = card.prettyTimeSinceCreation()
-        
-        profileImageViw.imageFromUrl(owner.profilePictureURL!, success: { img in
-            self.profileImageViw.image = img
-            self.profileImageViw.makeCircle()
-        })
+    var delegate: BeltOverlayDelegate?
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+//        isHidden = true
     }
-
+//    
+    
+    var config: BeltConfig! {
+        willSet {
+            sceneNameLabel.text = newValue.sceneName
+            sceneAddressLabel.text = newValue.address
+            createdAtLabel.text = newValue.createdAt
+            
+            profileImageViw.imageFromUrl(newValue.profilePictureUrl, success: { img in
+                self.profileImageViw.image = img
+                self.profileImageViw.makeCircle()
+                self.makeProfileClickable()
+                self.isHidden = false
+            })
+        }
+    }
+    
+    func makeProfileClickable() {
+        if let delegate = self.delegate {
+            let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(delegate.createProfileView))
+            profileImageViw.isUserInteractionEnabled = true
+            profileImageViw.addGestureRecognizer(tapGestureRecognizer)
+        }
+    }
 }

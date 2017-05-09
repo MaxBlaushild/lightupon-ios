@@ -19,7 +19,10 @@ class PostService: NSObject {
     private var awaitingGetURL = false
     private var card: Card!
     private var scene: Scene!
-    private var callback: (() -> Void)!
+    
+    public var activeScene: Scene?
+    
+    public let postNotificationName = Notification.Name("OnScenePosted")
     
     init(awsService: AwsService, apiAmbassador: AmbassadorToTheAPI, litService: LitService, currentLocationService: CurrentLocationService){
         _awsService = awsService
@@ -48,10 +51,9 @@ class PostService: NSObject {
         })
     }
     
-    func post(card: Card, scene: Scene, callback: @escaping () -> Void) {
+    func post(card: Card, scene: Scene) {
         self.card = card
         self.scene = scene
-        self.callback = callback
         
         if getURL.isEmpty {
             self.awaitingGetURL = true
@@ -63,19 +65,19 @@ class PostService: NSObject {
     func createContent() {
         if _litService.isLit {
             if scene.id != 0 {
-                createCard(card, sceneID: scene.id, callback: callback)
+                createCard(card, sceneID: scene.id)
             } else {
                 createScene(scene, callback: { scene in
                     self.card.sceneID = scene.id
-                    self.createCard(self.card, sceneID: scene.id, callback: self.callback)
+                    self.createCard(self.card, sceneID: scene.id)
                 })
             }
         } else {
-            createDegenerateTrip(card: card, scene: scene, callback: callback)
+            createDegenerateTrip(card: card, scene: scene)
         }
     }
     
-    func createDegenerateTrip(card: Card, scene: Scene, callback: @escaping () -> Void) {
+    func createDegenerateTrip(card: Card, scene: Scene) {
         let scene = [
             "ID": scene.id,
             "Latitude": scene.latitude ?? _currentLocationService.latitude,
@@ -92,17 +94,20 @@ class PostService: NSObject {
             ]] as [String : Any]
         
         _apiAmbassador.post("/trips/generate", parameters: scene as [String : AnyObject], success: { response in
-            callback()
+            let trip = Mapper<Trip>().map(JSONObject: response.result.value)
+            if let scene = trip?.scenes[0] {
+                NotificationCenter.default.post(name: self.postNotificationName, object: scene.id)
+            }
         })
     }
     
-    func createCard(_ card: Card, sceneID: Int, callback: @escaping () -> Void) {
+    func createCard(_ card: Card, sceneID: Int) {
         let newCard = [
             "Capion": card.caption,
             "ImageURL": getURL
         ]
         _apiAmbassador.post("/scenes/\(sceneID)/cards", parameters: newCard as [String : AnyObject], success: { response in
-            callback()
+            NotificationCenter.default.post(name: self.postNotificationName, object: sceneID)
         })
     }
     

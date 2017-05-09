@@ -10,10 +10,12 @@ import UIKit
 import ObjectMapper
 
 class FeedService: NSObject {
-    fileprivate let _apiAmbassador: AmbassadorToTheAPI
+    private let _apiAmbassador: AmbassadorToTheAPI
+    private let _currentLocationService: CurrentLocationService
     
-    init(apiAmbassador: AmbassadorToTheAPI) {
+    init(apiAmbassador: AmbassadorToTheAPI, currentLocationService: CurrentLocationService) {
         _apiAmbassador = apiAmbassador
+        _currentLocationService = currentLocationService
     }
     
     func getFeed(success: @escaping ([Scene]) -> Void) {
@@ -23,11 +25,27 @@ class FeedService: NSObject {
         })
     }
     
+    func getScene(_ sceneId: Int, success: @escaping (Scene) -> Void) {
+        _apiAmbassador.get("/scenes/\(sceneId)", success: { response in
+            let scene = Mapper<Scene>().map(JSONObject: response.result.value)
+            success(scene!)
+        })
+    }
+    
     func getUsersFeed(userID: Int, success: @escaping ([Scene]) -> Void) {
         _apiAmbassador.get("/users/\(userID)/scenes", success: { response in
             let scenes = Mapper<Scene>().mapArray(JSONObject: response.result.value)
             success(scenes!)
         })
     }
-
+    
+    func getNearbyScenes(success: @escaping ([Scene]) -> Void) {
+        let lat = _currentLocationService.latitude
+        let lon = _currentLocationService.longitude
+        let url = "/scenes/nearby?lat=\(lat)&lon=\(lon)"
+        _apiAmbassador.get(url, success: { response in
+            let scenes = Mapper<Scene>().mapArray(JSONObject: response.result.value)
+            success(scenes!)
+        })
+    }
 }

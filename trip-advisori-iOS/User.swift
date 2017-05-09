@@ -11,7 +11,7 @@ import UIKit
 import ObjectMapper
 
 class User: NSObject, Mappable {
-    var id:Int?
+    var id:Int = 0
     var email: String?
     var facebookId:String?
     var fullName:String?

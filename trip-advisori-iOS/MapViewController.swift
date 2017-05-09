@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import Alamofire
+import MDCSwipeToChoose
 
 class MapViewController: TripModalPresentingViewController,
                          GMSMapViewDelegate,
@@ -17,8 +18,10 @@ class MapViewController: TripModalPresentingViewController,
                          UICollectionViewDelegate,
                          UICollectionViewDataSource,
                          TripDetailsViewControllerDelegate,
-                         CurrentLocationServiceDelegate,
-                         LightuponGMSMapViewDelegate {
+                         PartyServiceDelegate,
+                         MDCSwipeToChooseDelegate,
+                         LightuponGMSMapViewDelegate,
+                         EndOfTripDelegate {
     
     let reuseIdentifier = "MapSceneCell"
     
@@ -26,6 +29,8 @@ class MapViewController: TripModalPresentingViewController,
     private let tripsService = Services.shared.getTripsService()
     private let feedService = Services.shared.getFeedService()
     private let partyService = Services.shared.getPartyService()
+    private let userService = Services.shared.getUserService()
+    private let postService = Services.shared.getPostService()
     
     var trips:[Trip] = [Trip]()
     var scenes: [Scene] = [Scene]()
@@ -41,7 +46,14 @@ class MapViewController: TripModalPresentingViewController,
     var scrollingUp = false
     var constellationOverlayVisible = false
     var markerFour: GMSMarker?
+    var endOfTripView: EndOfTripView!
+    var _nextSceneAvailable = false
+    var _cardCount: Int = 0
+    var _swipeOptions = CardSwipeOptions()
+    var _cardSize: CGRect!
     
+    @IBOutlet weak var checkItOutButton: UIButton!
+    @IBOutlet weak var partyButton: UIButton!
     @IBOutlet weak var litButton: LitButton!
     @IBOutlet weak var mapView: LightuponGMSMapView!
     @IBOutlet weak var MapSceneCollectionView: UICollectionView!
@@ -49,62 +61,95 @@ class MapViewController: TripModalPresentingViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getScenes()
+        getNearbyScenes()
 
         MapSceneCollectionView.dataSource = self
         MapSceneCollectionView.delegate = self
         litButton.delegate = self
         configureMapView()
         initDrawer()
+        createCardSize()
         
-        let visibleRegion = mapView.projection.visibleRegion()
-        let nearleftPosition = visibleRegion.nearLeft
-        let markerOne = GMSMarker(position: nearleftPosition)
-        markerOne.title = "Hello World"
-        markerOne.map = mapView
-        let nearRightPosition = visibleRegion.nearRight
-        let markerTwo = GMSMarker(position: nearRightPosition)
-        markerTwo.title = "Hello World"
-        markerTwo.map = mapView
-        let farLeftPosition = visibleRegion.farLeft
-        let markerThree = GMSMarker(position: farLeftPosition)
-        markerThree.title = "Hello World"
-        markerThree.map = mapView
-        let farRightPosition = visibleRegion.farRight
-        markerFour = GMSMarker(position: farRightPosition)
-        markerFour?.title = "Hello World"
-        markerFour!.map = mapView
+        let _ = BeltOverlayView.fromNib()
         
-        currentLocationService.registerDelegate(self)
+        _swipeOptions.delegate = self
+        partyService.registerDelegate(self)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onSceneAdded), name: postService.postNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onPartyChanged), name: partyService.partyChangeNotificationName, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getTrips()
-        getScenes()
         getParty()
+    }
+    
+    @IBAction func openPartyMenu(_ sender: Any) {
+        delegate.toggleRightPanel()
+    }
+    
+    @IBAction func checkItOut(_ sender: Any) {
+        checkItOutButton.isHidden = true
+        loadSwipeViews()
+    }
+    
+    func onSceneAdded(notification: NSNotification) {
+        let sceneId = notification.object as! Int
+        feedService.getScene(sceneId, success: { scene in
+            self.mapView.placeMarker(scene: scene)
+        })
+    }
+    
+    func onNextSceneAvailableUpdated(_ nextSceneAvailable: Bool) {
+        checkItOutButton.isHidden = !nextSceneAvailable
+    }
+    
+    func getNearbyScenes() {
+        feedService.getNearbyScenes(success: addNearbyScenes)
+    }
+    
+    func addNearbyScenes(_ nearbyScenes: [Scene]) {
+        mapView.bindScenes(nearbyScenes)
     }
     
     func getParty() {
         partyService.getUsersParty(self.onPartyRetreived)
     }
     
+    func createCardSize() {
+        _cardSize = CGRect(x: 0, y: 50 + UIApplication.shared.statusBarFrame.height, width: self.view.frame.width, height: self.view.frame.height - (UIApplication.shared.statusBarFrame.height + 50 + (self.tabBarController?.tabBar.frame.size.height)!))
+    }
+    
     func onPartyRetreived(party: Party?) {
+        removeCompasses()
         if let _ = partyService.currentParty {
             MapSceneCollectionView.isHidden = true
             addCompass()
-//            view.bringSubview(toFront: mapView)
+        } else {
+            MapSceneCollectionView.isHidden = false
+            checkItOutButton.isHidden = true
         }
     }
     
-    func onLocationUpdated() {
-    
+    func onPartyChanged() {
+        removeCompasses()
+        if let _ = partyService.currentParty {
+            MapSceneCollectionView.isHidden = true
+            addCompass()
+            mapView.lockState = .locked
+        } else {
+            MapSceneCollectionView.isHidden = false
+            checkItOutButton.isHidden = true
+            mapView.lockState = .locked
+        }
     }
     
-    func onHeadingUpdated() {
-        if let marker = markerFour {
-            print(mapView.projection.point(for: marker.position))
-            print(mapView.projection.contains(marker.position))
-        }
-
+    func removeCompasses() {
+        compasses.forEach({ compass in
+            compass.removeFromSuperview()
+        })
+        compasses = [Compass]()
     }
     
     func addCompass() {
@@ -115,6 +160,7 @@ class MapViewController: TripModalPresentingViewController,
         compasses.append(compass)
         view.addSubview(compass)
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -142,8 +188,7 @@ class MapViewController: TripModalPresentingViewController,
         let scene: Scene = scenes[(indexPath as NSIndexPath).row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MapSceneCell
         
-        cell.MapSceneImage.imageFromUrl(scene.backgroundUrl!, success: { img in
-            scene.image = img
+        cell.MapSceneImage.imageFromUrl(scene.pinUrl!, success: { img in
             cell.MapSceneImage.image = img
             cell.MapSceneImage.makeCircle()
         })
@@ -152,6 +197,8 @@ class MapViewController: TripModalPresentingViewController,
             cell.profileImageView.image = img
             cell.profileImageView.makeCircle()
         })
+        
+ 
         
         return cell
     }
@@ -274,7 +321,7 @@ class MapViewController: TripModalPresentingViewController,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedScene = scenes[indexPath.row]
-        let marker = mapView.findOrCreateMarker(byScene: selectedScene)
+        let marker = mapView.findOrCreateMarker(scene: selectedScene)
         
         if let selectedMarker = marker {
             mapView.selectMarker(selectedMarker)
@@ -310,19 +357,6 @@ class MapViewController: TripModalPresentingViewController,
         mapView.centerMap()
     }
     
-    func getTrips() {
-        tripsService
-            .getTrips(self.onTripsGotten,
-                              latitude: self.currentLocationService.latitude,
-                              longitude: self.currentLocationService.longitude
-        )
-    }
-    
-    func onTripsGotten(_ _trips_: [Trip]) {
-        trips = _trips_
-        mapView.bindTrips(trips)
-    }
-    
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         self.mapView.unselect()
         self.animateOutDrawer(duration: 0.25)
@@ -335,6 +369,20 @@ class MapViewController: TripModalPresentingViewController,
         self.animateOutDrawer(duration: 0.25)
     }
     
+
+    func mapView(_ mapView: GMSMapView, didChange postion: GMSCameraPosition) {
+        compasses.forEach({ compass in
+            if let target = compass.target {
+                let targetPoint = mapView.projection.point(for: target.coordinate)
+                if view.frame.contains(targetPoint) {
+                    compass.isHidden = true
+                } else {
+                    compass.isHidden = false
+                }
+            }
+        })
+    }
+    
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         let lightuponMarker = marker as! LightuponGMSMarker
         self.mapView.selectMarker(lightuponMarker)
@@ -344,12 +392,64 @@ class MapViewController: TripModalPresentingViewController,
     }
     
     func onSceneChanged(_ scene: Scene) {
-        let marker = mapView.findOrCreateMarker(byScene: scene)
+        let marker = mapView.findOrCreateMarker(scene: scene)
         mapView.selectMarker(marker!)
     }
     
-    func segueToContainer() {
-        performSegue(withIdentifier: "MapToContainer", sender: self)
+    func openEndOfTripView() {
+        endOfTripView = EndOfTripView.fromNib("EndOfTripView")
+        endOfTripView.frame = _cardSize
+        endOfTripView.delegate = self
+        self.view.addSubview(endOfTripView)
     }
+    
+    
+    func handleNoMoreCards() {
+        if (partyService.endOfTrip()) {
+            openEndOfTripView()
+        } else {
+            partyService.startNextScene()
+        }
+    }
+    
+    func onTripEnds() {
+        MapSceneCollectionView.isHidden = false
+        checkItOutButton.isHidden = true
+        endOfTripView.removeFromSuperview()
+        endOfTripView = nil
+    }
+    
+    
+    func loadSwipeViews() {
+        if let currentScene = partyService.currentScene() {
+            for card in currentScene.cards.reversed() {
+                _cardCount += 1
+                loadCardView(card, scene: currentScene)
+            }
+        }
+    }
+
+    func loadCardView(_ card: Card, scene: Scene) {
+        let owner = userService.currentUser
+        let cardView = CardView(card: card, scene: scene, owner: owner, options:_swipeOptions, frame: _cardSize)
+        
+        cardView.layer.borderWidth = 0.0
+        view.addSubview(cardView)
+    }
+    
+    func viewDidCancelSwipe(_ view: UIView) -> Void {}
+    
+    func view(_ view:UIView, shouldBeChosenWith shouldBeChosenWithDirection:MDCSwipeDirection) -> Bool {
+        return true
+    }
+    
+    func view(_ view: UIView, wasChosenWith wasChosenWithDirection: MDCSwipeDirection) -> Void{
+        _cardCount -= 1
+        
+        if (_cardCount == 0) {
+            handleNoMoreCards()
+        }
+    }
+    
 
 }

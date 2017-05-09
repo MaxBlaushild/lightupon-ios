@@ -1,4 +1,3 @@
-
 //  AmbassadorOfTheAPI.swift
 //  trip-advisori-iOS
 //

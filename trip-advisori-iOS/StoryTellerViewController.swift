@@ -34,10 +34,6 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 private let reuseIdentifier = "cardCollectionViewCell"
 private let centerPanelExpandedOffset: CGFloat = 60
 
-protocol MainViewControllerDelegate {
-    func toggleRightPanel()
-}
-
 class StoryTellerViewController: UIViewController, MDCSwipeToChooseDelegate, EndOfTripDelegate, CompassViewDelegate, PartyServiceDelegate {
     private let _partyService = Services.shared.getPartyService()
     
@@ -59,11 +55,11 @@ class StoryTellerViewController: UIViewController, MDCSwipeToChooseDelegate, End
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        
-        _swipeOptions.delegate = self
-        _partyService.registerDelegate(self)
-        
-        createCardSize()
+//        
+//        _swipeOptions.delegate = self
+//        _partyService.registerDelegate(self)
+//        
+//        createCardSize()
     }
     
     func createCardSize() {
@@ -127,8 +123,8 @@ class StoryTellerViewController: UIViewController, MDCSwipeToChooseDelegate, End
     }
     
     func loadCardView(_ card: Card) {
-        let cardView = CardView(card: card, options:_swipeOptions, frame: _cardSize)
-        self.view.addSubview(cardView)
+//        let cardView = CardView(card: card, options:_swipeOptions, frame: _cardSize)
+//        self.view.addSubview(cardView)
     }
     
     func viewDidCancelSwipe(_ view: UIView) -> Void {}

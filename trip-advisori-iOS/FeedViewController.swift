@@ -21,6 +21,7 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var litButton: LitButton!
+    @IBOutlet weak var partyButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +35,15 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
         getFeed()
     }
     
-    func createProfileView(user: User) {
+    @IBAction func openPartyMenu(_ sender: Any) {
+        delegate.toggleRightPanel()
+    }
+    
+    func createProfileView(_ userId: Int) {
         profileView = ProfileView.fromNib("ProfileView")
         profileView.frame = view.frame
         profileView.delegate = self
-        profileView.initializeView(user)
+        profileView.initializeView(userId)
         view.addSubview(profileView)
         addXBackButton()
     }
@@ -109,7 +114,7 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
             cell.profileImage.makeCircle()
         })
         
-        cell.tripImage.imageFromUrl(scene.cards[0].imageUrl!)
+        cell.tripImage.imageFromUrl(scene.cards[0].imageUrl)
         cell.delegate = self
         return cell
     }

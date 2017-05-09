@@ -17,7 +17,7 @@ protocol ProfileViewDelegate {
 }
 
 protocol ProfileViewCreator {
-    func createProfileView(user: User)
+    func createProfileView(_ userId: Int)
 }
 
 enum ProfileContext {
@@ -70,8 +70,8 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
         actionPackButtonHandler()
     }
     
-    @nonobjc func initializeView(_ user: User) {
-        getUser(user.id!)
+    @nonobjc func initializeView(_ userId: Int) {
+        getUser(userId)
         configureTableView()
         configureMapView()
         centerMap()
@@ -164,14 +164,6 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
         mapView.delegate = self
     }
     
-    func getUsersTrips() {
-        tripService.getUsersTrips(_user.id!, callback: self.onTripsReceived)
-    }
-    
-    func onTripsReceived(trips: [Trip]) {
-        mapView.bindTrips(trips)
-    }
-    
     func centerMap() {
         mapView.camera = GMSCameraPosition.camera(withLatitude: currentLocationService.latitude, longitude: currentLocationService.longitude, zoom: 15)
     }
@@ -219,7 +211,7 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     }
 
     func getUsersFeed() {
-        feedService.getUsersFeed(userID: _user.id!, success: self.onFeedReceived)
+        feedService.getUsersFeed(userID: _user.id, success: self.onFeedReceived)
     }
     
     func onFeedReceived(scenes: [Scene]) {
@@ -230,13 +222,12 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     func setUser(_ user: User) {
         _user = user
         getUsersFeed()
-        getUsersTrips()
         setUserContext(user)
         bindUser(user)
     }
     
     func refresh() {
-        getUser(_user.id!)
+        getUser(_user.id)
         centerMap()
     }
     
@@ -359,7 +350,7 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
             cell.profileImage.makeCircle()
         })
         
-        cell.tripImage.imageFromUrl(scene.cards[0].imageUrl!)
+        cell.tripImage.imageFromUrl(scene.cards[0].imageUrl)
         
         return cell
     }

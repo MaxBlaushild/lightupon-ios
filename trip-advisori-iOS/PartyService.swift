@@ -25,6 +25,8 @@ class PartyService: NSObject, SocketServiceDelegate {
     
     private var nextSceneAvailable: Bool = false
     
+    public let partyChangeNotificationName = Notification.Name("OnPartyStatusChange")
+    
     init(apiAmbassador: AmbassadorToTheAPI, socketService: SocketService){
         _apiAmbassador = apiAmbassador
         _socketService = socketService
@@ -126,6 +128,8 @@ class PartyService: NSObject, SocketServiceDelegate {
     
     func leaveParty(_ callback: @escaping () -> Void) {
         _apiAmbassador.delete("/parties", success: { response in
+            self.currentParty = nil
+            NotificationCenter.default.post(name: self.partyChangeNotificationName, object: nil)
             callback()
         })
     }
@@ -133,6 +137,8 @@ class PartyService: NSObject, SocketServiceDelegate {
     func end(callback: @escaping () -> Void) {
         if let party = currentParty {
             _apiAmbassador.get("/parties/\(party.id ?? 0)/end", success: { response in
+                self.currentParty = nil
+                NotificationCenter.default.post(name: self.partyChangeNotificationName, object: nil)
                 callback()
             })
         }
@@ -144,6 +150,8 @@ class PartyService: NSObject, SocketServiceDelegate {
         ]
         
         _apiAmbassador.post("/parties", parameters: parameters as [String : AnyObject], success: { response in
+            self.currentParty = Mapper<Party>().map(JSONObject: response.result.value)
+            NotificationCenter.default.post(name: self.partyChangeNotificationName, object: nil)
             callback()
         })
     }

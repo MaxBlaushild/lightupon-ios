@@ -18,19 +18,12 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
 
     @IBOutlet weak var mapView: LightuponGMSMapView!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var storyLbael: UILabel!
-    @IBOutlet weak var tripTitleSection: UIView!
     @IBOutlet weak var sceneImage: UIImageView!
-    @IBOutlet weak var storyLabel: UILabel!
     @IBOutlet weak var captionTextField: UITextView!
-    @IBOutlet weak var captionSection: UIView!
     @IBOutlet weak var topBar: UIView!
     @IBOutlet weak var sceneAddressLabel: UILabel!
     @IBOutlet weak var sceneNameTextField: UITextField!
     @IBOutlet weak var locationSection: UIView!
-    @IBOutlet weak var tripNameLabel: UILabel!
-    @IBOutlet weak var tripCreateLabel: UILabel!
-    @IBOutlet weak var createTripButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     
     
@@ -52,10 +45,8 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         sceneImage.image = PickedImage.shared
         postService.uploadPicture(image: PickedImage.shared)
         makeKeyboardLeave()
-        addBorders()
         getRecommendedScene()
         getActiveTrip()
-        tripBarActiveState()
         setDelegation()
         tintBackButton()
         watchForLocationSectionTouch()
@@ -143,13 +134,6 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         })
     }
     
-    func addBorders() {
-        captionSection.layer.addBorder(edge: .top, color: UIColor.lightGray, thickness: 1.0)
-        captionSection.layer.addBorder(edge: .bottom, color: UIColor.lightGray, thickness: 1.0)
-        topBar.layer.addBorder(edge: .bottom, color: UIColor.lightGray, thickness: 1.0)
-        storyLbael.textColor = UIColor.basePurple
-    }
-    
     func setDelegation() {
         mapView.delegate = self
         captionTextField.delegate = self
@@ -160,7 +144,7 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         let origImage = UIImage(named: "left_chevron")
         let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
         backButton.setImage(tintedImage, for: .normal)
-        backButton.tintColor = .darkGrey
+        backButton.tintColor = .basePurple
     }
     
     @IBAction func goBack(_ sender: Any) {
@@ -175,8 +159,6 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         tripNameModal.removeFromSuperview()
         blurView.removeFromSuperview()
         tripExplanationLabel.removeFromSuperview()
-        tripBarInactiveState()
-        tripNameLabel.text = trip.title
     }
     
     func getRecommendedScene() {
@@ -190,29 +172,12 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     func setActiveTrip(trip: Trip) {
         currentTrip = trip
         if !trip.title.isEmpty {
-            tripBarInactiveState()
         }
     }
-    
-    func tripBarInactiveState() {
-        tripNameLabel.text = currentTrip.title
-        tripNameLabel.textColor = UIColor.white
-        tripTitleSection.backgroundColor = UIColor.basePurple
-        tripCreateLabel.isHidden = true
-        tripNameLabel.isHidden = false
-        createTripButton.isEnabled = false
-    }
-    
-    func tripBarActiveState() {
-        tripNameLabel.textColor = UIColor.black
-        tripTitleSection.backgroundColor = UIColor.white
-        tripCreateLabel.isHidden = false
-        tripNameLabel.isHidden = true
-        createTripButton.isEnabled = true
-    }
+
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        tripBarActiveState()
+
         activeField = textField
         sceneNameFieldActive = (textField == sceneNameTextField)
     }
@@ -333,24 +298,16 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     }
 
     func post() {
+        performSegue(withIdentifier: "SceneFormToTripForm", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         currentScene.name = sceneNameTextField.text!
         let card = Card(caption: captionTextField.text)
-        postService.post(card: card, scene: currentScene, callback: {
-            self.tellUserHeOrSheIsJustSwell()
-        })
-    }
-    
-    func addPostConfirmationView() {
-        let postConfirmationView = PostConfirmationView.fromNib("PostConfirmationView")
-        view.addSubview(postConfirmationView)
-    }
-    
-    func tellUserHeOrSheIsJustSwell() {
-        addBlurView()
-        addPostConfirmationView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-            self.dismiss(animated: true, completion: nil)
-        })
+        let tripFormViewController = segue.destination as! TripFormViewController
+        tripFormViewController.currentScene = currentScene
+        tripFormViewController.currentCard = card
+        
     }
 
 }

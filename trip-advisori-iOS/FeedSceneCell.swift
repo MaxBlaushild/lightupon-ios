@@ -47,7 +47,7 @@ class FeedSceneCell: UITableViewCell {
     }
     
     func createProfileView(sender: AnyObject) {
-        delegate.createProfileView(user: _scene!.trip!.owner!)
+        delegate.createProfileView(_scene!.trip!.owner!.id)
     }
     
     func toggleLikeButton() {

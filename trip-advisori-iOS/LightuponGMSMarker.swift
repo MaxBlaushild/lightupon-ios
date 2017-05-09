@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import Toucan
+import Alamofire
 
 let markerDiameter = 40
 
@@ -25,12 +26,80 @@ class LightuponGMSMarker: GMSMarker {
         userData = scene
     }
     
-    func setImages() {
-        let url = URL(string: scene.backgroundUrl!)
-        let data = try? Data(contentsOf: url!)
-        let image = UIImage(data: data!)
-        _image = Toucan(image: image!).resize(CGSize(width: markerDiameter, height: markerDiameter), fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse().image
-        _selectedImage = Toucan(image: image!).resize(CGSize(width: markerDiameter * 3, height: markerDiameter * 3), fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 5, borderColor: UIColor.white).image
+    func setImages(mapView: LightuponGMSMapView, selected: Bool) {
+        if let pinUrl = _scene.pinUrl {
+            Alamofire.request(pinUrl).responseJSON { response in
+                if let data = response.data {
+                    var image = UIImage(data: data)
+                    if self._scene.hidden {
+                        image = image?.applyDarkEffect()
+                    }
+                    if let img = image {
+                        self._image = Toucan(image: img).resize(CGSize(width: markerDiameter, height: markerDiameter), fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse().image
+                        self._selectedImage = Toucan(image: img).resize(CGSize(width: 120, height: 120), fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 5, borderColor: UIColor.white).image
+                        
+                        self.map = mapView
+                        mapView.markers.append(self)
+                        
+                        if selected {
+                            self.setSelected()
+                        } else {
+                            self.setNotSelected()
+                        }
+                    }
+                }
+            }
+        }
+        
+//        if let pinUrl = _scene.pinUrl {
+//            Alamofire.request(pinUrl).responseJSON { response in
+//                if let data = response.data {
+//                    var image = UIImage(data: data)
+//                    if self._scene.hidden {
+//                        image = image?.applyDarkEffect()
+//                    }
+//                    if let img = image {
+//                        self._image = img
+//                        if self._selectedImage != nil {
+//                            self.map = mapView
+//                            mapView.markers.append(self)
+//                            
+//                            if selected {
+//                                self.setSelected()
+//                            } else {
+//                                self.setNotSelected()
+//                            }
+//                        }
+//                    }
+//                    
+//                }
+//            }
+//            
+//        }
+//        
+//        if let selectedPinUrl = _scene.selectedPinUrl {
+//            Alamofire.request(selectedPinUrl).responseJSON { response in
+//                if let data = response.data {
+//                    var selectedImage = UIImage(data: data)
+//                    if self._scene.hidden {
+//                        selectedImage = selectedImage?.applyDarkEffect()
+//                    }
+//                    if let selectedImg = selectedImage {
+//                        self._selectedImage  = selectedImg
+//                        if self._image != nil {
+//                            self.map = mapView
+//                            mapView.markers.append(self)
+//                            
+//                            if selected {
+//                                self.setSelected()
+//                            } else {
+//                                self.setNotSelected()
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
     
     func setSelected() {
@@ -50,5 +119,4 @@ class LightuponGMSMarker: GMSMarker {
             return _scene
         }
     }
-
 }
