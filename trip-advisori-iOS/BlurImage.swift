@@ -42,6 +42,10 @@ public extension UIImage {
         return applyBlurWithRadius(20, tintColor: UIColor(white: 0.11, alpha: 0.73), saturationDeltaFactor: 1.8)
     }
     
+    public func applyBackToTheFutureEffect(blur: CGFloat) -> UIImage? {
+        return applyBlurWithRadius(blur*20, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8)
+    }
+
     public func applyTintEffectWithColor(_ tintColor: UIColor) -> UIImage? {
         let effectColorAlpha: CGFloat = 0.6
         var effectColor = tintColor

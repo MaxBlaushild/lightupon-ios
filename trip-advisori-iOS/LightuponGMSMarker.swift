@@ -31,8 +31,8 @@ class LightuponGMSMarker: GMSMarker {
             Alamofire.request(pinUrl).responseJSON { response in
                 if let data = response.data {
                     var image = UIImage(data: data)
-                    if self._scene.hidden {
-                        image = image?.applyDarkEffect()
+                    if self._scene.blur > 0.001 {
+                        image = image?.applyBackToTheFutureEffect(blur: self._scene.blur)
                     }
                     if let img = image {
                         self._image = Toucan(image: img).resize(CGSize(width: markerDiameter, height: markerDiameter), fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse().image
