@@ -27,7 +27,7 @@ class CardViewController: UIViewController, ProfileViewCreator {
     
     func addCardView(card: Card, owner: User, scene: Scene) {
         cardView = DefaultCardDetailsView.fromNib("DefaultCardDetailsView")
-        cardView.initFrom(card: card, hidden: false)
+        cardView.initFrom(card: card, hidden: scene.hidden, blur: scene.blur)
         cardView.frame = self.view.frame
         cardView.delegate = self
         view.addSubview(cardView)
