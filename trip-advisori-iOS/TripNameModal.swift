@@ -15,7 +15,6 @@ protocol TripNameModalDelegate {
 class TripNameModal: UIView, UITextFieldDelegate, UITextViewDelegate {
     
     let tripService = Services.shared.getTripsService()
-    let litService = Services.shared.getLitService()
     
     @IBOutlet weak var descriptionLine: UIView!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -45,9 +44,7 @@ class TripNameModal: UIView, UITextFieldDelegate, UITextViewDelegate {
     }
     
     func onSaved(_ trip: Trip) {
-        litService.light {
-            self.delegate.onTripNameSaved(trip)
-        }
+        self.delegate.onTripNameSaved(trip)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

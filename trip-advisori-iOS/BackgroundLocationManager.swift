@@ -14,7 +14,7 @@ class BackgroundLocationManager: NSObject, APScheduledLocationManagerDelegate {
     override init(){
         super.init()
         _backgroundLocationManager = APScheduledLocationManager(delegate: self)
-//        _backgroundLocationManager.startUpdatingLocation(interval: 5)
+        _backgroundLocationManager.startUpdatingLocation(interval: 5)
         _sessionManager = Alamofire.SessionManager(configuration: configuration)
         
         setHeaders()
@@ -44,7 +44,7 @@ class BackgroundLocationManager: NSObject, APScheduledLocationManagerDelegate {
             "Longitude": coord.longitude
         ] as [String : Any]
         
-        _sessionManager.request(apiURL + "/locations", method: .post, parameters: location as [String : AnyObject], encoding: JSONEncoding.default, headers: _headers)
+        _sessionManager.request(apiURL + "/discover", method: .post, parameters: location as [String : AnyObject], encoding: JSONEncoding.default, headers: _headers)
     }
     
     func scheduledLocationManager(_ manager: APScheduledLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

@@ -1,4 +1,4 @@
-//
+ //
 //  PostService.swift
 //  trip-advisori-iOS
 //
@@ -19,6 +19,8 @@ class PostService: NSObject {
     private var awaitingGetURL = false
     private var card: Card!
     private var scene: Scene!
+    private var tripID: Int?
+    private var sceneID: Int?
     
     public var activeScene: Scene?
     
@@ -51,9 +53,11 @@ class PostService: NSObject {
         })
     }
     
-    func post(card: Card, scene: Scene) {
+    func post(card: Card, scene: Scene, tripID: Int?, sceneID: Int?) {
         self.card = card
         self.scene = scene
+        self.tripID = tripID
+        self.sceneID = sceneID
         
         if getURL.isEmpty {
             self.awaitingGetURL = true
@@ -63,17 +67,17 @@ class PostService: NSObject {
     }
     
     func createContent() {
-        if _litService.isLit {
-            if scene.id != 0 {
-                createCard(card, sceneID: scene.id)
-            } else {
-                createScene(scene, callback: { scene in
-                    self.card.sceneID = scene.id
-                    self.createCard(self.card, sceneID: scene.id)
-                })
-            }
+        if let id = tripID {
+            appendScene(scene, toTrip: id, callback: { scene in
+                self.card.sceneID = scene.id
+                self.createCard(self.card, sceneID: scene.id)
+            })
         } else {
-            createDegenerateTrip(card: card, scene: scene)
+            if let id  = sceneID {
+                createCard(card, sceneID: id)
+            } else {
+                createDegenerateTrip(card: card, scene: scene)
+            }
         }
     }
     
@@ -111,7 +115,7 @@ class PostService: NSObject {
         })
     }
     
-    func createScene(_ scene: Scene, callback: @escaping (Scene) -> Void) {
+    func appendScene(_ scene: Scene, toTrip tripID: Int, callback: @escaping (Scene) -> Void) {
         let scene = [
             "ID": scene.id,
             "Latitude": scene.latitude ?? _currentLocationService.latitude,
@@ -122,7 +126,7 @@ class PostService: NSObject {
             "BackgroundUrl": getURL
             ] as [String : Any]
         
-        _apiAmbassador.post("/trips/active/scenes", parameters: scene as [String : AnyObject], success: { response in
+        _apiAmbassador.post("/trips/\(tripID)/scenes", parameters: scene as [String : AnyObject], success: { response in
             let scene = Mapper<Scene>().map(JSONObject: response.result.value)
             callback(scene!)
         })

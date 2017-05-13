@@ -12,8 +12,8 @@ import SwiftyJSON
 
 let apiURL:String = "http://45.55.160.25/lightupon"
 let wsURL:String = "ws://45.55.160.25/lightupon"
-//     let apiURL:String = "http://localhost:5000/lightupon"
-//     let wsURL:String = "ws://localhost:5000/lightupon"
+//let apiURL:String = "http://localhost:5000/lightupon"
+//let wsURL:String = "ws://localhost:5000/lightupon"
 
 class AmbassadorToTheAPI: NSObject {
     fileprivate let _authService:AuthService

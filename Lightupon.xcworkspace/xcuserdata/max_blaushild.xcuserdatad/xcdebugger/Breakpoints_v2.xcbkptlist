@@ -42,7 +42,7 @@
                   moduleName = "Lightupon"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/max_blaushild/projects/lightupon-ios/trip-advisori-iOS/LightViewController.swift"
-                  timestampString = "515990099.906245"
+                  timestampString = "516335994.4769"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "37"
@@ -57,7 +57,7 @@
                   moduleName = "Lightupon"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/max_blaushild/projects/lightupon-ios/trip-advisori-iOS/LightViewController.swift"
-                  timestampString = "515990099.907643"
+                  timestampString = "516335994.478464"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "37"
@@ -73,13 +73,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "trip-advisori-iOS/BackgroundLocationManager.swift"
-            timestampString = "511508271.372644"
+            filePath = "trip-advisori-iOS/SocketService.swift"
+            timestampString = "516332727.702226"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "scheduledLocationManager(_:didUpdateLocations:)"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "websocketDidReceiveMessage(socket:text:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "trip-advisori-iOS/MapViewController.swift"
+            timestampString = "516335525.708933"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "onPartyRetreived(party:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "trip-advisori-iOS/MapViewController.swift"
+            timestampString = "516335626.993779"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "onPartyChanged()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

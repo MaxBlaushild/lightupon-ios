@@ -17,6 +17,7 @@ protocol LocationInfo{
 
 class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo {
     
+    
     fileprivate var _locationManager:CLLocationManager
     fileprivate var _locationStatus:(code: Int, message: String)
     fileprivate var _longitude:Double
@@ -25,13 +26,15 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     fileprivate var _heading:Double
     fileprivate var _lastLocationDate:NSDate = NSDate()
     
+    let tripsService:TripsService
+    
     var delegates:[CurrentLocationServiceDelegate] = [CurrentLocationServiceDelegate]()
     
-    override init(){
+    init(tripsService: TripsService){
         
+        self.tripsService = tripsService
         self._locationManager = CLLocationManager()
 
-        
         self._locationStatus = (code: 0, message: "")
         self._longitude = 50.0
         self._latitude = 50.0

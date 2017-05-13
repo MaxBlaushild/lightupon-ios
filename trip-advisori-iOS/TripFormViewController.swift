@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TripFormViewController: TripModalPresentingViewController {
+class TripFormViewController: TripModalPresentingViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     private let postService = Services.shared.getPostService()
     private let tripsService = Services.shared.getTripsService()
@@ -18,14 +18,20 @@ class TripFormViewController: TripModalPresentingViewController {
     @IBOutlet weak var sceneAddressLabel: UILabel!
     @IBOutlet weak var sceneNameLabel: UILabel!
     @IBOutlet weak var scenePreviewSection: UIView!
+    @IBOutlet weak var tripCollectionView: UICollectionView!
+    @IBOutlet weak var backButton: UIButton!
     
     var currentScene: Scene!
     var currentCard: Card!
-    var trips: [Trip]!
+    var trips: [Trip] = [Trip]()
+    var scenes: [Scene] = [Scene]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tripCollectionView.delegate = self
+        tripCollectionView.dataSource = self
+        
         sceneAddressLabel.text = "\(currentScene.streetNumber) \(currentScene.route)"
         sceneNameLabel.text = currentScene.name
         
@@ -46,7 +52,40 @@ class TripFormViewController: TripModalPresentingViewController {
         scenePreviewSection.layer.addSublayer(border)
         
         tripsService.getUsersTrips(userService.currentUser.id, callback: { trips in
-            self.trips = trips
+            self.trips = trips.filter({ trip in
+                return !trip.title.isEmpty
+            })
+            
+            self.tripCollectionView.reloadData()
+        })
+        
+        let origImage = UIImage(named: "left_chevron")
+        let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+        backButton.setImage(tintedImage, for: .normal)
+        backButton.tintColor = .basePurple
+    }
+
+    @IBAction func makeNewTrip(_ sender: Any) {
+       openTripModal()
+    }
+    
+    @IBAction func goBack(_ sender: Any) {
+        dismiss(animated: false, completion: {})
+    }
+    
+    override func onTripNameSaved(_ trip: Trip) {
+        tripNameModal.removeFromSuperview()
+        tripNameModal = nil
+        blurView.removeFromSuperview()
+        blurView = nil
+        tripExplanationLabel.removeFromSuperview()
+        tripExplanationLabel = nil
+        trips.insert(trip, at: 0)
+        tripCollectionView.reloadData()
+        tripCollectionView.performBatchUpdates({}, completion: { _ in
+            let selectedIndex = IndexPath(row: 0, section: 0)
+            self.tripCollectionView.selectItem(at: selectedIndex, animated: false, scrollPosition: .top)
+            self.collectionView(self.tripCollectionView, didSelectItemAt: selectedIndex)
         })
     }
 
@@ -55,16 +94,59 @@ class TripFormViewController: TripModalPresentingViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            let trip = trips[(indexPath as NSIndexPath).row]
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TripCollectionViewCell", for: indexPath) as! TripCollectionViewCell
+            cell.tripNameLabel.text = trip.title
+            cell.numberOfScenesLabel.text = "\(trip.scenes.count) scenes"
+            cell.tag = trip.id
+            return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return trips.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
+        tripCollectionView.visibleCells.forEach({ cell in
+            let tripCell = cell as! TripCollectionViewCell
+            tripCell.backgroundColor = .white
+            tripCell.tripNameLabel.textColor = .basePurple
+            tripCell.numberOfScenesLabel.textColor = .darkGrey
+        })
+        
+        let selectedTripCell = tripCollectionView.cellForItem(at: indexPath) as! TripCollectionViewCell
+        
+        selectedTripCell.backgroundColor = .basePurple
+        selectedTripCell.tripNameLabel.textColor = .white
+        selectedTripCell.numberOfScenesLabel.textColor = .white
+    }
+    
     @IBAction func share(_ sender: Any) {
+        var selectedTripId: Int?
+        
+        if let selectedCellPaths = tripCollectionView.indexPathsForSelectedItems {
+            if selectedCellPaths.count > 0 {
+                let selectedCellIndex = selectedCellPaths[0]
+                let selectedCell = tripCollectionView.cellForItem(at: selectedCellIndex)
+                if let tag = selectedCell?.tag {
+                    selectedTripId = tag
+                }
+            }
+        }
+        
+        
         tellUserHeOrSheIsJustSwell()
-        postService.post(card: currentCard, scene: currentScene)
+        postService.post(card: currentCard, scene: currentScene, tripID: selectedTripId, sceneID: nil)
     }
     
     func tellUserHeOrSheIsJustSwell() {
         addBlurView()
         addPostConfirmationView()
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-            self.dismiss(animated: true, completion: nil)
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
         })
     }
     

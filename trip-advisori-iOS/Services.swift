@@ -39,7 +39,7 @@ class Services: NSObject {
         _loginService = LoginService(authService: _authService, notificationService: _notificationService)
         _apiAmbassador = AmbassadorToTheAPI(authService: _authService)
         _tripsService = TripsService(apiAmbassador: _apiAmbassador)
-        _currentLocationService = CurrentLocationService()
+        _currentLocationService = CurrentLocationService(tripsService: _tripsService)
         _litService = LitService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService)
         _searchService = SearchService(apiAmbassador: _apiAmbassador)
         _followService = FollowService(apiAmbassador: _apiAmbassador)

@@ -17,8 +17,6 @@ enum LockState {
 protocol LightuponGMSMapViewDelegate {
     func onLocked() -> Void
 }
-let selectedZoom: Float = 15.0
-let unselectedZoom: Float = 18.0
 
 class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
     private let googleMapsService = Services.shared.getGoogleMapsService()
@@ -47,6 +45,24 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
                 setUnlockedState()
             }
         }
+    }
+    
+    public var radius: Double {
+        let bounds = projection.visibleRegion()
+        let sw = bounds.nearLeft
+        let ne = bounds.farRight
+        
+        // r = radius of the earth in statute miles
+        let r = 3963.0;
+        
+        // Convert lat or lng from decimal degrees into radians (divide by 57.2958)
+        let lat1 = sw.latitude / 57.2958
+        let lon1 = sw.longitude / 57.2958
+        let lat2 = ne.latitude / 57.2958
+        let lon2 = ne.longitude / 57.2958
+        
+        // distance = circle radius from center to Northeast corner of bounds
+        return r * acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(lon2 - lon1))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -141,7 +157,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         animate(to: GMSCameraPosition.camera(
             withLatitude: currentLocationService.latitude,
             longitude: currentLocationService.longitude,
-            zoom: unselectedZoom
+            zoom: googleMapsService.defaultLockedZoom
         ))
     }
     
@@ -161,7 +177,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         return GMSCameraPosition.camera(
             withLatitude: currentLocationService.latitude,
             longitude: currentLocationService.longitude,
-            zoom: 15,
+            zoom: camera.zoom,
             bearing: currentLocationService.heading,
             viewingAngle: 0
         )
@@ -225,7 +241,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
             to: GMSCameraPosition.camera(
                 withLatitude: scene.latitude!,
                 longitude: scene.longitude!,
-                zoom: selectedZoom,
+                zoom: googleMapsService.defaultUnlockedZoom,
                 bearing: camera.bearing,
                 viewingAngle: camera.viewingAngle
             )

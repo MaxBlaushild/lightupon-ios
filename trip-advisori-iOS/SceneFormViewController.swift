@@ -293,11 +293,6 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     @IBAction func changeLocation(_ sender: Any) {}
 
     @IBAction func share(_ sender: Any) {
-        shareButton.isEnabled = false
-        post()
-    }
-
-    func post() {
         performSegue(withIdentifier: "SceneFormToTripForm", sender: self)
     }
     

@@ -56,7 +56,8 @@ class TripsService: NSObject {
         ]
         
         _apiAmbassador.post("/trips", parameters: parameters as [String : AnyObject], success: { response in
-            callback(trip)
+            let newTrip = Mapper<Trip>().map(JSONObject: response.result.value)
+            callback(newTrip!)
         })
     }
     

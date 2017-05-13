@@ -50,6 +50,7 @@
 		1E3343CE1E15B27700A6E633 /* RoundDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3343CD1E15B27700A6E633 /* RoundDoubles.swift */; };
 		1E3940081E07277D009D29B0 /* AddBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3940071E07277D009D29B0 /* AddBorder.swift */; };
 		1E3FFA711E63CD7B001C4969 /* LightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FFA701E63CD7B001C4969 /* LightViewController.swift */; };
+		1E4E8CD51EC3C95C00DA4ACF /* SceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E8CD41EC3C95C00DA4ACF /* SceneCell.swift */; };
 		1E51D5961D9D8B530052DA6E /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5941D9D87ED0052DA6E /* ProfileView.xib */; };
 		1E51D5B51D9D968B0052DA6E /* Brandon_bld.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5B11D9D968B0052DA6E /* Brandon_bld.otf */; };
 		1E51D5B61D9D968B0052DA6E /* Brandon_blk.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5B21D9D968B0052DA6E /* Brandon_blk.otf */; };
@@ -139,6 +140,7 @@
 		1EBBFC1E1D734C6000697894 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBFC1D1D734C6000697894 /* CompassView.swift */; };
 		1EBBFC201D734EB100697894 /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBFC1F1D734EB100697894 /* NavigationService.swift */; };
 		1EBBFC221D73545F00697894 /* AddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBFC211D73545F00697894 /* AddShadow.swift */; };
+		1EC102101EC1658100D85CFD /* TripCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1020F1EC1658100D85CFD /* TripCollectionViewCell.swift */; };
 		1EC9E5921E3EAE7F0040C180 /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9E5911E3EAE7F0040C180 /* LoadingAnimationView.swift */; };
 		1EC9E5941E3EAE910040C180 /* LoadingAnimationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EC9E5931E3EAE910040C180 /* LoadingAnimationView.xib */; };
 		1EC9E5961E3EFF000040C180 /* LitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9E5951E3EFF000040C180 /* LitButton.swift */; };
@@ -256,6 +258,7 @@
 		1E3343CD1E15B27700A6E633 /* RoundDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundDoubles.swift; sourceTree = "<group>"; };
 		1E3940071E07277D009D29B0 /* AddBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBorder.swift; sourceTree = "<group>"; };
 		1E3FFA701E63CD7B001C4969 /* LightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightViewController.swift; sourceTree = "<group>"; };
+		1E4E8CD41EC3C95C00DA4ACF /* SceneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCell.swift; sourceTree = "<group>"; };
 		1E51D5941D9D87ED0052DA6E /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		1E51D5B11D9D968B0052DA6E /* Brandon_bld.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_bld.otf; sourceTree = "<group>"; };
 		1E51D5B21D9D968B0052DA6E /* Brandon_blk.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_blk.otf; sourceTree = "<group>"; };
@@ -343,6 +346,7 @@
 		1EBBFC1D1D734C6000697894 /* CompassView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
 		1EBBFC1F1D734EB100697894 /* NavigationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
 		1EBBFC211D73545F00697894 /* AddShadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddShadow.swift; sourceTree = "<group>"; };
+		1EC1020F1EC1658100D85CFD /* TripCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripCollectionViewCell.swift; sourceTree = "<group>"; };
 		1EC9E5911E3EAE7F0040C180 /* LoadingAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
 		1EC9E5931E3EAE910040C180 /* LoadingAnimationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingAnimationView.xib; sourceTree = "<group>"; };
 		1EC9E5951E3EFF000040C180 /* LitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LitButton.swift; sourceTree = "<group>"; };
@@ -730,6 +734,8 @@
 				1EA5AFD21D7E3E760024D6CD /* MenuButton.swift */,
 				1E09203D1D8A1D2B00D32376 /* XBackButton.swift */,
 				1E09203F1D8A2B9900D32376 /* BlurView.swift */,
+				1EC1020F1EC1658100D85CFD /* TripCollectionViewCell.swift */,
+				1E4E8CD41EC3C95C00DA4ACF /* SceneCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -1138,6 +1144,7 @@
 				1E1141D01DC662E700ACAF67 /* SearchService.swift in Sources */,
 				1E1141D21DC674DD00ACAF67 /* FollowService.swift in Sources */,
 				1EF93BFE1C6046F800A5B463 /* InitialLoadingViewController.swift in Sources */,
+				1EC102101EC1658100D85CFD /* TripCollectionViewCell.swift in Sources */,
 				1E5690561DA9C46300872DDA /* UserService.swift in Sources */,
 				1E1711931CD431D20083236C /* Services.swift in Sources */,
 				1E2014981C71273B0012B863 /* LoginService.swift in Sources */,
@@ -1195,6 +1202,7 @@
 				1EE9A2B71DCC00E400E7EC84 /* PostService.swift in Sources */,
 				1EA5C6181DC00E1200918CA6 /* SearchViewController.swift in Sources */,
 				1E9942191DF78894003E0FAA /* Helper.swift in Sources */,
+				1E4E8CD51EC3C95C00DA4ACF /* SceneCell.swift in Sources */,
 				1E0920401D8A2B9900D32376 /* BlurView.swift in Sources */,
 				1E71136D1D96FA11004F151D /* ViewFrame.swift in Sources */,
 				1E841C651C67C48F00AD638E /* AsynchronousUIImageLoading.swift in Sources */,

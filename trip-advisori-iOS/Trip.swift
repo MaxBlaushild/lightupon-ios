@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 
 class Trip: NSObject, Mappable {
-    var id:Int?
+    var id:Int = 0
     var latitude: Double?
     var longitude: Double?
     var title: String = ""

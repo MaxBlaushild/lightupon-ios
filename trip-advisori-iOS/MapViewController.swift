@@ -54,7 +54,6 @@ class MapViewController: TripModalPresentingViewController,
     
     @IBOutlet weak var checkItOutButton: UIButton!
     @IBOutlet weak var partyButton: UIButton!
-    @IBOutlet weak var litButton: LitButton!
     @IBOutlet weak var mapView: LightuponGMSMapView!
     @IBOutlet weak var MapSceneCollectionView: UICollectionView!
     
@@ -63,16 +62,14 @@ class MapViewController: TripModalPresentingViewController,
         super.viewDidLoad()
         
         getScenes()
-        getNearbyScenes()
 
         MapSceneCollectionView.dataSource = self
         MapSceneCollectionView.delegate = self
-        litButton.delegate = self
         configureMapView()
         initDrawer()
         createCardSize()
-        
-        let _ = BeltOverlayView.fromNib()
+        getNearbyScenes()
+
         
         _swipeOptions.delegate = self
         partyService.registerDelegate(self)
@@ -234,6 +231,14 @@ class MapViewController: TripModalPresentingViewController,
         initDrawer()
         drawerOpen = false
         mapView.clearDirections()
+    }
+    func mapView(_ mapView: GMSMapView, idleAt cameraPosition: GMSCameraPosition) {
+//        if self.mapView.lockState == .unlocked {
+//            DispatchQueue.main.async {
+
+//            }
+//        }
+
     }
     
     func navViewDragged(gestureRecognizer: UIPanGestureRecognizer){

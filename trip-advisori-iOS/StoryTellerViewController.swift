@@ -193,7 +193,7 @@ class StoryTellerViewController: UIViewController, MDCSwipeToChooseDelegate, End
     }
     
     func getBackgroundPicture(_ scene: Scene) -> UIImage {
-        let url = URL(string: (scene.backgroundUrl)!)
+        let url = URL(string: (scene.backgroundUrl))
         let data = try? Data(contentsOf: url!)
         return UIImage(data: data!)!
     }

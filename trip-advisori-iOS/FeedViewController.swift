@@ -20,15 +20,12 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
     var xBackButton:XBackButton!
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var litButton: LitButton!
     @IBOutlet weak var partyButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         getFeed()
-        
-        litButton.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {

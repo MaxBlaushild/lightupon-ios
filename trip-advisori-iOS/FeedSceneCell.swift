@@ -30,7 +30,7 @@ class FeedSceneCell: UITableViewCell {
         daysSince.text = scene.prettyTimeSinceCreation()
         tripTitle.text = scene.name
         location.text = "\(scene.neighborhood)"
-        tag = (scene.trip?.id!)!
+        tag = (scene.trip?.id)!
         _scene = scene
         selectionStyle = .none
         setLikeButton()

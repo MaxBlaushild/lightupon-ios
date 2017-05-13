@@ -14,7 +14,6 @@ class ProfileViewController: TripModalPresentingViewController, ProfileViewDeleg
     fileprivate let userService: UserService = Services.shared.getUserService()
     
     @IBOutlet weak var tabBar: UIView!
-    @IBOutlet weak var litButton: LitButton!
     
     var profileView: ProfileView!
 
@@ -23,8 +22,6 @@ class ProfileViewController: TripModalPresentingViewController, ProfileViewDeleg
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        litButton.delegate = self
-        
         if let profileView = profileView {
             profileView.refresh()
         }
