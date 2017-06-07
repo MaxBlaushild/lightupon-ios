@@ -103,26 +103,28 @@ class AmbassadorToTheAPI: NSObject {
     }
     
     func processResponse(_ response: DataResponse<Any>, success: @escaping NetworkSuccessHandler, uri: URLConvertible) {
-        if response.result.isFailure {
-            if let res = response.response {
-                if res.statusCode == 401 {
-                    self.refreshToken(uri, success: success)
-                } else {
-                    
-                }
-            } else {
-                createNoInternetWarning()
-            }
+        let status = response.response!.statusCode
+        if (response.result.isFailure) && (status == 401) {
+            self.refreshToken(uri, success: success)
+        } else if (status / 100 != 2) {
+            displayError(response)
         } else {
             success(response)
         }
     }
     
-    func createNoInternetWarning() {
+    func displayError(_ response: DataResponse<Any>) {
         let topView = UIApplication.topViewController()!.view
         let label = UILabel(frame: CGRect(x: 0, y: (topView?.frame.height)! - 40, width: (topView?.frame.width)!, height: 40))
         label.textAlignment = NSTextAlignment.center
-        label.text = "No Internet Connectivity"
+        
+        let JSON = response.result.value as! NSDictionary
+        if let message = JSON["message"] {
+            label.text = message as? String
+        } else {
+            label.text = "No Internet Connectivity"
+        }
+        
         label.font = UIFont(name: Fonts.dosisBold, size: 16)
         label.textColor = UIColor.white
         label.backgroundColor = UIColor.basePurple
