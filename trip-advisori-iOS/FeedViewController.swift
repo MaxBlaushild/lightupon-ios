@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedViewController: TripModalPresentingViewController, UITableViewDelegate, UITableViewDataSource, ProfileViewDelegate, ProfileViewCreator {
+class FeedViewController: TripModalPresentingViewController, UITableViewDelegate, UITableViewDataSource, ProfileViewDelegate, ProfileViewCreator, TripDetailsViewControllerDelegate {
     fileprivate let tripsService = Services.shared.getTripsService()
     fileprivate let currentLocationService = Services.shared.getCurrentLocationService()
     fileprivate let feedService = Services.shared.getFeedService()
@@ -17,7 +17,12 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
     var delegate: MainViewControllerDelegate!
     
     var profileView: ProfileView!
-    var xBackButton:XBackButton!
+    var toggleBackView: UIView!
+    var xBackButton: XBackButton!
+    var tripDetailsViewController: TripDetailsViewController!
+    
+    var onViewOpened:((Int) -> Void)!
+    var onViewClosed:(() -> Void)!
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var partyButton: UIButton!
@@ -25,7 +30,7 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        getFeed()
+//        getFeed()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,6 +39,28 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
     
     @IBAction func openPartyMenu(_ sender: Any) {
         delegate.toggleRightPanel()
+        toggleBackView = UIView(frame: self.view.frame)
+        toggleBackView.backgroundColor = .clear
+        view.addSubview(toggleBackView)
+        view.bringSubview(toFront: toggleBackView)
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(toggleBack))
+        toggleBackView.isUserInteractionEnabled = true
+        toggleBackView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func toggleBack() {
+        toggleBackView.removeFromSuperview()
+        toggleBackView = nil
+        delegate.toggleRightPanel()
+    }
+    
+    func canStartParty() -> Bool {
+        return tripDetailsViewController != nil
+    }
+    
+    func onDismissed() {
+        tripDetailsViewController = nil
+        onViewClosed()
     }
     
     func createProfileView(_ userId: Int) {
@@ -77,9 +104,6 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
         tableView.reloadData()
     }
     
-    @IBAction func openMenu(_ sender: AnyObject) {
-        delegate!.toggleRightPanel()
-    }
     override var shouldAutorotate : Bool {
         return false
     }
@@ -104,7 +128,7 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:FeedSceneCell = tableView.dequeueReusableCell(withIdentifier: "FeedSceneCell", for: indexPath) as! FeedSceneCell
         let scene = _scenes[(indexPath as NSIndexPath).row]
-        let pictureUrl = scene.trip?.owner?.profilePictureURL!
+        let pictureUrl = scene.trip?.owner?.profilePictureURL
         cell.decorateCell(scene: scene)
         cell.profileImage.imageFromUrl(pictureUrl!, success: { img in
             cell.profileImage.image = img
@@ -118,11 +142,13 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let scene: Scene = _scenes[indexPath.row]
-        let tripDetailsViewController = TripDetailsViewController(scene: scene)
+        tripDetailsViewController = TripDetailsViewController(scene: scene, blurApplies: false)
         addChildViewController(tripDetailsViewController)
         tripDetailsViewController.view.frame = view.frame
+        tripDetailsViewController.tripDelegate = self
         view.addSubview(tripDetailsViewController.view)
         tripDetailsViewController.didMove(toParentViewController: self)
+        onViewOpened(scene.tripId)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -47,24 +47,6 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         }
     }
     
-    public var radius: Double {
-        let bounds = projection.visibleRegion()
-        let sw = bounds.nearLeft
-        let ne = bounds.farRight
-        
-        // r = radius of the earth in statute miles
-        let r = 3963.0;
-        
-        // Convert lat or lng from decimal degrees into radians (divide by 57.2958)
-        let lat1 = sw.latitude / 57.2958
-        let lon1 = sw.longitude / 57.2958
-        let lat2 = ne.latitude / 57.2958
-        let lon2 = ne.longitude / 57.2958
-        
-        // distance = circle radius from center to Northeast corner of bounds
-        return r * acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(lon2 - lon1))
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         _lockState = .locked
         
@@ -95,24 +77,33 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         }
     }
     
+    func getCenterCoordinate() -> CLLocationCoordinate2D {
+        let bounds = UIScreen.main.bounds
+        let centerPoint = CGPoint(x: bounds.height / 2, y: bounds.width / 2)
+        let centerCoordinate = self.projection.coordinate(for: centerPoint)
+        return centerCoordinate
+    }
+    
+    func getTopCenterCoordinate() -> CLLocationCoordinate2D {
+        // to get coordinate from CGPoint of your map
+        let topCenterCoor = self.convert(CGPoint(x: self.frame.size.width, y: 0), from: self)
+        let point = self.projection.coordinate(for: topCenterCoor)
+        return point
+    }
+    
+    func getRadius() -> CLLocationDistance {
+        let centerCoordinate = getCenterCoordinate()
+        let centerLocation = CLLocation(latitude: centerCoordinate.latitude, longitude: centerCoordinate.longitude)
+        let topCenterCoordinate = self.getTopCenterCoordinate()
+        let topCenterLocation = CLLocation(latitude: topCenterCoordinate.latitude, longitude: topCenterCoordinate.longitude)
+        let radius = CLLocationDistance(centerLocation.distance(from: topCenterLocation))
+        return round(radius)
+    }
+    
     func setCompassFrame() {
         UIView.animate(withDuration: 0.25, animations: {
             self.frame = self._initialFrame
         })
-    }
-    
-    func watercolored() {
-        let urls: GMSTileURLConstructor = {(x, y, zoom) in
-            let url = "http://tile.stamen.com/watercolor/\(zoom)/\(x)/\(y).jpg"
-            return URL(string: url)
-        }
-        
-        // Create the GMSTileLayer
-        let layer = GMSURLTileLayer(urlConstructor: urls)
-        
-        // Display on the map at a specific zIndex
-        layer.zIndex = 100
-        layer.map = self
     }
     
     func setUnlockedState() {
@@ -129,7 +120,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         lockButton.backgroundColor = .white
         lockButton.frame = CGRect(
             x: frame.width - 70,
-            y: frame.height / 2,
+            y: frame.height / 2 - UIApplication.shared.statusBarFrame.height,
             width: 50,
             height: 50
         )
@@ -188,9 +179,11 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
     }
     
     func bindScenes(_ scenes: [Scene]) {
-        clearMarkers()
+//        clearMarkers()
         for scene in scenes {
-            placeMarker(scene: scene)
+            if let _ = markerFromSceneID(scene.id) { } else {
+                placeMarker(scene: scene)
+            }
         }
     }
     
@@ -258,25 +251,39 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
     
     func centerMapOnScreen() {
         UIView.animate(withDuration: 0.25, animations: {
-            self.frame = UIScreen.main.bounds
+            self.frame = CGRect(
+                x: 0,
+                y: UIApplication.shared.statusBarFrame.height,
+                width: self.frame.width,
+                height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height
+            )
         })
     }
     
-    func findOrCreateMarker(scene: Scene)  -> LightuponGMSMarker? {
-        let marker = markers.first(where:{$0.scene.id == scene.id})
+    func markerFromSceneID(_ sceneID: Int) -> LightuponGMSMarker? {
+        return markers.first(where:{$0.scene.id == sceneID})
+    }
+    
+    func findOrCreateMarker(scene: Scene, blurApplies: Bool)  -> LightuponGMSMarker? {
+        let marker = markerFromSceneID(scene.id)
+        
+        if marker != nil {
+            marker?.updateImages(blurApplies: false)
+        }
         return marker == nil ? createMarkerSync(scene: scene) : marker
     }
     
     private func createMarkerSync(scene: Scene) -> LightuponGMSMarker {
         let marker = LightuponGMSMarker(scene: scene)
-        marker.setImages(mapView: self, selected: true)
+        marker.setImages(mapView: self, selected: true, blurApplies: false)
         return marker
         
     }
     
     func placeMarker(scene: Scene) {
         let marker = LightuponGMSMarker(scene: scene)
-        marker.setImages(mapView: self, selected: false)
+        markers.append(marker)
+        marker.setImages(mapView: self, selected: false, blurApplies: true)
     }
 }
 

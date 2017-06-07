@@ -14,7 +14,7 @@ class BackgroundLocationManager: NSObject, APScheduledLocationManagerDelegate {
     override init(){
         super.init()
         _backgroundLocationManager = APScheduledLocationManager(delegate: self)
-        _backgroundLocationManager.startUpdatingLocation(interval: 5)
+//        _backgroundLocationManager.startUpdatingLocation(interval: 5)
         _sessionManager = Alamofire.SessionManager(configuration: configuration)
         
         setHeaders()

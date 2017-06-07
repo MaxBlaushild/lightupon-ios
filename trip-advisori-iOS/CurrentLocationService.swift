@@ -3,11 +3,9 @@ import CoreLocation
 import APScheduledLocationManager
 
 protocol LocationInfo{
-    
     var locationStatus:String { get }
     var longitude:Double { get }
     var latitude:Double { get }
-    
 }
 
 @objc protocol CurrentLocationServiceDelegate {
@@ -25,14 +23,17 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     fileprivate var _course:Double
     fileprivate var _heading:Double
     fileprivate var _lastLocationDate:NSDate = NSDate()
+    fileprivate var _updateTime: Timer!
     
     let tripsService:TripsService
+    let apiAmbassador:AmbassadorToTheAPI
     
     var delegates:[CurrentLocationServiceDelegate] = [CurrentLocationServiceDelegate]()
     
-    init(tripsService: TripsService){
+    init(tripsService: TripsService, apiAmbassador: AmbassadorToTheAPI){
         
         self.tripsService = tripsService
+        self.apiAmbassador = apiAmbassador
         self._locationManager = CLLocationManager()
 
         self._locationStatus = (code: 0, message: "")
@@ -43,11 +44,12 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         
         super.init()
         
+        self._updateTime = Timer.scheduledTimer(timeInterval: 15.0, target: self, selector: #selector(updateLocation), userInfo: nil, repeats: true)
+        
         _locationManager.delegate = self
         
         if (CLLocationManager.authorizationStatus() != .authorizedAlways) {
             _locationManager.requestAlwaysAuthorization()
-            
         }
         
         _locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
@@ -72,6 +74,16 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         for delegate in delegates {
             delegate.onLocationUpdated()
         }
+    }
+    
+    func updateLocation() {
+        let location = [
+            "Latitude": _latitude,
+            "Longitude": _longitude
+            ] as [String : Any]
+        
+        apiAmbassador.post("/discover", parameters: location as [String : AnyObject], success: { _ in
+        }, failure: { _ in })
     }
     
     func registerDelegate(_ delegate: CurrentLocationServiceDelegate) {
@@ -109,57 +121,43 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         }
     }
     
-    var locationStatus:String {
-
+    var cllocation: CLLocation {
         get {
-
-            return _locationStatus.message
-
+            return CLLocation(latitude: _latitude, longitude: _longitude)
         }
-
-    }
-
-    var latitude:Double {
-
-        get {
-
-            return _latitude
-
-        }
-
-    }
-
-    var longitude:Double {
-
-        get {
-
-            return _longitude
-
-        }
-
-    }
-
-    var course:Double {
-
-        get {
-
-            return _course
-
-        }
-
     }
     
-    var heading:Double {
-        
+    var locationStatus: String {
         get {
-            
-            return _heading
-            
+            return _locationStatus.message
         }
-        
     }
 
-    var location:Location {
+    var latitude: Double {
+        get {
+            return _latitude
+        }
+    }
+
+    var longitude: Double {
+        get {
+            return _longitude
+        }
+    }
+
+    var course: Double {
+        get {
+            return _course
+        }
+    }
+    
+    var heading: Double {
+        get {
+            return _heading
+        }
+    }
+
+    var location: Location {
         get {
             return Location(longitude: _longitude, latitude: _latitude)
         }

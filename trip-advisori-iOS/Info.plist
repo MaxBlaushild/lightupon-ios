@@ -35,22 +35,25 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>twitterkit-dn3Y4cdoDQhm0LmCFTCj83FVJ</string>
 				<string>fb939202066178832</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.67</string>
+	<string>1.78</string>
 	<key>FacebookAppID</key>
 	<string>939202066178832</string>
 	<key>FacebookDisplayName</key>
-	<string>Pharus</string>
+	<string>Lightupon</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>twitterauth</string>
+		<string>twitter</string>
 		<string>fbshareextension</string>
 		<string>fb-messenger-api</string>
 		<string>fb-messenger-platform-20150305</string>

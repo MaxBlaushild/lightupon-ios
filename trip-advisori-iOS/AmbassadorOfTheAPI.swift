@@ -19,7 +19,7 @@ class AmbassadorToTheAPI: NSObject {
     fileprivate let _authService:AuthService
     
     internal typealias NetworkSuccessHandler = (DataResponse<Any>) -> Void
-    internal typealias NetworkFailureHandler = (HTTPURLResponse?, AnyObject?, NSError) -> Void
+    internal typealias NetworkFailureHandler = (DataResponse<Any>) -> Void
     internal typealias Header = (Dictionary<String, String>)
     
     fileprivate typealias QueuedRequest = (HTTPURLResponse?, AnyObject?, NSError?) -> Void
@@ -47,19 +47,42 @@ class AmbassadorToTheAPI: NSObject {
         self.headers = headers
     }
 
-    func get(_ uri: URLConvertible, success: NetworkSuccessHandler?) {
+    func get(_ uri: URLConvertible, success: @escaping NetworkSuccessHandler) {
         setHeaders()
         
         Alamofire.request("\(apiURL)\(uri)", method: .get, headers: headers).responseJSON { response in
-            self.processResponse(response, success: success!, URLString: "\(apiURL)\(uri)")
+            self.processResponse(response, success: success, uri: uri)
         }
             
     }
     
-    func post(_ uri: URLConvertible, parameters:[String:AnyObject], success: NetworkSuccessHandler?) {
+    func get(_ uri: URLConvertible, queue: DispatchQueue, success: @escaping NetworkSuccessHandler) {
+        setHeaders()
+        
+        Alamofire.request("\(apiURL)\(uri)", method: .get, headers: headers).responseJSON(queue: queue) { response in
+            self.processResponse(response, success: success, uri: uri)
+        }
+        
+    }
+    
+    func post(_ uri: URLConvertible, parameters:[String:AnyObject], success: @escaping NetworkSuccessHandler) {
         setHeaders()
         Alamofire.request("\(apiURL)\(uri)", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            self.processResponse(response, success: success!, URLString: "\(apiURL)\(uri)")
+            self.processResponse(response, success: success, uri: uri)
+        }
+        
+    }
+    
+    func post(_ uri: URLConvertible, parameters:[String:AnyObject], success: @escaping NetworkSuccessHandler, failure: @escaping NetworkFailureHandler) {
+        setHeaders()
+        Alamofire.request("\(apiURL)\(uri)", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
+            if response.result.isFailure {
+                failure(response)
+            } else {
+                self.processResponse(response, success: success, uri: uri)
+            }
+
         }
         
     }
@@ -67,26 +90,30 @@ class AmbassadorToTheAPI: NSObject {
     func patch(_ uri: URLConvertible, parameters:[String:AnyObject], success: NetworkSuccessHandler?) {
         setHeaders()
         Alamofire.request("\(apiURL)\(uri)", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            self.processResponse(response, success: success!, URLString: "\(apiURL)\(uri)")
+            self.processResponse(response, success: success!, uri: uri)
         }
         
     }
     
-    func delete(_ uri: URLConvertible, success: NetworkSuccessHandler?) {
+    func delete(_ uri: URLConvertible, success: @escaping NetworkSuccessHandler) {
         setHeaders()
         Alamofire.request("\(apiURL)\(uri)", method: .delete, headers: headers).responseJSON { response in
-            self.processResponse(response, success: success!, URLString: "\(apiURL)\(uri)")
+            self.processResponse(response, success: success, uri: uri)
         }
     }
     
-    func processResponse(_ response: DataResponse<Any>, success: @escaping NetworkSuccessHandler, URLString: URLConvertible) {
+    func processResponse(_ response: DataResponse<Any>, success: @escaping NetworkSuccessHandler, uri: URLConvertible) {
         if response.result.isFailure {
-            if response.response!.statusCode == 401 {
-                self.refreshToken(URLString, success: success)
+            if let res = response.response {
+                if res.statusCode == 401 {
+                    self.refreshToken(uri, success: success)
+                } else {
+                    
+                }
             } else {
                 createNoInternetWarning()
             }
-        }  else {
+        } else {
             success(response)
         }
     }
@@ -102,7 +129,7 @@ class AmbassadorToTheAPI: NSObject {
         topView?.addSubview(label)
     }
     
-    fileprivate func refreshToken(_ URLString: URLConvertible, success: NetworkSuccessHandler?) {
+    fileprivate func refreshToken(_ uri: URLConvertible, success: NetworkSuccessHandler?) {
         let facebookId:String = _authService.getFacebookId()
         Alamofire.request("\(apiURL)/users/\(facebookId)/token", method: .patch)
             .responseJSON { response in
@@ -110,7 +137,7 @@ class AmbassadorToTheAPI: NSObject {
                 let token:String = json.string!
                 self._authService.setToken(token)
                 self.setHeaders()
-                self.get(URLString, success: success)
+                self.get(uri, success: success!)
         }
     }
 

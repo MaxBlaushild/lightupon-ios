@@ -12,8 +12,9 @@ import Starscream
 import ObjectMapper
 import SwiftyJSON
 
-protocol SocketServiceDelegate {
-    func onResponseReceived(_ partyState: PartyState) -> Void
+@objc protocol SocketServiceDelegate {
+    @objc optional func onResponseReceived(socketResponse: SocketResponse) -> Void
+    @objc optional func onSceneUpdated(sceneID: Int) -> Void
 }
 
 class SocketService: NSObject, WebSocketDelegate, CurrentLocationServiceDelegate {
@@ -76,9 +77,9 @@ class SocketService: NSObject, WebSocketDelegate, CurrentLocationServiceDelegate
     
     fileprivate func setSocketHeaders() {
         let token = _authService.getToken()
-        
+
         _socket.headers = [
-            "Authorization": "bearer \(token)"
+            "Authorization": "Bearer \(token)"
         ]
     }
     
@@ -106,9 +107,12 @@ class SocketService: NSObject, WebSocketDelegate, CurrentLocationServiceDelegate
     }
     
     func websocketDidReceiveMessage(socket ws: WebSocket, text: String) {
-        if let partyState:PartyState = Mapper<PartyState>().map(JSONString: text) {
+        if let socketResponse:SocketResponse = Mapper<SocketResponse>().map(JSONString: text) {
             for delegate in delegates {
-                delegate.onResponseReceived(partyState)
+                delegate.onResponseReceived?(socketResponse: socketResponse)
+                if socketResponse.updatedSceneID != 0 {
+                    delegate.onSceneUpdated?(sceneID: socketResponse.updatedSceneID)
+                }
             }
         }
     }

@@ -14,8 +14,8 @@ import GoogleMaps
 class GoogleMapsService: NSObject {
     let baseURL = "https://maps.googleapis.com/maps/api"
     let defaultUnlockedZoom: Float = 15.00
-    let defaultLockedZoom: Float = 19.00
-    var zoom: Float = 19.00
+    let defaultLockedZoom: Float = 18.00
+    var zoom: Float = 18.00
     
     func getDirections(origin: Location, destination: Location, mode:String = "walking", callback: @escaping (GMSPath) -> Void) {
         let url = "\(baseURL)/directions/json?origin=\(origin.latitude!),\(origin.longitude!)&destination=\(destination.latitude!),\(destination.longitude!)&mode=\(mode)&key=\(googleMapsApiKey)"

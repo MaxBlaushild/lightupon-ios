@@ -22,6 +22,8 @@ class Card: NSObject, Mappable {
     var updatedAt: Date?
     var sceneID: Int?
     var pending: Bool?
+    var shareOnFacebook: Bool = false
+    var shareOnTwitter: Bool = false
     
     
     func mapping(map: Map) {

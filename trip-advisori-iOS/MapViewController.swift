@@ -24,6 +24,11 @@ class MapViewController: TripModalPresentingViewController,
                          EndOfTripDelegate {
     
     let reuseIdentifier = "MapSceneCell"
+    let minimumDistanceTraveled: Double = 1000.00
+    let minimumZoomChange: Float = 1.50
+    let maximumNumOfMarkers = 800
+    let minimumZoom: Float = 8.00
+    let maximumRatioTraveled: Double = 3.0
     
     private let currentLocationService = Services.shared.getCurrentLocationService()
     private let tripsService = Services.shared.getTripsService()
@@ -31,6 +36,7 @@ class MapViewController: TripModalPresentingViewController,
     private let partyService = Services.shared.getPartyService()
     private let userService = Services.shared.getUserService()
     private let postService = Services.shared.getPostService()
+    private let navigationService = Services.shared.getNavigationService()
     
     var trips:[Trip] = [Trip]()
     var scenes: [Scene] = [Scene]()
@@ -39,18 +45,25 @@ class MapViewController: TripModalPresentingViewController,
     var compasses:[Compass] = [Compass]()
     
     var delegate: MainViewControllerDelegate!
-    var mapDrawer: TripDetailsViewController!
+    var tripDetailsViewController: TripDetailsViewController!
+    
+    var pastCameraPosition: GMSCameraPosition?
     
     var drawerOpen = false
     var drawerHeight: CGFloat = 0.0
     var scrollingUp = false
     var constellationOverlayVisible = false
     var markerFour: GMSMarker?
+    var toggleBackView: UIView!
     var endOfTripView: EndOfTripView!
+    var refresher: UIRefreshControl!
     var _nextSceneAvailable = false
     var _cardCount: Int = 0
     var _swipeOptions = CardSwipeOptions()
     var _cardSize: CGRect!
+    
+    var onViewOpened:((Int) -> Void)!
+    var onViewClosed:(() -> Void)!
     
     @IBOutlet weak var checkItOutButton: UIButton!
     @IBOutlet weak var partyButton: UIButton!
@@ -68,22 +81,81 @@ class MapViewController: TripModalPresentingViewController,
         configureMapView()
         initDrawer()
         createCardSize()
-        getNearbyScenes()
-
+        getNearbyScenes(location: nil, radius: nil)
+        
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresher.tintColor = .basePurple
+        refresher.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
+        MapSceneCollectionView.addSubview(refresher)
+        MapSceneCollectionView.alwaysBounceHorizontal = true
         
         _swipeOptions.delegate = self
         partyService.registerDelegate(self)
         
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.triggerDeepLinkIfPresent(callback: self.onDeepLink)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(onSceneAdded), name: postService.postNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onPartyChanged), name: partyService.partyChangeNotificationName, object: nil)
+    }
+    
+    func refresh() {
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getParty()
     }
     
+    func onDeepLink(deepLink: DeepLink) {
+        if deepLink.resource == "scenes" {
+            let sceneId = deepLink.id
+            feedService.getScene(sceneId, success: { selectedScene in
+                DispatchQueue.main.async {
+                    let marker = self.mapView.findOrCreateMarker(scene: selectedScene, blurApplies: false)
+                    
+                    if let selectedMarker = marker {
+                        self.mapView.selectMarker(selectedMarker)
+                    }
+                    
+                    self.mapView.lockState = .unlocked
+                    self.toggleDrawer(selectedScene, blurApplies: false)
+                    self.onViewOpened(selectedScene.tripId)
+                }
+            })
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplaySupplementaryView view: UICollectionReusableView,
+                        forElementKind elementKind: String,
+                        at indexPath: IndexPath) {
+        
+        
+        
+    }
+    
     @IBAction func openPartyMenu(_ sender: Any) {
+        toggleBackView = UIView(frame: self.view.frame)
+        toggleBackView.backgroundColor = .clear
+        view.addSubview(toggleBackView)
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(toggleBack))
+        toggleBackView.isUserInteractionEnabled = true
+        toggleBackView.addGestureRecognizer(tapGestureRecognizer)
+        
         delegate.toggleRightPanel()
+    }
+    
+    func toggleBack() {
+        toggleBackView.removeFromSuperview()
+        toggleBackView = nil
+        delegate.toggleRightPanel()
+    }
+    
+    func canStartParty() -> Bool {
+        return drawerOpen
     }
     
     @IBAction func checkItOut(_ sender: Any) {
@@ -102,8 +174,13 @@ class MapViewController: TripModalPresentingViewController,
         checkItOutButton.isHidden = !nextSceneAvailable
     }
     
-    func getNearbyScenes() {
-        feedService.getNearbyScenes(success: addNearbyScenes)
+    func getNearbyScenes(location: CLLocationCoordinate2D?, radius: Double?) {
+        feedService.getNearbyScenes(
+            location: location,
+            radius: radius,
+            numScenes: 50,
+            success: addNearbyScenes
+        )
     }
     
     func addNearbyScenes(_ nearbyScenes: [Scene]) {
@@ -150,12 +227,13 @@ class MapViewController: TripModalPresentingViewController,
     }
     
     func addCompass() {
-        let scene = partyService.currentScene()
-        let compass = Compass.fromNib("Compass")
-        let target = scene?.cllocation
-        compass.pointTowards(target: target!)
-        compasses.append(compass)
-        view.addSubview(compass)
+        if let scene = partyService.currentScene() {
+            let compass = Compass.fromNib("Compass")
+            let target = scene.cllocation
+            compass.pointTowards(target: target)
+            compasses.append(compass)
+            view.addSubview(compass)
+        }
     }
     
     
@@ -200,45 +278,74 @@ class MapViewController: TripModalPresentingViewController,
         return cell
     }
     
-    func animateInDrawer(duration: TimeInterval, scene: Scene) {
-        mapDrawer.bindScene(scene: scene)
-        mapDrawer.setDrawerMode()
-        view.bringSubview(toFront: mapDrawer.view)
+    func animateInDrawer(duration: TimeInterval, scene: Scene, blurApplies: Bool) {
+        tripDetailsViewController.bindScene(scene: scene, blurApplies: blurApplies)
+        tripDetailsViewController.setDrawerMode()
+        view.bringSubview(toFront: tripDetailsViewController.view)
         UIView.animate(withDuration: duration, animations: {
-            self.mapDrawer.view.frame.origin = CGPoint(x: 0, y: self.view.frame.height - (self.tabBarController?.tabBar.frame.size.height)! - 70)
+            self.tripDetailsViewController.view.frame.origin = CGPoint(x: 0, y: self.view.frame.height - (self.tabBarController?.tabBar.frame.size.height)! - 70)
         }, completion: { _ in
             self.drawerOpen = true
         })
     }
     
     func initDrawer() {
-        mapDrawer = TripDetailsViewController()
-        mapDrawer.view.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: self.view.frame.height)
-        addChildViewController(mapDrawer)
+        tripDetailsViewController = TripDetailsViewController()
+        tripDetailsViewController.view.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: self.view.frame.height)
+        addChildViewController(tripDetailsViewController)
         makeDrawerDraggable()
-        mapDrawer.tripDelegate = self
-        view.addSubview(mapDrawer.view)
+        tripDetailsViewController.tripDelegate = self
+        view.addSubview(tripDetailsViewController.view)
     }
     
     func makeDrawerDraggable() {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(navViewDragged(gestureRecognizer:)))
-        mapDrawer.view.addGestureRecognizer(gesture)
-        mapDrawer.view.isUserInteractionEnabled = true
+        tripDetailsViewController.view.addGestureRecognizer(gesture)
+        tripDetailsViewController.view.isUserInteractionEnabled = true
     }
     
     func onDismissed() {
-        mapDrawer = nil
+        tripDetailsViewController = nil
         initDrawer()
         drawerOpen = false
         mapView.clearDirections()
+        onViewClosed()
+        mapView.unselect()
     }
+    
+    func onTabChanged() {
+        tripDetailsViewController.view.removeFromSuperview()
+        tripDetailsViewController.removeFromParentViewController()
+        onDismissed()
+    }
+    
     func mapView(_ mapView: GMSMapView, idleAt cameraPosition: GMSCameraPosition) {
-//        if self.mapView.lockState == .unlocked {
-//            DispatchQueue.main.async {
-
-//            }
-//        }
-
+        let currentCameraPosition = mapView.camera
+        
+        if let pastCameraPosition = self.pastCameraPosition {
+            if self.mapView.markers.count > maximumNumOfMarkers {
+                self.mapView.clearMarkers()
+            }
+            
+            if shouldSearch(past: pastCameraPosition, current: currentCameraPosition) {
+                getNearbyScenes(location: currentCameraPosition.target, radius: self.mapView.getRadius())
+            }
+        }
+        
+        pastCameraPosition = currentCameraPosition
+    }
+    
+    func shouldSearch(past: GMSCameraPosition, current: GMSCameraPosition) -> Bool {
+        let pastLocation = CLLocation(latitude: past.target.latitude, longitude: past.target.longitude)
+        let currentLocation = CLLocation(latitude: current.target.latitude, longitude: current.target.longitude)
+        let distanceAway = currentLocation.distance(from: pastLocation)
+        let zoomAway = past.zoom - current.zoom
+        let radius = self.mapView.getRadius()
+        let ratioTraveled = radius / distanceAway
+        var shouldSearch = zoomAway > minimumZoomChange || distanceAway > minimumDistanceTraveled
+        shouldSearch = shouldSearch || ratioTraveled < maximumRatioTraveled
+        shouldSearch = shouldSearch && current.zoom > minimumZoom
+        return shouldSearch
     }
     
     func navViewDragged(gestureRecognizer: UIPanGestureRecognizer){
@@ -251,9 +358,9 @@ class MapViewController: TripModalPresentingViewController,
             let beltHeight = scrollingUp ? view.frame.height / 2 : 0
             
             UIView.animate(withDuration: 0.25, animations: {
-                self.mapDrawer.view.frame.origin.y = height
-                self.mapDrawer.setBeltOverlay(newHeight: beltHeight)
-                self.mapDrawer.setBottomViewHeight(newHeight: beltHeight + 70)
+                self.tripDetailsViewController.view.frame.origin.y = height
+                self.tripDetailsViewController.setBeltOverlay(newHeight: beltHeight)
+                self.tripDetailsViewController.setBottomViewHeight(newHeight: beltHeight + 70)
             }, completion: { _ in
                 if (self.scrollingUp) {
                     self.animateInOverlay()
@@ -274,8 +381,8 @@ class MapViewController: TripModalPresentingViewController,
                 var beltOverlayHeight = (self.view.frame.height - (70 + (self.tabBarController?.tabBar.frame.size.height)!)) - newOrigin.y
                 if (beltOverlayHeight <= view.frame.height / 2) {
                     beltOverlayHeight = beltOverlayHeight - beltOverlayHeight * 0.1
-                    mapDrawer.setBeltOverlay(newHeight: beltOverlayHeight)
-                    mapDrawer.setBottomViewHeight(newHeight: beltOverlayHeight + 70)
+                    tripDetailsViewController.setBeltOverlay(newHeight: beltOverlayHeight)
+                    tripDetailsViewController.setBottomViewHeight(newHeight: beltOverlayHeight + 70)
                 }
             }
         }
@@ -283,14 +390,14 @@ class MapViewController: TripModalPresentingViewController,
     
     func animateOutOverlay() {
         UIView.animate(withDuration: 0.25, animations: {
-            self.mapDrawer.setOverlayAlpha(alpha: 0.0)
+            self.tripDetailsViewController.setOverlayAlpha(alpha: 0.0)
             self.constellationOverlayVisible = false
         })
     }
     
     func animateInOverlay() {
         UIView.animate(withDuration: 0.25, animations: {
-            self.mapDrawer.setOverlayAlpha(alpha: 1.0)
+            self.tripDetailsViewController.setOverlayAlpha(alpha: 1.0)
             self.constellationOverlayVisible = true
         })
     }
@@ -298,27 +405,27 @@ class MapViewController: TripModalPresentingViewController,
     func animateOutDrawer(duration: TimeInterval) {
         DispatchQueue.main.async {
             UIView.animate(withDuration: duration, animations: {
-                self.mapDrawer.view.frame.origin = CGPoint(x: 0, y: self.view.frame.height)
+                self.tripDetailsViewController.view.frame.origin = CGPoint(x: 0, y: self.view.frame.height)
             }, completion: { truth in
                 self.drawerOpen = false
             })
         }
     }
     
-    func toggleDrawer(_ scene: Scene) {
+    func toggleDrawer(_ scene: Scene, blurApplies: Bool) {
         if (drawerOpen) {
             animateOutDrawer(duration: 0.25, completion: { _ in
-                self.animateInDrawer(duration: 0.25, scene: scene)
+                self.animateInDrawer(duration: 0.25, scene: scene, blurApplies: blurApplies)
             })
         } else {
-            animateInDrawer(duration: 0.5, scene: scene)
+            animateInDrawer(duration: 0.5, scene: scene, blurApplies: blurApplies)
         }
     }
     
     func animateOutDrawer(duration: TimeInterval, completion: @escaping (Bool) -> Void) {
         DispatchQueue.main.async {
             UIView.animate(withDuration: duration, animations: {
-                self.mapDrawer.view.frame.origin = CGPoint(x: 0, y: self.view.frame.height)
+                self.tripDetailsViewController.view.frame.origin = CGPoint(x: 0, y: self.view.frame.height)
             }, completion: completion)
         }
     }
@@ -326,14 +433,15 @@ class MapViewController: TripModalPresentingViewController,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedScene = scenes[indexPath.row]
-        let marker = mapView.findOrCreateMarker(scene: selectedScene)
+        let marker = mapView.findOrCreateMarker(scene: selectedScene, blurApplies: false)
         
         if let selectedMarker = marker {
             mapView.selectMarker(selectedMarker)
         }
 
         mapView.lockState = .unlocked
-        toggleDrawer(selectedScene)
+        toggleDrawer(selectedScene, blurApplies: false)
+        onViewOpened(selectedScene.tripId)
     }
     
     func getScenes() {
@@ -350,8 +458,8 @@ class MapViewController: TripModalPresentingViewController,
         view.insertSubview(MapSceneCollectionView, at: 0)
         view.bringSubview(toFront: MapSceneCollectionView)
         
-        if mapDrawer != nil {
-            view.bringSubview(toFront: mapDrawer.view)
+        if tripDetailsViewController != nil {
+            view.bringSubview(toFront: tripDetailsViewController.view)
         }
     }
 
@@ -364,6 +472,7 @@ class MapViewController: TripModalPresentingViewController,
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         self.mapView.unselect()
+        onViewClosed()
         self.animateOutDrawer(duration: 0.25)
         self.mapView.setCompassFrame()
 
@@ -371,6 +480,7 @@ class MapViewController: TripModalPresentingViewController,
     
     func onLocked() {
         self.mapView.unselect()
+        onViewClosed()
         self.animateOutDrawer(duration: 0.25)
     }
     
@@ -392,12 +502,13 @@ class MapViewController: TripModalPresentingViewController,
         let lightuponMarker = marker as! LightuponGMSMarker
         self.mapView.selectMarker(lightuponMarker)
         self.mapView.lockState = .unlocked
-        toggleDrawer(lightuponMarker.scene)
+        onViewOpened(lightuponMarker.scene.tripId)
+        toggleDrawer(lightuponMarker.scene, blurApplies: true)
         return true
     }
     
     func onSceneChanged(_ scene: Scene) {
-        let marker = mapView.findOrCreateMarker(scene: scene)
+        let marker = mapView.findOrCreateMarker(scene: scene, blurApplies: true)
         mapView.selectMarker(marker!)
     }
     

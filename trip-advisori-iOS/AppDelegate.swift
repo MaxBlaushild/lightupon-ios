@@ -10,15 +10,30 @@ import UIKit
 import GoogleMaps
 import FBSDKLoginKit
 import UserNotifications
+import TwitterKit
+import Foundation
 
 let googleMapsApiKey = "AIzaSyBS-y6hKLFKiM5yUWIO0AYR5-lrkCZSvp0"
+let twitterKey = "Tbo4foIOQNU4UguU7L2TvqwvF"
+let twitterSecret = "n64QcM5iksN6imlzdAYRVVEqFMpFtXT2HdftyYLZbsXPlmyTlt"
+let instagramClientId = "d0f146b43a394fb3b5334da7cbb3f053"
+
+class DeepLink {
+    let resource: String
+    let id: Int
+    
+    init(resource: String, id: Int) {
+        self.resource = resource
+        self.id = id
+    }
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var loadedEnoughToDeepLink:Bool = false
-    var invite:String!
+    var deepLink: DeepLink?
     var backgroundLocationManager = BackgroundLocationManager()
     var apiAmbassador: AmbassadorToTheAPI!
 
@@ -28,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKLoginManager.renewSystemCredentials { (result:ACAccountCredentialRenewResult, error:Error?) -> Void in
 
         }
+        
+        Twitter.sharedInstance().start(withConsumerKey: twitterKey, consumerSecret: twitterSecret)
         
         let authService = AuthService()
         apiAmbassador = AmbassadorToTheAPI(authService: authService)
@@ -54,8 +71,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         
-        //        apiAmbassador.post()
-        
     }
     
     
@@ -66,20 +81,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
         }
         
-        
-        
-//        let urlString = url.absoluteString
-//        let queryArray = urlString.componentsSeparatedByString("/")
-//        let query = queryArray[2]
-//        
-//        if query.rangeOfString("invite") != nil {
-//            if queryArray.count >= 3 {
-//                let partyId = queryArray[3]
-//                let userInfo = ["invite": partyId]
-//                self.applicationHandleRemoteNotification(application, didReceiveRemoteNotification: userInfo)
-//            }
-//        }
+        if url.scheme! == "lightupon" {
+            let urlString = url.absoluteString
+            let queryArray = urlString.components(separatedBy: "/")
+            let resource = queryArray[2]
+            let id = Int(queryArray[3])
+            self.deepLink = DeepLink(resource: resource, id: id ?? 0)
+            self.window?.rootViewController = InitialLoadingViewController()
+        }
+
         return false
+    }
+    
+    func triggerDeepLinkIfPresent(callback: (DeepLink) -> Void) {
+        if let link = deepLink {
+            callback(link)
+            deepLink = nil
+        }
     }
     
     func applicationHandleRemoteNotification(_ application: UIApplication, didReceiveRemoteNotification userInfo: [String : String]) {

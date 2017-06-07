@@ -44,11 +44,11 @@ class DefaultCardDetailsView: UIView, BeltOverlayDelegate {
         bringSubview(toFront: beltOverlay)
     }
     
-    func initFrom(card: Card, hidden: Bool) {
+    func initFrom(card: Card, blur: CGFloat, blurApplies: Bool) {
         cardImageView.imageFromUrl(card.imageUrl, success: { img in
             var image = img
-            if hidden {
-                image = img.applyDarkEffect()!
+            if blurApplies && blur > 0.001 {
+                image = img.applyBackToTheFutureEffect(blur: blur)!
             }
             self.cardImageView.image = image
         })

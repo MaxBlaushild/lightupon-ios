@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TripFormViewController: TripModalPresentingViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class TripFormViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CreateTripViewControllerDelegate {
     
     private let postService = Services.shared.getPostService()
     private let tripsService = Services.shared.getTripsService()
@@ -21,8 +21,10 @@ class TripFormViewController: TripModalPresentingViewController, UICollectionVie
     @IBOutlet weak var tripCollectionView: UICollectionView!
     @IBOutlet weak var backButton: UIButton!
     
+    
     var currentScene: Scene!
     var currentCard: Card!
+    var blurView: UIVisualEffectView!
     var trips: [Trip] = [Trip]()
     var scenes: [Scene] = [Scene]()
     
@@ -62,24 +64,22 @@ class TripFormViewController: TripModalPresentingViewController, UICollectionVie
         let origImage = UIImage(named: "left_chevron")
         let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
         backButton.setImage(tintedImage, for: .normal)
-        backButton.tintColor = .basePurple
+        backButton.tintColor = .black
     }
 
     @IBAction func makeNewTrip(_ sender: Any) {
-       openTripModal()
+       performSegue(withIdentifier: "TripFormToCreateTrip", sender: self)
+    }
+    
+    @IBAction func alsoMakeNewTrip(_ sender: Any) {
+        performSegue(withIdentifier: "TripFormToCreateTrip", sender: self)
     }
     
     @IBAction func goBack(_ sender: Any) {
         dismiss(animated: false, completion: {})
     }
     
-    override func onTripNameSaved(_ trip: Trip) {
-        tripNameModal.removeFromSuperview()
-        tripNameModal = nil
-        blurView.removeFromSuperview()
-        blurView = nil
-        tripExplanationLabel.removeFromSuperview()
-        tripExplanationLabel = nil
+    func onTripCreated(_ trip: Trip) {
         trips.insert(trip, at: 0)
         tripCollectionView.reloadData()
         tripCollectionView.performBatchUpdates({}, completion: { _ in
@@ -142,6 +142,14 @@ class TripFormViewController: TripModalPresentingViewController, UICollectionVie
         postService.post(card: currentCard, scene: currentScene, tripID: selectedTripId, sceneID: nil)
     }
     
+    func addBlurView() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurView)
+    }
+    
     func tellUserHeOrSheIsJustSwell() {
         addBlurView()
         addPostConfirmationView()
@@ -153,6 +161,12 @@ class TripFormViewController: TripModalPresentingViewController, UICollectionVie
     func addPostConfirmationView() {
         let postConfirmationView = PostConfirmationView.fromNib("PostConfirmationView")
         view.addSubview(postConfirmationView)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? CreateTripViewController {
+            destinationVC.delegate = self
+        }
     }
 
 }

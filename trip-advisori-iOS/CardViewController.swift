@@ -15,51 +15,24 @@ class CardViewController: UIViewController, ProfileViewCreator {
     var cardView: DefaultCardDetailsView!
     var delegate: TripDetailsViewController!
     
-    var tripId: Int = 0
-    
-    var startPartyButton: UIButton?
-    
-    func bindContext(card: Card, owner: User, scene: Scene) {
-        tripId = scene.tripId
-        addCardView(card: card, owner: owner, scene: scene)
-        addStartPartyButton()
+    func bindContext(card: Card, owner: User, scene: Scene, blurApplies: Bool) {
+        addCardView(card: card, owner: owner, scene: scene, blurApplies: blurApplies)
     }
     
-    func addCardView(card: Card, owner: User, scene: Scene) {
+    func addCardView(card: Card, owner: User, scene: Scene, blurApplies: Bool) {
         cardView = DefaultCardDetailsView.fromNib("DefaultCardDetailsView")
-        cardView.initFrom(card: card, hidden: false)
+        cardView.initFrom(card: card, blur: 1.0 - scene.percentDiscovered, blurApplies: blurApplies)
         cardView.frame = self.view.frame
         cardView.delegate = self
         view.addSubview(cardView)
     }
-    
-    func addStartPartyButton() {
-        startPartyButton = UIButton()
-        startPartyButton?.backgroundColor = .basePurple
-        startPartyButton?.frame = CGRect(x: view.frame.width / 2 - 70, y: view.frame.height  - 160, width: 140, height: 40)
-        startPartyButton?.setTitle("CREATE PARTY", for: .normal)
-        startPartyButton?.setTitleColor(.white, for: .normal)
-        startPartyButton?.addTarget(self, action: #selector(goOnTrip), for: .touchUpInside)
-        view.addSubview(startPartyButton!)
-        view.bringSubview(toFront: startPartyButton!)
-    }
-    
-    func goOnTrip(_ sender: UIButton) {
-        sender.isEnabled = false
-        partyService.createParty(tripId, callback: self.onPartyCreated)
-    }
 
-    
     func createProfileView(_ userId: Int) {
         delegate.createProfileView(userId)
     }
     
     func setBottomViewHeight(newHeight: CGFloat) {
         cardView.setBottomViewHeight(newHeight: newHeight)
-    }
-    
-    func onPartyCreated() {
-        delegate.onPartyCreated()
     }
 
     override func viewDidLoad() {

@@ -8,14 +8,18 @@
 
 import UIKit
 
-protocol TripDetailsViewControllerDelegate {
+@objc protocol TripDetailsViewControllerDelegate {
     func onDismissed () -> Void
-    func onSceneChanged (_ scene: Scene) -> Void
+    func canStartParty () -> Bool
+    var tripDetailsViewController: TripDetailsViewController { get set }
+    @objc optional func onSceneChanged (_ scene: Scene) -> Void
 }
 
 class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, ProfileViewCreator, ProfileViewDelegate {
     private let tripsService = Services.shared.getTripsService()
-    private var _tripId: Int!
+    private let partyService = Services.shared.getPartyService()
+    
+    public var tripId: Int!
     private var _trip: Trip!
     
     private var cardViewControllers: [CardViewController] = [CardViewController]()
@@ -23,21 +27,24 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     private var beltOverlay:BeltOverlayView!
     private var constellationPoints: [UIView] = [UIView]()
     private var currentIndex: Int = 0
-    
+    private var _blurApplies: Bool = false
     var profileView: ProfileView!
     var xBackButton:XBackButton!
     
     var tripDelegate: TripDetailsViewControllerDelegate?
     
-    init(tripId: Int) {
-        _tripId = tripId
+    init(_ _tripId: Int) {
+        tripId = _tripId
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         getTrip()
-//        addBeltOverlay()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissView), name: partyService.partyChangeNotificationName, object: nil)
     }
     
-    init(scene: Scene) {
-        _tripId = scene.tripId
+    
+    init(scene: Scene, blurApplies: Bool) {
+        tripId = scene.tripId
+        _blurApplies = blurApplies
         currentIndex = scene.sceneOrder! - 1
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         getTrip()
@@ -47,6 +54,8 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
             let beltConfig = BeltConfig(scene: scene, card: scene.cards[0], owner: scene.trip!.owner!)
             beltOverlay.config = beltConfig
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissView), name: partyService.partyChangeNotificationName, object: nil)
     }
     
     init() {
@@ -63,7 +72,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     }
     
     func setStartingOverlayHeight() {
-        overlay.frame.origin.y = ((view.frame.height / 2) * 0.8) - 65
+        overlay.frame.origin.y = ((view.frame.height / 2) * 0.8) - 70
     }
     
     func setOverlayAlpha(alpha: CGFloat) {
@@ -82,14 +91,15 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     
     func addBeltOverlay() {
         beltOverlay = BeltOverlayView.fromNib()
-        beltOverlay.frame = CGRect(x: 0, y: view.frame.height - ((view.frame.height / 2) * 0.8 ) - 65, width: view.frame.width, height: 70)
+        beltOverlay.frame = CGRect(x: 0, y: view.frame.height - ((view.frame.height / 2) * 0.8 ) - 53, width: view.frame.width, height: 70)
         beltOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         view.addSubview(beltOverlay)
     }
     
-    func bindScene(scene: Scene) {
+    func bindScene(scene: Scene, blurApplies: Bool) {
         clearConstellations()
-        _tripId = scene.tripId
+        tripId = scene.tripId
+        _blurApplies = blurApplies
         currentIndex = scene.sceneOrder! - 1
         getTrip()
         
@@ -122,10 +132,6 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         view.addSubview(overlay)
     }
     
-    func onPartyCreated() {
-        dismissView(sender: {} as AnyObject)
-    }
-    
     func placeBackButton() {
         let statusBarHeight = UIApplication.shared.statusBarFrame.height * 0.66
         let xPosition = view.frame.width - 45
@@ -139,7 +145,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
 
     
     func getTrip() {
-        tripsService.getTrip(_tripId, callback: self.setCardViewControllers)
+        tripsService.getTrip(tripId, callback: self.setCardViewControllers)
     }
     
     func dismissView(sender: AnyObject) {
@@ -156,7 +162,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         
         cardViewControllers = trip.scenes.map({ scene in
             let cardViewController = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CardViewController") as! CardViewController
-            cardViewController.bindContext(card: scene.cards[0], owner: trip.owner!, scene: scene)
+            cardViewController.bindContext(card: scene.cards[0], owner: trip.owner!, scene: scene, blurApplies: _blurApplies)
             cardViewController.delegate = self
             return cardViewController
         })
@@ -178,7 +184,6 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         setBeltOverlay(newHeight: 0.0)
         setOverlayHeight(newHeight: 0.0)
         setOverlayAlpha(alpha: 0.0)
-        
     }
 
     func jumpToSelectedScene() {
@@ -202,13 +207,14 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     }
     
     func drawConstellations(scenes: [Scene]) {
+        let xMultiplier = Double((UIScreen.main.bounds.width * 3/4) / CGFloat(scenes.count * 3))
         var xPosition = 10.0
         constellationPoints = scenes.map({ scene in
             let constellation = UIView()
             let yPosition = 30.00 * (scene.constellationPoint?.deltaY)! + 20
             var distanceToNextPoint = (scene.constellationPoint?.distanceToThePreviousPoint)!
             distanceToNextPoint = distanceToNextPoint > 1.0 ? 1.0 + drand48() : distanceToNextPoint
-            xPosition += 25.00 * distanceToNextPoint
+            xPosition += xMultiplier * distanceToNextPoint
             xPosition += 15
             constellation.frame = CGRect(x: xPosition, y: yPosition, width: 8, height: 8)
             constellation.backgroundColor = UIColor.white.withAlphaComponent(0.6)
@@ -284,7 +290,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
 
         
         if tripDelegate != nil {
-            tripDelegate?.onSceneChanged(_trip.scenes[currentIndex])
+            tripDelegate?.onSceneChanged!(_trip.scenes[currentIndex])
         }
     
     }

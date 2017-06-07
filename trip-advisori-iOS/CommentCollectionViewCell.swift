@@ -19,7 +19,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
     }
     
     func setComment(comment: Comment) {
-        let ownerNameText = comment.owner!.fullName!
+        let ownerNameText = comment.owner!.fullName
         let fullNameFont = [NSFontAttributeName: UIFont(name: "GothamRounded-Medium", size: 13.00)]
         let fullNameString = NSMutableAttributedString(string: ownerNameText, attributes: fullNameFont)
         

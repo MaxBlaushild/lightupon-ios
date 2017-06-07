@@ -38,7 +38,7 @@ class Scene: NSObject, Mappable {
     var pinUrl: String?
     var selectedPinUrl: String?
     var hidden: Bool = false
-    var blur: CGFloat = 0
+    var percentDiscovered: CGFloat = 0.0
     
     func mapping(map: Map) {
         id                 <- map["ID"]
@@ -66,7 +66,7 @@ class Scene: NSObject, Mappable {
         pinUrl             <- map["PinUrl"]
         selectedPinUrl     <- map["SelectedPinUrl"]
         hidden             <- map["Hidden"]
-        blur               <- map["Blur"]
+        percentDiscovered  <- map["PercentDiscovered"]
     }
     
     required init?(map: Map) {}

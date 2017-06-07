@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import CoreLocation
 
 class NavigationService: NSObject {
     
@@ -24,6 +25,12 @@ class NavigationService: NSObject {
     
     func radiansToDegrees(_ radians: Double) -> Double {
         return radians * 180.0 / M_PI
+    }
+    
+    func getDistanceBetweenCoordinates(one: Location, two: Location) -> Double {
+        let locationOne = one.cllocation
+        let locationTwo = two.cllocation
+        return locationOne.distance(from: locationTwo)
     }
     
     func getBearingBetweenTwoPoints1(_ point1 : CLLocation, point2 : CLLocation) -> CGFloat {

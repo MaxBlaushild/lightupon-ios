@@ -102,7 +102,6 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
         }
         
         if gestureRecognizer.state == UIGestureRecognizerState.began || gestureRecognizer.state == UIGestureRecognizerState.changed {
-            print(newOrigin.y)
             if (newOrigin.y > fullnameLabel.frame.origin.y) && (newOrigin.y < frame.height / 2) {
                 scrollingUp = drawerHeight - newOrigin.y > 0
                 drawerHeight = newOrigin.y
@@ -173,11 +172,13 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     }
     
     @IBAction func activateLightTab(_ sender: Any) {
+        onDrawerEngaged()
         tabBarContext = .lights
         setTabBar()
     }
     
     @IBAction func activateMapTab(_ sender: Any) {
+        onDrawerEngaged()
         tabBarContext = .map
         setTabBar()
     }
@@ -216,6 +217,7 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     
     func onFeedReceived(scenes: [Scene]) {
         _scenes = scenes
+        mapView.bindScenes(_scenes)
         tableView.reloadData()
     }
     
@@ -232,8 +234,8 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     }
     
     func bindUser(_ user: User) {
-        circleImage.imageFromUrl(user.profilePictureURL!)
-        blurImage.imageFromUrl(user.profilePictureURL!)
+        circleImage.imageFromUrl(user.profilePictureURL)
+        blurImage.imageFromUrl(user.profilePictureURL)
         fullnameLabel.text = user.fullName
         numberOfTripsLabel.text = "\(user.numberOfTrips!)"
         numberOfFollowersLabel.text = "\(user.numberOfFollowers!)"
@@ -343,7 +345,7 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:FeedSceneCell = tableView.dequeueReusableCell(withIdentifier: "FeedSceneCell", for: indexPath) as! FeedSceneCell
         let scene = _scenes[(indexPath as NSIndexPath).row]
-        let pictureUrl = scene.trip?.owner?.profilePictureURL!
+        let pictureUrl = scene.trip?.owner?.profilePictureURL
         cell.decorateCell(scene: scene)
         cell.profileImage.imageFromUrl(pictureUrl!, success: { img in
             cell.profileImage.image = img
@@ -357,7 +359,7 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let scene: Scene = _scenes[indexPath.row]
-        let tripDetailsViewController = TripDetailsViewController(scene: scene)
+        let tripDetailsViewController = TripDetailsViewController(scene: scene, blurApplies: true)
         let parentViewController = delegate as! UIViewController
         parentViewController.addChildViewController(tripDetailsViewController)
         tripDetailsViewController.view.frame = frame
@@ -374,11 +376,11 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
         return true
     }
     
-    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-        DispatchQueue.main.async {
-            self.onDrawerEngaged()
-        }
-    }
+//    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+//        DispatchQueue.main.async {
+//            self.onDrawerEngaged()
+//        }
+//    }
     
     func configureTableView() {
         tableView.dataSource = self

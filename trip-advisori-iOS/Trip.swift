@@ -46,6 +46,10 @@ class Trip: NSObject, Mappable {
         
     }
     
+    override init() {
+        super.init()
+    }
+    
     init(title: String, details: String) {
         self.title = title
         self.details = details

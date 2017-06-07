@@ -17,7 +17,7 @@ class BeltConfig {
     init(scene: Scene, card: Card, owner: User) {
         sceneName = scene.name
         address = "\(scene.streetNumber) \(scene.route)"
-        profilePictureUrl = owner.profilePictureURL!
+        profilePictureUrl = owner.profilePictureURL
         createdAt = card.prettyTimeSinceCreation()
     }
 }

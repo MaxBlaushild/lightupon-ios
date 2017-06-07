@@ -80,7 +80,8 @@
 		1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6B9F1D0C8A1F00D5793A /* owl.png */; };
 		1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6981CA6307F00D9F90C /* PartyService.swift */; };
 		1E66F1561E0F087D007EA08E /* ConstellationPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66F1551E0F087D007EA08E /* ConstellationPoint.swift */; };
-		1E7032AD1CE8F53A00B1C18D /* PartyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7032AC1CE8F53A00B1C18D /* PartyState.swift */; };
+		1E6B0CC41EE5F84700F77A94 /* CursorPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B0CC31EE5F84700F77A94 /* CursorPosition.swift */; };
+		1E7032AD1CE8F53A00B1C18D /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7032AC1CE8F53A00B1C18D /* SocketResponse.swift */; };
 		1E7032AF1CE8F58800B1C18D /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7032AE1CE8F58800B1C18D /* Scene.swift */; };
 		1E7032B11CE8F7B200B1C18D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7032B01CE8F7B200B1C18D /* User.swift */; };
 		1E71136B1D96F7BF004F151D /* RoundCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E71136A1D96F7BF004F151D /* RoundCorners.swift */; };
@@ -109,6 +110,8 @@
 		1E9373AF1D6D05BF00A7AE50 /* logo_white@2x.svg in Resources */ = {isa = PBXBuildFile; fileRef = 1E9373AC1D6D05BF00A7AE50 /* logo_white@2x.svg */; };
 		1E9373B01D6D05BF00A7AE50 /* logo_white@3x.svg in Resources */ = {isa = PBXBuildFile; fileRef = 1E9373AD1D6D05BF00A7AE50 /* logo_white@3x.svg */; };
 		1E9373B21D6D087400A7AE50 /* MainIconBeizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9373B11D6D087400A7AE50 /* MainIconBeizer.swift */; };
+		1E938BB71EDB4CE400266126 /* TwitterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E938BB61EDB4CE400266126 /* TwitterService.swift */; };
+		1E938BBD1EDCBE8F00266126 /* CreateTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E938BBC1EDCBE8F00266126 /* CreateTripViewController.swift */; };
 		1E954EB71D50EA7A0021FDD8 /* BlurImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */; };
 		1E9645F01E085A2E00A0E88F /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9645EF1E085A2E00A0E88F /* FeedService.swift */; };
 		1E9645F21E085D2800A0E88F /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9645F11E085D2800A0E88F /* Comment.swift */; };
@@ -182,6 +185,7 @@
 		1EF783AB1D0084A600860510 /* FromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF783AA1D0084A600860510 /* FromNib.swift */; };
 		1EF783AD1D00940100860510 /* PictureHero.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EF783AC1D00940100860510 /* PictureHero.xib */; };
 		1EF783AF1D00941700860510 /* PictureHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF783AE1D00941700860510 /* PictureHero.swift */; };
+		1EF90D6C1ECD4EED00728FBF /* RotateImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF90D6B1ECD4EED00728FBF /* RotateImage.swift */; };
 		1EF93BFE1C6046F800A5B463 /* InitialLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */; };
 		1EF93C001C604DA600A5B463 /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */; };
 		245A888C52EA8A07D422BD63 /* Pods_Lightupon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4136805875FAF88775BC625 /* Pods_Lightupon.framework */; };
@@ -288,7 +292,8 @@
 		1E5F6B9F1D0C8A1F00D5793A /* owl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owl.png; sourceTree = "<group>"; };
 		1E64A6981CA6307F00D9F90C /* PartyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyService.swift; sourceTree = "<group>"; };
 		1E66F1551E0F087D007EA08E /* ConstellationPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstellationPoint.swift; sourceTree = "<group>"; };
-		1E7032AC1CE8F53A00B1C18D /* PartyState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyState.swift; sourceTree = "<group>"; };
+		1E6B0CC31EE5F84700F77A94 /* CursorPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CursorPosition.swift; sourceTree = "<group>"; };
+		1E7032AC1CE8F53A00B1C18D /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketResponse.swift; sourceTree = "<group>"; };
 		1E7032AE1CE8F58800B1C18D /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		1E7032B01CE8F7B200B1C18D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1E71136A1D96F7BF004F151D /* RoundCorners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundCorners.swift; sourceTree = "<group>"; };
@@ -317,6 +322,8 @@
 		1E9373AC1D6D05BF00A7AE50 /* logo_white@2x.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "logo_white@2x.svg"; sourceTree = "<group>"; };
 		1E9373AD1D6D05BF00A7AE50 /* logo_white@3x.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "logo_white@3x.svg"; sourceTree = "<group>"; };
 		1E9373B11D6D087400A7AE50 /* MainIconBeizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainIconBeizer.swift; sourceTree = "<group>"; };
+		1E938BB61EDB4CE400266126 /* TwitterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterService.swift; sourceTree = "<group>"; };
+		1E938BBC1EDCBE8F00266126 /* CreateTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTripViewController.swift; sourceTree = "<group>"; };
 		1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurImage.swift; sourceTree = "<group>"; };
 		1E9645EF1E085A2E00A0E88F /* FeedService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
 		1E9645F11E085D2800A0E88F /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -388,6 +395,7 @@
 		1EF783AA1D0084A600860510 /* FromNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromNib.swift; sourceTree = "<group>"; };
 		1EF783AC1D00940100860510 /* PictureHero.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureHero.xib; sourceTree = "<group>"; };
 		1EF783AE1D00941700860510 /* PictureHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureHero.swift; sourceTree = "<group>"; };
+		1EF90D6B1ECD4EED00728FBF /* RotateImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotateImage.swift; sourceTree = "<group>"; };
 		1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialLoadingViewController.swift; sourceTree = "<group>"; };
 		1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewController.swift; sourceTree = "<group>"; };
 		66755F11CBD3FB79809ADBA9 /* Pods-trip-advisori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -456,7 +464,7 @@
 				1ED69B471D0C809C00CF2172 /* views */,
 				1ED69B2C1D07A93500CF2172 /* styles */,
 				1ED69B2B1D07A92C00CF2172 /* resources */,
-				1E841C631C67C40000AD638E /* utilities */,
+				1E841C631C67C40000AD638E /* extensions */,
 				1EF93C041C60536D00A5B463 /* models */,
 				1E05B88A1C5D135D009E37BA /* AppDelegate.swift */,
 				1E22C6711C701AE000B13A1B /* -Bridging-Header.h */,
@@ -531,7 +539,7 @@
 			name = BeltOverlay;
 			sourceTree = "<group>";
 		};
-		1E841C631C67C40000AD638E /* utilities */ = {
+		1E841C631C67C40000AD638E /* extensions */ = {
 			isa = PBXGroup;
 			children = (
 				1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */,
@@ -554,8 +562,10 @@
 				1E582B331E68E17800499771 /* ParentViewController.swift */,
 				1E2ADDB01E7CEED200FA47CE /* ReplaceRootViewController.swift */,
 				1EA083DA1EAC0753007D0FC1 /* FunWithStrings.swift */,
+				1EF90D6B1ECD4EED00728FBF /* RotateImage.swift */,
+				1E6B0CC31EE5F84700F77A94 /* CursorPosition.swift */,
 			);
-			name = utilities;
+			name = extensions;
 			sourceTree = "<group>";
 		};
 		1E9224901EB00BEB008E705F /* CardCollectionViewCell */ = {
@@ -762,6 +772,7 @@
 				1E3FFA701E63CD7B001C4969 /* LightViewController.swift */,
 				1E582B371E68E76200499771 /* TripModalPresentingViewController.swift */,
 				1E9AC22E1EBBFA2E00C61B4E /* TripFormViewController.swift */,
+				1E938BBC1EDCBE8F00266126 /* CreateTripViewController.swift */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -792,6 +803,7 @@
 				1E5D15471E287CDE0020D9B5 /* LikeService.swift */,
 				1EEEED0D1E3C39410009C35D /* GoogleMapsService.swift */,
 				1E7B1E1C1E3D762C00F6A71C /* NotificationService.swift */,
+				1E938BB61EDB4CE400266126 /* TwitterService.swift */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -833,7 +845,7 @@
 				1E841C591C66DB8900AD638E /* Trip.swift */,
 				1E2014951C70DB790012B863 /* FacebookProfile.swift */,
 				1EF49A861C990035001A32C2 /* Party.swift */,
-				1E7032AC1CE8F53A00B1C18D /* PartyState.swift */,
+				1E7032AC1CE8F53A00B1C18D /* SocketResponse.swift */,
 				1E7032AE1CE8F58800B1C18D /* Scene.swift */,
 				1E7032B01CE8F7B200B1C18D /* User.swift */,
 				1ED4D5A51CEA8D9500722695 /* Card.swift */,
@@ -1138,6 +1150,7 @@
 				1E09203E1D8A1D2B00D32376 /* XBackButton.swift in Sources */,
 				1EF783A51CFF666000860510 /* TextHero.swift in Sources */,
 				1E22A7D01D2C491C00163785 /* StoryTellerMenuViewController.swift in Sources */,
+				1E938BB71EDB4CE400266126 /* TwitterService.swift in Sources */,
 				1E7B1E1D1E3D762C00F6A71C /* NotificationService.swift in Sources */,
 				1E841C5A1C66DB8900AD638E /* Trip.swift in Sources */,
 				1EE2BD431E308B0100C73BCC /* NotSelectingViewController.swift in Sources */,
@@ -1147,6 +1160,7 @@
 				1EC102101EC1658100D85CFD /* TripCollectionViewCell.swift in Sources */,
 				1E5690561DA9C46300872DDA /* UserService.swift in Sources */,
 				1E1711931CD431D20083236C /* Services.swift in Sources */,
+				1E938BBD1EDCBE8F00266126 /* CreateTripViewController.swift in Sources */,
 				1E2014981C71273B0012B863 /* LoginService.swift in Sources */,
 				1EBBFC1E1D734C6000697894 /* CompassView.swift in Sources */,
 				1EA20DEC1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift in Sources */,
@@ -1167,6 +1181,8 @@
 				1E1763AB1D403E6F00C3FBCE /* StringEscaping.swift in Sources */,
 				1E8144D91E47DD9C0085B61C /* LightuponGMSMarker.swift in Sources */,
 				1E9AC22F1EBBFA2E00C61B4E /* TripFormViewController.swift in Sources */,
+				1E6B0CC41EE5F84700F77A94 /* CursorPosition.swift in Sources */,
+				1EF90D6C1ECD4EED00728FBF /* RotateImage.swift in Sources */,
 				1E30E7AB1D7CDF5400BB547F /* LastTripViewController.swift in Sources */,
 				1E582B381E68E76200499771 /* TripModalPresentingViewController.swift in Sources */,
 				1E22A7CA1D2C37BA00163785 /* CardView.swift in Sources */,
@@ -1217,7 +1233,7 @@
 				1E2014961C70DB790012B863 /* FacebookProfile.swift in Sources */,
 				1EBBFC1A1D72AB5700697894 /* SplashScreen.swift in Sources */,
 				1E935F1D1D4C249200CB070B /* MainContainerViewController.swift in Sources */,
-				1E7032AD1CE8F53A00B1C18D /* PartyState.swift in Sources */,
+				1E7032AD1CE8F53A00B1C18D /* SocketResponse.swift in Sources */,
 				1ECA410A1E4EB000002765AA /* SetFontSize.swift in Sources */,
 				1E72BE761E0B912E0060E82B /* SceneViewController.swift in Sources */,
 				1E3343CE1E15B27700A6E633 /* RoundDoubles.swift in Sources */,

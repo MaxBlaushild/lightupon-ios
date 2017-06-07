@@ -11,27 +11,25 @@ import ObjectMapper
 
 class FacebookService: NSObject {
     
-    fileprivate let queryParams = "fields=id,name,email,first_name,picture.width(800).height(800),cover"
+    fileprivate let queryParams = "fields=id,name,email,first_name,picture.width(800).height(800)"
     
     internal var profile:FacebookProfile!
 
     func getMyProfile(_ callback: @escaping (FacebookProfile) -> Void){
         let graphRequest = FBSDKGraphRequest(graphPath: "me?\(queryParams)", parameters: nil)
         
-        graphRequest?.start(completionHandler: { (connection, result, error) -> Void in
-            self.profile = Mapper<FacebookProfile>().map(JSONObject:
-                result)
-            callback(self.profile!)
+        _ = graphRequest?.start(completionHandler: { (connection, result, error) -> Void in
+            self.profile = Mapper<FacebookProfile>().map(JSONObject: result) ?? FacebookProfile()
+            callback(self.profile)
         })
     }
     
     func getProfile(_ facebookId: String, callback: @escaping (FacebookProfile) -> Void){
         let graphRequest = FBSDKGraphRequest(graphPath: "\(facebookId)?\(queryParams)", parameters: nil)
         
-        graphRequest?.start(completionHandler: { (connection, result, error) -> Void in
-            let profile = Mapper<FacebookProfile>().map(JSONObject:
-                result)
-            callback(profile!)
+        _ = graphRequest?.start(completionHandler: { (connection, result, error) -> Void in
+            let profile = Mapper<FacebookProfile>().map(JSONObject: result) ?? FacebookProfile()
+            callback(profile)
         })
     }
 }

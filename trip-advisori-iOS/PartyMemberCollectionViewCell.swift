@@ -20,7 +20,7 @@ class PartyMemberCollectionViewCell: UICollectionViewCell {
     }
     
     func bindCell(_ partyMember: User) {
-        facebookService.getProfile(partyMember.facebookId!, callback: self.bindProfileToCell)
+        facebookService.getProfile(partyMember.facebookId, callback: self.bindProfileToCell)
     }
     
     func bindUser(user: User) {
@@ -29,7 +29,7 @@ class PartyMemberCollectionViewCell: UICollectionViewCell {
     
     func bindProfileToCell(_ profile: FacebookProfile) {
         partyMemberFullName.text = profile.fullName
-        partyMemberProfilePicture.imageFromUrl(profile.profilePictureURL!)
+        partyMemberProfilePicture.imageFromUrl(profile.profilePictureURL)
         partyMemberProfilePicture.makeCircle()
     }
     

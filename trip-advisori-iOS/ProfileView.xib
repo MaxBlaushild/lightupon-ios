@@ -11,14 +11,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="GothamRounded-Book.otf">
+            <string>GothamRounded-Book</string>
+        </array>
         <array key="GothamRounded-Light.otf">
             <string>GothamRounded-Light</string>
         </array>
         <array key="GothamRounded-Medium.otf">
             <string>GothamRounded-Medium</string>
-        </array>
-        <array key="GothamRoundedBook_21018.ttf">
-            <string>GothamRounded-Book</string>
         </array>
     </customFonts>
     <objects>
@@ -55,7 +55,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boston, MA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5v-9R-SWY">
-                            <rect key="frame" x="153" y="167" width="69" height="12"/>
+                            <rect key="frame" x="153.5" y="167" width="68.5" height="12"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="12" id="lr2-P5-y03"/>
                             </constraints>
@@ -67,7 +67,7 @@
                             <rect key="frame" x="0.0" y="266" width="375" height="68"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9k-ge-RU6">
-                                    <rect key="frame" x="113" y="21" width="150" height="27"/>
+                                    <rect key="frame" x="113" y="20.5" width="150" height="27"/>
                                     <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="15"/>
                                     <state key="normal" title="LOGOUT">
@@ -90,7 +90,7 @@
                             <rect key="frame" x="0.0" y="204" width="375" height="48"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QT7-mk-kfc">
-                                    <rect key="frame" x="179" y="5" width="18" height="38"/>
+                                    <rect key="frame" x="179.5" y="5" width="17.5" height="38"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="42" id="uIU-Cq-iFZ"/>
                                     </constraints>
@@ -104,7 +104,7 @@
                                     </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xeg-Hc-1W9">
-                                    <rect key="frame" x="97" y="5" width="42" height="21"/>
+                                    <rect key="frame" x="97.5" y="5" width="42" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="42" id="NBp-cj-Org"/>
                                         <constraint firstAttribute="height" constant="21" id="rDB-eG-o7B"/>
@@ -114,7 +114,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOLLOWERS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ap0-V9-BPc">
-                                    <rect key="frame" x="59" y="31" width="80" height="12"/>
+                                    <rect key="frame" x="59.5" y="31" width="80" height="12"/>
                                     <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>

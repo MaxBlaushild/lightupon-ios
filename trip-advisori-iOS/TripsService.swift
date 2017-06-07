@@ -23,29 +23,29 @@ class TripsService: NSObject {
         let strLatitude = String(latitude)
         let strLongitude = String(longitude)
         _apiAmbassador.get("/trips?lat=" + strLatitude + "&lon=" + strLongitude, success: { response in
-            let trips = Mapper<Trip>().mapArray(JSONObject: response.result.value)
-            callback(trips!)
+            let trips = Mapper<Trip>().mapArray(JSONObject: response.result.value) ?? [Trip]()
+            callback(trips)
         })
     }
     
     func getActiveTrip(callback: @escaping (Trip) -> Void) {
         _apiAmbassador.get("/activeTrip", success: { response in
-            let trip = Mapper<Trip>().map(JSONObject: response.result.value)
-            callback(trip!)
+            let trip = Mapper<Trip>().map(JSONObject: response.result.value) ?? Trip()
+            callback(trip)
         })
     }
     
     func getTrip(_ tripId: Int, callback: @escaping (Trip) -> Void) {
         _apiAmbassador.get("/trips/\(tripId)", success: { response in
-            let trip = Mapper<Trip>().map(JSONObject: response.result.value)
-            callback(trip!)
+            let trip = Mapper<Trip>().map(JSONObject: response.result.value) ?? Trip()
+            callback(trip)
         })
     }
     
     func getUsersTrips(_ userID: Int, callback: @escaping ([Trip]) -> Void) {
         _apiAmbassador.get("/users/\(userID)/trips", success: { response in
-            let trips = Mapper<Trip>().mapArray(JSONObject: response.result.value)
-            callback(trips!)
+            let trips = Mapper<Trip>().mapArray(JSONObject: response.result.value) ?? [Trip]()
+            callback(trips)
         })
     }
     
@@ -56,8 +56,8 @@ class TripsService: NSObject {
         ]
         
         _apiAmbassador.post("/trips", parameters: parameters as [String : AnyObject], success: { response in
-            let newTrip = Mapper<Trip>().map(JSONObject: response.result.value)
-            callback(newTrip!)
+            let newTrip = Mapper<Trip>().map(JSONObject: response.result.value) ?? Trip()
+            callback(newTrip)
         })
     }
     
@@ -66,8 +66,8 @@ class TripsService: NSObject {
             "Title": tripTitle
         ]
         _apiAmbassador.patch("/activeTrip", parameters: parameters as [String : AnyObject], success: { response in
-            let trip = Mapper<Trip>().map(JSONObject: response.result.value)
-            callback(trip!)
+            let trip = Mapper<Trip>().map(JSONObject: response.result.value) ?? Trip()
+            callback(trip)
         })
     }
 }

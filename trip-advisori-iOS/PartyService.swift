@@ -83,12 +83,12 @@ class PartyService: NSObject, SocketServiceDelegate {
         })
     }
     
-    func onResponseReceived(_ partyState: PartyState) {
-        nextSceneAvailable = partyState.nextSceneAvailable ?? false
+    func onResponseReceived(socketResponse: SocketResponse) {
+        nextSceneAvailable = socketResponse.nextSceneAvailable ?? false
         updateDelegatesOnSceneAvailability()
         
-        if currentParty?.currentSceneOrder != partyState.currentSceneOrder {
-            currentParty?.currentSceneOrder = partyState.currentSceneOrder
+        if currentParty?.currentSceneOrder != socketResponse.currentSceneOrder {
+            currentParty?.currentSceneOrder = socketResponse.currentSceneOrder
             updateDelegatesOnNextScene()
         }
     }

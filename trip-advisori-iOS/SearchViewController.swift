@@ -144,7 +144,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         let user: User = _users[(indexPath as NSIndexPath).row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PartyMemberCollectionViewCell
         cell.bindCell(user)
-        cell.partyMemberProfilePicture.imageFromUrl(user.profilePictureURL!, success: { img in
+        cell.partyMemberProfilePicture.imageFromUrl(user.profilePictureURL, success: { img in
             cell.partyMemberProfilePicture.makeCircle()
         })
         

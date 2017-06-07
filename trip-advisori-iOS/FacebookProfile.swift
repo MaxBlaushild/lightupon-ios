@@ -11,12 +11,12 @@ import SwiftyJSON
 import ObjectMapper
 
 class FacebookProfile: NSObject, Mappable {
-    var firstName: String?
-    var fullName: String?
-    var email: String?
-    var id:String?
-    var profilePictureURL: String?
-    var coverPhoto:String?
+    var firstName: String = ""
+    var fullName: String = ""
+    var email: String = ""
+    var id:String = ""
+    var profilePictureURL: String = "http://p.fod4.com/p/channels/legacy/profile/1212782/a196f26e7efc0fc9c3890cdc748ce61d.jpg"
+    var coverPhoto:String = "http://p.fod4.com/p/channels/legacy/profile/1212782/a196f26e7efc0fc9c3890cdc748ce61d.jpg"
     
     func mapping(map: Map) {
         id         <- map["id"]
@@ -24,10 +24,15 @@ class FacebookProfile: NSObject, Mappable {
         firstName  <- map["first_name"]
         fullName   <- map["name"]
         profilePictureURL <- map["picture.data.url"]
-        coverPhoto   <- map["cover.source"]
     }
     
     required init?(map: Map) {}
+    
+    
+    override init() {
+        super.init()
+    }
+    
     
     init(user: User) {
         self.firstName = user.firstName

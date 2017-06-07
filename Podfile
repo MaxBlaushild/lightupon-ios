@@ -11,6 +11,7 @@ target 'Lightupon' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
+  pod 'TwitterKit'
   pod 'GoogleMaps'
   pod 'Locksmith'
   pod 'Starscream'

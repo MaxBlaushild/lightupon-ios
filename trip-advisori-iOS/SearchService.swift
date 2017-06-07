@@ -19,8 +19,8 @@ class SearchService: NSObject {
     
     func findUsers(query: String, callback: @escaping ([User]) -> Void) {
         _apiAmbassador.get("/users?full_name=\(query)", success: { response in
-            let users =  Mapper<User>().mapArray(JSONObject: response.result.value)
-            callback(users!)
+            let users =  Mapper<User>().mapArray(JSONObject: response.result.value) ?? [User]()
+            callback(users)
         })
     }
 }

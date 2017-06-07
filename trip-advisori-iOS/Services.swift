@@ -31,29 +31,35 @@ class Services: NSObject {
     private let _likeService: LikeService
     private let _googleMapsService: GoogleMapsService
     private let _notificationService: NotificationService
+    private let _twitterService: TwitterService
 
     override init(){
         _authService = AuthService()
         _notificationService = NotificationService()
         _facebookService = FacebookService()
-        _loginService = LoginService(authService: _authService, notificationService: _notificationService)
         _apiAmbassador = AmbassadorToTheAPI(authService: _authService)
+        _loginService = LoginService(authService: _authService, notificationService: _notificationService, apiAmbassador: _apiAmbassador)
         _tripsService = TripsService(apiAmbassador: _apiAmbassador)
-        _currentLocationService = CurrentLocationService(tripsService: _tripsService)
+        _currentLocationService = CurrentLocationService(tripsService: _tripsService, apiAmbassador: _apiAmbassador)
         _litService = LitService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService)
         _searchService = SearchService(apiAmbassador: _apiAmbassador)
         _followService = FollowService(apiAmbassador: _apiAmbassador)
-        _userService = UserService(apiAmbassador: _apiAmbassador, litService: _litService, followService: _followService)
+        _userService = UserService(apiAmbassador: _apiAmbassador, litService: _litService, followService: _followService, facebookService: _facebookService, loginService: _loginService)
         _socketService = SocketService(authService: _authService, currentLocationService: _currentLocationService)
         _partyService = PartyService(apiAmbassador: _apiAmbassador, socketService: _socketService)
         _navigationService = NavigationService()
         _awsService = AwsService(apiAmbassador: _apiAmbassador, currentLocationService:_currentLocationService)
-        _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, litService: _litService, currentLocationService: _currentLocationService)
-        _feedService = FeedService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService)
+        _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, litService: _litService, currentLocationService: _currentLocationService, tripsService: _tripsService)
+        _feedService = FeedService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService, socketService: _socketService)
         _commentService = CommentService(apiAmbassador: _apiAmbassador)
         _likeService = LikeService(apiAmbassador: _apiAmbassador)
         _googleMapsService = GoogleMapsService()
+        _twitterService = TwitterService(apiAmbassador: _apiAmbassador)
         super.init()
+    }
+    
+    func getTwitterService() -> TwitterService {
+        return _twitterService
     }
     
     func getNotificationService() -> NotificationService {

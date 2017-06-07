@@ -15,6 +15,7 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     let tripService = Services.shared.getTripsService()
     let currentLocationService = Services.shared.getCurrentLocationService()
     let googleMapsService = Services.shared.getGoogleMapsService()
+    let twitterService = Services.shared.getTwitterService()
 
     @IBOutlet weak var mapView: LightuponGMSMapView!
     @IBOutlet weak var backButton: UIButton!
@@ -25,7 +26,8 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     @IBOutlet weak var sceneNameTextField: UITextField!
     @IBOutlet weak var locationSection: UIView!
     @IBOutlet weak var shareButton: UIButton!
-    
+    @IBOutlet weak var facebookButton: UIButton!
+    @IBOutlet weak var twitterButton: UIButton!
     
     var captionTextFieldDirty = false
     var currentTrip: Trip!
@@ -38,6 +40,12 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     var doneButton: UIButton!
     var locationPickerOpen = false
     var currentAddress: Address?
+    var captionValid = false
+    var addressValid = false
+    var shareOnFacebook = false
+    var shareOnTwitter = false
+    
+    var keyboardHeight: CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,15 +60,61 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         watchForLocationSectionTouch()
         addDoneButton()
         
+        captionTextField.delegate = self
+        
         locationSectionY = locationSection.frame.origin.y
+        
+        shareButton.isEnabled = false
+        shareButton.setTitleColor(.mediumGrey, for: .disabled)
+        
+        UITextField.appearance().tintColor = .basePurple
+        captionTextField.tintColor = .basePurple
         
         view.bringSubview(toFront: mapView)
         view.bringSubview(toFront: locationSection)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+    }
+    
+    func keyboardWillShow(notification:NSNotification) {
+        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        keyboardHeight = keyboardRectangle.height
+        centerTextView()
+    }
+    
+    func keyboardWillHide() {
+        centerView()
+    }
+    
+
+    @IBAction func toggleShareToFacebook(_ sender: Any) {
+        shareOnFacebook = !shareOnFacebook
+        let icon = shareOnFacebook ? UIImage(named: "facebook-filled") : UIImage(named: "facebook-unfilled")
+        facebookButton.setImage(icon, for: .normal)
+    }
+    
+    @IBAction func toggleShareToTwitter(_ sender: Any) {
+        shareOnTwitter = !shareOnTwitter
+        let icon = shareOnTwitter ? UIImage(named: "twitter-filled") : UIImage(named: "twitter-unfilled")
+        twitterButton.setImage(icon, for: .normal)
+        
+        if shareOnTwitter {
+            twitterService.logIn {}
+        }
     }
     
     func watchForLocationSectionTouch() {
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(setLocationPickingState))
         locationSection.addGestureRecognizer(gesture)
+    }
+    
+    func setShareButtonEnabledness() {
+        let buttonEnabled = captionValid && addressValid
+        shareButton.isEnabled = buttonEnabled
     }
     
     func setLocationPickingState() {
@@ -144,7 +198,7 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         let origImage = UIImage(named: "left_chevron")
         let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
         backButton.setImage(tintedImage, for: .normal)
-        backButton.tintColor = .basePurple
+        backButton.tintColor = .black
     }
     
     @IBAction func goBack(_ sender: Any) {
@@ -177,7 +231,6 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
 
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-
         activeField = textField
         sceneNameFieldActive = (textField == sceneNameTextField)
     }
@@ -199,6 +252,9 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         
         bindCurrentLocation()
         bindCurrentLocationToMap()
+        
+        addressValid = true
+        setShareButtonEnabledness()
     }
     
     func bindCurrentLocationToMap() {
@@ -280,7 +336,27 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
             textView.resignFirstResponder()
             return false
         }
-        return true
+        let proposedText = textView.text + text
+        captionValid = proposedText.characters.count > 2
+        let proposedTextValidity = proposedText.characters.count < 156
+        setShareButtonEnabledness()
+        
+        return proposedTextValidity
+    }
+    
+    func centerTextView() {
+        let keyHeight = keyboardHeight ?? 0.00
+        let centerYOfExposedView = (view.frame.height - keyHeight) / 2
+        let centerOfExposedView = CGPoint(x: view.center.x, y: centerYOfExposedView)
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.center = centerOfExposedView
+        })
+    }
+    
+    func centerView() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.frame = UIScreen.main.bounds
+        })
     }
     
     func makeKeyboardLeave() {
@@ -297,12 +373,13 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        currentScene.name = sceneNameTextField.text!
-        let card = Card(caption: captionTextField.text)
-        let tripFormViewController = segue.destination as! TripFormViewController
-        tripFormViewController.currentScene = currentScene
-        tripFormViewController.currentCard = card
-        
+        if let tripFormViewController = segue.destination as? TripFormViewController {
+            currentScene.name = sceneNameTextField.text!
+            let card = Card(caption: captionTextField.text)
+            card.shareOnFacebook = shareOnFacebook
+            card.shareOnTwitter = shareOnTwitter
+            tripFormViewController.currentScene = currentScene
+            tripFormViewController.currentCard = card
+        }
     }
-
 }

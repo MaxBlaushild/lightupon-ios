@@ -12,11 +12,11 @@ import ObjectMapper
 
 class User: NSObject, Mappable {
     var id:Int = 0
-    var email: String?
-    var facebookId:String?
-    var fullName:String?
-    var firstName:String?
-    var profilePictureURL:String?
+    var email: String = ""
+    var facebookId:String = ""
+    var fullName:String = ""
+    var firstName:String = ""
+    var profilePictureURL:String = ""
     var location: Location?
     var facebookProfile: FacebookProfile?
     var createdAt: Date?
@@ -45,6 +45,10 @@ class User: NSObject, Mappable {
     }
     
     required init?(map: Map) {}
+    
+    override init() {
+        super.init()
+    }
     
     var profile: FacebookProfile {
         get {

@@ -22,7 +22,7 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var leavePartyButton: UIButton!
     
-    fileprivate var _partyState: PartyState!
+    fileprivate var _partyState: SocketResponse!
     fileprivate var _party: Party!
     
     fileprivate var profileView: ProfileView!
@@ -31,7 +31,7 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         bindProfile()
-        makeProfileClickable()
+//        makeProfileClickable()
         toggleLeavePartyButton()
         
         NotificationCenter.default.addObserver(
@@ -64,7 +64,7 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func bindProfile() {
-        profilePicture.imageFromUrl(userService.currentUser.profilePictureURL!)
+        profilePicture.imageFromUrl(userService.currentUser.profilePictureURL)
         nameLabel.text = userService.currentUser.fullName
         profilePicture.makeCircle()
     }

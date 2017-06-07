@@ -14,20 +14,35 @@ class UserService: NSObject {
     private let _apiAmbassador:AmbassadorToTheAPI
     private let _litService:LitService
     private let _followService:FollowService
+    private let _facebookService:FacebookService
+    private let _loginService: LoginService
     
     fileprivate var _currentUser: User!
     
-    init(apiAmbassador: AmbassadorToTheAPI, litService:LitService, followService: FollowService){
+    init(
+        apiAmbassador: AmbassadorToTheAPI,
+        litService:LitService,
+        followService: FollowService,
+        facebookService: FacebookService,
+        loginService: LoginService
+    ){
         _apiAmbassador = apiAmbassador
         _litService = litService
         _followService = followService
+        _facebookService = facebookService
+        _loginService = loginService
     }
     
     func getMyself(successCallback: @escaping () -> Void) {
-        _apiAmbassador.get("/me", success: { response in
-            self.setMyself(jsonObject: response.result.value as AnyObject)
-            successCallback()
+        _facebookService.getMyProfile({ profile in
+            self._loginService.upsertUser(profile, callback: {
+                self._apiAmbassador.get("/me", success: { response in
+                    self.setMyself(jsonObject: response.result.value as AnyObject)
+                    successCallback()
+                })
+            })
         })
+
     }
     
     func setMyself(jsonObject: AnyObject) {
@@ -42,8 +57,8 @@ class UserService: NSObject {
     
     func getUser(_ userID: Int, success: @escaping (User) -> Void) {
         _apiAmbassador.get("/users/\(userID)", success: { response in
-            let user = Mapper<User>().map(JSONObject: response.result.value)
-            success(user!)
+            let user = Mapper<User>().map(JSONObject: response.result.value) ?? User()
+            success(user)
         })
     }
     

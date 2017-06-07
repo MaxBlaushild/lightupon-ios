@@ -14,6 +14,7 @@ class PostService: NSObject {
     private let _apiAmbassador: AmbassadorToTheAPI
     private let _litService: LitService
     private let _currentLocationService: CurrentLocationService
+    private let _tripsService: TripsService
     
     private var getURL = ""
     private var awaitingGetURL = false
@@ -26,11 +27,18 @@ class PostService: NSObject {
     
     public let postNotificationName = Notification.Name("OnScenePosted")
     
-    init(awsService: AwsService, apiAmbassador: AmbassadorToTheAPI, litService: LitService, currentLocationService: CurrentLocationService){
+    init(
+        awsService: AwsService,
+        apiAmbassador: AmbassadorToTheAPI,
+        litService: LitService,
+        currentLocationService: CurrentLocationService,
+        tripsService: TripsService
+    ){
         _awsService = awsService
         _apiAmbassador = apiAmbassador
         _litService = litService
         _currentLocationService = currentLocationService
+        _tripsService = tripsService
     }
     
     
@@ -70,46 +78,33 @@ class PostService: NSObject {
         if let id = tripID {
             appendScene(scene, toTrip: id, callback: { scene in
                 self.card.sceneID = scene.id
-                self.createCard(self.card, sceneID: scene.id)
+                self.createCard(self.card, sceneID: scene.id, lat: scene.latitude, long: scene.longitude)
             })
         } else {
             if let id  = sceneID {
-                createCard(card, sceneID: id)
+                createCard(card, sceneID: id, lat: nil, long: nil)
             } else {
-                createDegenerateTrip(card: card, scene: scene)
+                let degenerateTrip = Trip(title: "", details: "")
+                _tripsService.createTrip(degenerateTrip, callback: { trip in
+                    self.appendScene(self.scene, toTrip: trip.id, callback: { scene in
+                        self.card.sceneID = scene.id
+                        self.createCard(self.card, sceneID: scene.id, lat: scene.latitude, long: scene.longitude)
+                    })
+                })
             }
         }
     }
     
-    func createDegenerateTrip(card: Card, scene: Scene) {
-        let scene = [
-            "ID": scene.id,
-            "Latitude": scene.latitude ?? _currentLocationService.latitude,
-            "Longitude": scene.longitude ?? _currentLocationService.longitude,
-            "Name": scene.name,
-            "Route": scene.route,
-            "StreetNumber": scene.streetNumber,
-            "BackgroundUrl": getURL,
-            "Cards": [
-                [
-                    "Caption": card.caption,
-                    "ImageURL": getURL
-                ]
-            ]] as [String : Any]
-        
-        _apiAmbassador.post("/trips/generate", parameters: scene as [String : AnyObject], success: { response in
-            let trip = Mapper<Trip>().map(JSONObject: response.result.value)
-            if let scene = trip?.scenes[0] {
-                NotificationCenter.default.post(name: self.postNotificationName, object: scene.id)
-            }
-        })
-    }
-    
-    func createCard(_ card: Card, sceneID: Int) {
+    func createCard(_ card: Card, sceneID: Int, lat: Double?, long: Double?) {
         let newCard = [
-            "Capion": card.caption,
-            "ImageURL": getURL
-        ]
+            "Caption": card.caption,
+            "ImageURL": getURL,
+            "ShareOnFacebook": card.shareOnFacebook,
+            "ShareOnTwitter": card.shareOnTwitter,
+            "Latitude": lat ?? _currentLocationService.latitude,
+            "Longitude": long ?? _currentLocationService.longitude
+        ] as [String : Any]
+        
         _apiAmbassador.post("/scenes/\(sceneID)/cards", parameters: newCard as [String : AnyObject], success: { response in
             NotificationCenter.default.post(name: self.postNotificationName, object: sceneID)
         })
