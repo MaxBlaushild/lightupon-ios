@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zM7-UW-UFv">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zM7-UW-UFv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,10 +21,10 @@
         <array key="Dosis-SemiBold.otf">
             <string>Dosis-SemiBold</string>
         </array>
-        <array key="GothamRoundedBook_21018.ttf">
+        <array key="GothamRounded-Book.otf">
             <string>GothamRounded-Book</string>
         </array>
-        <array key="GothamRoundedMedium_21022.ttf">
+        <array key="GothamRounded-Medium.otf">
             <string>GothamRounded-Medium</string>
         </array>
     </customFonts>
@@ -57,7 +56,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MapSceneCell" id="X4S-Bx-7DW" customClass="MapSceneCell" customModule="Lightupon" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="-2" width="88" height="83"/>
+                                                <rect key="frame" x="0.0" y="-1.5" width="88" height="83"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="88" height="83"/>
@@ -104,7 +103,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lightupon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTp-k9-Dca">
-                                        <rect key="frame" x="140.5" y="15.5" width="95.5" height="20"/>
+                                        <rect key="frame" x="140.5" y="15" width="95.5" height="20"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="20"/>
                                         <color key="textColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -207,7 +206,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" reuseIdentifier="PartyMemberCollectionViewCell" id="I1y-FN-KKW" customClass="PartyMemberCollectionViewCell" customModule="Lightupon" customModuleProvider="target">
-                                        <rect key="frame" x="1" y="0.0" width="374" height="88"/>
+                                        <rect key="frame" x="0.5" y="0.0" width="374" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="88"/>
@@ -227,7 +226,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOSTON, MA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="au1-IA-of3">
-                                                    <rect key="frame" x="94" y="46" width="75" height="14"/>
+                                                    <rect key="frame" x="94" y="46" width="80" height="12"/>
                                                     <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
                                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -280,7 +279,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZb-ao-kZy" userLabel="cancelButton">
-                                <rect key="frame" x="375" y="40" width="53" height="30"/>
+                                <rect key="frame" x="375" y="40" width="57" height="30"/>
                                 <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -339,164 +338,92 @@
                                 <rect key="frame" x="0.0" y="667" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" text="Why capture this moment?" translatesAutoresizingMaskIntoConstraints="NO" id="8jP-e7-Dy3">
-                                <rect key="frame" x="38" y="415" width="300" height="60"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Iyz-OA-kNF"/>
-                                </constraints>
-                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aSw-Su-QIr">
-                                <rect key="frame" x="38" y="97" width="300" height="280"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="aSw-Su-QIr" secondAttribute="height" multiplier="325:303" id="mvm-hl-2Np"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A27-NI-zj0" userLabel="topBar">
-                                <rect key="frame" x="0.0" y="20" width="375" height="67"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sMC-Zs-iac">
+                                <rect key="frame" x="321" y="619" width="38" height="28"/>
+                                <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="16"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="share:" destination="O5p-Xp-7sj" eventType="touchUpInside" id="YqJ-yE-ZAO"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J9N-gT-l51">
+                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sMC-Zs-iac">
-                                        <rect key="frame" x="300" y="20" width="38" height="28"/>
-                                        <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="16"/>
-                                        <state key="normal" title="Next">
-                                            <color key="titleColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONr-ng-5oI">
+                                        <rect key="frame" x="25" y="15" width="34" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Back"/>
                                         <connections>
-                                            <action selector="share:" destination="O5p-Xp-7sj" eventType="touchUpInside" id="YqJ-yE-ZAO"/>
+                                            <action selector="backToCamera:" destination="O5p-Xp-7sj" eventType="touchUpInside" id="V5B-PA-9ur"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tqz-hK-361">
-                                        <rect key="frame" x="38" y="21" width="20" height="25"/>
-                                        <state key="normal" backgroundImage="left_chevron"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZB-jb-d1x">
+                                        <rect key="frame" x="181" y="15" width="59" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Location"/>
                                         <connections>
-                                            <action selector="goBack:" destination="O5p-Xp-7sj" eventType="touchUpInside" id="vNz-yV-Eb6"/>
+                                            <action selector="editLocation:" destination="O5p-Xp-7sj" eventType="touchUpInside" id="1vt-9D-4ed"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UiI-Ro-9si">
+                                        <rect key="frame" x="270" y="15" width="36" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Draw"/>
+                                        <connections>
+                                            <action selector="addDrawing:" destination="O5p-Xp-7sj" eventType="touchUpInside" id="ZOm-gr-p12"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zeK-AS-qUw">
+                                        <rect key="frame" x="334" y="15" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Text"/>
+                                        <connections>
+                                            <action selector="addText:" destination="O5p-Xp-7sj" eventType="touchUpInside" id="EE9-K1-XTx"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Tqz-hK-361" firstAttribute="centerY" secondItem="A27-NI-zj0" secondAttribute="centerY" id="Iah-sl-NVz"/>
-                                    <constraint firstItem="sMC-Zs-iac" firstAttribute="centerY" secondItem="A27-NI-zj0" secondAttribute="centerY" id="eCw-IP-Rbi"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBx-ig-hEi" userLabel="shareSection">
-                                <rect key="frame" x="38" y="550" width="300" height="117"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wah-d3-OSZ" userLabel="twitterButton">
-                                        <rect key="frame" x="135" y="34" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Nvi-7j-yVT"/>
-                                            <constraint firstAttribute="width" constant="30" id="jt0-TG-ALk"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="twitter-unfilled"/>
-                                        <connections>
-                                            <action selector="toggleShareToTwitter:" destination="O5p-Xp-7sj" eventType="touchUpInside" id="dZ8-2l-tUA"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJt-TL-bO9" userLabel="facebookButton">
-                                        <rect key="frame" x="0.0" y="34" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="GrC-tP-EvY"/>
-                                            <constraint firstAttribute="width" constant="30" id="Kbb-tl-eLu"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="facebook-unfilled"/>
-                                        <connections>
-                                            <action selector="toggleShareToFacebook:" destination="O5p-Xp-7sj" eventType="touchUpInside" id="IXM-pd-v0k"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="IJt-TL-bO9" firstAttribute="leading" secondItem="UBx-ig-hEi" secondAttribute="leading" id="C7U-WI-smV"/>
-                                    <constraint firstItem="IJt-TL-bO9" firstAttribute="centerY" secondItem="UBx-ig-hEi" secondAttribute="centerY" constant="-10" id="TZo-n5-6vi"/>
-                                    <constraint firstItem="wah-d3-OSZ" firstAttribute="centerY" secondItem="UBx-ig-hEi" secondAttribute="centerY" constant="-10" id="de4-Nt-iOd"/>
-                                    <constraint firstItem="wah-d3-OSZ" firstAttribute="centerX" secondItem="UBx-ig-hEi" secondAttribute="centerX" id="eeI-c1-sev"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H0J-mD-KQ8" userLabel="locationSection">
-                                <rect key="frame" x="0.0" y="475" width="375" height="75"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJ3-MB-rMA">
-                                        <rect key="frame" x="38" y="25" width="20" height="25"/>
-                                        <state key="normal" backgroundImage="locationIcon"/>
-                                        <connections>
-                                            <action selector="changeLocation:" destination="O5p-Xp-7sj" eventType="touchUpInside" id="foF-12-xp8"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address of the Scene" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYT-eb-7sF">
-                                        <rect key="frame" x="78" y="38" width="138" height="13"/>
-                                        <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="13"/>
-                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="center" horizontalHuggingPriority="249" enabled="NO" contentHorizontalAlignment="fill" contentVerticalAlignment="bottom" text="Address of the Scene" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mZx-In-MuG">
-                                        <rect key="frame" x="78" y="21" width="184" height="17"/>
-                                        <color key="textColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="mZx-In-MuG" firstAttribute="leading" secondItem="DJ3-MB-rMA" secondAttribute="trailing" constant="20" id="0jM-wy-Bat"/>
-                                    <constraint firstItem="jYT-eb-7sF" firstAttribute="top" secondItem="H0J-mD-KQ8" secondAttribute="centerY" id="1CA-YV-kL5"/>
-                                    <constraint firstItem="jYT-eb-7sF" firstAttribute="leading" secondItem="mZx-In-MuG" secondAttribute="leading" id="QER-G1-5h6"/>
-                                    <constraint firstItem="mZx-In-MuG" firstAttribute="bottom" secondItem="H0J-mD-KQ8" secondAttribute="centerY" id="ZU7-ar-VGE"/>
-                                    <constraint firstAttribute="height" constant="75" id="mHQ-C1-s2V"/>
-                                    <constraint firstItem="DJ3-MB-rMA" firstAttribute="centerY" secondItem="H0J-mD-KQ8" secondAttribute="centerY" id="xDd-x2-yaZ"/>
+                                    <constraint firstAttribute="height" constant="60" id="kms-dk-961"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="H0J-mD-KQ8" firstAttribute="top" secondItem="8jP-e7-Dy3" secondAttribute="bottom" id="56p-f7-BIs"/>
                             <constraint firstAttribute="trailing" secondItem="0Sn-4g-RPn" secondAttribute="trailing" id="79b-QG-3un"/>
-                            <constraint firstItem="UBx-ig-hEi" firstAttribute="trailing" secondItem="aSw-Su-QIr" secondAttribute="trailing" id="BrY-qu-htV"/>
-                            <constraint firstItem="Tqz-hK-361" firstAttribute="leading" secondItem="aSw-Su-QIr" secondAttribute="leading" id="CPP-2h-eh3"/>
-                            <constraint firstAttribute="trailing" secondItem="H0J-mD-KQ8" secondAttribute="trailing" id="Crn-ST-PUP"/>
-                            <constraint firstItem="aSw-Su-QIr" firstAttribute="centerX" secondItem="33C-t6-Hea" secondAttribute="centerX" id="Fc6-bf-8Ef"/>
+                            <constraint firstAttribute="trailing" secondItem="aSw-Su-QIr" secondAttribute="trailing" id="D92-gW-5qT"/>
                             <constraint firstItem="0Sn-4g-RPn" firstAttribute="height" secondItem="33C-t6-Hea" secondAttribute="height" id="IX2-sj-hyR"/>
-                            <constraint firstItem="8jP-e7-Dy3" firstAttribute="leading" secondItem="aSw-Su-QIr" secondAttribute="leading" id="J5k-nx-dra"/>
-                            <constraint firstItem="sMC-Zs-iac" firstAttribute="trailing" secondItem="aSw-Su-QIr" secondAttribute="trailing" id="KWN-4e-vKL"/>
                             <constraint firstItem="RNU-vM-IkD" firstAttribute="top" secondItem="0Sn-4g-RPn" secondAttribute="top" id="MUk-gD-oww"/>
-                            <constraint firstAttribute="trailing" secondItem="A27-NI-zj0" secondAttribute="trailing" id="NUh-Pi-rd9"/>
-                            <constraint firstItem="RNU-vM-IkD" firstAttribute="top" secondItem="UBx-ig-hEi" secondAttribute="bottom" id="R6Y-iS-vt6"/>
-                            <constraint firstItem="aSw-Su-QIr" firstAttribute="top" secondItem="A27-NI-zj0" secondAttribute="bottom" constant="10" id="XMt-VB-Ft7"/>
-                            <constraint firstItem="aSw-Su-QIr" firstAttribute="leading" secondItem="33C-t6-Hea" secondAttribute="leading" constant="37.5" id="XWr-Kd-gzN"/>
-                            <constraint firstItem="UBx-ig-hEi" firstAttribute="top" secondItem="H0J-mD-KQ8" secondAttribute="bottom" id="eIa-J9-JRt"/>
-                            <constraint firstItem="A27-NI-zj0" firstAttribute="leading" secondItem="33C-t6-Hea" secondAttribute="leading" id="eJH-1R-awM"/>
-                            <constraint firstItem="DJ3-MB-rMA" firstAttribute="leading" secondItem="8jP-e7-Dy3" secondAttribute="leading" id="esb-xt-HoW"/>
-                            <constraint firstItem="UBx-ig-hEi" firstAttribute="leading" secondItem="aSw-Su-QIr" secondAttribute="leading" id="fRe-H7-uMk"/>
+                            <constraint firstItem="aSw-Su-QIr" firstAttribute="leading" secondItem="33C-t6-Hea" secondAttribute="leading" id="Omq-bg-2UN"/>
+                            <constraint firstItem="sMC-Zs-iac" firstAttribute="centerY" secondItem="33C-t6-Hea" secondAttribute="centerY" constant="299.5" id="SCl-5F-LzV"/>
+                            <constraint firstItem="J9N-gT-l51" firstAttribute="top" secondItem="5wm-JX-cqp" secondAttribute="bottom" id="Vfz-NL-WtH"/>
+                            <constraint firstItem="sMC-Zs-iac" firstAttribute="trailing" secondItem="33C-t6-Hea" secondAttribute="trailingMargin" id="ccH-xy-7TA"/>
+                            <constraint firstAttribute="trailing" secondItem="J9N-gT-l51" secondAttribute="trailing" id="ep4-uw-WpV"/>
+                            <constraint firstItem="aSw-Su-QIr" firstAttribute="top" secondItem="33C-t6-Hea" secondAttribute="top" id="h4P-Id-lu5"/>
                             <constraint firstItem="0Sn-4g-RPn" firstAttribute="leading" secondItem="33C-t6-Hea" secondAttribute="leading" id="hjj-q9-6Ve"/>
-                            <constraint firstItem="8jP-e7-Dy3" firstAttribute="trailing" secondItem="aSw-Su-QIr" secondAttribute="trailing" id="iCd-Q1-eBM"/>
-                            <constraint firstItem="A27-NI-zj0" firstAttribute="height" secondItem="33C-t6-Hea" secondAttribute="height" multiplier="0.1" id="ix5-2N-5PU"/>
-                            <constraint firstAttribute="trailing" secondItem="aSw-Su-QIr" secondAttribute="trailing" constant="37.5" id="jqO-ej-ol9"/>
-                            <constraint firstItem="A27-NI-zj0" firstAttribute="top" secondItem="5wm-JX-cqp" secondAttribute="bottom" id="oYB-0O-uhj"/>
-                            <constraint firstItem="H0J-mD-KQ8" firstAttribute="leading" secondItem="33C-t6-Hea" secondAttribute="leading" id="oaN-aA-jpj"/>
-                            <constraint firstItem="8jP-e7-Dy3" firstAttribute="top" secondItem="aSw-Su-QIr" secondAttribute="bottom" constant="37.5" id="uzO-kD-UGJ"/>
+                            <constraint firstItem="RNU-vM-IkD" firstAttribute="top" secondItem="aSw-Su-QIr" secondAttribute="bottom" id="iRn-hF-lq0"/>
+                            <constraint firstItem="J9N-gT-l51" firstAttribute="leading" secondItem="33C-t6-Hea" secondAttribute="leading" id="jMO-PQ-zfG"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backButton" destination="Tqz-hK-361" id="tbb-zO-pVt"/>
-                        <outlet property="captionTextField" destination="8jP-e7-Dy3" id="3f6-Po-2zO"/>
-                        <outlet property="facebookButton" destination="IJt-TL-bO9" id="4hM-bA-uXJ"/>
-                        <outlet property="locationSection" destination="H0J-mD-KQ8" id="x6k-8n-v2F"/>
+                        <outlet property="addTextIcon" destination="zeK-AS-qUw" id="BQ4-ZH-Jik"/>
+                        <outlet property="backToCameraIcon" destination="ONr-ng-5oI" id="DdC-Ec-UwT"/>
+                        <outlet property="drawIcon" destination="UiI-Ro-9si" id="6CS-OZ-wlY"/>
+                        <outlet property="locationEditIcon" destination="GZB-jb-d1x" id="Ib9-hF-axc"/>
                         <outlet property="mapView" destination="0Sn-4g-RPn" id="r7r-jK-Ce2"/>
-                        <outlet property="sceneAddressLabel" destination="jYT-eb-7sF" id="FmB-7u-myt"/>
                         <outlet property="sceneImage" destination="aSw-Su-QIr" id="Fm7-Iu-oIM"/>
-                        <outlet property="sceneNameTextField" destination="mZx-In-MuG" id="Xfe-mL-vuL"/>
                         <outlet property="shareButton" destination="sMC-Zs-iac" id="P3v-Tc-8PK"/>
-                        <outlet property="topBar" destination="A27-NI-zj0" id="AiE-sO-39l"/>
-                        <outlet property="twitterButton" destination="wah-d3-OSZ" id="QLe-NC-1jE"/>
                         <segue destination="8A4-Eq-8gO" kind="show" identifier="SceneFormToTripForm" id="l1G-IZ-oYV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uLR-M4-Ckz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3767" y="-1914"/>
+            <point key="canvasLocation" x="-3767.1999999999998" y="-1914.6926536731635"/>
         </scene>
         <!--Trip Form View Controller-->
         <scene sceneID="CPG-ad-WgY">
@@ -514,7 +441,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="67"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwr-Sl-IMS">
-                                        <rect key="frame" x="296" y="18.5" width="42" height="31"/>
+                                        <rect key="frame" x="292" y="20" width="46" height="28"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="16"/>
                                         <state key="normal" title="Share">
                                             <color key="titleColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -524,7 +451,7 @@
                                             <action selector="share:" destination="8A4-Eq-8gO" eventType="touchUpInside" id="AA6-2H-d5a"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7g-ZB-EJU">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7g-ZB-EJU">
                                         <rect key="frame" x="37.5" y="21" width="20" height="25"/>
                                         <state key="normal" backgroundImage="left_chevron"/>
                                         <connections>
@@ -552,7 +479,7 @@
                                 <rect key="frame" x="0.0" y="87" width="375" height="84"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address of the Scene" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6W-5t-xF3">
-                                        <rect key="frame" x="113" y="42" width="115.5" height="14"/>
+                                        <rect key="frame" x="113" y="42" width="127" height="12"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -565,7 +492,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of the Scene" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baS-TY-HjY">
-                                        <rect key="frame" x="113" y="24.5" width="129" height="17.5"/>
+                                        <rect key="frame" x="113" y="27" width="141.5" height="15"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="15"/>
                                         <color key="textColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -599,13 +526,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kma-yc-3wL">
-                                                    <rect key="frame" x="38" y="10" width="68.5" height="30"/>
+                                                    <rect key="frame" x="38" y="10" width="77" height="30"/>
                                                     <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="15"/>
                                                     <color key="textColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Scenes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcR-8k-Sfn">
-                                                    <rect key="frame" x="38" y="41" width="100.5" height="14"/>
+                                                    <rect key="frame" x="38" y="41" width="109.5" height="12"/>
                                                     <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -630,7 +557,7 @@
                                 <rect key="frame" x="0.0" y="171" width="375" height="83"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="daA-Qb-2Gg">
-                                        <rect key="frame" x="38" y="24" width="106" height="35"/>
+                                        <rect key="frame" x="38" y="24" width="115" height="35"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
                                         <state key="normal" title="  new trip" image="plus">
                                             <color key="titleColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -834,7 +761,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lightupon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWe-AI-df4">
-                                        <rect key="frame" x="139.5" y="15.5" width="95.5" height="20"/>
+                                        <rect key="frame" x="139.5" y="15" width="95.5" height="20"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="20"/>
                                         <color key="textColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -966,7 +893,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lightupon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7D-ch-9g5">
-                                <rect key="frame" x="141" y="172" width="94" height="33"/>
+                                <rect key="frame" x="141.5" y="172" width="93.5" height="33"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="26"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1099,7 +1026,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fullName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wV-th-mOl">
-                                                    <rect key="frame" x="148" y="54" width="67.5" height="20"/>
+                                                    <rect key="frame" x="148" y="53.5" width="59" height="21.5"/>
                                                     <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="17"/>
                                                     <color key="textColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1121,7 +1048,7 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wf5-XA-nFV">
-                                <rect key="frame" x="164" y="30" width="40" height="23"/>
+                                <rect key="frame" x="164" y="30" width="39.5" height="23"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
                                 <color key="textColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1246,12 +1173,10 @@
     </scenes>
     <resources>
         <image name="backButton" width="25" height="25"/>
-        <image name="facebook-unfilled" width="45" height="45"/>
         <image name="feed-filled" width="60" height="60"/>
         <image name="feed-unfilled" width="60" height="60"/>
         <image name="journey_filled" width="30" height="30"/>
         <image name="left_chevron" width="20" height="25"/>
-        <image name="locationIcon" width="20" height="25"/>
         <image name="login_background.jpg" width="2448" height="3264"/>
         <image name="map-filled" width="60" height="60"/>
         <image name="map-unfilled" width="60" height="60"/>
@@ -1259,7 +1184,6 @@
         <image name="profile_filled" width="30" height="30"/>
         <image name="profile_unfilled" width="30" height="30"/>
         <image name="search" width="30" height="30"/>
-        <image name="twitter-unfilled" width="45" height="45"/>
         <image name="whiteLogo" width="39" height="39"/>
     </resources>
     <inferredMetricsTieBreakers>

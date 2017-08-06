@@ -47,6 +47,27 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     
     var keyboardHeight: CGFloat?
     
+    @IBOutlet weak var backToCameraIcon: UIButton!
+    @IBOutlet weak var locationEditIcon: UIButton!
+    @IBOutlet weak var drawIcon: UIButton!
+    @IBOutlet weak var addTextIcon: UIButton!
+    
+    @IBAction func backToCamera(_ sender: UIButton) {
+    }
+    
+    @IBAction func editLocation(_ sender: UIButton) {
+    }
+    
+    
+    @IBAction func addDrawing(_ sender: UIButton) {
+    }
+    
+    
+    @IBAction func addText(_ sender: UIButton) {
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
