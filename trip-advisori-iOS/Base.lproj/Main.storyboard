@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zM7-UW-UFv">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zM7-UW-UFv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -13,19 +13,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Dosis-ExtraBold.otf">
-            <string>Dosis-ExtraBold</string>
-        </array>
         <array key="Dosis-Regular.otf">
             <string>Dosis-Regular</string>
         </array>
         <array key="Dosis-SemiBold.otf">
             <string>Dosis-SemiBold</string>
         </array>
-        <array key="GothamRoundedBook_21018.ttf">
+        <array key="GothamRounded-Book.otf">
             <string>GothamRounded-Book</string>
         </array>
-        <array key="GothamRoundedMedium_21022.ttf">
+        <array key="GothamRounded-Medium.otf">
             <string>GothamRounded-Medium</string>
         </array>
     </customFonts>
@@ -57,7 +54,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MapSceneCell" id="X4S-Bx-7DW" customClass="MapSceneCell" customModule="Lightupon" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="-2" width="88" height="83"/>
+                                                <rect key="frame" x="0.0" y="-1.5" width="88" height="83"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="88" height="83"/>
@@ -104,7 +101,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lightupon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTp-k9-Dca">
-                                        <rect key="frame" x="140.5" y="15.5" width="95.5" height="20"/>
+                                        <rect key="frame" x="140.5" y="16" width="95.5" height="20"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="20"/>
                                         <color key="textColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -207,7 +204,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" reuseIdentifier="PartyMemberCollectionViewCell" id="I1y-FN-KKW" customClass="PartyMemberCollectionViewCell" customModule="Lightupon" customModuleProvider="target">
-                                        <rect key="frame" x="1" y="0.0" width="374" height="88"/>
+                                        <rect key="frame" x="0.5" y="0.0" width="374" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="88"/>
@@ -227,7 +224,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOSTON, MA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="au1-IA-of3">
-                                                    <rect key="frame" x="94" y="46" width="75" height="14"/>
+                                                    <rect key="frame" x="94" y="46" width="80" height="12"/>
                                                     <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
                                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -280,7 +277,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZb-ao-kZy" userLabel="cancelButton">
-                                <rect key="frame" x="375" y="40" width="53" height="30"/>
+                                <rect key="frame" x="375" y="40" width="57" height="30"/>
                                 <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -427,7 +424,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address of the Scene" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYT-eb-7sF">
-                                        <rect key="frame" x="78" y="38" width="138" height="13"/>
+                                        <rect key="frame" x="78" y="38" width="137.5" height="13"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="13"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -514,7 +511,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="67"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwr-Sl-IMS">
-                                        <rect key="frame" x="296" y="18.5" width="42" height="31"/>
+                                        <rect key="frame" x="292" y="20" width="46" height="28"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="16"/>
                                         <state key="normal" title="Share">
                                             <color key="titleColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -524,7 +521,7 @@
                                             <action selector="share:" destination="8A4-Eq-8gO" eventType="touchUpInside" id="AA6-2H-d5a"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7g-ZB-EJU">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7g-ZB-EJU">
                                         <rect key="frame" x="37.5" y="21" width="20" height="25"/>
                                         <state key="normal" backgroundImage="left_chevron"/>
                                         <connections>
@@ -552,7 +549,7 @@
                                 <rect key="frame" x="0.0" y="87" width="375" height="84"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address of the Scene" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6W-5t-xF3">
-                                        <rect key="frame" x="113" y="42" width="115.5" height="14"/>
+                                        <rect key="frame" x="113" y="42" width="127" height="12"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -565,7 +562,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of the Scene" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baS-TY-HjY">
-                                        <rect key="frame" x="113" y="24.5" width="129" height="17.5"/>
+                                        <rect key="frame" x="113" y="27" width="141.5" height="15"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="15"/>
                                         <color key="textColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -599,13 +596,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kma-yc-3wL">
-                                                    <rect key="frame" x="38" y="10" width="68.5" height="30"/>
+                                                    <rect key="frame" x="38" y="10" width="77" height="30"/>
                                                     <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="15"/>
                                                     <color key="textColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Scenes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcR-8k-Sfn">
-                                                    <rect key="frame" x="38" y="41" width="100.5" height="14"/>
+                                                    <rect key="frame" x="38" y="41" width="109.5" height="12"/>
                                                     <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="12"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -630,7 +627,7 @@
                                 <rect key="frame" x="0.0" y="171" width="375" height="83"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="daA-Qb-2Gg">
-                                        <rect key="frame" x="38" y="24" width="106" height="35"/>
+                                        <rect key="frame" x="38" y="24" width="115" height="35"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="17"/>
                                         <state key="normal" title="  new trip" image="plus">
                                             <color key="titleColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -834,7 +831,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lightupon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWe-AI-df4">
-                                        <rect key="frame" x="139.5" y="15.5" width="95.5" height="20"/>
+                                        <rect key="frame" x="139.5" y="16" width="95.5" height="20"/>
                                         <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="20"/>
                                         <color key="textColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -956,36 +953,35 @@
                             </imageView>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HoC-H4-6jN">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lightupon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7D-ch-9g5">
+                                        <rect key="frame" x="126.5" y="116" width="124" height="26"/>
+                                        <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="26"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteLogo" translatesAutoresizingMaskIntoConstraints="NO" id="LRs-bf-Jf5">
-                                <rect key="frame" x="148" y="88" width="79" height="79"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="79" id="iaQ-6v-X4t"/>
-                                    <constraint firstAttribute="height" constant="79" id="ixr-qU-Txa"/>
+                                    <constraint firstItem="G7D-ch-9g5" firstAttribute="top" secondItem="HoC-H4-6jN" secondAttribute="top" constant="116" id="kqw-dM-WZp"/>
+                                    <constraint firstItem="G7D-ch-9g5" firstAttribute="centerX" secondItem="HoC-H4-6jN" secondAttribute="centerX" id="zk0-7R-T2O"/>
                                 </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lightupon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7D-ch-9g5">
-                                <rect key="frame" x="141" y="172" width="94" height="33"/>
-                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="26"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISCOVER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MhN-lg-zkt">
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISCOVER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MhN-lg-zkt">
                                 <rect key="frame" x="56" y="237" width="183" height="66"/>
-                                <fontDescription key="fontDescription" name="Dosis-ExtraBold" family="Dosis" pointSize="50"/>
+                                <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="54"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CITY." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ob2-vh-b0b">
                                 <rect key="frame" x="56" y="369" width="106.5" height="66"/>
-                                <fontDescription key="fontDescription" name="Dosis-ExtraBold" family="Dosis" pointSize="50"/>
+                                <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="54"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="immerse yourself in hidden aventures around your city" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LNr-RI-YFN">
-                                <rect key="frame" x="56" y="443" width="223" height="56"/>
-                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="22"/>
+                                <rect key="frame" x="56" y="443" width="223" height="44"/>
+                                <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="22"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -998,7 +994,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOUR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fHJ-Y7-wZp">
                                 <rect key="frame" x="56" y="303" width="114.5" height="66"/>
-                                <fontDescription key="fontDescription" name="Dosis-ExtraBold" family="Dosis" pointSize="50"/>
+                                <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="54"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1007,9 +1003,7 @@
                         <constraints>
                             <constraint firstItem="LNr-RI-YFN" firstAttribute="top" secondItem="ob2-vh-b0b" secondAttribute="bottom" constant="8" id="50M-tg-rrL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LNr-RI-YFN" secondAttribute="trailing" constant="80" id="5ig-Qw-DXk"/>
-                            <constraint firstItem="G7D-ch-9g5" firstAttribute="centerX" secondItem="tlT-Pq-s8R" secondAttribute="centerX" id="5pt-G3-GiW"/>
                             <constraint firstItem="ob2-vh-b0b" firstAttribute="leading" secondItem="tlT-Pq-s8R" secondAttribute="leadingMargin" multiplier="3.5" id="60j-Fx-p9g"/>
-                            <constraint firstItem="G7D-ch-9g5" firstAttribute="top" secondItem="LRs-bf-Jf5" secondAttribute="bottom" constant="5" id="7SU-qQ-clx"/>
                             <constraint firstItem="MhN-lg-zkt" firstAttribute="height" secondItem="tlT-Pq-s8R" secondAttribute="height" multiplier="0.1" id="AzX-K6-mCz"/>
                             <constraint firstAttribute="trailing" secondItem="ob2-vh-b0b" secondAttribute="trailing" multiplier="2" constant="50" id="BQ9-dr-Y9L"/>
                             <constraint firstAttribute="right" secondItem="fHJ-Y7-wZp" secondAttribute="rightMargin" multiplier="2" constant="50" id="Dy2-DD-quK"/>
@@ -1027,8 +1021,6 @@
                             <constraint firstItem="ob2-vh-b0b" firstAttribute="top" secondItem="fHJ-Y7-wZp" secondAttribute="bottom" id="kKa-BA-C4l"/>
                             <constraint firstItem="fHJ-Y7-wZp" firstAttribute="height" secondItem="MhN-lg-zkt" secondAttribute="height" id="lFP-FQ-k2b"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MhN-lg-zkt" secondAttribute="trailing" multiplier="1.5" id="lYk-Tr-xhf"/>
-                            <constraint firstItem="2m5-gn-uF4" firstAttribute="top" secondItem="LRs-bf-Jf5" secondAttribute="bottom" multiplier="4" id="m6g-AJ-YPm"/>
-                            <constraint firstItem="LRs-bf-Jf5" firstAttribute="centerX" secondItem="tlT-Pq-s8R" secondAttribute="centerX" id="pHd-v9-MRK"/>
                             <constraint firstAttribute="trailing" secondItem="HoC-H4-6jN" secondAttribute="trailing" id="wE1-2z-c5B"/>
                             <constraint firstItem="geO-ze-4Ry" firstAttribute="top" secondItem="tlT-Pq-s8R" secondAttribute="top" id="wYE-BS-hlR"/>
                             <constraint firstItem="2m5-gn-uF4" firstAttribute="top" secondItem="geO-ze-4Ry" secondAttribute="bottom" id="wkk-2o-wol"/>
@@ -1099,7 +1091,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fullName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wV-th-mOl">
-                                                    <rect key="frame" x="148" y="54" width="67.5" height="20"/>
+                                                    <rect key="frame" x="148" y="53.5" width="59" height="21.5"/>
                                                     <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="17"/>
                                                     <color key="textColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1121,7 +1113,7 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wf5-XA-nFV">
-                                <rect key="frame" x="164" y="30" width="40" height="23"/>
+                                <rect key="frame" x="164" y="30" width="39.5" height="23"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="18"/>
                                 <color key="textColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1260,7 +1252,6 @@
         <image name="profile_unfilled" width="30" height="30"/>
         <image name="search" width="30" height="30"/>
         <image name="twitter-unfilled" width="45" height="45"/>
-        <image name="whiteLogo" width="39" height="39"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hf2-En-4BL"/>

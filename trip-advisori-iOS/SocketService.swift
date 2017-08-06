@@ -41,7 +41,7 @@ class SocketService: NSObject, WebSocketDelegate, CurrentLocationServiceDelegate
     func openSocket() {
         _socket = WebSocket(url: URL(string: "\(wsURL)/pull")!, protocols: ["chat", "superchat"])
         _socket.delegate = self
-        _socket.voipEnabled = true
+        // _socket.voipEnabled = true
         setSocketHeaders()
         _socket.connect()
     }
