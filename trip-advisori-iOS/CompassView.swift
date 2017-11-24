@@ -103,7 +103,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, P
     
     func addNextScene() {
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(_nextScene!.latitude!, _nextScene!.longitude!)
+        marker.position = CLLocationCoordinate2DMake(_nextScene!.latitude, _nextScene!.longitude)
         marker.title = "fuck"
         marker.snippet = "fuck"
         marker.map = sceneMapView
@@ -206,7 +206,7 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, P
     
     func twirlCompass() {
         let origin = CLLocation(latitude: currentLocationService.latitude, longitude: currentLocationService.longitude)
-        let destination = CLLocation(latitude: _nextScene!.latitude!, longitude: _nextScene!.longitude!)
+        let destination = CLLocation(latitude: _nextScene!.latitude, longitude: _nextScene!.longitude)
         let bearing = navigationService.getBearingBetweenTwoPoints1(origin, point2: destination)
         var rotationAngle = navigationService.adjustBearingForDeviceHeading(bearing, heading: currentLocationService.heading)
         let otherRotationAngle = rotationAngle * CGFloat(M_PI) / 180

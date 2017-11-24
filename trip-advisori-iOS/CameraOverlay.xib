@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,25 +12,25 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CameraOverlay" customModule="Lightupon" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q51-1Q-IC8">
-                    <rect key="frame" x="23" y="575" width="30" height="35"/>
+                    <rect key="frame" x="17" y="476" width="30" height="35"/>
                     <state key="normal" image="photoGallery"/>
                     <connections>
                         <action selector="photoGallery:" destination="iN0-l3-epB" eventType="touchUpInside" id="gHF-y2-UtF"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fW4-1M-zpZ" userLabel="cameraSwitchButton">
-                    <rect key="frame" x="23" y="35" width="35" height="35"/>
+                    <rect key="frame" x="17" y="57" width="35" height="35"/>
                     <state key="normal" image="cameraSwitch"/>
                     <connections>
                         <action selector="cameraSwitch:" destination="iN0-l3-epB" eventType="touchUpInside" id="Nby-x6-jVo"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwo-es-myc">
-                    <rect key="frame" x="323" y="35" width="30" height="30"/>
+                    <rect key="frame" x="273" y="57" width="30" height="30"/>
                     <state key="normal" image="mainCancel"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
@@ -43,42 +42,27 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sp0-qO-Tfe" userLabel="resetButton">
-                    <rect key="frame" x="23" y="35" width="20" height="25"/>
+                    <rect key="frame" x="17" y="57" width="20" height="25"/>
                     <state key="normal" image="left_chevron"/>
                     <connections>
                         <action selector="reset:" destination="iN0-l3-epB" eventType="touchUpInside" id="mOh-G4-IIP"/>
                     </connections>
                 </button>
-                <collectionView hidden="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Mop-WR-dWw">
-                    <rect key="frame" x="-99000" y="105" width="99375" height="293"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="20" id="yJ5-mZ-hgt">
-                        <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="37.5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Mop-WR-dWw" firstAttribute="top" secondItem="fW4-1M-zpZ" secondAttribute="bottom" constant="35" id="3g4-oO-AbS"/>
-                <constraint firstItem="fW4-1M-zpZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="35" id="6Va-Wn-5BD"/>
+                <constraint firstItem="fW4-1M-zpZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="57" id="6Va-Wn-5BD"/>
                 <constraint firstAttribute="bottom" secondItem="Q51-1Q-IC8" secondAttribute="bottom" constant="57" id="CRi-G2-P04"/>
                 <constraint firstItem="Q51-1Q-IC8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="0.2" id="Ff8-ZH-cuL"/>
                 <constraint firstItem="gwo-es-myc" firstAttribute="top" secondItem="fW4-1M-zpZ" secondAttribute="top" id="IO3-eD-duD"/>
                 <constraint firstItem="sp0-qO-Tfe" firstAttribute="top" secondItem="fW4-1M-zpZ" secondAttribute="top" id="VJS-Uc-r4E"/>
-                <constraint firstItem="Mop-WR-dWw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-99000" id="Z19-B0-Dpu"/>
-                <constraint firstAttribute="trailing" secondItem="Mop-WR-dWw" secondAttribute="trailing" id="b6O-jq-BhR"/>
                 <constraint firstItem="fW4-1M-zpZ" firstAttribute="leading" secondItem="Q51-1Q-IC8" secondAttribute="leading" id="hQ6-Xg-RQu"/>
-                <constraint firstAttribute="bottom" secondItem="Mop-WR-dWw" secondAttribute="bottom" multiplier="1.5" constant="70" id="jXr-xc-Mds"/>
                 <constraint firstItem="gwo-es-myc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="1.8" id="pIZ-Yj-pyz"/>
                 <constraint firstItem="sp0-qO-Tfe" firstAttribute="leading" secondItem="fW4-1M-zpZ" secondAttribute="leading" id="zSw-Pf-dLQ"/>
             </constraints>
             <connections>
                 <outlet property="backButton" destination="gwo-es-myc" id="oKs-BN-taC"/>
                 <outlet property="cameraSwitchButton" destination="fW4-1M-zpZ" id="wfy-H9-gkz"/>
-                <outlet property="cardCollectionView" destination="Mop-WR-dWw" id="WFP-RF-Kbc"/>
                 <outlet property="photoGalleryButton" destination="Q51-1Q-IC8" id="YcN-qx-Ike"/>
                 <outlet property="resetButton" destination="sp0-qO-Tfe" id="vXp-5m-KY3"/>
             </connections>

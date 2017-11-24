@@ -11,11 +11,12 @@ import GoogleMaps
 
 class SceneFormViewController: TripModalPresentingViewController, UIGestureRecognizerDelegate, GMSMapViewDelegate, UITextFieldDelegate, UITextViewDelegate {
     
-    let postService = Services.shared.getPostService()
-    let tripService = Services.shared.getTripsService()
-    let currentLocationService = Services.shared.getCurrentLocationService()
-    let googleMapsService = Services.shared.getGoogleMapsService()
-    let twitterService = Services.shared.getTwitterService()
+    private let postService = Services.shared.getPostService()
+    private let tripService = Services.shared.getTripsService()
+    private let userService = Services.shared.getUserService()
+    private let currentLocationService = Services.shared.getCurrentLocationService()
+    private let googleMapsService = Services.shared.getGoogleMapsService()
+    private let twitterService = Services.shared.getTwitterService()
 
     @IBOutlet weak var mapView: LightuponGMSMapView!
     @IBOutlet weak var backButton: UIButton!
@@ -54,7 +55,6 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         postService.uploadPicture(image: PickedImage.shared)
         makeKeyboardLeave()
         getRecommendedScene()
-        getActiveTrip()
         setDelegation()
         tintBackButton()
         watchForLocationSectionTouch()
@@ -90,7 +90,15 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         centerView()
     }
     
-
+    @IBAction func share(_ sender: Any) {
+        currentScene.name = sceneNameTextField.text!
+        let card = Card(caption: captionTextField.text)
+        card.shareOnFacebook = shareOnFacebook
+        card.shareOnTwitter = shareOnTwitter
+        tellUserHeOrSheIsJustSwell()
+        postService.post(card: card, scene: currentScene, tripID: nil, sceneID: nil)
+    }
+    
     @IBAction func toggleShareToFacebook(_ sender: Any) {
         shareOnFacebook = !shareOnFacebook
         let icon = shareOnFacebook ? UIImage(named: "facebook-filled") : UIImage(named: "facebook-unfilled")
@@ -128,6 +136,28 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
                 self.addCancelButton()
             })
         }
+    }
+    
+    func tellUserHeOrSheIsJustSwell() {
+        addBlurView()
+        addPostConfirmationView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+            self.dismiss(animated: true, completion: nil)
+        })
+    }
+    
+    override func addBlurView() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurView)
+    }
+    
+    func addPostConfirmationView() {
+        let postConfirmationView = PostConfirmationView.fromNib("PostConfirmationView")
+        postConfirmationView.frame = UIScreen.main.bounds
+        view.addSubview(postConfirmationView)
     }
     
     func addCancelButton() {
@@ -219,15 +249,15 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         postService.getActiveScene(callback: self.setRecommendedScene)
     }
     
-    func getActiveTrip() {
-        tripService.getActiveTrip(callback: self.setActiveTrip)
-    }
-    
-    func setActiveTrip(trip: Trip) {
-        currentTrip = trip
-        if !trip.title.isEmpty {
-        }
-    }
+//    func getActiveTrip() {
+//        tripService.getActiveTrip(callback: self.setActiveTrip)
+//    }
+//
+//    func setActiveTrip(trip: Trip) {
+//        currentTrip = trip
+//        if !trip.title.isEmpty {
+//        }
+//    }
 
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -259,8 +289,8 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     
     func bindCurrentLocationToMap() {
         addMiddleIconToMap()
-        let camera = GMSCameraPosition.camera(withLatitude: currentScene.latitude!,
-                                 longitude: currentScene.longitude!,
+        let camera = GMSCameraPosition.camera(withLatitude: currentScene.latitude,
+                                 longitude: currentScene.longitude,
                                  zoom: 18)
         mapView.camera = camera
     }
@@ -367,19 +397,4 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     }
     
     @IBAction func changeLocation(_ sender: Any) {}
-
-    @IBAction func share(_ sender: Any) {
-        performSegue(withIdentifier: "SceneFormToTripForm", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let tripFormViewController = segue.destination as? TripFormViewController {
-            currentScene.name = sceneNameTextField.text!
-            let card = Card(caption: captionTextField.text)
-            card.shareOnFacebook = shareOnFacebook
-            card.shareOnTwitter = shareOnTwitter
-            tripFormViewController.currentScene = currentScene
-            tripFormViewController.currentCard = card
-        }
-    }
 }

@@ -22,6 +22,7 @@ class LoadingAnimationView: UIView {
     var delegate: LoadingAnimationViewDelegate!
 
     func initialize(parentView: LoadingAnimationViewDelegate) {
+        frame = UIScreen.main.bounds
         firstDot.backgroundColor = UIColor.basePurple
         secondDot.backgroundColor = UIColor.basePurple
         thirdDot.backgroundColor = UIColor.basePurple

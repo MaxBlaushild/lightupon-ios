@@ -21,6 +21,10 @@ private extension UIStoryboard {
     class func homeTabBarViewController() -> HomeTabBarViewController? {
         return mainStoryboard().instantiateViewController(withIdentifier: "HomeTabBarViewController") as? HomeTabBarViewController
     }
+    
+    class func mapViewController() -> MapViewController? {
+        return mainStoryboard().instantiateViewController(withIdentifier: "MapViewController") as? MapViewController
+    }
 }
 
 protocol MainViewControllerDelegate {
@@ -28,26 +32,22 @@ protocol MainViewControllerDelegate {
 }
 
 class MainContainerViewController: UIViewController, MainViewControllerDelegate, LoadingAnimationViewDelegate {
-    fileprivate let _partyService: PartyService = Services.shared.getPartyService()
-    
     var storyTellerViewController: StoryTellerViewController!
-    var homeTabBarViewController: HomeTabBarViewController!
+    var mapViewController: MapViewController!
     var menuOpen: Bool = false
     var menuViewController: StoryTellerMenuViewController!
     var shownViewController: UIViewController!
     var loadingAnimation: LoadingAnimationView!
-    
-    var _party: Party!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initHomeTabBarViewController()
+        initMapViewController()
     }
     
-    func initHomeTabBarViewController() {
-        homeTabBarViewController = UIStoryboard.homeTabBarViewController()
-        homeTabBarViewController.assignDelegation(self)
-        showViewController(homeTabBarViewController)
+    func initMapViewController() {
+        mapViewController = UIStoryboard.mapViewController()
+        mapViewController.delegate = self
+        showViewController(mapViewController)
     }
     
     func showViewController(_ viewController: UIViewController) {

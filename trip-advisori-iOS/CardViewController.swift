@@ -8,23 +8,46 @@
 
 import UIKit
 
+@objc protocol CardViewControllerDelegate {
+    func onDismissed () -> Void
+    func canStartParty () -> Bool
+    var tripDetailsViewController: CardViewController { get set }
+    @objc optional func onSceneChanged (_ scene: Scene) -> Void
+}
+
 class CardViewController: UIViewController, ProfileViewCreator {
     
     private let partyService = Services.shared.getPartyService()
     
-    var cardView: DefaultCardDetailsView!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var sceneImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var sceneTitleLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var timeSinceLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var overlay: UIView!
+    @IBOutlet weak var beltOverlay: UIView!
+    @IBOutlet weak var overlayTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var bottomViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sceneImageHeightConstraint: NSLayoutConstraint!
     var delegate: TripDetailsViewController!
     
     func bindContext(card: Card, owner: User, scene: Scene, blurApplies: Bool) {
-        addCardView(card: card, owner: owner, scene: scene, blurApplies: blurApplies)
-    }
-    
-    func addCardView(card: Card, owner: User, scene: Scene, blurApplies: Bool) {
-        cardView = DefaultCardDetailsView.fromNib("DefaultCardDetailsView")
-        cardView.initFrom(card: card, blur: 1.0 - scene.percentDiscovered, blurApplies: blurApplies)
-        cardView.frame = self.view.frame
-        cardView.delegate = self
-        view.addSubview(cardView)
+        sceneImageView.imageFromUrl(card.imageUrl)
+        
+        profileImageView.imageFromUrl(owner.profilePictureURL, success: { img in
+            self.profileImageView.image = img
+            self.profileImageView.makeCircle()
+        })
+        
+        sceneTitleLabel.text = scene.name
+        timeSinceLabel.text = card.prettyTimeSinceCreation()
+        addressLabel.text = "\(scene.streetNumber) \(scene.route)"
+        descriptionLabel.attributedText = createBylineText(username: owner.fullName, caption: card.caption)
+        beltOverlay.backgroundColor = UIColor.basePurple
+        overlay.backgroundColor = UIColor.basePurple
     }
 
     func createProfileView(_ userId: Int) {
@@ -32,7 +55,33 @@ class CardViewController: UIViewController, ProfileViewCreator {
     }
     
     func setBottomViewHeight(newHeight: CGFloat) {
-        cardView.setBottomViewHeight(newHeight: newHeight)
+        bottomViewTopConstraint.constant = newHeight
+    }
+    
+    func setStartingBottomViewHeight() {
+        let startingHeight = sceneImageView.frame.height * -1.0
+        bottomViewTopConstraint.constant = startingHeight
+    }
+    
+    func setOverlayAlpha(alpha: CGFloat) {
+        overlay.alpha = alpha
+    }
+    
+    func createBylineText(username: String, caption: String) -> NSMutableAttributedString {
+        let formattedString = NSMutableAttributedString()
+        let bold = [NSFontAttributeName : UIFont(name: "GothamRounded-Medium", size: 17)!]
+        let boldPart = NSMutableAttributedString(string:"\(username) ", attributes:bold)
+        
+        formattedString.append(boldPart)
+        let normal = [NSFontAttributeName : descriptionLabel.font]
+        let normalPart = NSMutableAttributedString(string: caption, attributes: normal)
+        formattedString.append(normalPart)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 3
+        
+        formattedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, formattedString.length))
+        return formattedString
     }
 
     override func viewDidLoad() {
@@ -45,16 +94,6 @@ class CardViewController: UIViewController, ProfileViewCreator {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -10,7 +10,13 @@ import UIKit
 
 private let reuseIdentifier = "PartyMemberCollectionViewCell"
 
-class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ProfileViewDelegate, UITextFieldDelegate {
+class SearchViewController: UIViewController,
+                            UICollectionViewDelegate,
+                            UICollectionViewDelegateFlowLayout,
+                            UICollectionViewDataSource,
+                            ProfileViewDelegate,
+                            UITextFieldDelegate {
+    
     fileprivate let _searchService = Services.shared.getSearchService()
     fileprivate let _followService = Services.shared.getFollowService()
     
@@ -144,6 +150,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         let user: User = _users[(indexPath as NSIndexPath).row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PartyMemberCollectionViewCell
         cell.bindCell(user)
+        
         cell.partyMemberProfilePicture.imageFromUrl(user.profilePictureURL, success: { img in
             cell.partyMemberProfilePicture.makeCircle()
         })
@@ -168,7 +175,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let kWhateverHeightYouWant = 75
-        return CGSize(width: userCollectionView.bounds.size.width, height: CGFloat(kWhateverHeightYouWant))
+        return CGSize(width: UIScreen.main.bounds.width, height: CGFloat(kWhateverHeightYouWant))
     }
     
     func giveOffsetBorder(cell: PartyMemberCollectionViewCell) {

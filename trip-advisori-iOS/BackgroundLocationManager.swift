@@ -33,18 +33,18 @@ class BackgroundLocationManager: NSObject, APScheduledLocationManagerDelegate {
     }
     
     func scheduledLocationManager(_ manager: APScheduledLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let locationObj:CLLocation = locations.last!
-        let coord = locationObj.coordinate
-        
-        let location = [
-            "Accuracy": locationObj.horizontalAccuracy,
-            "Floor": locationObj.floor?.level ?? 1,
-            "Course": locationObj.course,
-            "Latitude": coord.latitude,
-            "Longitude": coord.longitude
-        ] as [String : Any]
-        
-        _sessionManager.request(apiURL + "/discover", method: .post, parameters: location as [String : AnyObject], encoding: JSONEncoding.default, headers: _headers)
+//        let locationObj:CLLocation = locations.last!
+//        let coord = locationObj.coordinate
+//        
+//        let location = [
+//            "Accuracy": locationObj.horizontalAccuracy,
+//            "Floor": locationObj.floor?.level ?? 1,
+//            "Course": locationObj.course,
+//            "Latitude": coord.latitude,
+//            "Longitude": coord.longitude
+//        ] as [String : Any]
+//        
+//        _sessionManager.request(apiURL + "/discover", method: .post, parameters: location as [String : AnyObject], encoding: JSONEncoding.default, headers: _headers)
     }
     
     func scheduledLocationManager(_ manager: APScheduledLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

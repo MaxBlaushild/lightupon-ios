@@ -21,6 +21,8 @@ extension UIImageView {
     public func imageFromUrl(_ urlString: String, success: @escaping (UIImage) -> Void) {
         self.image = nil
         let nsurl = URL(string: urlString)
-        self.hnk_setImageFromURL(nsurl!, success: success)
+        if let _image = nsurl  {
+            self.hnk_setImageFromURL(_image, success: success)
+        }
     }
 }

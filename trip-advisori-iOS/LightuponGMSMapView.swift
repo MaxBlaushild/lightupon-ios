@@ -65,7 +65,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         selectedLightuponMarker?.setNotSelected()
         settings.scrollGestures = false
         settings.rotateGestures = false
-        settings.myLocationButton = true
+        settings.myLocationButton = false
         settings.tiltGestures = false
         settings.zoomGestures = false
         centerMap()
@@ -102,7 +102,12 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
     
     func setCompassFrame() {
         UIView.animate(withDuration: 0.25, animations: {
-            self.frame = self._initialFrame
+            self.frame = CGRect(
+                x: self._initialFrame.minX,
+                y: self._initialFrame.minY,
+                width: UIScreen.main.bounds.width,
+                height: self._initialFrame.height
+            )
         })
     }
     
@@ -119,8 +124,8 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         lockButton = UIButton()
         lockButton.backgroundColor = .white
         lockButton.frame = CGRect(
-            x: frame.width - 70,
-            y: frame.height / 2 - UIApplication.shared.statusBarFrame.height,
+            x: UIScreen.main.bounds.width - 70,
+            y: UIScreen.main.bounds.height - 175,
             width: 50,
             height: 50
         )
@@ -232,8 +237,8 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         let scene = selectedLightuponMarker!.scene
         animate(
             to: GMSCameraPosition.camera(
-                withLatitude: scene.latitude!,
-                longitude: scene.longitude!,
+                withLatitude: scene.latitude,
+                longitude: scene.longitude,
                 zoom: googleMapsService.defaultUnlockedZoom,
                 bearing: camera.bearing,
                 viewingAngle: camera.viewingAngle

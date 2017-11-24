@@ -16,8 +16,8 @@ class Scene: NSObject, Mappable {
     var tripId:Int = 0
     var trip: Trip?
     var name:String = ""
-    var latitude: Double?
-    var longitude: Double?
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
     var cards: [Card] = [Card]()
     var soundResource:String?
     var backgroundUrl: String = "http://p.fod4.com/p/channels/legacy/profile/1212782/a196f26e7efc0fc9c3890cdc748ce61d.jpg"
@@ -91,19 +91,20 @@ class Scene: NSObject, Mappable {
             locality = newValue.locality!
             neighborhood = newValue.neighborhood!
             googlePlaceID = newValue.googlePlaceId
-            latitude = newValue.latitude
-            longitude = newValue.longitude
+            latitude = newValue.latitude ?? 0.0
+            longitude = newValue.longitude ?? 0.0
+            
         }
     }
     
     var location: Location {
         get {
-            return Location(longitude: self.longitude!, latitude: self.latitude!)
+            return Location(longitude: self.longitude, latitude: self.latitude)
         }
     }
     
     var cllocation: CLLocation {
-        return CLLocation(latitude: self.latitude!, longitude: self.longitude!)
+        return CLLocation(latitude: self.latitude, longitude: self.longitude)
     }
     
     func prettyTimeSinceCreation() -> String {

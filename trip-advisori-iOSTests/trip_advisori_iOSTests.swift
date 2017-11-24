@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import trip_advisori_iOS
+@testable import lightupon
 
 class trip_advisori_iOSTests: XCTestCase {
     

@@ -24,7 +24,7 @@ class LightuponGMSMarker: GMSMarker {
     init(scene: Scene) {
         _scene = scene
         super.init()
-        position = CLLocationCoordinate2DMake(scene.latitude!, scene.longitude!)
+        position = CLLocationCoordinate2DMake(scene.latitude, scene.longitude)
         title = scene.name
         userData = scene
          NotificationCenter.default.addObserver(self, selector: #selector(onSceneUpdated), name: feedService.sceneUpdatedSubscriptionName, object: nil)
@@ -32,14 +32,11 @@ class LightuponGMSMarker: GMSMarker {
     
     func onSceneUpdated(notification: NSNotification) {
         let sceneID = notification.object as! Int
-//        let utilityQueue = DispatchQueue.global(qos: .utility)
         if sceneID == _scene.id {
-//            DispatchQueue.global(qos: .userInteractive).async {
-                self.feedService.getScene(sceneID, success: { scene in
-                    self._scene = scene
-                    self.updateImages(blurApplies: true)
-                })
-//            }
+            self.feedService.getScene(sceneID, success: { scene in
+                self._scene = scene
+                self.updateImages(blurApplies: true)
+            })
         }
     }
     
@@ -115,6 +112,12 @@ class LightuponGMSMarker: GMSMarker {
     var scene: Scene {
         get {
             return _scene
+        }
+    }
+    
+    var cllocation: CLLocation {
+        get {
+            return CLLocation(latitude: _scene.latitude, longitude: _scene.longitude)
         }
     }
 }

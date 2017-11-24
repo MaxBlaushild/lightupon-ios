@@ -23,7 +23,6 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     fileprivate var _course:Double
     fileprivate var _heading:Double
     fileprivate var _lastLocationDate:NSDate = NSDate()
-    fileprivate var _updateTime: Timer!
     
     let tripsService:TripsService
     let apiAmbassador:AmbassadorToTheAPI
@@ -44,7 +43,7 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         
         super.init()
         
-        self._updateTime = Timer.scheduledTimer(timeInterval: 15.0, target: self, selector: #selector(updateLocation), userInfo: nil, repeats: true)
+//        self._updateTime = Timer.scheduledTimer(timeInterval: 15.0, target: self, selector: #selector(updateLocation), userInfo: nil, repeats: true)
         
         _locationManager.delegate = self
         

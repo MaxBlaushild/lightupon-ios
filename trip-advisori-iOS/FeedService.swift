@@ -31,8 +31,8 @@ class FeedService: NSObject, SocketServiceDelegate {
         NotificationCenter.default.post(name: self.sceneUpdatedSubscriptionName, object: sceneID)
     }
     
-    func getFeed(success: @escaping ([Scene]) -> Void) {
-        _apiAmbassador.get("/feed", success: { response in
+    func getFeed(page: Int, success: @escaping ([Scene]) -> Void) {
+        _apiAmbassador.get("/feed?page=\(page)", success: { response in
             let scenes = Mapper<Scene>().mapArray(JSONObject: response.result.value) ?? [Scene]()
             success(scenes)
         })

@@ -32,6 +32,7 @@ class Services: NSObject {
     private let _googleMapsService: GoogleMapsService
     private let _notificationService: NotificationService
     private let _twitterService: TwitterService
+    private let _discoveryService: DiscoveryService
 
     override init(){
         _authService = AuthService()
@@ -55,7 +56,13 @@ class Services: NSObject {
         _likeService = LikeService(apiAmbassador: _apiAmbassador)
         _googleMapsService = GoogleMapsService()
         _twitterService = TwitterService(apiAmbassador: _apiAmbassador)
+        _discoveryService = DiscoveryService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService, navigationService: _navigationService)
+        
         super.init()
+    }
+    
+    func getDiscoveryService() -> DiscoveryService {
+        return _discoveryService
     }
     
     func getTwitterService() -> TwitterService {

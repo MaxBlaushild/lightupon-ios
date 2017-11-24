@@ -75,24 +75,13 @@ class PostService: NSObject {
     }
     
     func createContent() {
-        if let id = tripID {
-            appendScene(scene, toTrip: id, callback: { scene in
+        let degenerateTrip = Trip(title: "", details: "")
+        _tripsService.createTrip(degenerateTrip, callback: { trip in
+            self.appendScene(self.scene, toTrip: trip.id, callback: { scene in
                 self.card.sceneID = scene.id
                 self.createCard(self.card, sceneID: scene.id, lat: scene.latitude, long: scene.longitude)
             })
-        } else {
-            if let id  = sceneID {
-                createCard(card, sceneID: id, lat: nil, long: nil)
-            } else {
-                let degenerateTrip = Trip(title: "", details: "")
-                _tripsService.createTrip(degenerateTrip, callback: { trip in
-                    self.appendScene(self.scene, toTrip: trip.id, callback: { scene in
-                        self.card.sceneID = scene.id
-                        self.createCard(self.card, sceneID: scene.id, lat: scene.latitude, long: scene.longitude)
-                    })
-                })
-            }
-        }
+        })
     }
     
     func createCard(_ card: Card, sceneID: Int, lat: Double?, long: Double?) {

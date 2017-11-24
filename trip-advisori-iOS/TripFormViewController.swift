@@ -125,43 +125,10 @@ class TripFormViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     @IBAction func share(_ sender: Any) {
-        var selectedTripId: Int?
+
         
-        if let selectedCellPaths = tripCollectionView.indexPathsForSelectedItems {
-            if selectedCellPaths.count > 0 {
-                let selectedCellIndex = selectedCellPaths[0]
-                let selectedCell = tripCollectionView.cellForItem(at: selectedCellIndex)
-                if let tag = selectedCell?.tag {
-                    selectedTripId = tag
-                }
-            }
-        }
-        
-        
-        tellUserHeOrSheIsJustSwell()
-        postService.post(card: currentCard, scene: currentScene, tripID: selectedTripId, sceneID: nil)
     }
     
-    func addBlurView() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-        blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.frame = view.bounds
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurView)
-    }
-    
-    func tellUserHeOrSheIsJustSwell() {
-        addBlurView()
-        addPostConfirmationView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-        })
-    }
-    
-    func addPostConfirmationView() {
-        let postConfirmationView = PostConfirmationView.fromNib("PostConfirmationView")
-        view.addSubview(postConfirmationView)
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? CreateTripViewController {

@@ -20,6 +20,7 @@
 		1E09203E1D8A1D2B00D32376 /* XBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E09203D1D8A1D2B00D32376 /* XBackButton.swift */; };
 		1E0920401D8A2B9900D32376 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E09203F1D8A2B9900D32376 /* BlurView.swift */; };
 		1E0B3E601DAA06E700F830D4 /* ArrayMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B3E5F1DAA06E700F830D4 /* ArrayMethod.swift */; };
+		1E0E99111EEB35E40001F72C /* DiscoveryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0E99101EEB35E40001F72C /* DiscoveryService.swift */; };
 		1E1141D01DC662E700ACAF67 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1141CF1DC662E700ACAF67 /* SearchService.swift */; };
 		1E1141D21DC674DD00ACAF67 /* FollowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1141D11DC674DD00ACAF67 /* FollowService.swift */; };
 		1E1711931CD431D20083236C /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1711921CD431D20083236C /* Services.swift */; };
@@ -49,7 +50,6 @@
 		1E30E7AF1D7CEC6300BB547F /* EndOfTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E30E7AE1D7CEC6300BB547F /* EndOfTripView.xib */; };
 		1E3343CE1E15B27700A6E633 /* RoundDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3343CD1E15B27700A6E633 /* RoundDoubles.swift */; };
 		1E3940081E07277D009D29B0 /* AddBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3940071E07277D009D29B0 /* AddBorder.swift */; };
-		1E3FFA711E63CD7B001C4969 /* LightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FFA701E63CD7B001C4969 /* LightViewController.swift */; };
 		1E4E8CD51EC3C95C00DA4ACF /* SceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E8CD41EC3C95C00DA4ACF /* SceneCell.swift */; };
 		1E51D5961D9D8B530052DA6E /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5941D9D87ED0052DA6E /* ProfileView.xib */; };
 		1E51D5B51D9D968B0052DA6E /* Brandon_bld.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5B11D9D968B0052DA6E /* Brandon_bld.otf */; };
@@ -231,6 +231,7 @@
 		1E09203D1D8A1D2B00D32376 /* XBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XBackButton.swift; sourceTree = "<group>"; };
 		1E09203F1D8A2B9900D32376 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		1E0B3E5F1DAA06E700F830D4 /* ArrayMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayMethod.swift; sourceTree = "<group>"; };
+		1E0E99101EEB35E40001F72C /* DiscoveryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryService.swift; sourceTree = "<group>"; };
 		1E1141CF1DC662E700ACAF67 /* SearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		1E1141D11DC674DD00ACAF67 /* FollowService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowService.swift; sourceTree = "<group>"; };
 		1E1711921CD431D20083236C /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
@@ -261,7 +262,6 @@
 		1E30E7AE1D7CEC6300BB547F /* EndOfTripView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EndOfTripView.xib; sourceTree = "<group>"; };
 		1E3343CD1E15B27700A6E633 /* RoundDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundDoubles.swift; sourceTree = "<group>"; };
 		1E3940071E07277D009D29B0 /* AddBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBorder.swift; sourceTree = "<group>"; };
-		1E3FFA701E63CD7B001C4969 /* LightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightViewController.swift; sourceTree = "<group>"; };
 		1E4E8CD41EC3C95C00DA4ACF /* SceneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCell.swift; sourceTree = "<group>"; };
 		1E51D5941D9D87ED0052DA6E /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		1E51D5B11D9D968B0052DA6E /* Brandon_bld.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_bld.otf; sourceTree = "<group>"; };
@@ -335,7 +335,7 @@
 		1EA083DA1EAC0753007D0FC1 /* FunWithStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunWithStrings.swift; sourceTree = "<group>"; };
 		1EA20DEB1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO8601MilliDateTransform.swift; sourceTree = "<group>"; };
 		1EA20DED1DA1995D00596CDE /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
-		1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "trip-advisori-iOS.entitlements"; sourceTree = "<group>"; };
+		1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "trip-advisori-iOS.entitlements"; path = "trip-advisori-iOS/trip-advisori-iOS.entitlements"; sourceTree = "<group>"; };
 		1EA5AFD21D7E3E760024D6CD /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		1EA5C6171DC00E1200918CA6 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -436,6 +436,7 @@
 		1E05B87E1C5D135D009E37BA = {
 			isa = PBXGroup;
 			children = (
+				1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */,
 				1E05B8891C5D135D009E37BA /* trip-advisori-iOS */,
 				1E05B8A01C5D135D009E37BA /* trip-advisori-iOSTests */,
 				1E05B8AB1C5D135D009E37BA /* trip-advisori-iOSUITests */,
@@ -458,7 +459,6 @@
 		1E05B8891C5D135D009E37BA /* trip-advisori-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */,
 				1ED69B4D1D0C850D00CF2172 /* services */,
 				1ED69B4C1D0C84EC00CF2172 /* viewControllers */,
 				1ED69B471D0C809C00CF2172 /* views */,
@@ -769,7 +769,6 @@
 				1E72BE731E0B88420060E82B /* TripDetailsViewController.swift */,
 				1EE2BD421E308B0100C73BCC /* NotSelectingViewController.swift */,
 				1EBB2F421E4A9B5B00EB8104 /* SceneFormViewController.swift */,
-				1E3FFA701E63CD7B001C4969 /* LightViewController.swift */,
 				1E582B371E68E76200499771 /* TripModalPresentingViewController.swift */,
 				1E9AC22E1EBBFA2E00C61B4E /* TripFormViewController.swift */,
 				1E938BBC1EDCBE8F00266126 /* CreateTripViewController.swift */,
@@ -804,6 +803,7 @@
 				1EEEED0D1E3C39410009C35D /* GoogleMapsService.swift */,
 				1E7B1E1C1E3D762C00F6A71C /* NotificationService.swift */,
 				1E938BB61EDB4CE400266126 /* TwitterService.swift */,
+				1E0E99101EEB35E40001F72C /* DiscoveryService.swift */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -1165,6 +1165,7 @@
 				1EBBFC1E1D734C6000697894 /* CompassView.swift in Sources */,
 				1EA20DEC1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift in Sources */,
 				AEE1AC691E2D5A790043ADDE /* MapSceneCell.swift in Sources */,
+				1E0E99111EEB35E40001F72C /* DiscoveryService.swift in Sources */,
 				1E9645F01E085A2E00A0E88F /* FeedService.swift in Sources */,
 				1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */,
 				1E7032AF1CE8F58800B1C18D /* Scene.swift in Sources */,
@@ -1205,7 +1206,6 @@
 				1EBBFC221D73545F00697894 /* AddShadow.swift in Sources */,
 				1E20149F1C72B7730012B863 /* AuthService.swift in Sources */,
 				1E30E7AD1D7CE91100BB547F /* EndOfTripView.swift in Sources */,
-				1E3FFA711E63CD7B001C4969 /* LightViewController.swift in Sources */,
 				1E77798C1E08F42F005B883D /* CommentCollectionViewCell.swift in Sources */,
 				1E9224921EB00C09008E705F /* CardCollectionViewCell.swift in Sources */,
 				1EBB2F431E4A9B5B00EB8104 /* SceneFormViewController.swift in Sources */,
@@ -1413,7 +1413,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XLWZ7RAXK6;
 				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1502,7 +1502,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XLWZ7RAXK6;
 				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",

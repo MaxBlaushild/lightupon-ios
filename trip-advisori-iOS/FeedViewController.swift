@@ -19,10 +19,13 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
     var profileView: ProfileView!
     var toggleBackView: UIView!
     var xBackButton: XBackButton!
+    var refresher: UIRefreshControl!
     var tripDetailsViewController: TripDetailsViewController!
     
     var onViewOpened:((Int) -> Void)!
     var onViewClosed:(() -> Void)!
+    
+    var page = 0
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var partyButton: UIButton!
@@ -30,11 +33,28 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-//        getFeed()
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refresher)
+        getFeed(callback: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        getFeed()
+    func refresh() {
+        page = 0
+        getFeed(callback: { scenes in
+            self.onFeedGotten(scenes: scenes)
+            self.refresher.endRefreshing()
+        })
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastRowIndex = tableView.numberOfRows(inSection: 0)
+        if indexPath.row == lastRowIndex - 1 {
+            getFeed(callback: { scenes in
+                self._scenes.append(contentsOf: scenes)
+                self.tableView.reloadData()
+            })
+        }
     }
     
     @IBAction func openPartyMenu(_ sender: Any) {
@@ -95,8 +115,10 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
         tableView.register(nibName, forCellReuseIdentifier: "FeedSceneCell")
     }
     
-    func getFeed() {
-        feedService.getFeed(success: self.onFeedGotten)
+    func getFeed(callback: (([Scene]) -> Void)?) {
+        let callback = callback ?? self.onFeedGotten
+        feedService.getFeed(page: page, success: callback)
+        page += 1
     }
     
     func onFeedGotten(scenes: [Scene]) {

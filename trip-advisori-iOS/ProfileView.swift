@@ -332,6 +332,7 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
         let blurView = BlurView(onClick: {})
         blurView.frame = fadedCoolGuyView.frame
         fadedCoolGuyView.insertSubview(blurView, aboveSubview: blurImage)
+        fadedCoolGuyView.frame.origin.x = 0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

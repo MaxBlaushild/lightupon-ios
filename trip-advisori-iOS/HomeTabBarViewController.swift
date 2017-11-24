@@ -169,9 +169,6 @@ class HomeTabBarViewController: UITabBarController,
         for controller in viewControllers! {
             
             if let mapController = controller as? MapViewController {
-                mapController.delegate = vc
-                mapController.onViewOpened = mainActionToStartParty
-                mapController.onViewClosed = mainActionToOpenCamera
             }
             
             if let feedController = controller as? FeedViewController {

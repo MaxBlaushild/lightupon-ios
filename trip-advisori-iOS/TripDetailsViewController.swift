@@ -81,7 +81,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     
     func setBottomViewHeight(newHeight: CGFloat) {
         if let topViewController = viewControllers?[0] as? CardViewController {
-            topViewController.setBottomViewHeight(newHeight: newHeight)
+//            topViewController.setBottomViewHeight(newHeight: newHeight)
         }
     }
     
@@ -97,7 +97,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     }
     
     func bindScene(scene: Scene, blurApplies: Bool) {
-        clearConstellations()
+//        clearConstellations()
         tripId = scene.tripId
         _blurApplies = blurApplies
         currentIndex = scene.sceneOrder! - 1
@@ -170,15 +170,15 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         dataSource = self
         delegate = self
 
-        drawConstellations(scenes: trip.scenes)
+//        drawConstellations(scenes: trip.scenes)
         jumpToSelectedScene()
     }
     
-    func clearConstellations() {
-        constellationPoints.forEach({ view in
-            view.removeFromSuperview()
-        })
-    }
+//    func clearConstellations() {
+//        constellationPoints.forEach({ view in
+//            view.removeFromSuperview()
+//        })
+//    }
     
     func setDrawerMode() {
         setBeltOverlay(newHeight: 0.0)
@@ -189,7 +189,7 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
     func jumpToSelectedScene() {
         let vc = cardViewControllers[currentIndex]
         setViewControllers([vc], direction: .forward, animated: true, completion: nil)
-        activateConstellation(constellationPoints[currentIndex])
+//        activateConstellation(constellationPoints[currentIndex])
     }
     
     func activateConstellation(_ constellation: UIView) {
@@ -206,26 +206,6 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         }), completion: nil)
     }
     
-    func drawConstellations(scenes: [Scene]) {
-        let xMultiplier = Double((UIScreen.main.bounds.width * 3/4) / CGFloat(scenes.count * 3))
-        var xPosition = 10.0
-        constellationPoints = scenes.map({ scene in
-            let constellation = UIView()
-            let yPosition = 30.00 * (scene.constellationPoint?.deltaY)! + 20
-            var distanceToNextPoint = (scene.constellationPoint?.distanceToThePreviousPoint)!
-            distanceToNextPoint = distanceToNextPoint > 1.0 ? 1.0 + drand48() : distanceToNextPoint
-            xPosition += xMultiplier * distanceToNextPoint
-            xPosition += 15
-            constellation.frame = CGRect(x: xPosition, y: yPosition, width: 8, height: 8)
-            constellation.backgroundColor = UIColor.white.withAlphaComponent(0.6)
-            constellation.makeCircle()
-            return constellation
-        })
-        
-        constellationPoints.forEach({ constellation in
-            overlay.addSubview(constellation)
-        })
-    }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let viewControllerIndex = cardViewControllers.index(of: viewController as! CardViewController) else {
