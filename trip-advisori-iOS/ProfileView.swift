@@ -62,7 +62,7 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     fileprivate var drawerHeight: CGFloat = 0.0
     
     fileprivate var _user: User!
-    fileprivate var _scenes: [Scene] = [Scene]()
+    fileprivate var _posts: [Post] = [Post]()
     
     internal var delegate: ProfileViewDelegate!
     
@@ -215,9 +215,9 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
         feedService.getUsersFeed(userID: _user.id, success: self.onFeedReceived)
     }
     
-    func onFeedReceived(scenes: [Scene]) {
-        _scenes = scenes
-        mapView.bindScenes(_scenes)
+    func onFeedReceived(posts: [Post]) {
+        _posts = posts
+        mapView.bindPosts(_posts)
         tableView.reloadData()
     }
     
@@ -320,7 +320,6 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     func style() {
         styleCircleImage()
         styleBlurImage()
-        tabBar.layer.addBorder(edge: .bottom, color: UIColor.mediumGrey, thickness: 1.0)
     }
     
     func styleCircleImage() {
@@ -330,9 +329,13 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     
     func styleBlurImage() {
         let blurView = BlurView(onClick: {})
-        blurView.frame = fadedCoolGuyView.frame
+        blurView.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: UIScreen.main.bounds.width,
+            height: frame.height * 0.5
+        )
         fadedCoolGuyView.insertSubview(blurView, aboveSubview: blurImage)
-        fadedCoolGuyView.frame.origin.x = 0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -340,31 +343,22 @@ class ProfileView: UIView, UITableViewDelegate, UITableViewDataSource, GMSMapVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _scenes.count
+        return _posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:FeedSceneCell = tableView.dequeueReusableCell(withIdentifier: "FeedSceneCell", for: indexPath) as! FeedSceneCell
-        let scene = _scenes[(indexPath as NSIndexPath).row]
-        let pictureUrl = scene.trip?.owner?.profilePictureURL
-        cell.decorateCell(scene: scene)
-        cell.profileImage.imageFromUrl(pictureUrl!, success: { img in
+        let post = _posts[(indexPath as NSIndexPath).row]
+        let pictureUrl = post.owner!.profilePictureURL
+        cell.decorateCell(post: post)
+        cell.profileImage.imageFromUrl(pictureUrl, success: { img in
             cell.profileImage.image = img
             cell.profileImage.makeCircle()
         })
         
-        cell.tripImage.imageFromUrl(scene.cards[0].imageUrl)
+        cell.tripImage.imageFromUrl(post.imageUrl)
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        let scene: Scene = _scenes[indexPath.row]
-        let tripDetailsViewController = TripDetailsViewController(scene: scene, blurApplies: true)
-        let parentViewController = delegate as! UIViewController
-        parentViewController.addChildViewController(tripDetailsViewController)
-        tripDetailsViewController.view.frame = frame
-        addSubview(tripDetailsViewController.view)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

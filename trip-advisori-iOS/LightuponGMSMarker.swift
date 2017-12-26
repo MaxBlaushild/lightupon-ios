@@ -16,39 +16,35 @@ let markerDiameter = 40
 class LightuponGMSMarker: GMSMarker {
     private var feedService = Services.shared.getFeedService()
     
-    var _scene: Scene
+    var _post: Post
     var _image: UIImage?
     var _selectedImage: UIImage?
     var _selected: Bool = false
     
-    init(scene: Scene) {
-        _scene = scene
+    init(post: Post) {
+        _post = post
         super.init()
-        position = CLLocationCoordinate2DMake(scene.latitude, scene.longitude)
-        title = scene.name
-        userData = scene
-         NotificationCenter.default.addObserver(self, selector: #selector(onSceneUpdated), name: feedService.sceneUpdatedSubscriptionName, object: nil)
+        position = CLLocationCoordinate2DMake(post.latitude ?? 0.0, post.longitude ?? 0.0)
+        title = post.name
+        userData = post
+         NotificationCenter.default.addObserver(self, selector: #selector(onPostUpdated), name: feedService.sceneUpdatedSubscriptionName, object: nil)
     }
     
-    func onSceneUpdated(notification: NSNotification) {
-        let sceneID = notification.object as! Int
-        if sceneID == _scene.id {
-            self.feedService.getScene(sceneID, success: { scene in
-                self._scene = scene
-                self.updateImages(blurApplies: true)
+    func onPostUpdated(notification: NSNotification) {
+        let postID = notification.object as! Int
+        if postID == _post.id {
+            self.feedService.getPost(postID, success: { post in
+                self._post = post
+                self.updateImages()
             })
         }
     }
     
-    func setImages(mapView: LightuponGMSMapView, selected: Bool, blurApplies: Bool) {
-        if let pinUrl = _scene.pinUrl {
+    func setImages(mapView: LightuponGMSMapView, selected: Bool) {
+        if let pinUrl = _post.pin!.url {
             Alamofire.request(pinUrl).responseJSON { response in
-                let blur = 1.0 - self._scene.percentDiscovered
                 if let data = response.data {
-                    var image = UIImage(data: data)
-                    if blurApplies && blur > 0.001 {
-                        image = image?.applyBackToTheFutureEffect(blur: blur)
-                    }
+                    let image = UIImage(data: data)
                     if let img = image {
                         self._image = Toucan(image: img).resize(CGSize(width: markerDiameter, height: markerDiameter), fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse().image
                         self._selectedImage = Toucan(image: img).resize(CGSize(width: 120, height: 120), fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 5, borderColor: UIColor.white).image
@@ -67,19 +63,15 @@ class LightuponGMSMarker: GMSMarker {
         }
     }
     
-    func updateImages(blurApplies: Bool) {
+    func updateImages() {
         _image = nil
         _selectedImage = nil
         let backgroundQueue = DispatchQueue.global(qos: .background)
         
-        if let pinUrl = _scene.pinUrl {
+        if let pinUrl = _post.pin!.url {
             Alamofire.request(pinUrl).responseJSON(queue: backgroundQueue) { response in
-                let blur = 1.0 - self._scene.percentDiscovered
                 if let data = response.data {
-                    var image = UIImage(data: data)
-                    if blurApplies && blur > 0.001 {
-                        image = image?.applyBackToTheFutureEffect(blur: blur)
-                    }
+                    let image = UIImage(data: data)
                     if let img = image {
                         self._image = Toucan(image: img).resize(CGSize(width: markerDiameter, height: markerDiameter), fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse().image
                         self._selectedImage = Toucan(image: img).resize(CGSize(width: 120, height: 120), fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 5, borderColor: UIColor.white).image
@@ -109,15 +101,15 @@ class LightuponGMSMarker: GMSMarker {
         _selected = false
     }
     
-    var scene: Scene {
+    var post: Post {
         get {
-            return _scene
+            return _post
         }
     }
     
     var cllocation: CLLocation {
         get {
-            return CLLocation(latitude: _scene.latitude, longitude: _scene.longitude)
+            return CLLocation(latitude: _post.latitude!, longitude: _post.longitude!)
         }
     }
 }

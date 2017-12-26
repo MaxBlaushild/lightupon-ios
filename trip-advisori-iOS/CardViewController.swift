@@ -10,9 +10,7 @@ import UIKit
 
 @objc protocol CardViewControllerDelegate {
     func onDismissed () -> Void
-    func canStartParty () -> Bool
-    var tripDetailsViewController: CardViewController { get set }
-    @objc optional func onSceneChanged (_ scene: Scene) -> Void
+    func createProfileView (userID: Int) -> Void
 }
 
 class CardViewController: UIViewController, ProfileViewCreator {
@@ -29,29 +27,29 @@ class CardViewController: UIViewController, ProfileViewCreator {
     @IBOutlet weak var overlay: UIView!
     @IBOutlet weak var beltOverlay: UIView!
     @IBOutlet weak var overlayTopConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var bottomViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var sceneImageHeightConstraint: NSLayoutConstraint!
-    var delegate: TripDetailsViewController!
     
-    func bindContext(card: Card, owner: User, scene: Scene, blurApplies: Bool) {
-        sceneImageView.imageFromUrl(card.imageUrl)
+    var delegate: CardViewControllerDelegate!
+    
+    func bindContext(post: Post, blurApplies: Bool) {
+        sceneImageView.imageFromUrl(post.imageUrl)
         
-        profileImageView.imageFromUrl(owner.profilePictureURL, success: { img in
+        profileImageView.imageFromUrl(post.owner!.profilePictureURL, success: { img in
             self.profileImageView.image = img
             self.profileImageView.makeCircle()
         })
         
-        sceneTitleLabel.text = scene.name
-        timeSinceLabel.text = card.prettyTimeSinceCreation()
-        addressLabel.text = "\(scene.streetNumber) \(scene.route)"
-        descriptionLabel.attributedText = createBylineText(username: owner.fullName, caption: card.caption)
+        sceneTitleLabel.text = post.name
+        timeSinceLabel.text = post.prettyTimeSinceCreation()
+        addressLabel.text = "\(post.streetNumber) \(post.route)"
+        descriptionLabel.attributedText = createBylineText(username: post.owner!.fullName, caption: post.caption)
         beltOverlay.backgroundColor = UIColor.basePurple
         overlay.backgroundColor = UIColor.basePurple
     }
 
     func createProfileView(_ userId: Int) {
-        delegate.createProfileView(userId)
+        delegate.createProfileView(userID: userId)
     }
     
     func setBottomViewHeight(newHeight: CGFloat) {
@@ -65,6 +63,10 @@ class CardViewController: UIViewController, ProfileViewCreator {
     
     func setOverlayAlpha(alpha: CGFloat) {
         overlay.alpha = alpha
+    }
+    
+    @IBAction func close(_ sender: Any) {
+        delegate.onDismissed()
     }
     
     func createBylineText(username: String, caption: String) -> NSMutableAttributedString {

@@ -220,7 +220,7 @@
                             <rect key="frame" x="0.0" y="42.5" width="375" height="291"/>
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VEf-dW-nOB" customClass="LightuponGMSMapView" customModule="Lightupon" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1000.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="867"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="toF-kw-tja">
@@ -246,8 +246,10 @@
                         <constraint firstItem="I4a-3Y-VSP" firstAttribute="top" secondItem="O01-Du-5lk" secondAttribute="bottom" id="Ji6-Ul-ehr"/>
                         <constraint firstItem="I4a-3Y-VSP" firstAttribute="leading" secondItem="8Zp-5b-MXi" secondAttribute="leading" id="OGt-0g-62h"/>
                         <constraint firstItem="VEf-dW-nOB" firstAttribute="top" secondItem="O01-Du-5lk" secondAttribute="bottom" id="T4t-x0-lDw"/>
+                        <constraint firstItem="O01-Du-5lk" firstAttribute="leading" secondItem="8Zp-5b-MXi" secondAttribute="leading" id="VVi-B3-xWD"/>
                         <constraint firstAttribute="trailing" secondItem="O01-Du-5lk" secondAttribute="trailing" id="XdJ-E6-ZBd"/>
                         <constraint firstAttribute="bottom" secondItem="I4a-3Y-VSP" secondAttribute="bottom" id="d3Y-sm-v5B"/>
+                        <constraint firstAttribute="trailing" secondItem="O01-Du-5lk" secondAttribute="trailing" id="fIK-rQ-seE"/>
                         <constraint firstItem="O01-Du-5lk" firstAttribute="height" secondItem="8Zp-5b-MXi" secondAttribute="height" multiplier="0.125" id="yUZ-ib-osl"/>
                     </constraints>
                 </view>
@@ -261,7 +263,7 @@
                 <constraint firstAttribute="trailing" secondItem="8Zp-5b-MXi" secondAttribute="trailing" id="Kvx-fM-9DA"/>
                 <constraint firstAttribute="bottom" secondItem="8Zp-5b-MXi" secondAttribute="bottom" id="M5W-oO-xXC"/>
                 <constraint firstItem="26y-k6-9Qf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="S3z-Ad-mew"/>
-                <constraint firstItem="VEf-dW-nOB" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="1.5" id="SjG-vq-quu"/>
+                <constraint firstItem="VEf-dW-nOB" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="1.3" id="SjG-vq-quu"/>
                 <constraint firstItem="26y-k6-9Qf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="U4H-KZ-unp"/>
                 <constraint firstItem="8Zp-5b-MXi" firstAttribute="top" secondItem="26y-k6-9Qf" secondAttribute="bottom" id="XtY-26-ZcS"/>
                 <constraint firstItem="toF-kw-tja" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="etP-g0-Fno"/>

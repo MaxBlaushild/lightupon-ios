@@ -50,6 +50,8 @@
 		1E30E7AF1D7CEC6300BB547F /* EndOfTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E30E7AE1D7CEC6300BB547F /* EndOfTripView.xib */; };
 		1E3343CE1E15B27700A6E633 /* RoundDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3343CD1E15B27700A6E633 /* RoundDoubles.swift */; };
 		1E3940081E07277D009D29B0 /* AddBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3940071E07277D009D29B0 /* AddBorder.swift */; };
+		1E3941811FD8DA8600D2712A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3941801FD8DA8600D2712A /* Post.swift */; };
+		1E3941831FD8DD3600D2712A /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3941821FD8DD3600D2712A /* Pin.swift */; };
 		1E4E8CD51EC3C95C00DA4ACF /* SceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E8CD41EC3C95C00DA4ACF /* SceneCell.swift */; };
 		1E51D5961D9D8B530052DA6E /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5941D9D87ED0052DA6E /* ProfileView.xib */; };
 		1E51D5B51D9D968B0052DA6E /* Brandon_bld.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5B11D9D968B0052DA6E /* Brandon_bld.otf */; };
@@ -157,6 +159,7 @@
 		1ED2BACB1E42ED7D00A075B5 /* MapDrawerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ED2BACA1E42ED7D00A075B5 /* MapDrawerView.xib */; };
 		1ED488161D9720BD00C67516 /* login_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1ED488151D9720BD00C67516 /* login_background.jpg */; };
 		1ED4881D1D98529C00C67516 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED4881C1D98529C00C67516 /* ProfileView.swift */; };
+		1ED4B0881FC7C5F4005B76A3 /* CircularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED4B0871FC7C5F4005B76A3 /* CircularButton.swift */; };
 		1ED4D5A61CEA8D9500722695 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED4D5A51CEA8D9500722695 /* Card.swift */; };
 		1ED69B351D07A96800CF2172 /* Dosis-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ED69B2D1D07A96800CF2172 /* Dosis-Bold.otf */; };
 		1ED69B361D07A96800CF2172 /* Dosis-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ED69B2E1D07A96800CF2172 /* Dosis-ExtraBold.otf */; };
@@ -262,6 +265,8 @@
 		1E30E7AE1D7CEC6300BB547F /* EndOfTripView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EndOfTripView.xib; sourceTree = "<group>"; };
 		1E3343CD1E15B27700A6E633 /* RoundDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundDoubles.swift; sourceTree = "<group>"; };
 		1E3940071E07277D009D29B0 /* AddBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBorder.swift; sourceTree = "<group>"; };
+		1E3941801FD8DA8600D2712A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		1E3941821FD8DD3600D2712A /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		1E4E8CD41EC3C95C00DA4ACF /* SceneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCell.swift; sourceTree = "<group>"; };
 		1E51D5941D9D87ED0052DA6E /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		1E51D5B11D9D968B0052DA6E /* Brandon_bld.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_bld.otf; sourceTree = "<group>"; };
@@ -367,6 +372,7 @@
 		1ED2BACA1E42ED7D00A075B5 /* MapDrawerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapDrawerView.xib; sourceTree = "<group>"; };
 		1ED488151D9720BD00C67516 /* login_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = login_background.jpg; sourceTree = "<group>"; };
 		1ED4881C1D98529C00C67516 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		1ED4B0871FC7C5F4005B76A3 /* CircularButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButton.swift; sourceTree = "<group>"; };
 		1ED4D5A51CEA8D9500722695 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		1ED69B2D1D07A96800CF2172 /* Dosis-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Bold.otf"; sourceTree = "<group>"; };
 		1ED69B2E1D07A96800CF2172 /* Dosis-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -736,6 +742,7 @@
 				1EE009941D8052A800E550CF /* CompassView */,
 				1EF7839B1CFF46D100860510 /* cards */,
 				1EEBE09F1D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift */,
+				1ED4B0871FC7C5F4005B76A3 /* CircularButton.swift */,
 				1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */,
 				1EC9E5951E3EFF000040C180 /* LitButton.swift */,
 				AEE1AC681E2D5A790043ADDE /* MapSceneCell.swift */,
@@ -857,6 +864,8 @@
 				1E66F1551E0F087D007EA08E /* ConstellationPoint.swift */,
 				1ECA41071E4EA2F8002765AA /* PickedImage.swift */,
 				1EE39BCA1E58004700A67FA7 /* Address.swift */,
+				1E3941801FD8DA8600D2712A /* Post.swift */,
+				1E3941821FD8DD3600D2712A /* Pin.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -1143,6 +1152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ED4B0881FC7C5F4005B76A3 /* CircularButton.swift in Sources */,
 				1EA9E0A71DF49EB00022E730 /* BackgroundLocationManager.swift in Sources */,
 				1E3940081E07277D009D29B0 /* AddBorder.swift in Sources */,
 				1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */,
@@ -1217,6 +1227,7 @@
 				1E5690541DA987B000872DDA /* LitService.swift in Sources */,
 				1EE9A2B71DCC00E400E7EC84 /* PostService.swift in Sources */,
 				1EA5C6181DC00E1200918CA6 /* SearchViewController.swift in Sources */,
+				1E3941831FD8DD3600D2712A /* Pin.swift in Sources */,
 				1E9942191DF78894003E0FAA /* Helper.swift in Sources */,
 				1E4E8CD51EC3C95C00DA4ACF /* SceneCell.swift in Sources */,
 				1E0920401D8A2B9900D32376 /* BlurView.swift in Sources */,
@@ -1231,6 +1242,7 @@
 				1E05B8BD1C5D193B009E37BA /* CurrentLocationService.swift in Sources */,
 				1E22A7CC1D2C383400163785 /* IAmCardContents.swift in Sources */,
 				1E2014961C70DB790012B863 /* FacebookProfile.swift in Sources */,
+				1E3941811FD8DA8600D2712A /* Post.swift in Sources */,
 				1EBBFC1A1D72AB5700697894 /* SplashScreen.swift in Sources */,
 				1E935F1D1D4C249200CB070B /* MainContainerViewController.swift in Sources */,
 				1E7032AD1CE8F53A00B1C18D /* SocketResponse.swift in Sources */,

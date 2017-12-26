@@ -54,8 +54,6 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         
         currentLocationService.registerDelegate(self)
         
-        addLockButton()
-        
         isMyLocationEnabled = true
         _initialFrame = frame
         lockState = .locked
@@ -69,7 +67,6 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         settings.tiltGestures = false
         settings.zoomGestures = false
         centerMap()
-        lockButton.setImage(UIImage(named: "locked"), for: .normal)
         setCompassFrame()
         
         if let lightDelegate = lightuponDelegate {
@@ -117,21 +114,6 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         settings.tiltGestures = true
         settings.zoomGestures = true
         clearDirections()
-        lockButton.setImage(UIImage(named: "unlocked"), for: .normal)
-    }
-    
-    func addLockButton() {
-        lockButton = UIButton()
-        lockButton.backgroundColor = .white
-        lockButton.frame = CGRect(
-            x: UIScreen.main.bounds.width - 70,
-            y: UIScreen.main.bounds.height - 175,
-            width: 50,
-            height: 50
-        )
-        lockButton.addTarget(self, action: #selector(toggleLock), for: .touchUpInside)
-        lockButton.setImage(UIImage(named: "locked"), for: .normal)
-        addSubview(lockButton)
     }
     
     func toggleLock() {
@@ -143,8 +125,8 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
     }
     
     func unselect() {
-        if let selectedScene = selectedLightuponMarker {
-            selectedScene.setNotSelected()
+        if let selectedMarker = selectedLightuponMarker {
+            selectedMarker.setNotSelected()
             clearDirections()
         }
     }
@@ -183,11 +165,10 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         centerMapOnLocation()
     }
     
-    func bindScenes(_ scenes: [Scene]) {
-//        clearMarkers()
-        for scene in scenes {
-            if let _ = markerFromSceneID(scene.id) { } else {
-                placeMarker(scene: scene)
+    func bindPosts(_ posts: [Post]) {
+        for post in posts {
+            if let _ = markerFromPostID(post.id!) { } else {
+                placeMarker(post: post)
             }
         }
     }
@@ -214,31 +195,12 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         directions.append(singleLine)
     }
     
-    func drawDirections() {
-        let trip = selectedLightuponMarker!.scene.trip!
-        let totalScenes = trip.scenes.count
-        for (index, currentScene) in trip.scenes.enumerated() {
-            let nextSceneIndex = index + 1
-            if nextSceneIndex != totalScenes {
-                let nextScene = trip.scenes[nextSceneIndex]
-                
-                googleMapsService.getDirections(
-                    origin: currentScene.location,
-                    destination:
-                    nextScene.location,
-                    callback: { path in
-                        self.drawLine(path)
-                    })
-            }
-        }
-    }
-    
     func updateFrame() {
-        let scene = selectedLightuponMarker!.scene
+        let post = selectedLightuponMarker!.post
         animate(
             to: GMSCameraPosition.camera(
-                withLatitude: scene.latitude,
-                longitude: scene.longitude,
+                withLatitude: post.latitude!,
+                longitude: post.longitude!,
                 zoom: googleMapsService.defaultUnlockedZoom,
                 bearing: camera.bearing,
                 viewingAngle: camera.viewingAngle
@@ -249,7 +211,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
     func selectMarker(_ marker: LightuponGMSMarker) {
         selectedLightuponMarker?.setNotSelected()
         marker.setSelected()
-        centerMapOnScreen()
+//        centerMapOnScreen()
         selectedLightuponMarker = marker
         updateFrame()
     }
@@ -258,37 +220,37 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         UIView.animate(withDuration: 0.25, animations: {
             self.frame = CGRect(
                 x: 0,
-                y: UIApplication.shared.statusBarFrame.height,
+                y: 0,
                 width: self.frame.width,
-                height: UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height
+                height: 100
             )
         })
     }
     
-    func markerFromSceneID(_ sceneID: Int) -> LightuponGMSMarker? {
-        return markers.first(where:{$0.scene.id == sceneID})
+    func markerFromPostID(_ postID: Int) -> LightuponGMSMarker? {
+        return markers.first(where:{$0.post.id == postID})
     }
     
-    func findOrCreateMarker(scene: Scene, blurApplies: Bool)  -> LightuponGMSMarker? {
-        let marker = markerFromSceneID(scene.id)
+    func findOrCreateMarker(post: Post, blurApplies: Bool)  -> LightuponGMSMarker? {
+        let marker = markerFromPostID(post.id!)
         
         if marker != nil {
-            marker?.updateImages(blurApplies: false)
+            marker?.updateImages()
         }
-        return marker == nil ? createMarkerSync(scene: scene) : marker
+        return marker == nil ? createMarkerSync(post: post) : marker
     }
     
-    private func createMarkerSync(scene: Scene) -> LightuponGMSMarker {
-        let marker = LightuponGMSMarker(scene: scene)
-        marker.setImages(mapView: self, selected: true, blurApplies: false)
+    private func createMarkerSync(post: Post) -> LightuponGMSMarker {
+        let marker = LightuponGMSMarker(post: post)
+        marker.setImages(mapView: self, selected: true)
         return marker
         
     }
     
-    func placeMarker(scene: Scene) {
-        let marker = LightuponGMSMarker(scene: scene)
+    func placeMarker(post: Post) {
+        let marker = LightuponGMSMarker(post: post)
         markers.append(marker)
-        marker.setImages(mapView: self, selected: false, blurApplies: true)
+        marker.setImages(mapView: self, selected: false)
     }
 }
 

@@ -46,23 +46,32 @@ class FeedService: NSObject, SocketServiceDelegate {
         })
     }
     
-    func getUsersFeed(userID: Int, success: @escaping ([Scene]) -> Void) {
-        _apiAmbassador.get("/users/\(userID)/scenes", success: { response in
-            let scenes = Mapper<Scene>().mapArray(JSONObject: response.result.value) ?? [Scene]()
-            success(scenes)
+    func getPost(_ postId: Int, success: @escaping (Post) -> Void) {
+        let backgroundQueue = DispatchQueue.global(qos: .background)
+        _apiAmbassador.get("/scenes/\(postId)", queue: backgroundQueue, success: { response in
+            let post = Mapper<Post>().map(JSONObject: response.result.value) ?? Post(caption: "")
+            success(post)
         })
     }
     
-    func getNearbyScenes(location: CLLocationCoordinate2D?, radius: Double?, numScenes: Int?, success: @escaping ([Scene]) -> Void) {
+    func getUsersFeed(userID: Int, success: @escaping ([Post]) -> Void) {
+        _apiAmbassador.get("/users/\(userID)/posts", success: { response in
+            let posts = Mapper<Post>().mapArray(JSONObject: response.result.value) ?? [Post]()
+            success(posts)
+        })
+    }
+    
+    func getNearbyPosts(location: CLLocationCoordinate2D?, radius: Double?, numScenes: Int?, success: @escaping ([Post]) -> Void) {
         let loc = location ?? _currentLocationService.cllocation.coordinate
         let lat = loc.latitude
         let lon = loc.longitude
         let rad = radius ?? 10000.00
         let num = numScenes ?? 20
-        let url = "/scenes/nearby?lat=\(lat)&lon=\(lon)&radius=\(rad)&numScenes=\(num)"
+        let url = "/posts/nearby?lat=\(lat)&lon=\(lon)&radius=\(rad)&numScenes=\(num)"
         _apiAmbassador.get(url, success: { response in
-            let scenes = Mapper<Scene>().mapArray(JSONObject: response.result.value) ?? [Scene]()
-            success(scenes)
+            let post = Mapper<Post>().mapArray(JSONObject: response.result.value) ?? [Post]()
+            
+            success(post)
         })
     }
 }

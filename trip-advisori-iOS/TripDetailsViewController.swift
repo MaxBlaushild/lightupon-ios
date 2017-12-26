@@ -162,8 +162,8 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         
         cardViewControllers = trip.scenes.map({ scene in
             let cardViewController = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "CardViewController") as! CardViewController
-            cardViewController.bindContext(card: scene.cards[0], owner: trip.owner!, scene: scene, blurApplies: _blurApplies)
-            cardViewController.delegate = self
+//            cardViewController.bindContext(card: scene.cards[0], owner: trip.owner!, scene: scene, blurApplies: _blurApplies)
+//            cardViewController.delegate = self
             return cardViewController
         })
         

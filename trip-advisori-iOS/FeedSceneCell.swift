@@ -15,16 +15,15 @@ class FeedSceneCell: UITableViewCell {
     @IBOutlet weak var tripImage: UIImageView!
     @IBOutlet weak var profileImage: UIImageView!
     
-    var _scene: Scene!
+    var _post: Post!
     var delegate: ProfileViewCreator!
     
-    func decorateCell(scene: Scene) {
+    func decorateCell(post: Post) {
         let borderColor = UIColor(red: CGFloat(153.00)/255, green: CGFloat(153.00)/255, blue: CGFloat(153.00)/255, alpha: 0.5)
         let thickness = CGFloat(1)
         contentView.layer.addBorder(edge: .bottom, color: borderColor, thickness: thickness)
-        tripTitle.text = scene.name
-        tag = (scene.trip?.id)!
-        _scene = scene
+        tripTitle.text = post.name
+        _post = post
         selectionStyle = .none
         makeProfileClickable()
         
@@ -38,7 +37,7 @@ class FeedSceneCell: UITableViewCell {
     }
     
     func createProfileView(sender: AnyObject) {
-        delegate.createProfileView(_scene!.trip!.owner!.id)
+        delegate.createProfileView(_post.owner!.id)
     }
 
     

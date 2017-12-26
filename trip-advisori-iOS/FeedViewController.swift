@@ -149,16 +149,16 @@ class FeedViewController: TripModalPresentingViewController, UITableViewDelegate
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:FeedSceneCell = tableView.dequeueReusableCell(withIdentifier: "FeedSceneCell", for: indexPath) as! FeedSceneCell
-        let scene = _scenes[(indexPath as NSIndexPath).row]
-        let pictureUrl = scene.trip?.owner?.profilePictureURL
-        cell.decorateCell(scene: scene)
-        cell.profileImage.imageFromUrl(pictureUrl!, success: { img in
-            cell.profileImage.image = img
-            cell.profileImage.makeCircle()
-        })
-        
-        cell.tripImage.imageFromUrl(scene.cards[0].imageUrl)
-        cell.delegate = self
+//        let scene = _scenes[(indexPath as NSIndexPath).row]
+//        let pictureUrl = post.owner?.profilePictureURL
+//        cell.decorateCell(post: post)
+//        cell.profileImage.imageFromUrl(pictureUrl!, success: { img in
+//            cell.profileImage.image = img
+//            cell.profileImage.makeCircle()
+//        })
+//        
+//        cell.tripImage.imageFromUrl(scene.cards[0].imageUrl)
+//        cell.delegate = self
         return cell
     }
     

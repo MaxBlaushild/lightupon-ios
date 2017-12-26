@@ -31,7 +31,6 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     @IBOutlet weak var twitterButton: UIButton!
     
     var captionTextFieldDirty = false
-    var currentTrip: Trip!
     var activeField: UITextField!
     var currentScene: Scene!
     var sceneNameFieldActive = false
@@ -45,6 +44,7 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     var addressValid = false
     var shareOnFacebook = false
     var shareOnTwitter = false
+    var post = Post(caption: "")
     
     var keyboardHeight: CGFloat?
     
@@ -54,8 +54,9 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         sceneImage.image = PickedImage.shared
         postService.uploadPicture(image: PickedImage.shared)
         makeKeyboardLeave()
-        getRecommendedScene()
+        getCurrentLocation()
         setDelegation()
+        addMiddleIconToMap()
         tintBackButton()
         watchForLocationSectionTouch()
         addDoneButton()
@@ -91,12 +92,12 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     }
     
     @IBAction func share(_ sender: Any) {
-        currentScene.name = sceneNameTextField.text!
-        let card = Card(caption: captionTextField.text)
-        card.shareOnFacebook = shareOnFacebook
-        card.shareOnTwitter = shareOnTwitter
+        post.name = sceneNameTextField.text!
+        post.caption = captionTextField.text
+        post.shareOnFacebook = shareOnFacebook
+        post.shareOnTwitter = shareOnTwitter
         tellUserHeOrSheIsJustSwell()
-        postService.post(card: card, scene: currentScene, tripID: nil, sceneID: nil)
+        postService.post(post:post)
     }
     
     @IBAction func toggleShareToFacebook(_ sender: Any) {
@@ -173,7 +174,7 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     
     func addDoneButton() {
         doneButton = UIButton()
-        doneButton.frame = CGRect(x: 40, y: self.mapView.frame.height - 100, width: self.view.frame.width - 80, height: 40)
+        doneButton.frame = CGRect(x: 40, y: self.mapView.frame.height - 60, width: self.view.frame.width - 80, height: 40)
         doneButton.backgroundColor = UIColor.basePurple
         doneButton.titleLabel?.font = UIFont(name: "GothamRounded-Book", size: 20)
         doneButton.titleLabel?.textColor = UIColor.white
@@ -184,16 +185,16 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     }
     
     func submitLocationPick() {
-        currentScene.name = sceneNameTextField.text!
+        post.name = sceneNameTextField.text!
         if let address: Address = currentAddress {
-            currentScene.address = address
+            post.address = address
         }
         setNotLocationingPickingState()
     }
     
     func cancelLocationPick() {
-        sceneNameTextField.text = currentScene.name.isEmpty ? currentScene.neighborhood : currentScene.name
-        sceneAddressLabel.text = "\(currentScene.streetNumber) \(currentScene.route)"
+        sceneNameTextField.text = post.neighborhood
+        sceneAddressLabel.text = "\(post.streetNumber) \(post.route)"
         locationPickerOpen = false
         stopTheJitters()
         setNotLocationingPickingState()
@@ -211,7 +212,7 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     func setNotLocationingPickingState() {
         locationPickerOpen = false
         UIView.animate(withDuration: 0.5, animations: {
-            self.locationSection.frame.origin.y = self.locationSectionY
+            self.locationSection.frame.origin.y = self.captionTextField.frame.maxY
             self.mapView.frame.origin.y = self.view.frame.height
         }, completion: { _ in
             self.cancelButton.removeFromSuperview()
@@ -245,8 +246,12 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         tripExplanationLabel.removeFromSuperview()
     }
     
-    func getRecommendedScene() {
-        postService.getActiveScene(callback: self.setRecommendedScene)
+    func getCurrentLocation() {
+        googleMapsService.getAddress(
+            lat: currentLocationService.latitude,
+            lon: currentLocationService.longitude,
+            callback: self.onCurrentLocationGotten
+        )
     }
     
 //    func getActiveTrip() {
@@ -263,28 +268,6 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeField = textField
         sceneNameFieldActive = (textField == sceneNameTextField)
-    }
-
-    func setRecommendedScene(scene: Scene) {
-        currentScene = scene
-        bindCurrentScene()
-    }
-    
-    func bindCurrentScene() {
-        sceneAddressLabel.text = "\(currentScene.streetNumber) \(currentScene.route)"
-        if !currentScene.name.isEmpty {
-            sceneNameTextField.text = currentScene.name
-        } else if !currentScene.neighborhood.isEmpty {
-            sceneNameTextField.text = currentScene.neighborhood
-        } else {
-            sceneNameTextField.text = currentScene.locality
-        }
-        
-        bindCurrentLocation()
-        bindCurrentLocationToMap()
-        
-        addressValid = true
-        setShareButtonEnabledness()
     }
     
     func bindCurrentLocationToMap() {
@@ -318,12 +301,22 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         }
     }
     
+    func onCurrentLocationGotten(_ address: Address) {
+        let currentLocation = GMSCameraPosition.camera(withLatitude: address.latitude!,
+                                              longitude: address.longitude!,
+                                              zoom: 18)
+        mapView.camera = currentLocation
+        post.address = address
+        bindAddress(address)
+    }
+    
     func bindAddress(_ address: Address) {
         currentAddress = address
         sceneAddressLabel.text = "\(address.streetNumber!) \(address.route!)"
         sceneNameTextField.text = address.neighborhood
         stopTheJitters()
         doneButton.isHidden = false
+        addressValid = true
     }
     
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
@@ -375,18 +368,18 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
     }
     
     func centerTextView() {
-        let keyHeight = keyboardHeight ?? 0.00
-        let centerYOfExposedView = (view.frame.height - keyHeight) / 2
-        let centerOfExposedView = CGPoint(x: view.center.x, y: centerYOfExposedView)
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.center = centerOfExposedView
-        })
+//        let keyHeight = keyboardHeight ?? 0.00
+//        let centerYOfExposedView = (view.frame.height - keyHeight) / 2
+//        let centerOfExposedView = CGPoint(x: view.center.x, y: centerYOfExposedView)
+//        UIView.animate(withDuration: 0.25, animations: {
+//            self.view.center = centerOfExposedView
+//        })
     }
     
     func centerView() {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.frame = UIScreen.main.bounds
-        })
+//        UIView.animate(withDuration: 0.25, animations: {
+//            self.view.frame = UIScreen.main.bounds
+//        })
     }
     
     func makeKeyboardLeave() {

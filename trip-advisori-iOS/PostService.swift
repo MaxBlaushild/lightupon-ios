@@ -18,10 +18,7 @@ class PostService: NSObject {
     
     private var getURL = ""
     private var awaitingGetURL = false
-    private var card: Card!
-    private var scene: Scene!
-    private var tripID: Int?
-    private var sceneID: Int?
+    private var post: Post!
     
     public var activeScene: Scene?
     
@@ -61,11 +58,8 @@ class PostService: NSObject {
         })
     }
     
-    func post(card: Card, scene: Scene, tripID: Int?, sceneID: Int?) {
-        self.card = card
-        self.scene = scene
-        self.tripID = tripID
-        self.sceneID = sceneID
+    func post(post: Post) {
+        self.post = post
         
         if getURL.isEmpty {
             self.awaitingGetURL = true
@@ -75,46 +69,22 @@ class PostService: NSObject {
     }
     
     func createContent() {
-        let degenerateTrip = Trip(title: "", details: "")
-        _tripsService.createTrip(degenerateTrip, callback: { trip in
-            self.appendScene(self.scene, toTrip: trip.id, callback: { scene in
-                self.card.sceneID = scene.id
-                self.createCard(self.card, sceneID: scene.id, lat: scene.latitude, long: scene.longitude)
-            })
-        })
-    }
-    
-    func createCard(_ card: Card, sceneID: Int, lat: Double?, long: Double?) {
-        let newCard = [
-            "Caption": card.caption,
+        let newPost = [
+            "Caption": post.caption,
             "ImageURL": getURL,
-            "ShareOnFacebook": card.shareOnFacebook,
-            "ShareOnTwitter": card.shareOnTwitter,
-            "Latitude": lat ?? _currentLocationService.latitude,
-            "Longitude": long ?? _currentLocationService.longitude
-        ] as [String : Any]
-        
-        _apiAmbassador.post("/scenes/\(sceneID)/cards", parameters: newCard as [String : AnyObject], success: { response in
-            NotificationCenter.default.post(name: self.postNotificationName, object: sceneID)
-        })
-    }
-    
-    func appendScene(_ scene: Scene, toTrip tripID: Int, callback: @escaping (Scene) -> Void) {
-        let scene = [
-            "ID": scene.id,
-            "Latitude": scene.latitude ?? _currentLocationService.latitude,
-            "Longitude": scene.longitude ?? _currentLocationService.longitude,
-            "Name": scene.name,
-            "Route": scene.route,
-            "StreetNumber": scene.streetNumber,
-            "BackgroundUrl": getURL
+            "Name": post.name,
+            "ShareOnFacebook": post.shareOnFacebook,
+            "ShareOnTwitter": post.shareOnTwitter,
+            "Latitude": post.latitude ?? _currentLocationService.latitude,
+            "Longitude": post.longitude ?? _currentLocationService.longitude,
+            "Locality": post.locality,
+            "Neighborhood": post.neighborhood,
+            "StreetNumber": post.streetNumber,
+            "GooglePlaceID": post.googlePlaceID
             ] as [String : Any]
         
-        _apiAmbassador.post("/trips/\(tripID)/scenes", parameters: scene as [String : AnyObject], success: { response in
-            let scene = Mapper<Scene>().map(JSONObject: response.result.value)
-            callback(scene!)
+        _apiAmbassador.post("/posts", parameters: newPost as [String : AnyObject], success: { response in
+            NotificationCenter.default.post(name: self.postNotificationName, object: 09)
         })
-        
     }
-    
 }
