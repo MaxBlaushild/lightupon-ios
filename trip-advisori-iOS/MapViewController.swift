@@ -85,6 +85,7 @@ class MapViewController: UIViewController,
     var onViewClosed:(() -> Void)!
     fileprivate var profileView: ProfileView!
     
+    @IBOutlet weak var postCost: UILabel!
     @IBOutlet weak var searchButton: CircularButton!
     @IBOutlet weak var checkItOutButton: UIButton!
     @IBOutlet weak var partyButton: UIButton!
@@ -117,6 +118,7 @@ class MapViewController: UIViewController,
         configureMapView()
         initDrawer()
         styleSidebarButton()
+        postService.getPostCost(callback: self.printPostCost)
         getNearbyPosts(location: currentLocationService.location.cllocation.coordinate, radius: self.mapView.getRadius())
         
         MapSceneCollectionView.alwaysBounceHorizontal = true
@@ -145,6 +147,10 @@ class MapViewController: UIViewController,
     @IBAction func toggleLock(_ sender: Any) {
         mapView.lockState = mapView.lockState == .locked ? .unlocked : .locked
         setLockButton()
+    }
+    
+    func printPostCost(_ cost: Int) {
+        postCost.text = "Cost to post: " + String(cost ?? 0)
     }
     
     func setLockButton() {

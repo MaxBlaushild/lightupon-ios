@@ -16,6 +16,7 @@ import UIKit
 class CardViewController: UIViewController, ProfileViewCreator {
     
     private let partyService = Services.shared.getPartyService()
+    private let postService = Services.shared.getPostService()
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var sceneImageView: UIImageView!
@@ -30,6 +31,7 @@ class CardViewController: UIViewController, ProfileViewCreator {
     @IBOutlet weak var bottomViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var sceneImageHeightConstraint: NSLayoutConstraint!
     
+    var postID: Int = 0
     var delegate: CardViewControllerDelegate!
     
     func bindContext(post: Post, blurApplies: Bool) {
@@ -40,6 +42,7 @@ class CardViewController: UIViewController, ProfileViewCreator {
             self.profileImageView.makeCircle()
         })
         
+        postID = (post.id)!
         sceneTitleLabel.text = post.name
         timeSinceLabel.text = post.prettyTimeSinceCreation()
         addressLabel.text = "\(post.streetNumber) \(post.route)"
@@ -85,7 +88,13 @@ class CardViewController: UIViewController, ProfileViewCreator {
         formattedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, formattedString.length))
         return formattedString
     }
-
+    @IBAction func upvotePost(_ sender: UIButton) {
+        postService.upvotePost(postID: postID)
+    }
+    @IBAction func downvotePost(_ sender: UIButton) {
+        postService.downvotePost(postID: postID)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

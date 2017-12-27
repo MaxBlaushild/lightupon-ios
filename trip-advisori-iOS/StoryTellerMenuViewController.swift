@@ -19,8 +19,10 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var partyMemberCollectionView: UICollectionView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var manaLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var leavePartyButton: UIButton!
+    
     
     fileprivate var _partyState: SocketResponse!
     fileprivate var _party: Party!
@@ -66,6 +68,7 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     func bindProfile() {
         profilePicture.imageFromUrl(userService.currentUser.profilePictureURL)
         nameLabel.text = userService.currentUser.fullName
+        manaLabel.text = "Mana: " + String(userService.currentUser.manaTotal ?? 0)
         profilePicture.makeCircle()
     }
     

@@ -48,6 +48,14 @@ class PostService: NSObject {
             }
         })
     }
+
+    func upvotePost(postID: Int) {
+        _apiAmbassador.post("/posts/" + String(postID) + "/upvote", parameters: [:], success: {_ in } )
+    }
+    
+    func downvotePost(postID: Int) {
+        _apiAmbassador.post("/posts/" + String(postID) + "/downvote", parameters: [:], success: {_ in } )
+    }
     
     func getActiveScene(callback: @escaping (Scene) -> Void) {
         let lat = _currentLocationService.latitude
@@ -55,6 +63,19 @@ class PostService: NSObject {
         _apiAmbassador.get("/activeScene?lat=\(lat)&lon=\(lon)", success: { response in
             let scene = Mapper<Scene>().map(JSONObject: response.result.value)
             callback(scene!)
+        })
+    }
+
+    func getPostCost(callback: @escaping (Int) -> Void) {
+        let lat = _currentLocationService.latitude
+        let lon = _currentLocationService.longitude
+        _apiAmbassador.get("/posts/cost?lat=\(lat)&lon=\(lon)", success:{response in
+            var cost: Int = 9999999
+            let dict = response.result.value as! Dictionary<String, Int>
+            if dict.count > 0 {
+                cost = dict["Cost"]!
+            }
+            callback(cost)
         })
     }
     

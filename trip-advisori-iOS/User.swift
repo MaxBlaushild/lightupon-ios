@@ -26,6 +26,7 @@ class User: NSObject, Mappable {
     var numberOfFollowers: Int?
     var numberOfTrips: Int?
     var following: Bool?
+    var manaTotal: Int?
     
     func mapping(map: Map) {
         id                <- map["ID"]
@@ -42,6 +43,7 @@ class User: NSObject, Mappable {
         numberOfFollowers <- map["NumberOfFollowers"]
         numberOfTrips     <- map["NumberOfTrips"]
         following         <- map["Following"]
+        manaTotal         <- map["ManaTotal"]
     }
     
     required init?(map: Map) {}

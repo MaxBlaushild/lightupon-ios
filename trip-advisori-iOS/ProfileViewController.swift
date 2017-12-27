@@ -14,12 +14,14 @@ class ProfileViewController: TripModalPresentingViewController, ProfileViewDeleg
     fileprivate let userService: UserService = Services.shared.getUserService()
     
     @IBOutlet weak var tabBar: UIView!
+    @IBOutlet weak var manaTotal: UILabel!
     
     var profileView: ProfileView!
 
     @IBAction func goBack(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: {});
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         if let profileView = profileView {

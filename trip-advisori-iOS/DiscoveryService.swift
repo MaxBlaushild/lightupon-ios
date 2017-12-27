@@ -32,8 +32,8 @@ class DiscoveryService: NSObject {
                 "Longitude": currentLocation.coordinate.longitude
             ] as [String : Any]
             
-            _apiAmbassador.post("/scenes/\(marker.post.id)/discover", parameters: location as [String : AnyObject], success: { _ in
-            }, failure: { _ in })
+//            _apiAmbassador.post("/scenes/\(marker.post.id)/discover", parameters: location as [String : AnyObject], success: { _ in
+//            }, failure: { _ in })
         }
     }
 }
