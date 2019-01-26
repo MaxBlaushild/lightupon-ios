@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         }
         
-        Twitter.sharedInstance().start(withConsumerKey: twitterKey, consumerSecret: twitterSecret)
+        TWTRTwitter.sharedInstance().start(withConsumerKey: twitterKey, consumerSecret: twitterSecret)
         
         let authService = AuthService()
         apiAmbassador = AmbassadorToTheAPI(authService: authService)

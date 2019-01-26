@@ -53,8 +53,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func setLoginButton() {
         loginView.center = CGPoint(x: view.frame.width / 2, y: view.frame.height - 100)
-        loginView.readPermissions = ["public_profile", "email", "user_friends", "publish_actions"]
-        loginView.publishPermissions = ["publish_actions"]
+        loginView.readPermissions = ["public_profile", "email", "user_friends"]
         loginView.delegate = self
     }
 

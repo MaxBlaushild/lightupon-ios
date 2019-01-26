@@ -290,7 +290,7 @@ class MapViewController: UIViewController,
         Alamofire.request(userService.currentUser.profilePictureURL, method: .get, parameters: nil).responseJSON { response in
             if let imageData = response.data {
                 let image = UIImage(data: imageData)
-                let selectedImage = Toucan(image: image!).resize((self.feedButton.imageView?.frame.size)!, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 3, borderColor: UIColor.white).resize((self.feedButton.imageView?.frame.size)!, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 2, borderColor: UIColor.basePurple).image.withRenderingMode(.alwaysOriginal)
+                let selectedImage = Toucan(image: image!).resize((self.feedButton.imageView?.frame.size)!, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 3, borderColor: UIColor.white).resize((self.feedButton.imageView?.frame.size)!, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 2, borderColor: UIColor.basePurple).image?.withRenderingMode(.alwaysOriginal)
                 self.sideMenuButton.setImage(selectedImage, for: .normal)
                 self.view.bringSubview(toFront: self.sideMenuButton)
             }

@@ -18,7 +18,7 @@ class TwitterService: NSObject {
     }
     
     func logIn(_ callback: @escaping () -> Void) {
-        Twitter.sharedInstance().logIn(completion: { session, error in
+        TWTRTwitter.sharedInstance().logIn(completion: { session, error in
             if let s = session {
                 
                 let twitterCreds = [

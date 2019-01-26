@@ -18,6 +18,31 @@ import SwiftyJSON
 }
 
 class SocketService: NSObject, WebSocketDelegate, CurrentLocationServiceDelegate {
+    func websocketDidConnect(socket: WebSocketClient) {
+        updateLocation()
+    }
+    
+    func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+        if let e = error {
+            print("websocket is disconnected: \(e.localizedDescription)")
+        } else {
+            openSocket()
+        }
+    }
+    
+    func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
+        if let socketResponse:SocketResponse = Mapper<SocketResponse>().map(JSONString: text) {
+            for delegate in delegates {
+                delegate.onResponseReceived?(socketResponse: socketResponse)
+                if socketResponse.updatedSceneID != 0 {
+                    delegate.onSceneUpdated?(sceneID: socketResponse.updatedSceneID)
+                }
+            }
+        }
+    }
+    
+    func websocketDidReceiveData(socket: WebSocketClient, data: Data) {}
+    
     private let _authService: AuthService
     private let _currentLocationService: CurrentLocationService
     
@@ -31,18 +56,16 @@ class SocketService: NSObject, WebSocketDelegate, CurrentLocationServiceDelegate
         _currentLocationService = currentLocationService
         
         super.init()
-        
-        _currentLocationService.registerDelegate(self)
-            
-        openSocket()
-        keepSocketOpen()
+//        
+//        _currentLocationService.registerDelegate(self)
+//            
+//        openSocket()
+//        keepSocketOpen()
     }
     
     func openSocket() {
         _socket = WebSocket(url: URL(string: "\(wsURL)/pull")!, protocols: ["chat", "superchat"])
         _socket.delegate = self
-        _socket.voipEnabled = true
-        setSocketHeaders()
         _socket.connect()
     }
     
@@ -62,10 +85,7 @@ class SocketService: NSObject, WebSocketDelegate, CurrentLocationServiceDelegate
             _socket.write(string: jsonLocation!)
         }
     }
-    
-    func websocketDidConnect(ws: WebSocket) {
-        updateLocation()
-    }
+
     
     func onLocationUpdated() {
         updateLocation()
@@ -75,47 +95,17 @@ class SocketService: NSObject, WebSocketDelegate, CurrentLocationServiceDelegate
         updateLocation()
     }
     
-    fileprivate func setSocketHeaders() {
-        let token = _authService.getToken()
-
-        _socket.headers = [
-            "Authorization": "Bearer \(token)"
-        ]
-    }
     
     func registerDelegate(_ delegate: SocketServiceDelegate) {
         delegates.append(delegate)
     }
-        
-    func websocketDidConnect(socket ws: WebSocket) {}
+    
     
     func checkOnSocket() {
         if !_socket.isConnected {
-            setSocketHeaders()
             _socket.connect()
         } else {
             updateLocation()
         }
     }
-    
-    func websocketDidDisconnect(socket ws: WebSocket, error: NSError?) {
-        if let e = error {
-            print("websocket is disconnected: \(e.localizedDescription)")
-        } else {
-            openSocket()
-        }
-    }
-    
-    func websocketDidReceiveMessage(socket ws: WebSocket, text: String) {
-        if let socketResponse:SocketResponse = Mapper<SocketResponse>().map(JSONString: text) {
-            for delegate in delegates {
-                delegate.onResponseReceived?(socketResponse: socketResponse)
-                if socketResponse.updatedSceneID != 0 {
-                    delegate.onSceneUpdated?(sceneID: socketResponse.updatedSceneID)
-                }
-            }
-        }
-    }
-    
-    func websocketDidReceiveData(socket ws: WebSocket, data: Data) {}
 }

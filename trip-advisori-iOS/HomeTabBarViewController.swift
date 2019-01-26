@@ -61,8 +61,8 @@ class HomeTabBarViewController: UITabBarController,
         Alamofire.request(userService.currentUser.profilePictureURL, method: .get, parameters: nil).responseJSON { response in
             let image = UIImage(data: response.data!)
             let profileItem = self.tabBar.items?.last
-            let resizeImage = Toucan(image: image!).resize(profileItem!.image!.size, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse().image.withRenderingMode(.alwaysOriginal)
-            let selectedImage = Toucan(image: image!).resize(profileItem!.image!.size, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 3, borderColor: UIColor.white).resize(profileItem!.image!.size, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 2, borderColor: UIColor.basePurple).image.withRenderingMode(.alwaysOriginal)
+            let resizeImage = Toucan(image: image!).resize(profileItem!.image!.size, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse().image?.withRenderingMode(.alwaysOriginal)
+            let selectedImage = Toucan(image: image!).resize(profileItem!.image!.size, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 3, borderColor: UIColor.white).resize(profileItem!.image!.size, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 2, borderColor: UIColor.basePurple).image?.withRenderingMode(.alwaysOriginal)
             profileItem?.image = resizeImage
             profileItem?.selectedImage = selectedImage
         }
