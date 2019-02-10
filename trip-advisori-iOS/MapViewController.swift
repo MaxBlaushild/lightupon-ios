@@ -24,18 +24,13 @@ class MapViewController: UIViewController,
                          GMSMapViewDelegate,
                          UIImagePickerControllerDelegate,
                          UINavigationControllerDelegate,
-                         UICollectionViewDelegate,
                          CameraOverlayDelegate,
-                         UICollectionViewDataSource,
                          CardViewControllerDelegate,
                          ProfileViewDelegate,
                          PartyServiceDelegate,
                          MDCSwipeToChooseDelegate,
-                         LightuponGMSMapViewDelegate,
-                         UITextFieldDelegate,
-                         UIScrollViewDelegate {
+                         LightuponGMSMapViewDelegate {
     
-    let reuseIdentifier = "MapSceneCell"
     let minimumDistanceTraveled: Double = 1000.00
     let minimumZoomChange: Float = 1.50
     let maximumNumOfMarkers = 800
@@ -44,9 +39,7 @@ class MapViewController: UIViewController,
     let imagePicker = UIImagePickerController()
     
     private let currentLocationService = Services.shared.getCurrentLocationService()
-    private let tripsService = Services.shared.getTripsService()
     private let feedService = Services.shared.getFeedService()
-    private let partyService = Services.shared.getPartyService()
     private let userService = Services.shared.getUserService()
     private let postService = Services.shared.getPostService()
     private let navigationService = Services.shared.getNavigationService()
@@ -71,57 +64,34 @@ class MapViewController: UIViewController,
     var constellationOverlayVisible = false
     var markerFour: GMSMarker?
     var toggleBackView: UIView!
-    var endOfTripView: EndOfTripView!
     var nextSceneAvailable = false
-    var cardCount: Int = 0
-    var swipeOptions = CardSwipeOptions()
     var cardSize: CGRect!
     var updateTime: Timer!
-    var page = 0
     var _users: [User] = [User]()
     var posts: [Post] = [Post]()
     
     var onViewOpened:((Int) -> Void)!
     var onViewClosed:(() -> Void)!
     fileprivate var profileView: ProfileView!
-    
-    @IBOutlet weak var searchButton: CircularButton!
+
     @IBOutlet weak var checkItOutButton: UIButton!
     @IBOutlet weak var partyButton: UIButton!
     @IBOutlet weak var mapView: LightuponGMSMapView!
-    @IBOutlet weak var MapSceneCollectionView: UICollectionView!
     @IBOutlet weak var sideMenuButton: UIButton!
     @IBOutlet weak var mapBottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var searchBar: UITextField!
     var barButtonItems: [CircularButton]!
-    
-    @IBOutlet weak var userCollectionView: UICollectionView!
-    @IBOutlet weak var feedButton: CircularButton!
+
     @IBOutlet weak var lockButton: CircularButton!
     @IBOutlet weak var postButton: CircularButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getScenes(callback: nil)
-
-        MapSceneCollectionView.dataSource = self
-        MapSceneCollectionView.delegate = self
-        
-        userCollectionView.dataSource = self
-        userCollectionView.delegate = self
-        
-        searchBar.delegate = self
-        
         configureMapView()
         initDrawer()
         styleSidebarButton()
         getNearbyPosts(location: currentLocationService.location.cllocation.coordinate, radius: self.mapView.getRadius())
-        
-        MapSceneCollectionView.alwaysBounceHorizontal = true
-        
-        swipeOptions.delegate = self
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.triggerDeepLinkIfPresent(callback: self.onDeepLink)
@@ -129,15 +99,6 @@ class MapViewController: UIViewController,
         self.updateTime = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(discover), userInfo: nil, repeats: true)
         
         NotificationCenter.default.addObserver(self, selector: #selector(onSceneAdded), name: postService.postNotificationName, object: nil)
-        
-        searchButton.setImageTint(color: UIColor.basePurple)
-        
-        barButtonItems = [searchButton, feedButton]
-        
-        setLeftView()
-        watchForKeyTouch()
-        
-        makeKeyboardLeave()
         
         lockButton.setImageTint(color: .basePurple)
     }
@@ -167,47 +128,10 @@ class MapViewController: UIViewController,
         }
     }
     
-    func makeKeyboardLeave() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dissmissKeyboard))
-        tap.cancelsTouchesInView = false
-        
-        view.addGestureRecognizer(tap)
-    }
-    
     @IBAction func post(_ sender: Any) {
         openCamera()
     }
     
-    
-    func setLeftView() {
-        let space = UILabel()
-        space.frame = CGRect(x: 0, y: 0, width: 34, height: 10)
-        space.backgroundColor = .white
-        searchBar.leftView = space
-        searchBar.leftViewMode = .always
-    }
-    
-    func watchForKeyTouch() {
-        let notificationCenter = NotificationCenter.default
-        
-        notificationCenter.addObserver(self,
-                                       selector: #selector(SearchViewController.onKeyPress),
-                                       name: NSNotification.Name.UITextFieldTextDidChange,
-                                       object: nil)
-    }
-    
-    func onKeyPress(sender: AnyObject) {
-        if let notification = sender as? NSNotification {
-            let textFieldChanged = notification.object as? UITextField
-            if textFieldChanged == self.searchBar && (self.searchBar.text?.characters.count)! > 1 {
-                search()
-            }
-        }
-    }
-    
-    func search() {
-        _searchService.findUsers(query: searchBar.text!, callback: self.onUsersRecieved)
-    }
     
     func createProfileView(userID: Int) {
         profileView = ProfileView.fromNib("ProfileView")
@@ -217,53 +141,12 @@ class MapViewController: UIViewController,
         view.addSubview(profileView)
         addXBackButton()
     }
-    
-    func clearTextField() {
-        searchBar.text = ""
-    }
-    
-    func dissmissKeyboard(sender: UITapGestureRecognizer) {
-        dismissKeyboard()
-    }
-    
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    @IBAction func toggleFeed(_ sender: Any) {
-        resetBarItems()
-        MapSceneCollectionView.isHidden = !MapSceneCollectionView.isHidden
-        searchBar.isHidden = true
-        userCollectionView.isHidden = true
-        
-        if !MapSceneCollectionView.isHidden {
-            feedButton.layer.borderWidth = 3.0
-            feedButton.layer.borderColor = UIColor.basePurple.cgColor
-        }
-    }
-    
-    @IBAction func toggleSearch(_ sender: Any) {
-        resetBarItems()
-        MapSceneCollectionView.isHidden = true
-        searchBar.isHidden = !searchBar.isHidden
-        userCollectionView.isHidden = true
-        
-        if !searchBar.isHidden {
-            searchButton.layer.borderWidth = 3.0
-            searchButton.layer.borderColor = UIColor.basePurple.cgColor
-        }
-        
-    }
+
     
     func resetBarItems() {
         barButtonItems.forEach({ item in
             item.layer.borderWidth = 0.0
         })
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField,
-                                reason: UITextFieldDidEndEditingReason) {
-        userCollectionView.isHidden = true
     }
     
     func openCamera() {
@@ -290,7 +173,7 @@ class MapViewController: UIViewController,
         Alamofire.request(userService.currentUser.profilePictureURL, method: .get, parameters: nil).responseJSON { response in
             if let imageData = response.data {
                 let image = UIImage(data: imageData)
-                let selectedImage = Toucan(image: image!).resize((self.feedButton.imageView?.frame.size)!, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 3, borderColor: UIColor.white).resize((self.feedButton.imageView?.frame.size)!, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 2, borderColor: UIColor.basePurple).image?.withRenderingMode(.alwaysOriginal)
+                let selectedImage = Toucan(image: image!).resize((self.lockButton.imageView?.frame.size)!, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 3, borderColor: UIColor.white).resize((self.lockButton.imageView?.frame.size)!, fitMode: Toucan.Resize.FitMode.scale).maskWithEllipse(borderWidth: 2, borderColor: UIColor.basePurple).image?.withRenderingMode(.alwaysOriginal)
                 self.sideMenuButton.setImage(selectedImage, for: .normal)
                 self.view.bringSubview(toFront: self.sideMenuButton)
             }
@@ -298,38 +181,10 @@ class MapViewController: UIViewController,
         }
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset
-        let inset = scrollView.contentInset
-        let y: CGFloat = offset.x - inset.left
-        let reload_distance: CGFloat = -75
-        if y < reload_distance {
-            page = 0
-            getScenes(callback: nil)
-        }
-    }
-    
     func discover() {
         mapView.markers.forEach(discoveryService.discover)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-//        getParty()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        willDisplay cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
-        if collectionView == MapSceneCollectionView {
-            let lastRowIndex = MapSceneCollectionView.numberOfItems(inSection: 0)
-            if indexPath.row == lastRowIndex - 1 {
-                getScenes(callback: { _scenes in
-                    self.scenes.append(contentsOf: _scenes)
-                    self.MapSceneCollectionView.reloadData()
-                })
-            }
-        }
-    }
     
     func onDeepLink(deepLink: DeepLink) {
         if deepLink.resource == "scenes" {
@@ -368,10 +223,6 @@ class MapViewController: UIViewController,
         delegate.toggleRightPanel()
     }
     
-    func canStartParty() -> Bool {
-        return drawerOpen
-    }
-    
     @IBAction func checkItOut(_ sender: Any) {
         checkItOutButton.isHidden = true
     }
@@ -403,16 +254,6 @@ class MapViewController: UIViewController,
         compasses = [Compass]()
     }
     
-    func addCompass() {
-        if let scene = partyService.currentScene() {
-            let compass = Compass.fromNib("Compass")
-            let target = scene.cllocation
-            compass.pointTowards(target: target)
-            compasses.append(compass)
-            view.addSubview(compass)
-        }
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -430,79 +271,6 @@ class MapViewController: UIViewController,
         delegate.toggleRightPanel()
     }
 
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionView == userCollectionView ? _users.count : scenes.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == MapSceneCollectionView {
-            let scene: Scene = scenes[(indexPath as NSIndexPath).row]
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MapSceneCell
-            
-            cell.MapSceneImage.imageFromUrl(scene.pinUrl!, success: { img in
-                cell.MapSceneImage.image = img
-                cell.MapSceneImage.makeCircle()
-            })
-            
-            cell.profileImageView.imageFromUrl((scene.trip?.owner?.profilePictureURL)!, success: { img in
-                cell.profileImageView.image = img
-                cell.profileImageView.makeCircle()
-            })
-            
-            return cell
-        } else {
-            let user: User = _users[(indexPath as NSIndexPath).row]
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PartyMemberCollectionViewCell", for: indexPath) as! PartyMemberCollectionViewCell
-            cell.bindCell(user)
-            
-            cell.partyMemberProfilePicture.imageFromUrl(user.profilePictureURL, success: { img in
-                cell.partyMemberProfilePicture.makeCircle()
-            })
-            
-            giveOffsetBorder(cell: cell)
-            
-            return cell
-        }
-
-    }
-    
-    func onUsersRecieved(users: [User]) {
-        _users = users
-        userCollectionView.isHidden = false
-        userCollectionView.reloadData()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        if collectionView == MapSceneCollectionView {
-            let selectedPost = posts[indexPath.row]
-            let marker = mapView.findOrCreateMarker(post: selectedPost, blurApplies: false)
-            
-            if let selectedMarker = marker {
-                mapView.selectMarker(selectedMarker)
-            }
-            
-            mapView.lockState = .unlocked
-            setLockButton()
-            toggleDrawer(selectedPost, blurApplies: false)
-
-        } else {
-            createProfileView(userID: _users[indexPath.row].id)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let kWhateverHeightYouWant = 75
-        return CGSize(width: UIScreen.main.bounds.width, height: CGFloat(kWhateverHeightYouWant))
-    }
-    
-    func giveOffsetBorder(cell: PartyMemberCollectionViewCell) {
-        let border = CALayer()
-        border.frame = CGRect.init(x: 94.5, y: cell.frame.height - 0.5, width: cell.frame.width - 94.5, height: 0.5)
-        border.backgroundColor = UIColor.lightGray.cgColor
-        cell.layer.addSublayer(border)
-    }
     
     func onLoggedOut() {}
     
@@ -672,17 +440,6 @@ class MapViewController: UIViewController,
             }, completion: completion)
         }
     }
-    
-    func getScenes(callback: (([Scene]) -> Void)?) {
-        let success = callback ?? addScenes
-        feedService.getFeed(page: page, success: success)
-        page += 1
-    }
-    
-    func addScenes(_scenes: [Scene]) {
-        scenes = _scenes
-        MapSceneCollectionView.reloadData()
-    }
 
     func configureMapView() {
         mapView.isMyLocationEnabled = true
@@ -722,7 +479,6 @@ class MapViewController: UIViewController,
         self.mapView.selectMarker(lightuponMarker)
         self.mapView.lockState = .unlocked
         setLockButton()
-//        onViewOpened(lightuponMarker.scene.tripId)
         toggleDrawer(lightuponMarker.post, blurApplies: true)
         return true
     }
