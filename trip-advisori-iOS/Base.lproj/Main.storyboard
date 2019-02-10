@@ -21,11 +21,11 @@
         <array key="GothamRounded-Light.otf">
             <string>GothamRounded-Light</string>
         </array>
-        <array key="GothamRounded-Medium.otf">
-            <string>GothamRounded-Medium</string>
-        </array>
         <array key="GothamRoundedBook_21018.ttf">
             <string>GothamRounded-Book</string>
+        </array>
+        <array key="GothamRoundedMedium_21022.ttf">
+            <string>GothamRounded-Medium</string>
         </array>
     </customFonts>
     <scenes>
@@ -62,23 +62,35 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y6b-5T-Ikb">
-                                <rect key="frame" x="329" y="40" width="30" height="30"/>
+                                <rect key="frame" x="309" y="40" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Xdp-TL-Xox"/>
+                                    <constraint firstAttribute="width" constant="50" id="umw-pu-KzD"/>
+                                </constraints>
                                 <state key="normal" image="button:Y6b-5T-Ikb:image"/>
                                 <connections>
                                     <action selector="openPartyMenu:" destination="9pv-A4-QxB" eventType="touchUpInside" id="g1P-I7-o8Q"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yic-c7-xEh" userLabel="postButton" customClass="CircularButton" customModule="Lightupon" customModuleProvider="target">
-                                <rect key="frame" x="335" y="504" width="24" height="24"/>
+                                <rect key="frame" x="309" y="478" width="50" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="MZt-sS-Ecw"/>
+                                    <constraint firstAttribute="height" constant="50" id="ryb-k1-ayc"/>
+                                </constraints>
                                 <state key="normal" image="post"/>
                                 <connections>
                                     <action selector="post:" destination="9pv-A4-QxB" eventType="touchUpInside" id="7bz-R4-aOT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzx-rG-PZS" userLabel="lockButton" customClass="CircularButton" customModule="Lightupon" customModuleProvider="target">
-                                <rect key="frame" x="327" y="450" width="32" height="44"/>
+                                <rect key="frame" x="309" y="418" width="50" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Nks-Oj-1LQ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="f7T-Na-Nl0"/>
+                                </constraints>
                                 <state key="normal" image="locked"/>
                                 <connections>
                                     <action selector="toggleLock:" destination="9pv-A4-QxB" eventType="touchUpInside" id="sFq-AM-38W"/>
