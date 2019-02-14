@@ -74,9 +74,6 @@
 		1E5690561DA9C46300872DDA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5690551DA9C46300872DDA /* UserService.swift */; };
 		1E582B341E68E17800499771 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E582B331E68E17800499771 /* ParentViewController.swift */; };
 		1E582B381E68E76200499771 /* TripModalPresentingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E582B371E68E76200499771 /* TripModalPresentingViewController.swift */; };
-		1E5D15401E234F910020D9B5 /* FeedSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5D153F1E234F910020D9B5 /* FeedSceneCell.swift */; };
-		1E5D15461E2858DF0020D9B5 /* FeedSceneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E5D15451E2858DF0020D9B5 /* FeedSceneCell.xib */; };
-		1E5D15481E287CDE0020D9B5 /* LikeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5D15471E287CDE0020D9B5 /* LikeService.swift */; };
 		1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6B9F1D0C8A1F00D5793A /* owl.png */; };
 		1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6981CA6307F00D9F90C /* PartyService.swift */; };
 		1E66F1561E0F087D007EA08E /* ConstellationPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66F1551E0F087D007EA08E /* ConstellationPoint.swift */; };
@@ -100,7 +97,6 @@
 		1E8144DB1E47EADC0085B61C /* LightuponGMSMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8144DA1E47EADC0085B61C /* LightuponGMSMapView.swift */; };
 		1E841C581C66DA0C00AD638E /* TripsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C571C66DA0C00AD638E /* TripsService.swift */; };
 		1E841C5A1C66DB8900AD638E /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C591C66DB8900AD638E /* Trip.swift */; };
-		1E841C5C1C6704A600AD638E /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C5B1C6704A600AD638E /* FeedViewController.swift */; };
 		1E841C651C67C48F00AD638E /* AsynchronousUIImageLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */; };
 		1E9224921EB00C09008E705F /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9224911EB00C09008E705F /* CardCollectionViewCell.swift */; };
 		1E9224941EB00C21008E705F /* CardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E9224931EB00C21008E705F /* CardCollectionViewCell.xib */; };
@@ -115,7 +111,6 @@
 		1E954EB71D50EA7A0021FDD8 /* BlurImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */; };
 		1E9645F01E085A2E00A0E88F /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9645EF1E085A2E00A0E88F /* FeedService.swift */; };
 		1E9645F21E085D2800A0E88F /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9645F11E085D2800A0E88F /* Comment.swift */; };
-		1E9645F41E08807D00A0E88F /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9645F31E08807D00A0E88F /* CommentService.swift */; };
 		1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */; };
 		1E9942191DF78894003E0FAA /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9942181DF78894003E0FAA /* Helper.swift */; };
 		1E9AC22F1EBBFA2E00C61B4E /* TripFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9AC22E1EBBFA2E00C61B4E /* TripFormViewController.swift */; };
@@ -172,7 +167,6 @@
 		1EE009931D80514100E550CF /* CardSwipeOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE009921D80514100E550CF /* CardSwipeOptions.swift */; };
 		1EE2BD431E308B0100C73BCC /* NotSelectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE2BD421E308B0100C73BCC /* NotSelectingViewController.swift */; };
 		1EE39BCB1E58004700A67FA7 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE39BCA1E58004700A67FA7 /* Address.swift */; };
-		1EE9A2B31DCBB1EB00E7EC84 /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9A2B21DCBB1EB00E7EC84 /* Follow.swift */; };
 		1EE9A2B51DCC00CF00E7EC84 /* AwsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9A2B41DCC00CF00E7EC84 /* AwsService.swift */; };
 		1EE9A2B71DCC00E400E7EC84 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9A2B61DCC00E400E7EC84 /* PostService.swift */; };
 		1EEEED0E1E3C39410009C35D /* GoogleMapsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEEED0D1E3C39410009C35D /* GoogleMapsService.swift */; };
@@ -284,9 +278,6 @@
 		1E5690551DA9C46300872DDA /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		1E582B331E68E17800499771 /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		1E582B371E68E76200499771 /* TripModalPresentingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripModalPresentingViewController.swift; sourceTree = "<group>"; };
-		1E5D153F1E234F910020D9B5 /* FeedSceneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedSceneCell.swift; sourceTree = "<group>"; };
-		1E5D15451E2858DF0020D9B5 /* FeedSceneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedSceneCell.xib; sourceTree = "<group>"; };
-		1E5D15471E287CDE0020D9B5 /* LikeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeService.swift; sourceTree = "<group>"; };
 		1E5F6B9F1D0C8A1F00D5793A /* owl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owl.png; sourceTree = "<group>"; };
 		1E64A6981CA6307F00D9F90C /* PartyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyService.swift; sourceTree = "<group>"; };
 		1E66F1551E0F087D007EA08E /* ConstellationPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstellationPoint.swift; sourceTree = "<group>"; };
@@ -310,7 +301,6 @@
 		1E8144DA1E47EADC0085B61C /* LightuponGMSMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightuponGMSMapView.swift; sourceTree = "<group>"; };
 		1E841C571C66DA0C00AD638E /* TripsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripsService.swift; sourceTree = "<group>"; };
 		1E841C591C66DB8900AD638E /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
-		1E841C5B1C6704A600AD638E /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		1E841C641C67C48F00AD638E /* AsynchronousUIImageLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousUIImageLoading.swift; sourceTree = "<group>"; };
 		1E9224911EB00C09008E705F /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E9224931EB00C21008E705F /* CardCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -325,7 +315,6 @@
 		1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurImage.swift; sourceTree = "<group>"; };
 		1E9645EF1E085A2E00A0E88F /* FeedService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
 		1E9645F11E085D2800A0E88F /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		1E9645F31E08807D00A0E88F /* CommentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		1E9942181DF78894003E0FAA /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		1E9AC22E1EBBFA2E00C61B4E /* TripFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripFormViewController.swift; sourceTree = "<group>"; };
@@ -380,7 +369,6 @@
 		1EE009921D80514100E550CF /* CardSwipeOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSwipeOptions.swift; sourceTree = "<group>"; };
 		1EE2BD421E308B0100C73BCC /* NotSelectingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotSelectingViewController.swift; sourceTree = "<group>"; };
 		1EE39BCA1E58004700A67FA7 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
-		1EE9A2B21DCBB1EB00E7EC84 /* Follow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		1EE9A2B41DCC00CF00E7EC84 /* AwsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwsService.swift; sourceTree = "<group>"; };
 		1EE9A2B61DCC00E400E7EC84 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		1EEEED0D1E3C39410009C35D /* GoogleMapsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleMapsService.swift; sourceTree = "<group>"; };
@@ -497,15 +485,6 @@
 				1E243D3A1E5A3BE700B73221 /* TripNameModal.xib */,
 			);
 			name = tripNameModal;
-			sourceTree = "<group>";
-		};
-		1E5D153E1E234EDF0020D9B5 /* FeedSceneCell */ = {
-			isa = PBXGroup;
-			children = (
-				1E5D153F1E234F910020D9B5 /* FeedSceneCell.swift */,
-				1E5D15451E2858DF0020D9B5 /* FeedSceneCell.xib */,
-			);
-			name = FeedSceneCell;
 			sourceTree = "<group>";
 		};
 		1E76EDAA1E3EAE350020CD05 /* LoadingAnimation */ = {
@@ -724,7 +703,6 @@
 				1E8144D21E46A5180085B61C /* BeltOverlay */,
 				1ED2BAC71E42ED5D00A075B5 /* MapDrawer */,
 				1E76EDAA1E3EAE350020CD05 /* LoadingAnimation */,
-				1E5D153E1E234EDF0020D9B5 /* FeedSceneCell */,
 				1E7779891E08F3A8005B883D /* CommentCollectionViewCell */,
 				1ED488171D98525600C67516 /* ProfileView */,
 				1EAE6A2D1D85FE6A00DA19A8 /* DefaultCardDetailsView */,
@@ -749,7 +727,6 @@
 			isa = PBXGroup;
 			children = (
 				1E72BE701E0B81890060E82B /* CardViewController.swift */,
-				1E841C5B1C6704A600AD638E /* FeedViewController.swift */,
 				1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */,
 				1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */,
 				1E30E7AA1D7CDF5400BB547F /* LastTripViewController.swift */,
@@ -790,8 +767,6 @@
 				1EA9E0A61DF49EB00022E730 /* BackgroundLocationManager.swift */,
 				1E9942181DF78894003E0FAA /* Helper.swift */,
 				1E9645EF1E085A2E00A0E88F /* FeedService.swift */,
-				1E9645F31E08807D00A0E88F /* CommentService.swift */,
-				1E5D15471E287CDE0020D9B5 /* LikeService.swift */,
 				1EEEED0D1E3C39410009C35D /* GoogleMapsService.swift */,
 				1E7B1E1C1E3D762C00F6A71C /* NotificationService.swift */,
 				1E938BB61EDB4CE400266126 /* TwitterService.swift */,
@@ -843,7 +818,6 @@
 				1ED4D5A51CEA8D9500722695 /* Card.swift */,
 				1EE009921D80514100E550CF /* CardSwipeOptions.swift */,
 				1EA20DEB1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift */,
-				1EE9A2B21DCBB1EB00E7EC84 /* Follow.swift */,
 				1EF2A44A1DFF18BB00BBD823 /* LightuponResponse.swift */,
 				1E9645F11E085D2800A0E88F /* Comment.swift */,
 				1E66F1551E0F087D007EA08E /* ConstellationPoint.swift */,
@@ -1020,7 +994,6 @@
 				1E51D5B71D9D968B0052DA6E /* Brandon_light.otf in Resources */,
 				1E05B8971C5D135D009E37BA /* LaunchScreen.storyboard in Resources */,
 				1E05B8941C5D135D009E37BA /* Assets.xcassets in Resources */,
-				1E5D15461E2858DF0020D9B5 /* FeedSceneCell.xib in Resources */,
 				1EC9E5941E3EAE910040C180 /* LoadingAnimationView.xib in Resources */,
 				1EAA15191E5B84C30037B01E /* CameraOverlay.xib in Resources */,
 				1E9373AE1D6D05BF00A7AE50 /* logo_white@1x.svg in Resources */,
@@ -1249,7 +1222,6 @@
 				1E9224921EB00C09008E705F /* CardCollectionViewCell.swift in Sources */,
 				1EBB2F431E4A9B5B00EB8104 /* SceneFormViewController.swift in Sources */,
 				1ED4D5A61CEA8D9500722695 /* Card.swift in Sources */,
-				1E841C5C1C6704A600AD638E /* FeedViewController.swift in Sources */,
 				1E8144D71E46A5640085B61C /* BeltOverlayView.swift in Sources */,
 				1E05B8BB1C5D1566009E37BA /* Location.swift in Sources */,
 				1E20149C1C72B39D0012B863 /* ProfileViewController.swift in Sources */,
@@ -1265,7 +1237,6 @@
 				1EF93C001C604DA600A5B463 /* HomeTabBarViewController.swift in Sources */,
 				1E9645F21E085D2800A0E88F /* Comment.swift in Sources */,
 				1EE009931D80514100E550CF /* CardSwipeOptions.swift in Sources */,
-				1EE9A2B31DCBB1EB00E7EC84 /* Follow.swift in Sources */,
 				1E05B8BD1C5D193B009E37BA /* CurrentLocationService.swift in Sources */,
 				1E22A7CC1D2C383400163785 /* IAmCardContents.swift in Sources */,
 				1E2014961C70DB790012B863 /* FacebookProfile.swift in Sources */,
@@ -1282,11 +1253,8 @@
 				1E954EB71D50EA7A0021FDD8 /* BlurImage.swift in Sources */,
 				1EAE6A2C1D85FD0100DA19A8 /* DefaultCardDetailsView.swift in Sources */,
 				1EA5AFD51D7E430E0024D6CD /* TitleLabel.swift in Sources */,
-				1E5D15481E287CDE0020D9B5 /* LikeService.swift in Sources */,
-				1E9645F41E08807D00A0E88F /* CommentService.swift in Sources */,
 				1E05B8C11C5D327A009E37BA /* MapViewController.swift in Sources */,
 				1E2014901C705C280012B863 /* FacebookService.swift in Sources */,
-				1E5D15401E234F910020D9B5 /* FeedSceneCell.swift in Sources */,
 				1E71136B1D96F7BF004F151D /* RoundCorners.swift in Sources */,
 				1EAA151B1E5B88440037B01E /* SetImageTint.swift in Sources */,
 				1EAA89AF1D94A3EF009E9D03 /* ComboTitle.swift in Sources */,

@@ -13,17 +13,12 @@ import Locksmith
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, LoadingAnimationViewDelegate {
     fileprivate let  facebookService:FacebookService = Services.shared.getFacebookService()
     fileprivate let loginService:LoginService = Services.shared.getLoginService()
-    fileprivate var loadingAnimation: LoadingAnimationView!
     
     @IBOutlet weak var loginView: FBSDKLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setLoginButton()
-        loadingAnimation = LoadingAnimationView.fromNib("LoadingAnimationView")
-        loadingAnimation.initialize(parentView: self)
-        view.addSubview(loadingAnimation)
-        loadingAnimation.animate()
     }
     
     func dismissLoadingView() {}

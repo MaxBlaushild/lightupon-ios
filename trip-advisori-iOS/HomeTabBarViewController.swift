@@ -171,12 +171,6 @@ class HomeTabBarViewController: UITabBarController,
             if let mapController = controller as? MapViewController {
             }
             
-            if let feedController = controller as? FeedViewController {
-                feedController.delegate = vc
-                feedController.onViewOpened = mainActionToStartParty
-                feedController.onViewClosed = mainActionToOpenCamera
-            }
-            
             if let profileController = controller as? ProfileViewController {
                 profileController.initProfile()
             }

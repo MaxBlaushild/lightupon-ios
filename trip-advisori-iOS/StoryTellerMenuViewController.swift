@@ -25,7 +25,7 @@ class StoryTellerMenuViewController: UIViewController, ProfileViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindProfile()
-//        makeProfileClickable()
+        makeProfileClickable()
     }
     
 

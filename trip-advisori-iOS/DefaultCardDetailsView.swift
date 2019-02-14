@@ -11,7 +11,6 @@ import UIKit
 class DefaultCardDetailsView: UIView, BeltOverlayDelegate {
     fileprivate let tripsService: TripsService = Services.shared.getTripsService()
     fileprivate let partyService: PartyService = Services.shared.getPartyService()
-    fileprivate let commentService: CommentService = Services.shared.getCommentService()
     
     fileprivate var tripId: Int?
     fileprivate var ownerId: Int?

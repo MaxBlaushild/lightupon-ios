@@ -21,10 +21,6 @@ class User: NSObject, Mappable {
     var facebookProfile: FacebookProfile?
     var createdAt: Date?
     var updatedAt: Date?
-    var follows: [Follow]?
-    var numberOfFollowers: Int?
-    var numberOfTrips: Int?
-    var following: Bool?
     
     func mapping(map: Map) {
         id                <- map["ID"]
@@ -36,10 +32,6 @@ class User: NSObject, Mappable {
         profilePictureURL <- map["ProfilePictureURL"]
         createdAt         <- (map["CreatedAt"], ISO8601MilliDateTransform())
         updatedAt         <- (map["UpdatedAt"], ISO8601MilliDateTransform())
-        follows           <- map["Follows"]
-        numberOfFollowers <- map["NumberOfFollowers"]
-        numberOfTrips     <- map["NumberOfTrips"]
-        following         <- map["Following"]
     }
     
     required init?(map: Map) {}

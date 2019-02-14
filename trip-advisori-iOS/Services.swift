@@ -26,8 +26,6 @@ class Services: NSObject {
     private let _awsService: AwsService
     private let _postService: PostService
     private let _feedService: FeedService
-    private let _commentService: CommentService
-    private let _likeService: LikeService
     private let _googleMapsService: GoogleMapsService
     private let _notificationService: NotificationService
     private let _twitterService: TwitterService
@@ -50,8 +48,6 @@ class Services: NSObject {
         _awsService = AwsService(apiAmbassador: _apiAmbassador, currentLocationService:_currentLocationService)
         _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService, tripsService: _tripsService)
         _feedService = FeedService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService, socketService: _socketService)
-        _commentService = CommentService(apiAmbassador: _apiAmbassador)
-        _likeService = LikeService(apiAmbassador: _apiAmbassador)
         _googleMapsService = GoogleMapsService()
         _twitterService = TwitterService(apiAmbassador: _apiAmbassador)
         _discoveryService = DiscoveryService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService, navigationService: _navigationService)
@@ -74,15 +70,7 @@ class Services: NSObject {
     func getGoogleMapsService() -> GoogleMapsService {
         return _googleMapsService
     }
-    
-    func getLikeService() -> LikeService {
-        return _likeService
-    }
-    
-    func getCommentService() -> CommentService {
-        return _commentService
-    }
-    
+
     func getFeedService() -> FeedService {
         return _feedService
     }
