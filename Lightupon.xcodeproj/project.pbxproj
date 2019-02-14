@@ -25,7 +25,6 @@
 		1E1141D21DC674DD00ACAF67 /* FollowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1141D11DC674DD00ACAF67 /* FollowService.swift */; };
 		1E1711931CD431D20083236C /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1711921CD431D20083236C /* Services.swift */; };
 		1E1763AB1D403E6F00C3FBCE /* StringEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1763AA1D403E6F00C3FBCE /* StringEscaping.swift */; };
-		1E1A1A9B1CEE9D1A00A3A812 /* StoryTellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */; };
 		1E1ED1BD1D4C18CE00B49C64 /* user_menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1ED1BA1D4C18CE00B49C64 /* user_menu@3x.png */; };
 		1E1ED1BE1D4C18CE00B49C64 /* user_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1ED1BB1D4C18CE00B49C64 /* user_menu@2x.png */; };
 		1E1ED1BF1D4C18CE00B49C64 /* user_menu@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1ED1BC1D4C18CE00B49C64 /* user_menu@1x.png */; };
@@ -72,7 +71,6 @@
 		1E51D5D11D9D96A70052DA6E /* GothamRoundedLight_21020.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5C41D9D96A70052DA6E /* GothamRoundedLight_21020.ttf */; };
 		1E51D5D21D9D96A70052DA6E /* GothamRoundedMedium_21022.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E51D5C51D9D96A70052DA6E /* GothamRoundedMedium_21022.ttf */; };
 		1E5674061E54068800609C09 /* PlaceholderTextFieldColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5674051E54068800609C09 /* PlaceholderTextFieldColor.swift */; };
-		1E5690541DA987B000872DDA /* LitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5690531DA987B000872DDA /* LitService.swift */; };
 		1E5690561DA9C46300872DDA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5690551DA9C46300872DDA /* UserService.swift */; };
 		1E582B341E68E17800499771 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E582B331E68E17800499771 /* ParentViewController.swift */; };
 		1E582B381E68E76200499771 /* TripModalPresentingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E582B371E68E76200499771 /* TripModalPresentingViewController.swift */; };
@@ -130,7 +128,6 @@
 		1EA20DF21DA2A46600596CDE /* trip-advisori-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */; };
 		1EA5AFD31D7E3E760024D6CD /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5AFD21D7E3E760024D6CD /* MenuButton.swift */; };
 		1EA5AFD51D7E430E0024D6CD /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */; };
-		1EA5C6181DC00E1200918CA6 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5C6171DC00E1200918CA6 /* SearchViewController.swift */; };
 		1EA9E0A71DF49EB00022E730 /* BackgroundLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA9E0A61DF49EB00022E730 /* BackgroundLocationManager.swift */; };
 		1EAA15171E5B84B30037B01E /* CameraOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAA15161E5B84B30037B01E /* CameraOverlay.swift */; };
 		1EAA15191E5B84C30037B01E /* CameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EAA15181E5B84C30037B01E /* CameraOverlay.xib */; };
@@ -148,7 +145,6 @@
 		1EC102101EC1658100D85CFD /* TripCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1020F1EC1658100D85CFD /* TripCollectionViewCell.swift */; };
 		1EC9E5921E3EAE7F0040C180 /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9E5911E3EAE7F0040C180 /* LoadingAnimationView.swift */; };
 		1EC9E5941E3EAE910040C180 /* LoadingAnimationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EC9E5931E3EAE910040C180 /* LoadingAnimationView.xib */; };
-		1EC9E5961E3EFF000040C180 /* LitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC9E5951E3EFF000040C180 /* LitButton.swift */; };
 		1ECA41081E4EA2F8002765AA /* PickedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECA41071E4EA2F8002765AA /* PickedImage.swift */; };
 		1ECA410A1E4EB000002765AA /* SetFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECA41091E4EB000002765AA /* SetFontSize.swift */; };
 		1ECAB2671E8F29E50062C60B /* Compass.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ECAB2661E8F29E50062C60B /* Compass.xib */; };
@@ -179,7 +175,6 @@
 		1EE9A2B31DCBB1EB00E7EC84 /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9A2B21DCBB1EB00E7EC84 /* Follow.swift */; };
 		1EE9A2B51DCC00CF00E7EC84 /* AwsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9A2B41DCC00CF00E7EC84 /* AwsService.swift */; };
 		1EE9A2B71DCC00E400E7EC84 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9A2B61DCC00E400E7EC84 /* PostService.swift */; };
-		1EEBE0A01D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEBE09F1D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift */; };
 		1EEEED0E1E3C39410009C35D /* GoogleMapsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEEED0D1E3C39410009C35D /* GoogleMapsService.swift */; };
 		1EF2A44B1DFF18BB00BBD823 /* LightuponResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2A44A1DFF18BB00BBD823 /* LightuponResponse.swift */; };
 		1EF49A871C990035001A32C2 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF49A861C990035001A32C2 /* Party.swift */; };
@@ -239,7 +234,6 @@
 		1E1141D11DC674DD00ACAF67 /* FollowService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowService.swift; sourceTree = "<group>"; };
 		1E1711921CD431D20083236C /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		1E1763AA1D403E6F00C3FBCE /* StringEscaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringEscaping.swift; sourceTree = "<group>"; };
-		1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTellerViewController.swift; sourceTree = "<group>"; };
 		1E1ED1BA1D4C18CE00B49C64 /* user_menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_menu@3x.png"; sourceTree = "<group>"; };
 		1E1ED1BB1D4C18CE00B49C64 /* user_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_menu@2x.png"; sourceTree = "<group>"; };
 		1E1ED1BC1D4C18CE00B49C64 /* user_menu@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_menu@1x.png"; sourceTree = "<group>"; };
@@ -287,7 +281,6 @@
 		1E51D5C41D9D96A70052DA6E /* GothamRoundedLight_21020.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedLight_21020.ttf; sourceTree = "<group>"; };
 		1E51D5C51D9D96A70052DA6E /* GothamRoundedMedium_21022.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedMedium_21022.ttf; sourceTree = "<group>"; };
 		1E5674051E54068800609C09 /* PlaceholderTextFieldColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderTextFieldColor.swift; sourceTree = "<group>"; };
-		1E5690531DA987B000872DDA /* LitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LitService.swift; sourceTree = "<group>"; };
 		1E5690551DA9C46300872DDA /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		1E582B331E68E17800499771 /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		1E582B371E68E76200499771 /* TripModalPresentingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripModalPresentingViewController.swift; sourceTree = "<group>"; };
@@ -343,7 +336,6 @@
 		1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "trip-advisori-iOS.entitlements"; path = "trip-advisori-iOS/trip-advisori-iOS.entitlements"; sourceTree = "<group>"; };
 		1EA5AFD21D7E3E760024D6CD /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
-		1EA5C6171DC00E1200918CA6 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		1EA9E0A61DF49EB00022E730 /* BackgroundLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundLocationManager.swift; sourceTree = "<group>"; };
 		1EAA15161E5B84B30037B01E /* CameraOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraOverlay.swift; sourceTree = "<group>"; };
 		1EAA15181E5B84C30037B01E /* CameraOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlay.xib; sourceTree = "<group>"; };
@@ -361,7 +353,6 @@
 		1EC1020F1EC1658100D85CFD /* TripCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripCollectionViewCell.swift; sourceTree = "<group>"; };
 		1EC9E5911E3EAE7F0040C180 /* LoadingAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
 		1EC9E5931E3EAE910040C180 /* LoadingAnimationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingAnimationView.xib; sourceTree = "<group>"; };
-		1EC9E5951E3EFF000040C180 /* LitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LitButton.swift; sourceTree = "<group>"; };
 		1ECA41071E4EA2F8002765AA /* PickedImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickedImage.swift; sourceTree = "<group>"; };
 		1ECA41091E4EB000002765AA /* SetFontSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetFontSize.swift; sourceTree = "<group>"; };
 		1ECAB2661E8F29E50062C60B /* Compass.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Compass.xib; sourceTree = "<group>"; };
@@ -392,7 +383,6 @@
 		1EE9A2B21DCBB1EB00E7EC84 /* Follow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		1EE9A2B41DCC00CF00E7EC84 /* AwsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwsService.swift; sourceTree = "<group>"; };
 		1EE9A2B61DCC00E400E7EC84 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
-		1EEBE09F1D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		1EEEED0D1E3C39410009C35D /* GoogleMapsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleMapsService.swift; sourceTree = "<group>"; };
 		1EF2A44A1DFF18BB00BBD823 /* LightuponResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightuponResponse.swift; sourceTree = "<group>"; };
 		1EF49A861C990035001A32C2 /* Party.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
@@ -741,10 +731,8 @@
 				1EE009951D8052BA00E550CF /* EndOfTripView */,
 				1EE009941D8052A800E550CF /* CompassView */,
 				1EF7839B1CFF46D100860510 /* cards */,
-				1EEBE09F1D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift */,
 				1ED4B0871FC7C5F4005B76A3 /* CircularButton.swift */,
 				1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */,
-				1EC9E5951E3EFF000040C180 /* LitButton.swift */,
 				AEE1AC681E2D5A790043ADDE /* MapSceneCell.swift */,
 				1E8144DA1E47EADC0085B61C /* LightuponGMSMapView.swift */,
 				1E8144D81E47DD9C0085B61C /* LightuponGMSMarker.swift */,
@@ -770,9 +758,7 @@
 				1E05B8C01C5D327A009E37BA /* MapViewController.swift */,
 				1E20149B1C72B39D0012B863 /* ProfileViewController.swift */,
 				1E72BE751E0B912E0060E82B /* SceneViewController.swift */,
-				1EA5C6171DC00E1200918CA6 /* SearchViewController.swift */,
 				1E22A7CF1D2C491C00163785 /* StoryTellerMenuViewController.swift */,
-				1E1A1A9A1CEE9D1A00A3A812 /* StoryTellerViewController.swift */,
 				1E72BE731E0B88420060E82B /* TripDetailsViewController.swift */,
 				1EE2BD421E308B0100C73BCC /* NotSelectingViewController.swift */,
 				1EBB2F421E4A9B5B00EB8104 /* SceneFormViewController.swift */,
@@ -796,7 +782,6 @@
 				1E0003C91C83954000B25C05 /* AmbassadorOfTheAPI.swift */,
 				1E841C571C66DA0C00AD638E /* TripsService.swift */,
 				1EBBFC1F1D734EB100697894 /* NavigationService.swift */,
-				1E5690531DA987B000872DDA /* LitService.swift */,
 				1E5690551DA9C46300872DDA /* UserService.swift */,
 				1E1141CF1DC662E700ACAF67 /* SearchService.swift */,
 				1E1141D11DC674DD00ACAF67 /* FollowService.swift */,
@@ -1230,7 +1215,6 @@
 				1EA20DEE1DA1995D00596CDE /* DateExtensions.swift in Sources */,
 				1EA5AFD31D7E3E760024D6CD /* MenuButton.swift in Sources */,
 				1ECAB26B1E8F2AB90062C60B /* Compass.swift in Sources */,
-				1E1A1A9B1CEE9D1A00A3A812 /* StoryTellerViewController.swift in Sources */,
 				1EBBFC201D734EB100697894 /* NavigationService.swift in Sources */,
 				1EF2A44B1DFF18BB00BBD823 /* LightuponResponse.swift in Sources */,
 				1E72BE741E0B88420060E82B /* TripDetailsViewController.swift in Sources */,
@@ -1269,9 +1253,7 @@
 				1E8144D71E46A5640085B61C /* BeltOverlayView.swift in Sources */,
 				1E05B8BB1C5D1566009E37BA /* Location.swift in Sources */,
 				1E20149C1C72B39D0012B863 /* ProfileViewController.swift in Sources */,
-				1E5690541DA987B000872DDA /* LitService.swift in Sources */,
 				1EE9A2B71DCC00E400E7EC84 /* PostService.swift in Sources */,
-				1EA5C6181DC00E1200918CA6 /* SearchViewController.swift in Sources */,
 				1E3941831FD8DD3600D2712A /* Pin.swift in Sources */,
 				1E9942191DF78894003E0FAA /* Helper.swift in Sources */,
 				1E4E8CD51EC3C95C00DA4ACF /* SceneCell.swift in Sources */,
@@ -1304,14 +1286,12 @@
 				1E9645F41E08807D00A0E88F /* CommentService.swift in Sources */,
 				1E05B8C11C5D327A009E37BA /* MapViewController.swift in Sources */,
 				1E2014901C705C280012B863 /* FacebookService.swift in Sources */,
-				1EEBE0A01D4EAE9B00ED5AD0 /* PartyMemberCollectionViewCell.swift in Sources */,
 				1E5D15401E234F910020D9B5 /* FeedSceneCell.swift in Sources */,
 				1E71136B1D96F7BF004F151D /* RoundCorners.swift in Sources */,
 				1EAA151B1E5B88440037B01E /* SetImageTint.swift in Sources */,
 				1EAA89AF1D94A3EF009E9D03 /* ComboTitle.swift in Sources */,
 				1EC9E5921E3EAE7F0040C180 /* LoadingAnimationView.swift in Sources */,
 				1ED2BAC91E42ED6F00A075B5 /* MapDrawerView.swift in Sources */,
-				1EC9E5961E3EFF000040C180 /* LitButton.swift in Sources */,
 				1ECDABC41E5B670D00A3BA78 /* PostConfirmationView.swift in Sources */,
 				1ED69B421D07B1C300CF2172 /* ColorFromHex.swift in Sources */,
 				1E9373B21D6D087400A7AE50 /* MainIconBeizer.swift in Sources */,

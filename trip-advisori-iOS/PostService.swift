@@ -12,7 +12,6 @@ import ObjectMapper
 class PostService: NSObject {
     private let _awsService: AwsService
     private let _apiAmbassador: AmbassadorToTheAPI
-    private let _litService: LitService
     private let _currentLocationService: CurrentLocationService
     private let _tripsService: TripsService
     
@@ -27,13 +26,11 @@ class PostService: NSObject {
     init(
         awsService: AwsService,
         apiAmbassador: AmbassadorToTheAPI,
-        litService: LitService,
         currentLocationService: CurrentLocationService,
         tripsService: TripsService
     ){
         _awsService = awsService
         _apiAmbassador = apiAmbassador
-        _litService = litService
         _currentLocationService = currentLocationService
         _tripsService = tripsService
     }

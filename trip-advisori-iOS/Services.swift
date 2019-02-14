@@ -20,7 +20,6 @@ class Services: NSObject {
     private let _loginService: LoginService
     private let _socketService: SocketService
     private let _navigationService: NavigationService
-    private let _litService: LitService
     private let _userService: UserService
     private let _searchService: SearchService
     private let _followService: FollowService
@@ -42,15 +41,14 @@ class Services: NSObject {
         _loginService = LoginService(authService: _authService, notificationService: _notificationService, apiAmbassador: _apiAmbassador)
         _tripsService = TripsService(apiAmbassador: _apiAmbassador)
         _currentLocationService = CurrentLocationService(tripsService: _tripsService, apiAmbassador: _apiAmbassador)
-        _litService = LitService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService)
         _searchService = SearchService(apiAmbassador: _apiAmbassador)
         _followService = FollowService(apiAmbassador: _apiAmbassador)
-        _userService = UserService(apiAmbassador: _apiAmbassador, litService: _litService, followService: _followService, facebookService: _facebookService, loginService: _loginService)
+        _userService = UserService(apiAmbassador: _apiAmbassador, followService: _followService, facebookService: _facebookService, loginService: _loginService)
         _socketService = SocketService(authService: _authService, currentLocationService: _currentLocationService)
         _partyService = PartyService(apiAmbassador: _apiAmbassador, socketService: _socketService)
         _navigationService = NavigationService()
         _awsService = AwsService(apiAmbassador: _apiAmbassador, currentLocationService:_currentLocationService)
-        _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, litService: _litService, currentLocationService: _currentLocationService, tripsService: _tripsService)
+        _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService, tripsService: _tripsService)
         _feedService = FeedService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService, socketService: _socketService)
         _commentService = CommentService(apiAmbassador: _apiAmbassador)
         _likeService = LikeService(apiAmbassador: _apiAmbassador)
@@ -111,10 +109,6 @@ class Services: NSObject {
     
     func getUserService() -> UserService {
         return _userService
-    }
-    
-    func getLitService() -> LitService {
-        return _litService
     }
     
     func getSocketService() -> SocketService {

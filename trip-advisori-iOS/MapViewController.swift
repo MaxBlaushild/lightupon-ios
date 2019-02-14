@@ -42,12 +42,10 @@ class MapViewController: UIViewController,
     private let feedService = Services.shared.getFeedService()
     private let userService = Services.shared.getUserService()
     private let postService = Services.shared.getPostService()
-    private let navigationService = Services.shared.getNavigationService()
     private let discoveryService = Services.shared.getDiscoveryService()
     private let _searchService = Services.shared.getSearchService()
     
     var trips:[Trip] = [Trip]()
-    var scenes: [Scene] = [Scene]()
     
     var xBackButton:XBackButton!
     var compasses:[Compass] = [Compass]()

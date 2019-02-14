@@ -8,19 +8,13 @@
 
 import UIKit
 
-
-private let reuseIdentifier = "PartyMemberCollectionViewCell"
-
-class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ProfileViewDelegate {
+class StoryTellerMenuViewController: UIViewController, ProfileViewDelegate {
     
-    fileprivate let partyService: PartyService = Services.shared.getPartyService()
     fileprivate let userService: UserService = Services.shared.getUserService()
 
-    @IBOutlet weak var partyMemberCollectionView: UICollectionView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
-    @IBOutlet weak var leavePartyButton: UIButton!
     
     fileprivate var _partyState: SocketResponse!
     fileprivate var _party: Party!
@@ -32,23 +26,8 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         super.viewDidLoad()
         bindProfile()
 //        makeProfileClickable()
-        toggleLeavePartyButton()
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(toggleLeavePartyButton),
-            name: partyService.partyChangeNotificationName,
-            object: nil
-        )
     }
     
-    func toggleLeavePartyButton() {
-        if let _ = partyService.currentParty {
-            leavePartyButton.isHidden = false
-        } else {
-            leavePartyButton.isHidden = true
-        }
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,20 +49,6 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
     }
     
 
-    func configurePartyCollectionView() {
-        partyMemberCollectionView.dataSource = self
-        partyMemberCollectionView.delegate = self
-        partyMemberCollectionView.reloadData()
-    }
-    
-//    func removeUserFromPartyList() {
-//        for (index, partyMember) in _partyState.users!.enumerated() {
-//            if partyMember.email == userService.currentUser.email {
-//                _partyState.users?.remove(at: index)
-//            }
-//        }
-//    }
-
     func goBack(){
         dismiss(animated: true, completion: {})
     }
@@ -103,24 +68,10 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         addXBackButton()
     }
     
-    @IBAction func leaveParty(_ sender: AnyObject) {
-        partyService.leaveParty({})
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-    
     func onLoggedOut() {
-            self.performSegue(withIdentifier: "StoryTellerMenuToHome", sender: nil)
+        self.performSegue(withIdentifier: "StoryTellerMenuToHome", sender: nil)
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        removeUserFromPartyList()
-//        return _partyState.users!.count
-        return 0
-    }
     
     func addXBackButton() {
         let frame = CGRect(x: view.bounds.width - 45, y: 30, width: 30, height: 30)
@@ -134,12 +85,4 @@ class StoryTellerMenuViewController: UIViewController, UICollectionViewDelegate,
         xBackButton.removeFromSuperview()
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let user: User = _partyState.users![(indexPath as NSIndexPath).row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-//
-//        cell.bindCell(user)
-        
-        return cell
-    }
 }

@@ -21,7 +21,6 @@ class User: NSObject, Mappable {
     var facebookProfile: FacebookProfile?
     var createdAt: Date?
     var updatedAt: Date?
-    var lit: Bool?
     var follows: [Follow]?
     var numberOfFollowers: Int?
     var numberOfTrips: Int?
@@ -34,7 +33,6 @@ class User: NSObject, Mappable {
         location          <- map["Location"]
         fullName          <- map["FullName"]
         firstName         <- map["FirstName"]
-        lit               <- map["Lit"]
         profilePictureURL <- map["ProfilePictureURL"]
         createdAt         <- (map["CreatedAt"], ISO8601MilliDateTransform())
         updatedAt         <- (map["UpdatedAt"], ISO8601MilliDateTransform())

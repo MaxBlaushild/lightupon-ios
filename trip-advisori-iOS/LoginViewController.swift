@@ -10,10 +10,25 @@ import UIKit
 import FBSDKLoginKit
 import Locksmith
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
-
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, LoadingAnimationViewDelegate {
+    fileprivate let  facebookService:FacebookService = Services.shared.getFacebookService()
+    fileprivate let loginService:LoginService = Services.shared.getLoginService()
+    fileprivate var loadingAnimation: LoadingAnimationView!
+    
+    @IBOutlet weak var loginView: FBSDKLoginButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setLoginButton()
+        loadingAnimation = LoadingAnimationView.fromNib("LoadingAnimationView")
+        loadingAnimation.initialize(parentView: self)
+        view.addSubview(loadingAnimation)
+        loadingAnimation.animate()
+    }
+    
+    func dismissLoadingView() {}
+    
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        print("User Logged In")
         
         if ((error) != nil) {
             // Process error
@@ -23,24 +38,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             loginView.isHidden = true
             facebookService.getMyProfile(self.onLoginInfoRecieved)
         }
-    }
-
-    fileprivate let  facebookService:FacebookService = Services.shared.getFacebookService()
-    fileprivate let loginService:LoginService = Services.shared.getLoginService()
-
-    @IBOutlet weak var loginView: FBSDKLoginButton!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setLoginButton()
-        addFrame()
-    }
-    
-    func addFrame() {
-        let offset = view.frame.width / 10
-        let size = CGSize(width: view.frame.width - offset * 2, height: view.frame.height - offset * 2)
-        let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: offset), size: size))
-        self.view.addSubview(imageView)
-        imageView.image = UIImage.frame(size, color: UIColor.white.cgColor)
     }
     
     override var shouldAutorotate : Bool {

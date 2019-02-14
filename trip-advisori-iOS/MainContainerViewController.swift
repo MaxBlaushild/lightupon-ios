@@ -32,7 +32,6 @@ protocol MainViewControllerDelegate {
 }
 
 class MainContainerViewController: UIViewController, MainViewControllerDelegate, LoadingAnimationViewDelegate {
-    var storyTellerViewController: StoryTellerViewController!
     var mapViewController: MapViewController!
     var menuOpen: Bool = false
     var menuViewController: StoryTellerMenuViewController!
@@ -108,12 +107,5 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
             animateCenterPanelXPosition(0) { _ in }
         }
     }
-    
-    func showShadowForCenterViewController(_ shouldShowShadow: Bool) {
-        if (shouldShowShadow) {
-            storyTellerViewController.view.layer.shadowOpacity = 0.8
-        } else {
-            storyTellerViewController.view.layer.shadowOpacity = 0.0
-        }
-    }
+
 }

@@ -12,7 +12,6 @@ import ObjectMapper
 class UserService: NSObject {
     
     private let _apiAmbassador:AmbassadorToTheAPI
-    private let _litService:LitService
     private let _followService:FollowService
     private let _facebookService:FacebookService
     private let _loginService: LoginService
@@ -21,13 +20,11 @@ class UserService: NSObject {
     
     init(
         apiAmbassador: AmbassadorToTheAPI,
-        litService:LitService,
         followService: FollowService,
         facebookService: FacebookService,
         loginService: LoginService
     ){
         _apiAmbassador = apiAmbassador
-        _litService = litService
         _followService = followService
         _facebookService = facebookService
         _loginService = loginService
@@ -48,7 +45,6 @@ class UserService: NSObject {
     func setMyself(jsonObject: AnyObject) {
         let user = Mapper<User>().map(JSONObject: jsonObject)
         _currentUser = user
-        _litService.setLitness(lit: _currentUser.lit!)
     }
     
     func isUser(_ otherProfile: FacebookProfile) -> Bool {
