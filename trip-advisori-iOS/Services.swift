@@ -14,7 +14,6 @@ class Services: NSObject {
     private let _apiAmbassador: AmbassadorToTheAPI
     private let _authService: AuthService
     private let _tripsService: TripsService
-    private let _partyService: PartyService
     private let _currentLocationService: CurrentLocationService
     private let _facebookService: FacebookService
     private let _loginService: LoginService
@@ -43,7 +42,6 @@ class Services: NSObject {
         _followService = FollowService(apiAmbassador: _apiAmbassador)
         _userService = UserService(apiAmbassador: _apiAmbassador, followService: _followService, facebookService: _facebookService, loginService: _loginService)
         _socketService = SocketService(authService: _authService, currentLocationService: _currentLocationService)
-        _partyService = PartyService(apiAmbassador: _apiAmbassador, socketService: _socketService)
         _navigationService = NavigationService()
         _awsService = AwsService(apiAmbassador: _apiAmbassador, currentLocationService:_currentLocationService)
         _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService, tripsService: _tripsService)
@@ -113,10 +111,6 @@ class Services: NSObject {
     
     func getFacebookService() -> FacebookService {
         return _facebookService
-    }
-    
-    func getPartyService() -> PartyService {
-        return _partyService
     }
     
     func getCurrentLocationService() -> CurrentLocationService {

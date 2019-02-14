@@ -15,11 +15,10 @@ import Darwin
     func openCards() -> Void
 }
 
-class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, PartyServiceDelegate  {
+class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate {
     
     fileprivate let currentLocationService = Services.shared.getCurrentLocationService()
     fileprivate let navigationService = Services.shared.getNavigationService()
-    fileprivate let partyService = Services.shared.getPartyService()
     
     @IBOutlet weak var sceneMapView: LightuponGMSMapView!
     @IBOutlet weak var compass: UIImageView!
@@ -39,7 +38,6 @@ class CompassView: UIView, GMSMapViewDelegate, CurrentLocationServiceDelegate, P
         
         sceneMapView.delegate = self
         currentLocationService.registerDelegate(self)
-        partyService.registerDelegate(self)
         
         setCompassSize()
         centerMapOnLocation()

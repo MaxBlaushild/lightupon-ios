@@ -45,8 +45,6 @@
 		1E243D3B1E5A3BE700B73221 /* TripNameModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E243D3A1E5A3BE700B73221 /* TripNameModal.xib */; };
 		1E2ADDB11E7CEED200FA47CE /* ReplaceRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2ADDB01E7CEED200FA47CE /* ReplaceRootViewController.swift */; };
 		1E30E7AB1D7CDF5400BB547F /* LastTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E30E7AA1D7CDF5400BB547F /* LastTripViewController.swift */; };
-		1E30E7AD1D7CE91100BB547F /* EndOfTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E30E7AC1D7CE91100BB547F /* EndOfTripView.swift */; };
-		1E30E7AF1D7CEC6300BB547F /* EndOfTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E30E7AE1D7CEC6300BB547F /* EndOfTripView.xib */; };
 		1E3343CE1E15B27700A6E633 /* RoundDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3343CD1E15B27700A6E633 /* RoundDoubles.swift */; };
 		1E3940081E07277D009D29B0 /* AddBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3940071E07277D009D29B0 /* AddBorder.swift */; };
 		1E3941811FD8DA8600D2712A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3941801FD8DA8600D2712A /* Post.swift */; };
@@ -75,7 +73,6 @@
 		1E582B341E68E17800499771 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E582B331E68E17800499771 /* ParentViewController.swift */; };
 		1E582B381E68E76200499771 /* TripModalPresentingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E582B371E68E76200499771 /* TripModalPresentingViewController.swift */; };
 		1E5F6BA01D0C8A1F00D5793A /* owl.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E5F6B9F1D0C8A1F00D5793A /* owl.png */; };
-		1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64A6981CA6307F00D9F90C /* PartyService.swift */; };
 		1E66F1561E0F087D007EA08E /* ConstellationPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66F1551E0F087D007EA08E /* ConstellationPoint.swift */; };
 		1E6B0CC41EE5F84700F77A94 /* CursorPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B0CC31EE5F84700F77A94 /* CursorPosition.swift */; };
 		1E7032AD1CE8F53A00B1C18D /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7032AC1CE8F53A00B1C18D /* SocketResponse.swift */; };
@@ -249,8 +246,6 @@
 		1E243D3A1E5A3BE700B73221 /* TripNameModal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TripNameModal.xib; sourceTree = "<group>"; };
 		1E2ADDB01E7CEED200FA47CE /* ReplaceRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceRootViewController.swift; sourceTree = "<group>"; };
 		1E30E7AA1D7CDF5400BB547F /* LastTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastTripViewController.swift; sourceTree = "<group>"; };
-		1E30E7AC1D7CE91100BB547F /* EndOfTripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndOfTripView.swift; sourceTree = "<group>"; };
-		1E30E7AE1D7CEC6300BB547F /* EndOfTripView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EndOfTripView.xib; sourceTree = "<group>"; };
 		1E3343CD1E15B27700A6E633 /* RoundDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundDoubles.swift; sourceTree = "<group>"; };
 		1E3940071E07277D009D29B0 /* AddBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBorder.swift; sourceTree = "<group>"; };
 		1E3941801FD8DA8600D2712A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -279,7 +274,6 @@
 		1E582B331E68E17800499771 /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		1E582B371E68E76200499771 /* TripModalPresentingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripModalPresentingViewController.swift; sourceTree = "<group>"; };
 		1E5F6B9F1D0C8A1F00D5793A /* owl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owl.png; sourceTree = "<group>"; };
-		1E64A6981CA6307F00D9F90C /* PartyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyService.swift; sourceTree = "<group>"; };
 		1E66F1551E0F087D007EA08E /* ConstellationPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstellationPoint.swift; sourceTree = "<group>"; };
 		1E6B0CC31EE5F84700F77A94 /* CursorPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CursorPosition.swift; sourceTree = "<group>"; };
 		1E7032AC1CE8F53A00B1C18D /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketResponse.swift; sourceTree = "<group>"; };
@@ -706,7 +700,6 @@
 				1E7779891E08F3A8005B883D /* CommentCollectionViewCell */,
 				1ED488171D98525600C67516 /* ProfileView */,
 				1EAE6A2D1D85FE6A00DA19A8 /* DefaultCardDetailsView */,
-				1EE009951D8052BA00E550CF /* EndOfTripView */,
 				1EE009941D8052A800E550CF /* CompassView */,
 				1EF7839B1CFF46D100860510 /* cards */,
 				1ED4B0871FC7C5F4005B76A3 /* CircularButton.swift */,
@@ -750,7 +743,6 @@
 			isa = PBXGroup;
 			children = (
 				1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */,
-				1E64A6981CA6307F00D9F90C /* PartyService.swift */,
 				1E1711921CD431D20083236C /* Services.swift */,
 				1E2014971C71273B0012B863 /* LoginService.swift */,
 				1E20148F1C705C280012B863 /* FacebookService.swift */,
@@ -782,15 +774,6 @@
 				1E22A7D91D2C763300163785 /* CompassView.xib */,
 			);
 			name = CompassView;
-			sourceTree = "<group>";
-		};
-		1EE009951D8052BA00E550CF /* EndOfTripView */ = {
-			isa = PBXGroup;
-			children = (
-				1E30E7AE1D7CEC6300BB547F /* EndOfTripView.xib */,
-				1E30E7AC1D7CE91100BB547F /* EndOfTripView.swift */,
-			);
-			name = EndOfTripView;
 			sourceTree = "<group>";
 		};
 		1EF7839B1CFF46D100860510 /* cards */ = {
@@ -1019,7 +1002,6 @@
 				1EF783AD1D00940100860510 /* PictureHero.xib in Resources */,
 				1ECDABC71E5B672600A3BA78 /* PostConfirmationView.xib in Resources */,
 				1ED69B371D07A96800CF2172 /* Dosis-ExtraLight.otf in Resources */,
-				1E30E7AF1D7CEC6300BB547F /* EndOfTripView.xib in Resources */,
 				1E51D5B61D9D968B0052DA6E /* Brandon_blk.otf in Resources */,
 				1E22A7D41D2C6FD200163785 /* birdhouse@3x.png in Resources */,
 				1E51D5D11D9D96A70052DA6E /* GothamRoundedLight_21020.ttf in Resources */,
@@ -1158,7 +1140,6 @@
 				1ED4B0881FC7C5F4005B76A3 /* CircularButton.swift in Sources */,
 				1EA9E0A71DF49EB00022E730 /* BackgroundLocationManager.swift in Sources */,
 				1E3940081E07277D009D29B0 /* AddBorder.swift in Sources */,
-				1E64A6991CA6307F00D9F90C /* PartyService.swift in Sources */,
 				1EE9A2B51DCC00CF00E7EC84 /* AwsService.swift in Sources */,
 				1E09203E1D8A1D2B00D32376 /* XBackButton.swift in Sources */,
 				1EF783A51CFF666000860510 /* TextHero.swift in Sources */,
@@ -1217,7 +1198,6 @@
 				1E582B341E68E17800499771 /* ParentViewController.swift in Sources */,
 				1EBBFC221D73545F00697894 /* AddShadow.swift in Sources */,
 				1E20149F1C72B7730012B863 /* AuthService.swift in Sources */,
-				1E30E7AD1D7CE91100BB547F /* EndOfTripView.swift in Sources */,
 				1E77798C1E08F42F005B883D /* CommentCollectionViewCell.swift in Sources */,
 				1E9224921EB00C09008E705F /* CardCollectionViewCell.swift in Sources */,
 				1EBB2F431E4A9B5B00EB8104 /* SceneFormViewController.swift in Sources */,

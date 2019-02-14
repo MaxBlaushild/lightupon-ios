@@ -15,8 +15,6 @@ import UIKit
 
 class CardViewController: UIViewController, ProfileViewCreator {
     
-    private let partyService = Services.shared.getPartyService()
-    
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var sceneImageView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!

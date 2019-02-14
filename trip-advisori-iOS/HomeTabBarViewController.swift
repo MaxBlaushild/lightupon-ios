@@ -18,7 +18,6 @@ class HomeTabBarViewController: UITabBarController,
     
     private let userService = Services.shared.getUserService()
     private let postService = Services.shared.getPostService()
-    private let partyService = Services.shared.getPartyService()
     
     var profileTabBarItem: UIImageView!
     var mainButton: UIButton!
@@ -34,11 +33,6 @@ class HomeTabBarViewController: UITabBarController,
         delegate = self
         
         styleTabBar()
-        addMainButton()
-        
-        mainButtonAction = openCamera
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(mainActionToOpenCamera), name: partyService.partyChangeNotificationName, object: nil)
     }
     
     func styleTabBar() {
@@ -68,18 +62,6 @@ class HomeTabBarViewController: UITabBarController,
         }
     }
     
-    func addMainButton() {
-        mainButton = UIButton(type: .custom)
-        mainButton.frame = CGRect(x: view.frame.width / 2 - 30, y: view.frame.height - 70, width: 60, height: 60)
-        mainButton.center = CGPoint(x:view.center.x , y: mainButton.center.y)
-        mainButton.backgroundColor = UIColor.white
-        mainButton.addTarget(self, action: #selector(performMainAction), for: .touchUpInside)
-        mainButton.layer.borderColor = UIColor.basePurple.cgColor
-        mainButton.layer.borderWidth = 3.0
-        mainButton.makeCircle()
-        view.addSubview(mainButton)
-    }
-    
     func onPhotoConfirmed() {
         dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: "TabBarToSceneForm", sender: nil)
@@ -87,49 +69,6 @@ class HomeTabBarViewController: UITabBarController,
     
     override var shouldAutorotate : Bool {
         return false
-    }
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if let detailsVCDelegate = tabBarController.selectedViewController as? TripDetailsViewControllerDelegate {
-            if detailsVCDelegate.canStartParty() {
-                mainActionToStartParty(tId: detailsVCDelegate.tripDetailsViewController.tripId)
-            } else {
-                mainActionToOpenCamera()
-            }
-        }
-    }
-    
-    func mainActionToOpenCamera() {
-        tripId = nil
-        mainButtonAction = openCamera
-        mainButton.backgroundColor = .white
-    }
-    
-    func mainActionToStartParty(tId: Int) {
-        tripId = tId
-        mainButtonAction = startParty
-        mainButton.backgroundColor = .basePurple
-    }
-    
-    func performMainAction() {
-        mainButtonAction()
-    }
-    
-    func startParty() {
-        if let id = tripId {
-            partyService.createParty(id, callback: {
-                self.selectedIndex = 0
-            })
-        }
-    }
-    
-    func openCamera() {
-        
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            let overlay = CameraOverlay.fromNib("CameraOverlay")
-            overlay.initialize(self, picker: imagePicker)
-            self.present(imagePicker, animated: true, completion: nil)
-        }
     }
     
     func onCancelPressed() {

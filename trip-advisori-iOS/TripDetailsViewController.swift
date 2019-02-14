@@ -17,7 +17,6 @@ import UIKit
 
 class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, ProfileViewCreator, ProfileViewDelegate {
     private let tripsService = Services.shared.getTripsService()
-    private let partyService = Services.shared.getPartyService()
     
     public var tripId: Int!
     private var _trip: Trip!
@@ -37,8 +36,6 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
         tripId = _tripId
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         getTrip()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(dismissView), name: partyService.partyChangeNotificationName, object: nil)
     }
     
     
@@ -54,8 +51,6 @@ class TripDetailsViewController: UIPageViewController, UIPageViewControllerDataS
             let beltConfig = BeltConfig(scene: scene, card: scene.cards[0], owner: scene.trip!.owner!)
             beltOverlay.config = beltConfig
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(dismissView), name: partyService.partyChangeNotificationName, object: nil)
     }
     
     init() {

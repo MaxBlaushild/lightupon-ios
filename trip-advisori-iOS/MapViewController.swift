@@ -27,7 +27,6 @@ class MapViewController: UIViewController,
                          CameraOverlayDelegate,
                          CardViewControllerDelegate,
                          ProfileViewDelegate,
-                         PartyServiceDelegate,
                          MDCSwipeToChooseDelegate,
                          LightuponGMSMapViewDelegate {
     
