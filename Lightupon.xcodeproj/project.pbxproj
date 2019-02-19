@@ -35,7 +35,7 @@
 		1E20149F1C72B7730012B863 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E20149E1C72B7730012B863 /* AuthService.swift */; };
 		1E22A7CA1D2C37BA00163785 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22A7C91D2C37BA00163785 /* CardView.swift */; };
 		1E22A7CC1D2C383400163785 /* IAmCardContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22A7CB1D2C383400163785 /* IAmCardContents.swift */; };
-		1E22A7D01D2C491C00163785 /* StoryTellerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22A7CF1D2C491C00163785 /* StoryTellerMenuViewController.swift */; };
+		1E22A7D01D2C491C00163785 /* QuestLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22A7CF1D2C491C00163785 /* QuestLogViewController.swift */; };
 		1E22A7D41D2C6FD200163785 /* birdhouse@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D11D2C6FD200163785 /* birdhouse@3x.png */; };
 		1E22A7D51D2C6FD200163785 /* birdhouse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D21D2C6FD200163785 /* birdhouse@2x.png */; };
 		1E22A7D61D2C6FD200163785 /* birdhouse@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D31D2C6FD200163785 /* birdhouse@1x.png */; };
@@ -44,7 +44,6 @@
 		1E243D391E5A3B8B00B73221 /* TripNameModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E243D381E5A3B8B00B73221 /* TripNameModal.swift */; };
 		1E243D3B1E5A3BE700B73221 /* TripNameModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E243D3A1E5A3BE700B73221 /* TripNameModal.xib */; };
 		1E2ADDB11E7CEED200FA47CE /* ReplaceRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2ADDB01E7CEED200FA47CE /* ReplaceRootViewController.swift */; };
-		1E30E7AB1D7CDF5400BB547F /* LastTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E30E7AA1D7CDF5400BB547F /* LastTripViewController.swift */; };
 		1E3343CE1E15B27700A6E633 /* RoundDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3343CD1E15B27700A6E633 /* RoundDoubles.swift */; };
 		1E3940081E07277D009D29B0 /* AddBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3940071E07277D009D29B0 /* AddBorder.swift */; };
 		1E3941811FD8DA8600D2712A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3941801FD8DA8600D2712A /* Post.swift */; };
@@ -108,7 +107,6 @@
 		1E954EB71D50EA7A0021FDD8 /* BlurImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */; };
 		1E9645F01E085A2E00A0E88F /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9645EF1E085A2E00A0E88F /* FeedService.swift */; };
 		1E9645F21E085D2800A0E88F /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9645F11E085D2800A0E88F /* Comment.swift */; };
-		1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */; };
 		1E9942191DF78894003E0FAA /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9942181DF78894003E0FAA /* Helper.swift */; };
 		1E9AC22F1EBBFA2E00C61B4E /* TripFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9AC22E1EBBFA2E00C61B4E /* TripFormViewController.swift */; };
 		1EA083D91EABEF33007D0FC1 /* BeltOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EA083D81EABEF33007D0FC1 /* BeltOverlayView.xib */; };
@@ -176,7 +174,6 @@
 		1EF783AF1D00941700860510 /* PictureHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF783AE1D00941700860510 /* PictureHero.swift */; };
 		1EF90D6C1ECD4EED00728FBF /* RotateImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF90D6B1ECD4EED00728FBF /* RotateImage.swift */; };
 		1EF93BFE1C6046F800A5B463 /* InitialLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */; };
-		1EF93C001C604DA600A5B463 /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */; };
 		245A888C52EA8A07D422BD63 /* Pods_Lightupon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4136805875FAF88775BC625 /* Pods_Lightupon.framework */; };
 		9C3F53181D4EB25300A6B3DE /* TestSound2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C3F53171D4EB25300A6B3DE /* TestSound2.mp3 */; };
 		AEE1AC691E2D5A790043ADDE /* MapSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1AC681E2D5A790043ADDE /* MapSceneCell.swift */; };
@@ -235,7 +232,7 @@
 		1E20149E1C72B7730012B863 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1E22A7C91D2C37BA00163785 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		1E22A7CB1D2C383400163785 /* IAmCardContents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAmCardContents.swift; sourceTree = "<group>"; };
-		1E22A7CF1D2C491C00163785 /* StoryTellerMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTellerMenuViewController.swift; sourceTree = "<group>"; };
+		1E22A7CF1D2C491C00163785 /* QuestLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestLogViewController.swift; sourceTree = "<group>"; };
 		1E22A7D11D2C6FD200163785 /* birdhouse@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "birdhouse@3x.png"; sourceTree = "<group>"; };
 		1E22A7D21D2C6FD200163785 /* birdhouse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "birdhouse@2x.png"; sourceTree = "<group>"; };
 		1E22A7D31D2C6FD200163785 /* birdhouse@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "birdhouse@1x.png"; sourceTree = "<group>"; };
@@ -245,7 +242,6 @@
 		1E243D381E5A3B8B00B73221 /* TripNameModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripNameModal.swift; sourceTree = "<group>"; };
 		1E243D3A1E5A3BE700B73221 /* TripNameModal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TripNameModal.xib; sourceTree = "<group>"; };
 		1E2ADDB01E7CEED200FA47CE /* ReplaceRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceRootViewController.swift; sourceTree = "<group>"; };
-		1E30E7AA1D7CDF5400BB547F /* LastTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastTripViewController.swift; sourceTree = "<group>"; };
 		1E3343CD1E15B27700A6E633 /* RoundDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundDoubles.swift; sourceTree = "<group>"; };
 		1E3940071E07277D009D29B0 /* AddBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBorder.swift; sourceTree = "<group>"; };
 		1E3941801FD8DA8600D2712A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -309,7 +305,6 @@
 		1E954EB61D50EA7A0021FDD8 /* BlurImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurImage.swift; sourceTree = "<group>"; };
 		1E9645EF1E085A2E00A0E88F /* FeedService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
 		1E9645F11E085D2800A0E88F /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		1E9942181DF78894003E0FAA /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		1E9AC22E1EBBFA2E00C61B4E /* TripFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripFormViewController.swift; sourceTree = "<group>"; };
 		1EA083D81EABEF33007D0FC1 /* BeltOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BeltOverlayView.xib; sourceTree = "<group>"; };
@@ -375,7 +370,6 @@
 		1EF783AE1D00941700860510 /* PictureHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureHero.swift; sourceTree = "<group>"; };
 		1EF90D6B1ECD4EED00728FBF /* RotateImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotateImage.swift; sourceTree = "<group>"; };
 		1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialLoadingViewController.swift; sourceTree = "<group>"; };
-		1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewController.swift; sourceTree = "<group>"; };
 		66755F11CBD3FB79809ADBA9 /* Pods-trip-advisori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		750635AAF33A440FF06F8E2F /* Pods-trip-advisori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		901B6EEE17958FA82E34E780 /* Pods-Lightupon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightupon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lightupon/Pods-Lightupon.release.xcconfig"; sourceTree = "<group>"; };
@@ -720,15 +714,13 @@
 			isa = PBXGroup;
 			children = (
 				1E72BE701E0B81890060E82B /* CardViewController.swift */,
-				1EF93BFF1C604DA600A5B463 /* HomeTabBarViewController.swift */,
 				1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */,
-				1E30E7AA1D7CDF5400BB547F /* LastTripViewController.swift */,
 				1E22C6741C70232200B13A1B /* LoginViewController.swift */,
 				1E935F1C1D4C249200CB070B /* MainContainerViewController.swift */,
 				1E05B8C01C5D327A009E37BA /* MapViewController.swift */,
 				1E20149B1C72B39D0012B863 /* ProfileViewController.swift */,
 				1E72BE751E0B912E0060E82B /* SceneViewController.swift */,
-				1E22A7CF1D2C491C00163785 /* StoryTellerMenuViewController.swift */,
+				1E22A7CF1D2C491C00163785 /* QuestLogViewController.swift */,
 				1E72BE731E0B88420060E82B /* TripDetailsViewController.swift */,
 				1EE2BD421E308B0100C73BCC /* NotSelectingViewController.swift */,
 				1EBB2F421E4A9B5B00EB8104 /* SceneFormViewController.swift */,
@@ -742,7 +734,6 @@
 		1ED69B4D1D0C850D00CF2172 /* services */ = {
 			isa = PBXGroup;
 			children = (
-				1E96EA2E1CB98FBF006C0F5D /* SocketService.swift */,
 				1E1711921CD431D20083236C /* Services.swift */,
 				1E2014971C71273B0012B863 /* LoginService.swift */,
 				1E20148F1C705C280012B863 /* FacebookService.swift */,
@@ -1143,7 +1134,7 @@
 				1EE9A2B51DCC00CF00E7EC84 /* AwsService.swift in Sources */,
 				1E09203E1D8A1D2B00D32376 /* XBackButton.swift in Sources */,
 				1EF783A51CFF666000860510 /* TextHero.swift in Sources */,
-				1E22A7D01D2C491C00163785 /* StoryTellerMenuViewController.swift in Sources */,
+				1E22A7D01D2C491C00163785 /* QuestLogViewController.swift in Sources */,
 				1E938BB71EDB4CE400266126 /* TwitterService.swift in Sources */,
 				1E7B1E1D1E3D762C00F6A71C /* NotificationService.swift in Sources */,
 				1E841C5A1C66DB8900AD638E /* Trip.swift in Sources */,
@@ -1177,7 +1168,6 @@
 				1E9AC22F1EBBFA2E00C61B4E /* TripFormViewController.swift in Sources */,
 				1E6B0CC41EE5F84700F77A94 /* CursorPosition.swift in Sources */,
 				1EF90D6C1ECD4EED00728FBF /* RotateImage.swift in Sources */,
-				1E30E7AB1D7CDF5400BB547F /* LastTripViewController.swift in Sources */,
 				1E582B381E68E76200499771 /* TripModalPresentingViewController.swift in Sources */,
 				1E22A7CA1D2C37BA00163785 /* CardView.swift in Sources */,
 				1EEEED0E1E3C39410009C35D /* GoogleMapsService.swift in Sources */,
@@ -1214,7 +1204,6 @@
 				1E841C651C67C48F00AD638E /* AsynchronousUIImageLoading.swift in Sources */,
 				1E5674061E54068800609C09 /* PlaceholderTextFieldColor.swift in Sources */,
 				1EF783AB1D0084A600860510 /* FromNib.swift in Sources */,
-				1EF93C001C604DA600A5B463 /* HomeTabBarViewController.swift in Sources */,
 				1E9645F21E085D2800A0E88F /* Comment.swift in Sources */,
 				1EE009931D80514100E550CF /* CardSwipeOptions.swift in Sources */,
 				1E05B8BD1C5D193B009E37BA /* CurrentLocationService.swift in Sources */,
@@ -1228,7 +1217,6 @@
 				1E72BE761E0B912E0060E82B /* SceneViewController.swift in Sources */,
 				1E3343CE1E15B27700A6E633 /* RoundDoubles.swift in Sources */,
 				1E935F1F1D4C2F3300CB070B /* CircularImageView.swift in Sources */,
-				1E96EA2F1CB98FBF006C0F5D /* SocketService.swift in Sources */,
 				1E8144DB1E47EADC0085B61C /* LightuponGMSMapView.swift in Sources */,
 				1E954EB71D50EA7A0021FDD8 /* BlurImage.swift in Sources */,
 				1EAE6A2C1D85FD0100DA19A8 /* DefaultCardDetailsView.swift in Sources */,

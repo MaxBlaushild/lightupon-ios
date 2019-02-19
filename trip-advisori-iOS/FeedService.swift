@@ -10,21 +10,17 @@ import UIKit
 import ObjectMapper
 import CoreLocation
 
-class FeedService: NSObject, SocketServiceDelegate {
+class FeedService: NSObject {
     private let _apiAmbassador: AmbassadorToTheAPI
     private let _currentLocationService: CurrentLocationService
-    private let _socketService: SocketService
     
     public let sceneUpdatedSubscriptionName = Notification.Name("OnSceneUpdated")
     
-    init(apiAmbassador: AmbassadorToTheAPI, currentLocationService: CurrentLocationService, socketService: SocketService) {
+    init(apiAmbassador: AmbassadorToTheAPI, currentLocationService: CurrentLocationService) {
         _apiAmbassador = apiAmbassador
         _currentLocationService = currentLocationService
-        _socketService = socketService
         
         super.init()
-        
-        _socketService.registerDelegate(self)
     }
     
     func onSceneUpdated(sceneID: Int) {

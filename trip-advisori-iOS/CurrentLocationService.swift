@@ -43,8 +43,6 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         
         super.init()
         
-//        self._updateTime = Timer.scheduledTimer(timeInterval: 15.0, target: self, selector: #selector(updateLocation), userInfo: nil, repeats: true)
-        
         _locationManager.delegate = self
         
         if (CLLocationManager.authorizationStatus() != .authorizedAlways) {

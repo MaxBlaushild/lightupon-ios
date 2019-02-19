@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoryTellerMenuViewController: UIViewController, ProfileViewDelegate {
+class QuestLogViewController: UIViewController, ProfileViewDelegate {
     
     fileprivate let userService: UserService = Services.shared.getUserService()
 
@@ -54,7 +54,7 @@ class StoryTellerMenuViewController: UIViewController, ProfileViewDelegate {
     }
     
     func makeProfileClickable() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(StoryTellerMenuViewController.imageTapped(_:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(QuestLogViewController.imageTapped(_:)))
         profilePicture.isUserInteractionEnabled = true
         profilePicture.addGestureRecognizer(tapGestureRecognizer)
     }

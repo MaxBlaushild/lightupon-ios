@@ -23,7 +23,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
     private let currentLocationService = Services.shared.getCurrentLocationService()
     
     private var _initialFrame: CGRect!
-    private var _lockState: LockState
+    private var _lockState: LockState = .locked
     public var markers = [LightuponGMSMarker]()
     private var directions: [GMSPolyline] = [GMSPolyline]()
     private var lockButton: UIButton!
@@ -48,12 +48,9 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        _lockState = .locked
-        
         super.init(coder: aDecoder)
         
         currentLocationService.registerDelegate(self)
-        
         isMyLocationEnabled = true
         _initialFrame = frame
         lockState = .locked
@@ -67,7 +64,6 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         settings.tiltGestures = false
         settings.zoomGestures = false
         centerMap()
-        setCompassFrame()
         
         if let lightDelegate = lightuponDelegate {
             lightDelegate.onLocked()
@@ -113,7 +109,6 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         settings.rotateGestures = true
         settings.tiltGestures = true
         settings.zoomGestures = true
-        clearDirections()
     }
     
     func toggleLock() {
@@ -127,7 +122,6 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
     func unselect() {
         if let selectedMarker = selectedLightuponMarker {
             selectedMarker.setNotSelected()
-            clearDirections()
         }
     }
     
@@ -180,20 +174,6 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         markers = [LightuponGMSMarker]()
     }
     
-    func clearDirections() {
-        directions.forEach({ direction in
-            direction.map = nil
-        })
-        directions = [GMSPolyline]()
-    }
-    
-    func drawLine(_ path: GMSPath) {
-        let singleLine = GMSPolyline(path: path)
-        singleLine.strokeWidth = 5
-        singleLine.strokeColor = UIColor.basePurple
-        singleLine.map = self
-        directions.append(singleLine)
-    }
     
     func updateFrame() {
         let post = selectedLightuponMarker!.post

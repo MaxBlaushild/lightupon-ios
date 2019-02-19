@@ -14,12 +14,8 @@ private let centerPanelExpandedOffset: CGFloat = 60
 private extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: Bundle.main) }
     
-    class func menuViewController() -> StoryTellerMenuViewController? {
-        return mainStoryboard().instantiateViewController(withIdentifier: "StoryTellerMenuViewController") as? StoryTellerMenuViewController
-    }
-
-    class func homeTabBarViewController() -> HomeTabBarViewController? {
-        return mainStoryboard().instantiateViewController(withIdentifier: "HomeTabBarViewController") as? HomeTabBarViewController
+    class func menuViewController() -> QuestLogViewController? {
+        return mainStoryboard().instantiateViewController(withIdentifier: "QuestLogViewController") as? QuestLogViewController
     }
     
     class func mapViewController() -> MapViewController? {
@@ -34,8 +30,7 @@ protocol MainViewControllerDelegate {
 class MainContainerViewController: UIViewController, MainViewControllerDelegate, LoadingAnimationViewDelegate {
     var mapViewController: MapViewController!
     var menuOpen: Bool = false
-    var menuViewController: StoryTellerMenuViewController!
-    var shownViewController: UIViewController!
+    var menuViewController: QuestLogViewController!
     var loadingAnimation: LoadingAnimationView!
 
     override func viewDidLoad() {
@@ -46,14 +41,12 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
     func initMapViewController() {
         mapViewController = UIStoryboard.mapViewController()
         mapViewController.delegate = self
-        showViewController(mapViewController)
+        view.addSubview(mapViewController.view)
+        addChildViewController(mapViewController)
+        mapViewController.didMove(toParentViewController: self)
     }
     
-    func showViewController(_ viewController: UIViewController) {
-        view.addSubview(viewController.view)
-        addChildViewController(viewController)
-        shownViewController = viewController
-        viewController.didMove(toParentViewController: self)
+    func showLoading() {
         loadingAnimation = LoadingAnimationView.fromNib("LoadingAnimationView")
         loadingAnimation.initialize(parentView: self)
         view.addSubview(loadingAnimation)
@@ -88,7 +81,7 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
         }
     }
     
-    func addChildMenuController(_ menuViewController: StoryTellerMenuViewController) {
+    func addChildMenuController(_ menuViewController: QuestLogViewController) {
         view.insertSubview(menuViewController.view, at: 0)
         addChildViewController(menuViewController)
         menuViewController.didMove(toParentViewController: self)
@@ -96,13 +89,13 @@ class MainContainerViewController: UIViewController, MainViewControllerDelegate,
     
     func animateCenterPanelXPosition(_ targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIViewAnimationOptions(), animations: {
-            self.shownViewController.view.frame.origin.x = targetPosition
+            self.mapViewController.view.frame.origin.x = targetPosition
             }, completion: completion)
     }
     
     func animateRightPanel(_ shouldExpand: Bool) {
         if (shouldExpand) {
-            animateCenterPanelXPosition(-shownViewController.view.frame.width + centerPanelExpandedOffset)
+            animateCenterPanelXPosition(-mapViewController.view.frame.width + centerPanelExpandedOffset)
         } else {
             animateCenterPanelXPosition(0) { _ in }
         }

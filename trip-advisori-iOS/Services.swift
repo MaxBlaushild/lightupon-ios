@@ -17,7 +17,6 @@ class Services: NSObject {
     private let _currentLocationService: CurrentLocationService
     private let _facebookService: FacebookService
     private let _loginService: LoginService
-    private let _socketService: SocketService
     private let _navigationService: NavigationService
     private let _userService: UserService
     private let _searchService: SearchService
@@ -41,11 +40,10 @@ class Services: NSObject {
         _searchService = SearchService(apiAmbassador: _apiAmbassador)
         _followService = FollowService(apiAmbassador: _apiAmbassador)
         _userService = UserService(apiAmbassador: _apiAmbassador, followService: _followService, facebookService: _facebookService, loginService: _loginService)
-        _socketService = SocketService(authService: _authService, currentLocationService: _currentLocationService)
         _navigationService = NavigationService()
         _awsService = AwsService(apiAmbassador: _apiAmbassador, currentLocationService:_currentLocationService)
         _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService, tripsService: _tripsService)
-        _feedService = FeedService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService, socketService: _socketService)
+        _feedService = FeedService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService)
         _googleMapsService = GoogleMapsService()
         _twitterService = TwitterService(apiAmbassador: _apiAmbassador)
         _discoveryService = DiscoveryService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService, navigationService: _navigationService)
@@ -96,11 +94,7 @@ class Services: NSObject {
     func getUserService() -> UserService {
         return _userService
     }
-    
-    func getSocketService() -> SocketService {
-        return _socketService
-    }
-    
+
     func getLoginService() -> LoginService {
         return _loginService
     }

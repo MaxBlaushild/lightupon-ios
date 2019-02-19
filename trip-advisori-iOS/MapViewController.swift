@@ -42,10 +42,7 @@ class MapViewController: UIViewController,
     private let userService = Services.shared.getUserService()
     private let postService = Services.shared.getPostService()
     private let discoveryService = Services.shared.getDiscoveryService()
-    private let _searchService = Services.shared.getSearchService()
-    
-    var trips:[Trip] = [Trip]()
-    
+
     var xBackButton:XBackButton!
     var compasses:[Compass] = [Compass]()
     
@@ -69,9 +66,8 @@ class MapViewController: UIViewController,
     
     var onViewOpened:((Int) -> Void)!
     var onViewClosed:(() -> Void)!
+    
     fileprivate var profileView: ProfileView!
-
-    @IBOutlet weak var checkItOutButton: UIButton!
     @IBOutlet weak var partyButton: UIButton!
     @IBOutlet weak var mapView: LightuponGMSMapView!
     @IBOutlet weak var sideMenuButton: UIButton!
@@ -84,10 +80,13 @@ class MapViewController: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         configureMapView()
         initDrawer()
         styleSidebarButton()
+        setLockButton()
         getNearbyPosts(location: currentLocationService.location.cllocation.coordinate, radius: self.mapView.getRadius())
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -96,8 +95,7 @@ class MapViewController: UIViewController,
         self.updateTime = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(discover), userInfo: nil, repeats: true)
         
         NotificationCenter.default.addObserver(self, selector: #selector(onSceneAdded), name: postService.postNotificationName, object: nil)
-        
-        lockButton.setImageTint(color: .basePurple)
+
     }
     
     @IBAction func toggleLock(_ sender: Any) {
@@ -112,23 +110,11 @@ class MapViewController: UIViewController,
             lockButton.setImage(UIImage(named: "unlocked"), for: .normal)
         }
         lockButton.setImageTint(color: .basePurple)
-        setMapHeight()
-    }
-    
-    func setMapHeight() {
-        DispatchQueue.main.async {
-            let bottomConstant = self.mapView.lockState == .locked ? 0 : self.view.frame.height * 0.4
-            self.mapBottomConstraint.constant = bottomConstant
-            UIView.animate(withDuration: 0.25, animations: {
-                self.view.layoutIfNeeded()
-            })
-        }
     }
     
     @IBAction func post(_ sender: Any) {
         openCamera()
     }
-    
     
     func createProfileView(userID: Int) {
         profileView = ProfileView.fromNib("ProfileView")
@@ -219,11 +205,7 @@ class MapViewController: UIViewController,
         toggleBackView = nil
         delegate.toggleRightPanel()
     }
-    
-    @IBAction func checkItOut(_ sender: Any) {
-        checkItOutButton.isHidden = true
-    }
-    
+
     func onSceneAdded(notification: NSNotification) {
         let sceneId = notification.object as! Int
         feedService.getPost(sceneId, success: { post in
@@ -316,7 +298,6 @@ class MapViewController: UIViewController,
         cardViewController = nil
         initDrawer()
         drawerOpen = false
-        mapView.clearDirections()
         mapView.unselect()
     }
     
@@ -448,8 +429,6 @@ class MapViewController: UIViewController,
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         self.mapView.unselect()
         self.animateOutDrawer(duration: 0.25)
-        self.mapView.setCompassFrame()
-
     }
     
     func onLocked() {
