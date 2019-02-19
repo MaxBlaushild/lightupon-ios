@@ -93,17 +93,6 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         return round(radius)
     }
     
-    func setCompassFrame() {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.frame = CGRect(
-                x: self._initialFrame.minX,
-                y: self._initialFrame.minY,
-                width: UIScreen.main.bounds.width,
-                height: self._initialFrame.height
-            )
-        })
-    }
-    
     func setUnlockedState() {
         settings.scrollGestures = true
         settings.rotateGestures = true
@@ -161,7 +150,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
     
     func bindPosts(_ posts: [Post]) {
         for post in posts {
-            if let _ = markerFromPostID(post.id!) { } else {
+            if let _ = markerFromPostID(post.id) { } else {
                 placeMarker(post: post)
             }
         }
@@ -212,7 +201,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
     }
     
     func findOrCreateMarker(post: Post, blurApplies: Bool)  -> LightuponGMSMarker? {
-        let marker = markerFromPostID(post.id!)
+        let marker = markerFromPostID(post.id)
         
         if marker != nil {
             marker?.updateImages()
@@ -231,6 +220,7 @@ class LightuponGMSMapView: GMSMapView, CurrentLocationServiceDelegate {
         let marker = LightuponGMSMarker(post: post)
         markers.append(marker)
         marker.setImages(mapView: self, selected: false)
+        marker.map = self
     }
 }
 

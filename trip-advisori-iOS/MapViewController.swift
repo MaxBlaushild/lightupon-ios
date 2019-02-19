@@ -71,7 +71,6 @@ class MapViewController: UIViewController,
     @IBOutlet weak var partyButton: UIButton!
     @IBOutlet weak var mapView: LightuponGMSMapView!
     @IBOutlet weak var sideMenuButton: UIButton!
-    @IBOutlet weak var mapBottomConstraint: NSLayoutConstraint!
     
     var barButtonItems: [CircularButton]!
 
@@ -183,7 +182,7 @@ class MapViewController: UIViewController,
                     self.mapView.lockState = .unlocked
                     self.setLockButton()
                     self.toggleDrawer(post, blurApplies: false)
-                    self.onViewOpened(post.id!)
+                    self.onViewOpened(post.id)
                 }
             })
         }

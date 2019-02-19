@@ -11,7 +11,7 @@ import ObjectMapper
 import GoogleMaps
 
 class Post: NSObject, Mappable {
-    var id:Int?
+    var id:Int = 0
     var imageUrl: String = "http://p.fod4.com/p/channels/legacy/profile/1212782/a196f26e7efc0fc9c3890cdc748ce61d.jpg"
     var identifier: String?
     var createdAt: Date?

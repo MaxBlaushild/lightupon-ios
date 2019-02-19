@@ -66,7 +66,6 @@ class FeedService: NSObject {
         let url = "/posts/nearby?lat=\(lat)&lon=\(lon)&radius=\(rad)&numScenes=\(num)"
         _apiAmbassador.get(url, success: { response in
             let post = Mapper<Post>().mapArray(JSONObject: response.result.value) ?? [Post]()
-            
             success(post)
         })
     }
