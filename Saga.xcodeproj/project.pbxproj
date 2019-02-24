@@ -113,9 +113,6 @@
 		1EA083DB1EAC0753007D0FC1 /* FunWithStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA083DA1EAC0753007D0FC1 /* FunWithStrings.swift */; };
 		1EA20DEC1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA20DEB1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift */; };
 		1EA20DEE1DA1995D00596CDE /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA20DED1DA1995D00596CDE /* DateExtensions.swift */; };
-		1EA20DF01DA2A40300596CDE /* trip-advisori-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */; };
-		1EA20DF11DA2A46500596CDE /* trip-advisori-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */; };
-		1EA20DF21DA2A46600596CDE /* trip-advisori-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */; };
 		1EA5AFD31D7E3E760024D6CD /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5AFD21D7E3E760024D6CD /* MenuButton.swift */; };
 		1EA5AFD51D7E430E0024D6CD /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */; };
 		1EA9E0A71DF49EB00022E730 /* BackgroundLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA9E0A61DF49EB00022E730 /* BackgroundLocationManager.swift */; };
@@ -199,16 +196,16 @@
 /* Begin PBXFileReference section */
 		11B2F5F4E62714C2E6120AA4 /* Pods_trip_advisori_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trip_advisori_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E0003C91C83954000B25C05 /* AmbassadorOfTheAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbassadorOfTheAPI.swift; sourceTree = "<group>"; };
-		1E05B8871C5D135D009E37BA /* Lightupon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lightupon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E05B8871C5D135D009E37BA /* Saga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E05B88A1C5D135D009E37BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E05B8911C5D135D009E37BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1E05B8931C5D135D009E37BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1E05B8961C5D135D009E37BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E05B8981C5D135D009E37BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1E05B89D1C5D135D009E37BA /* LightuponTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightuponTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E05B89D1C5D135D009E37BA /* SagaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SagaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E05B8A11C5D135D009E37BA /* trip_advisori_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trip_advisori_iOSTests.swift; sourceTree = "<group>"; };
 		1E05B8A31C5D135D009E37BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1E05B8A81C5D135D009E37BA /* LightuponUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightuponUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E05B8A81C5D135D009E37BA /* SagaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SagaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E05B8AC1C5D135D009E37BA /* trip_advisori_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trip_advisori_iOSUITests.swift; sourceTree = "<group>"; };
 		1E05B8AE1C5D135D009E37BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E05B8BA1C5D1566009E37BA /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -311,7 +308,6 @@
 		1EA083DA1EAC0753007D0FC1 /* FunWithStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunWithStrings.swift; sourceTree = "<group>"; };
 		1EA20DEB1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO8601MilliDateTransform.swift; sourceTree = "<group>"; };
 		1EA20DED1DA1995D00596CDE /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
-		1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "trip-advisori-iOS.entitlements"; path = "trip-advisori-iOS/trip-advisori-iOS.entitlements"; sourceTree = "<group>"; };
 		1EA5AFD21D7E3E760024D6CD /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		1EA9E0A61DF49EB00022E730 /* BackgroundLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundLocationManager.swift; sourceTree = "<group>"; };
@@ -371,6 +367,7 @@
 		1EF90D6B1ECD4EED00728FBF /* RotateImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotateImage.swift; sourceTree = "<group>"; };
 		1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialLoadingViewController.swift; sourceTree = "<group>"; };
 		66755F11CBD3FB79809ADBA9 /* Pods-trip-advisori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		6D80B9A82223495D001AEBA4 /* saga.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = saga.entitlements; path = saga.iOS/saga.entitlements; sourceTree = "<group>"; };
 		750635AAF33A440FF06F8E2F /* Pods-trip-advisori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trip-advisori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-trip-advisori-iOS/Pods-trip-advisori-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		901B6EEE17958FA82E34E780 /* Pods-Lightupon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lightupon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lightupon/Pods-Lightupon.release.xcconfig"; sourceTree = "<group>"; };
 		9C3F53171D4EB25300A6B3DE /* TestSound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TestSound2.mp3; sourceTree = "<group>"; };
@@ -408,11 +405,11 @@
 		1E05B87E1C5D135D009E37BA = {
 			isa = PBXGroup;
 			children = (
-				1EA20DEF1DA29A1300596CDE /* trip-advisori-iOS.entitlements */,
-				1E05B8891C5D135D009E37BA /* trip-advisori-iOS */,
-				1E05B8A01C5D135D009E37BA /* trip-advisori-iOSTests */,
+				6D80B9A82223495D001AEBA4 /* saga.entitlements */,
+				1E05B8891C5D135D009E37BA /* saga.iOS */,
+				1E05B8A01C5D135D009E37BA /* saga-iOSTests */,
 				1E05B8881C5D135D009E37BA /* Products */,
-				1E05B8AB1C5D135D009E37BA /* trip-advisori-iOSUITests */,
+				1E05B8AB1C5D135D009E37BA /* saga-iOSUITests */,
 				A56A4F0B7400A272A92E7274 /* Pods */,
 				A45623097A45558826830116 /* Frameworks */,
 			);
@@ -421,14 +418,14 @@
 		1E05B8881C5D135D009E37BA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1E05B8871C5D135D009E37BA /* Lightupon.app */,
-				1E05B89D1C5D135D009E37BA /* LightuponTests.xctest */,
-				1E05B8A81C5D135D009E37BA /* LightuponUITests.xctest */,
+				1E05B8871C5D135D009E37BA /* Saga.app */,
+				1E05B89D1C5D135D009E37BA /* SagaTests.xctest */,
+				1E05B8A81C5D135D009E37BA /* SagaUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1E05B8891C5D135D009E37BA /* trip-advisori-iOS */ = {
+		1E05B8891C5D135D009E37BA /* saga.iOS */ = {
 			isa = PBXGroup;
 			children = (
 				1ED69B4D1D0C850D00CF2172 /* services */,
@@ -445,25 +442,25 @@
 				1E05B8951C5D135D009E37BA /* LaunchScreen.storyboard */,
 				1E05B8981C5D135D009E37BA /* Info.plist */,
 			);
-			path = "trip-advisori-iOS";
+			path = saga.iOS;
 			sourceTree = "<group>";
 		};
-		1E05B8A01C5D135D009E37BA /* trip-advisori-iOSTests */ = {
+		1E05B8A01C5D135D009E37BA /* saga-iOSTests */ = {
 			isa = PBXGroup;
 			children = (
 				1E05B8A11C5D135D009E37BA /* trip_advisori_iOSTests.swift */,
 				1E05B8A31C5D135D009E37BA /* Info.plist */,
 			);
-			path = "trip-advisori-iOSTests";
+			path = "saga-iOSTests";
 			sourceTree = "<group>";
 		};
-		1E05B8AB1C5D135D009E37BA /* trip-advisori-iOSUITests */ = {
+		1E05B8AB1C5D135D009E37BA /* saga-iOSUITests */ = {
 			isa = PBXGroup;
 			children = (
 				1E05B8AC1C5D135D009E37BA /* trip_advisori_iOSUITests.swift */,
 				1E05B8AE1C5D135D009E37BA /* Info.plist */,
 			);
-			path = "trip-advisori-iOSUITests";
+			path = "saga-iOSUITests";
 			sourceTree = "<group>";
 		};
 		1E243D371E5A3B7A00B73221 /* tripNameModal */ = {
@@ -826,9 +823,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1E05B8861C5D135D009E37BA /* Lightupon */ = {
+		1E05B8861C5D135D009E37BA /* Saga */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1E05B8B11C5D135D009E37BA /* Build configuration list for PBXNativeTarget "Lightupon" */;
+			buildConfigurationList = 1E05B8B11C5D135D009E37BA /* Build configuration list for PBXNativeTarget "Saga" */;
 			buildPhases = (
 				3411383C665904CD8EB8C6E7 /* [CP] Check Pods Manifest.lock */,
 				1E05B8831C5D135D009E37BA /* Sources */,
@@ -841,14 +838,14 @@
 			);
 			dependencies = (
 			);
-			name = Lightupon;
+			name = Saga;
 			productName = "trip-advisori-iOS";
-			productReference = 1E05B8871C5D135D009E37BA /* Lightupon.app */;
+			productReference = 1E05B8871C5D135D009E37BA /* Saga.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1E05B89C1C5D135D009E37BA /* LightuponTests */ = {
+		1E05B89C1C5D135D009E37BA /* SagaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1E05B8B41C5D135D009E37BA /* Build configuration list for PBXNativeTarget "LightuponTests" */;
+			buildConfigurationList = 1E05B8B41C5D135D009E37BA /* Build configuration list for PBXNativeTarget "SagaTests" */;
 			buildPhases = (
 				1E05B8991C5D135D009E37BA /* Sources */,
 				1E05B89A1C5D135D009E37BA /* Frameworks */,
@@ -859,14 +856,14 @@
 			dependencies = (
 				1E05B89F1C5D135D009E37BA /* PBXTargetDependency */,
 			);
-			name = LightuponTests;
+			name = SagaTests;
 			productName = "trip-advisori-iOSTests";
-			productReference = 1E05B89D1C5D135D009E37BA /* LightuponTests.xctest */;
+			productReference = 1E05B89D1C5D135D009E37BA /* SagaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		1E05B8A71C5D135D009E37BA /* LightuponUITests */ = {
+		1E05B8A71C5D135D009E37BA /* SagaUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1E05B8B71C5D135D009E37BA /* Build configuration list for PBXNativeTarget "LightuponUITests" */;
+			buildConfigurationList = 1E05B8B71C5D135D009E37BA /* Build configuration list for PBXNativeTarget "SagaUITests" */;
 			buildPhases = (
 				1E05B8A41C5D135D009E37BA /* Sources */,
 				1E05B8A51C5D135D009E37BA /* Frameworks */,
@@ -877,9 +874,9 @@
 			dependencies = (
 				1E05B8AA1C5D135D009E37BA /* PBXTargetDependency */,
 			);
-			name = LightuponUITests;
+			name = SagaUITests;
 			productName = "trip-advisori-iOSUITests";
-			productReference = 1E05B8A81C5D135D009E37BA /* LightuponUITests.xctest */;
+			productReference = 1E05B8A81C5D135D009E37BA /* SagaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -924,7 +921,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1E05B8821C5D135D009E37BA /* Build configuration list for PBXProject "Lightupon" */;
+			buildConfigurationList = 1E05B8821C5D135D009E37BA /* Build configuration list for PBXProject "Saga" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -937,9 +934,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1E05B8861C5D135D009E37BA /* Lightupon */,
-				1E05B89C1C5D135D009E37BA /* LightuponTests */,
-				1E05B8A71C5D135D009E37BA /* LightuponUITests */,
+				1E05B8861C5D135D009E37BA /* Saga */,
+				1E05B89C1C5D135D009E37BA /* SagaTests */,
+				1E05B8A71C5D135D009E37BA /* SagaUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -989,7 +986,6 @@
 				1E51D5CA1D9D96A70052DA6E /* GothamRounded-BookItalic.otf in Resources */,
 				1E1ED1BF1D4C18CE00B49C64 /* user_menu@1x.png in Resources */,
 				1ED2BACB1E42ED7D00A075B5 /* MapDrawerView.xib in Resources */,
-				1EA20DF01DA2A40300596CDE /* trip-advisori-iOS.entitlements in Resources */,
 				1EF783AD1D00940100860510 /* PictureHero.xib in Resources */,
 				1ECDABC71E5B672600A3BA78 /* PostConfirmationView.xib in Resources */,
 				1ED69B371D07A96800CF2172 /* Dosis-ExtraLight.otf in Resources */,
@@ -1016,7 +1012,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EA20DF11DA2A46500596CDE /* trip-advisori-iOS.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1024,7 +1019,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EA20DF21DA2A46600596CDE /* trip-advisori-iOS.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1257,12 +1251,12 @@
 /* Begin PBXTargetDependency section */
 		1E05B89F1C5D135D009E37BA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1E05B8861C5D135D009E37BA /* Lightupon */;
+			target = 1E05B8861C5D135D009E37BA /* Saga */;
 			targetProxy = 1E05B89E1C5D135D009E37BA /* PBXContainerItemProxy */;
 		};
 		1E05B8AA1C5D135D009E37BA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1E05B8861C5D135D009E37BA /* Lightupon */;
+			target = 1E05B8861C5D135D009E37BA /* Saga */;
 			targetProxy = 1E05B8A91C5D135D009E37BA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1397,11 +1391,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "trip-advisori-iOS/trip-advisori-iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Saga/saga.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XLWZ7RAXK6;
-				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
+				INFOPLIST_FILE = saga.iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1469,11 +1463,11 @@
 					"\"UIKit\"",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "lightupon.lightupon-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "saga.saga-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "trip-advisori-iOS/-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "saga.iOS/-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1486,11 +1480,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "trip-advisori-iOS/trip-advisori-iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Saga/saga.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XLWZ7RAXK6;
-				INFOPLIST_FILE = "trip-advisori-iOS/Info.plist";
+				INFOPLIST_FILE = saga.iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1558,11 +1552,11 @@
 					"\"UIKit\"",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "lightupon.lightupon-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "saga.saga-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "trip-advisori-iOS/-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "saga.iOS/-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1578,7 +1572,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lightupon.app/Lightupon";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Saga.app/Saga";
 			};
 			name = Debug;
 		};
@@ -1591,7 +1585,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "trip-advisor.trip-advisori-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lightupon.app/Lightupon";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Saga.app/Saga";
 			};
 			name = Release;
 		};
@@ -1624,7 +1618,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1E05B8821C5D135D009E37BA /* Build configuration list for PBXProject "Lightupon" */ = {
+		1E05B8821C5D135D009E37BA /* Build configuration list for PBXProject "Saga" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1E05B8AF1C5D135D009E37BA /* Debug */,
@@ -1633,7 +1627,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1E05B8B11C5D135D009E37BA /* Build configuration list for PBXNativeTarget "Lightupon" */ = {
+		1E05B8B11C5D135D009E37BA /* Build configuration list for PBXNativeTarget "Saga" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1E05B8B21C5D135D009E37BA /* Debug */,
@@ -1642,7 +1636,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1E05B8B41C5D135D009E37BA /* Build configuration list for PBXNativeTarget "LightuponTests" */ = {
+		1E05B8B41C5D135D009E37BA /* Build configuration list for PBXNativeTarget "SagaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1E05B8B51C5D135D009E37BA /* Debug */,
@@ -1651,7 +1645,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1E05B8B71C5D135D009E37BA /* Build configuration list for PBXNativeTarget "LightuponUITests" */ = {
+		1E05B8B71C5D135D009E37BA /* Build configuration list for PBXNativeTarget "SagaUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1E05B8B81C5D135D009E37BA /* Debug */,
