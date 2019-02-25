@@ -4,7 +4,7 @@ inhibit_all_warnings!
 
 
 target 'Saga' do
-  pod 'Alamofire' 
+  pod 'Alamofire', '~> 4.8.1'
   pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
   pod 'Locksmith'
   pod 'Toucan', :git => 'https://github.com/gavinbunney/Toucan'
@@ -16,7 +16,7 @@ target 'Saga' do
   pod 'Locksmith'
   pod 'Starscream'
   pod 'ObjectMapper'
-  pod 'AlamofireObjectMapper'
+  pod 'AlamofireObjectMapper', '~> 5.2'
   pod 'APScheduledLocationManager'
   pod 'HanekeSwift', :git => 'https://github.com/jasonnoahchoi/HanekeSwift', :branch => 'swift3'
   pod 'MDCSwipeToChoose'
