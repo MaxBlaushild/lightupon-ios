@@ -17,18 +17,5 @@ class CommentCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
-    func setComment(comment: Comment) {
-        let ownerNameText = comment.owner!.fullName
-        let fullNameFont = [NSFontAttributeName: UIFont(name: "GothamRounded-Medium", size: 13.00)]
-        let fullNameString = NSMutableAttributedString(string: ownerNameText, attributes: fullNameFont)
-        
-        let commentText = " \(comment.text!)"
-        let commentString = NSMutableAttributedString(string: commentText)
-        
-        fullNameString.append(commentString)
-        
-        commentLabel.attributedText = fullNameString
-    }
 
 }

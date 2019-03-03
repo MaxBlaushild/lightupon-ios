@@ -13,7 +13,6 @@ class Services: NSObject {
     
     private let _apiAmbassador: AmbassadorToTheAPI
     private let _authService: AuthService
-    private let _tripsService: TripsService
     private let _currentLocationService: CurrentLocationService
     private let _facebookService: FacebookService
     private let _loginService: LoginService
@@ -28,21 +27,22 @@ class Services: NSObject {
     private let _notificationService: NotificationService
     private let _twitterService: TwitterService
     private let _discoveryService: DiscoveryService
-
+    private let _questService: QuestService
+    
     override init(){
         _authService = AuthService()
         _notificationService = NotificationService()
         _facebookService = FacebookService()
         _apiAmbassador = AmbassadorToTheAPI(authService: _authService)
         _loginService = LoginService(authService: _authService, notificationService: _notificationService, apiAmbassador: _apiAmbassador)
-        _tripsService = TripsService(apiAmbassador: _apiAmbassador)
-        _currentLocationService = CurrentLocationService(tripsService: _tripsService, apiAmbassador: _apiAmbassador)
+        _questService = QuestService(apiAmbassador: _apiAmbassador)
+        _currentLocationService = CurrentLocationService(apiAmbassador: _apiAmbassador)
         _searchService = SearchService(apiAmbassador: _apiAmbassador)
         _followService = FollowService(apiAmbassador: _apiAmbassador)
         _userService = UserService(apiAmbassador: _apiAmbassador, followService: _followService, facebookService: _facebookService, loginService: _loginService)
         _navigationService = NavigationService()
         _awsService = AwsService(apiAmbassador: _apiAmbassador, currentLocationService:_currentLocationService)
-        _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService, tripsService: _tripsService)
+        _postService = PostService(awsService: _awsService, apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService)
         _feedService = FeedService(apiAmbassador: _apiAmbassador, currentLocationService: _currentLocationService)
         _googleMapsService = GoogleMapsService()
         _twitterService = TwitterService(apiAmbassador: _apiAmbassador)
@@ -99,8 +99,8 @@ class Services: NSObject {
         return _loginService
     }
     
-    func getTripsService() -> TripsService {
-        return _tripsService
+    func getQuestService() -> QuestService {
+        return _questService
     }
     
     func getFacebookService() -> FacebookService {

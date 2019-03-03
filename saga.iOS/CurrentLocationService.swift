@@ -24,14 +24,12 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
     fileprivate var _heading:Double
     fileprivate var _lastLocationDate:NSDate = NSDate()
     
-    let tripsService:TripsService
     let apiAmbassador:AmbassadorToTheAPI
     
     var delegates:[CurrentLocationServiceDelegate] = [CurrentLocationServiceDelegate]()
     
-    init(tripsService: TripsService, apiAmbassador: AmbassadorToTheAPI){
-        
-        self.tripsService = tripsService
+    init(apiAmbassador: AmbassadorToTheAPI){
+    
         self.apiAmbassador = apiAmbassador
         self._locationManager = CLLocationManager()
 

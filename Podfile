@@ -1,4 +1,4 @@
-platform :ios, '10.1'
+platform :ios, '12.1'
 use_frameworks!
 inhibit_all_warnings!
 
@@ -15,6 +15,7 @@ target 'Saga' do
   pod 'GoogleMaps'
   pod 'Locksmith'
   pod 'Starscream'
+  pod 'PromisesSwift'
   pod 'ObjectMapper'
   pod 'AlamofireObjectMapper', '~> 5.2'
   pod 'APScheduledLocationManager'

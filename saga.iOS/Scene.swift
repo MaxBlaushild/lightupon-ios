@@ -14,7 +14,6 @@ import ObjectMapper
 class Scene: NSObject, Mappable {
     var id:Int = 0
     var tripId:Int = 0
-    var trip: Trip?
     var name:String = ""
     var latitude: Double = 0.0
     var longitude: Double = 0.0
@@ -28,7 +27,6 @@ class Scene: NSObject, Mappable {
     var state: String?
     var neighborhood: String = ""
     var constellationPoint: ConstellationPoint?
-    var comments: [Comment] = [Comment]()
     var liked: Bool?
     var image: UIImage?
     var formattedAddress: String?
@@ -47,7 +45,6 @@ class Scene: NSObject, Mappable {
         longitude          <- map["Longitude"]
         cards              <- map["Cards"]
         tripId             <- map["TripID"]
-        trip               <- map["Trip"]
         locality           <- map["Locality"]
         neighborhood       <- map["Neighborhood"]
         googlePlaceID      <- map["GooglePlaceID"]
@@ -58,7 +55,6 @@ class Scene: NSObject, Mappable {
         sceneOrder         <- map["SceneOrder"]
         formattedAddress   <- map["FormattedAddress"]
         streetNumber       <- map["StreetNumber"]
-        comments           <- map["Comments"]
         route              <- map["Route"]
         createdAt          <- (map["CreatedAt"], ISO8601MilliDateTransform())
         updatedAt          <- (map["UpdatedAt"], ISO8601MilliDateTransform())

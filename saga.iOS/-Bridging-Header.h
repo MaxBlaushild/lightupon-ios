@@ -14,5 +14,6 @@
 #import <UIKit/UIKit.h>
 #import <MDCSwipeToChoose/MDCSwipeToChoose.h>
 #import <CBZSplashView/CBZSplashView.h>
+#import <FBLPromises/FBLPromises.h>
 
 #endif /* _Bridging_Header_h */

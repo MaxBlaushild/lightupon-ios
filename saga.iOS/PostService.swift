@@ -13,26 +13,21 @@ class PostService: NSObject {
     private let _awsService: AwsService
     private let _apiAmbassador: AmbassadorToTheAPI
     private let _currentLocationService: CurrentLocationService
-    private let _tripsService: TripsService
     
     private var getURL = ""
     private var awaitingGetURL = false
     private var post: Post!
-    
-    public var activeScene: Scene?
     
     public let postNotificationName = Notification.Name("OnScenePosted")
     
     init(
         awsService: AwsService,
         apiAmbassador: AmbassadorToTheAPI,
-        currentLocationService: CurrentLocationService,
-        tripsService: TripsService
+        currentLocationService: CurrentLocationService
     ){
         _awsService = awsService
         _apiAmbassador = apiAmbassador
         _currentLocationService = currentLocationService
-        _tripsService = tripsService
     }
     
     
@@ -43,15 +38,6 @@ class PostService: NSObject {
             if self.awaitingGetURL {
                 self.createContent()
             }
-        })
-    }
-    
-    func getActiveScene(callback: @escaping (Scene) -> Void) {
-        let lat = _currentLocationService.latitude
-        let lon = _currentLocationService.longitude
-        _apiAmbassador.get("/activeScene?lat=\(lat)&lon=\(lon)", success: { response in
-            let scene = Mapper<Scene>().map(JSONObject: response.result.value)
-            callback(scene!)
         })
     }
     

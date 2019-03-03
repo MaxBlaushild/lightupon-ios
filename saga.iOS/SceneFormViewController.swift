@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-class SceneFormViewController: TripModalPresentingViewController, UIGestureRecognizerDelegate, GMSMapViewDelegate, UITextFieldDelegate, UITextViewDelegate {
+class SceneFormViewController: UIViewController, UIGestureRecognizerDelegate, GMSMapViewDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     private let postService = Services.shared.getPostService()
     private let userService = Services.shared.getUserService()
@@ -95,9 +95,9 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         })
     }
     
-    override func addBlurView() {
+    func addBlurView() {
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-        blurView = UIVisualEffectView(effect: blurEffect)
+        let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = view.bounds
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurView)
@@ -205,10 +205,6 @@ class SceneFormViewController: TripModalPresentingViewController, UIGestureRecog
         currentScene.longitude = currentLocationService.longitude
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func dismissKeyboard(sender: UITapGestureRecognizer) {
         sceneNameFieldActive = false

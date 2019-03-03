@@ -11,13 +11,11 @@ import UIKit
 class QuestLogViewController: UIViewController, ProfileViewDelegate {
     
     fileprivate let userService: UserService = Services.shared.getUserService()
+    fileprivate let questService: QuestService = Services.shared.getQuestService()
 
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
-    
-    fileprivate var _partyState: SocketResponse!
-    fileprivate var _party: Party!
     
     fileprivate var profileView: ProfileView!
     fileprivate var xBackButton:XBackButton!
@@ -26,8 +24,8 @@ class QuestLogViewController: UIViewController, ProfileViewDelegate {
         super.viewDidLoad()
         bindProfile()
         makeProfileClickable()
+        getQuests()
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -46,6 +44,15 @@ class QuestLogViewController: UIViewController, ProfileViewDelegate {
         profilePicture.imageFromUrl(userService.currentUser.profilePictureURL)
         nameLabel.text = userService.currentUser.fullName
         profilePicture.makeCircle()
+    }
+    
+    func getQuests() {
+        questService
+            .getActiveQuests()
+            .then({ quests in
+                
+            })
+        
     }
     
 
