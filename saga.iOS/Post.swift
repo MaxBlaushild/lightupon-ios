@@ -31,6 +31,7 @@ class Post: NSObject, Mappable {
     var state: String?
     var neighborhood: String = ""
     var name = ""
+    var completed = false
         
     func mapping(map: Map) {
         id                <- map["ID"]
@@ -49,6 +50,7 @@ class Post: NSObject, Mappable {
         pin               <- map["Pin"]
         name              <- map["Name"]
         streetNumber      <- map["StreetNumber"]
+        completed         <- map["Completed"]
     }
     
     required init?(map: Map) {

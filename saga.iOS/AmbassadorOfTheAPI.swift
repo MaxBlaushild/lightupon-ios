@@ -10,10 +10,10 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-//let apiURL:String = "https://www.lightupon.net/lightupon"
-//let wsURL:String = "ws://www.lightupon.net/lightupon"
-let apiURL:String = "http://fd7a57f5.ngrok.io/lightupon"
-let wsURL:String = "http://fd7a57f5.ngrok.io/lightupon"
+let apiURL:String = "https://www.lightupon.net/lightupon"
+let wsURL:String = "ws://www.lightupon.net/lightupon"
+//let apiURL:String = "http://fd7a57f5.ngrok.io/lightupon"
+//let wsURL:String = "http://fd7a57f5.ngrok.io/lightupon"
 
 class AmbassadorToTheAPI: NSObject {
     fileprivate let _authService:AuthService

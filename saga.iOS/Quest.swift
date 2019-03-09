@@ -14,7 +14,7 @@ class Quest: NSObject, Mappable {
     var title: String = ""
     var timeToComplete: Int = 0
     var posts: [Post] =  [Post]()
-    var questProgress: QuestProgress?
+    var questProgress: QuestProgress = QuestProgress()
     
     func mapping(map: Map) {
         id                <- map["ID"]

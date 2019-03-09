@@ -10,6 +10,7 @@ import Foundation
 import ObjectMapper
 
 class QuestProgress: NSObject, Mappable {
+    
     var completedPosts:Int = 0
     
     func mapping(map: Map) {
@@ -17,5 +18,8 @@ class QuestProgress: NSObject, Mappable {
     }
     
     required init?(map: Map) {}
+    
+    override init() {}
+    
 }
 

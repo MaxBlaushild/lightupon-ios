@@ -8,14 +8,19 @@
 
 import UIKit
 
-class QuestLogViewController: UIViewController, ProfileViewDelegate {
+let cellReuseIdentifier = "QuestLogItem"
+
+class QuestLogViewController: UIViewController, ProfileViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
     fileprivate let userService: UserService = Services.shared.getUserService()
     fileprivate let questService: QuestService = Services.shared.getQuestService()
+    
+    fileprivate var quests = [Quest]()
 
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var questLog: UITableView!
     
     fileprivate var profileView: ProfileView!
     fileprivate var xBackButton:XBackButton!
@@ -25,6 +30,8 @@ class QuestLogViewController: UIViewController, ProfileViewDelegate {
         bindProfile()
         makeProfileClickable()
         getQuests()
+        configureQuestLog()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +47,12 @@ class QuestLogViewController: UIViewController, ProfileViewDelegate {
         return UIInterfaceOrientationMask.portrait
     }
     
+    func configureQuestLog() {
+        questLog.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        questLog.delegate = self
+        questLog.dataSource = self
+    }
+    
     func bindProfile() {
         profilePicture.imageFromUrl(userService.currentUser.profilePictureURL)
         nameLabel.text = userService.currentUser.fullName
@@ -49,10 +62,23 @@ class QuestLogViewController: UIViewController, ProfileViewDelegate {
     func getQuests() {
         questService
             .getActiveQuests()
-            .then({ quests in
-                
+            .then({ _quests in
+                self.quests = _quests
+                self.questLog.reloadData()
             })
         
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return quests.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell = questLog.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
+        let quest = quests[indexPath.row]
+        cell.textLabel?.text = "\(quest.title) \(quest.questProgress.completedPosts)/\(quest.posts.count)"
+        cell.textLabel?.font = UIFont(name: "Gotham", size: 14)
+        return cell
     }
     
 

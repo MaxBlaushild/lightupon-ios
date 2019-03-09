@@ -15,6 +15,8 @@ import UIKit
 
 class CardViewController: UIViewController, ProfileViewCreator {
     
+    let postService = Services.shared.getPostService()
+    
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var sceneImageView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -27,25 +29,43 @@ class CardViewController: UIViewController, ProfileViewCreator {
     @IBOutlet weak var overlayTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var sceneImageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var completeButton: UIButton!
     
     var delegate: CardViewControllerDelegate!
+    var postID: Int = 0
     
     func bindContext(post: Post, blurApplies: Bool) {
         sceneImageView.imageFromUrl(post.imageUrl)
+        postID = post.id
         
         profileImageView.imageFromUrl(post.owner!.profilePictureURL, success: { img in
             self.profileImageView.image = img
             self.profileImageView.makeCircle()
         })
         
+        if post.completed {
+            setCompletedState()
+        }
+        
         sceneTitleLabel.text = post.name
         timeSinceLabel.text = post.prettyTimeSinceCreation()
         addressLabel.text = "\(post.streetNumber) \(post.route)"
         descriptionLabel.attributedText = createBylineText(username: post.owner!.fullName, caption: post.caption)
-        beltOverlay.backgroundColor = UIColor.basePurple
-        overlay.backgroundColor = UIColor.basePurple
     }
 
+    @IBAction func onCompletionPress(_ sender: Any) {
+        postService.completePost(postID: postID).then { _ in
+            self.setCompletedState()
+        }
+    }
+    
+    func setCompletedState() {
+        completeButton.setTitle("COMPLETED", for: .normal)
+        completeButton.isEnabled = false
+        completeButton.backgroundColor = UIColor.gray
+        completeButton.alpha = 0.6
+    }
+    
     func createProfileView(_ userId: Int) {
         delegate.createProfileView(userID: userId)
     }

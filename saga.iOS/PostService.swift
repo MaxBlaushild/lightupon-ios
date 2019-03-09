@@ -8,7 +8,8 @@
 
 import UIKit
 import ObjectMapper
-
+import Promises
+ 
 class PostService: NSObject {
     private let _awsService: AwsService
     private let _apiAmbassador: AmbassadorToTheAPI
@@ -48,6 +49,15 @@ class PostService: NSObject {
             self.awaitingGetURL = true
         } else {
             createContent()
+        }
+    }
+    
+    func completePost(postID: Int) -> Promise<Bool> {
+        return Promise<Bool> { fulfill, reject in
+            let emptyData = [:] as [String: AnyObject]
+            self._apiAmbassador.post("/posts/\(postID)/complete", parameters: emptyData, success: { response in
+                fulfill(true)
+            })
         }
     }
     

@@ -181,7 +181,7 @@ class MapViewController: UIViewController,
                     
                     self.mapView.lockState = .unlocked
                     self.setLockButton()
-                    self.toggleDrawer(post, blurApplies: false)
+                    self.toggleDrawer(post, blurApplies: true)
                     self.onViewOpened(post.id)
                 }
             })

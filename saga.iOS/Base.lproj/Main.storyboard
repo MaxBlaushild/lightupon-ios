@@ -12,21 +12,21 @@
         <array key="Dosis-Regular.otf">
             <string>Dosis-Regular</string>
         </array>
+        <array key="GothamRounded-Book.otf">
+            <string>GothamRounded-Book</string>
+        </array>
         <array key="GothamRounded-Light.otf">
             <string>GothamRounded-Light</string>
         </array>
-        <array key="GothamRounded-Medium.otf">
+        <array key="GothamRoundedMedium_21022.ttf">
             <string>GothamRounded-Medium</string>
-        </array>
-        <array key="GothamRoundedBook_21018.ttf">
-            <string>GothamRounded-Book</string>
         </array>
     </customFonts>
     <scenes>
         <!--Map-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController restorationIdentifier="MapViewController" storyboardIdentifier="MapViewController" title="Map" id="9pv-A4-QxB" customClass="MapViewController" customModule="Lightupon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MapViewController" storyboardIdentifier="MapViewController" title="Map" id="9pv-A4-QxB" customClass="MapViewController" customModule="Saga" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="baG-0d-enO"/>
                         <viewControllerLayoutGuide type="bottom" id="TJW-Kp-5do"/>
@@ -35,7 +35,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWV-37-CxM" customClass="LightuponGMSMapView" customModule="Lightupon" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWV-37-CxM" customClass="LightuponGMSMapView" customModule="Saga" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="10" width="375" height="608"/>
                                 <color key="backgroundColor" red="1" green="0.76514193932349661" blue="0.47131396505029965" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -50,7 +50,7 @@
                                     <action selector="openPartyMenu:" destination="9pv-A4-QxB" eventType="touchUpInside" id="g1P-I7-o8Q"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yic-c7-xEh" userLabel="postButton" customClass="CircularButton" customModule="Lightupon" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yic-c7-xEh" userLabel="postButton" customClass="CircularButton" customModule="Saga" customModuleProvider="target">
                                 <rect key="frame" x="309" y="478" width="50" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -62,7 +62,7 @@
                                     <action selector="post:" destination="9pv-A4-QxB" eventType="touchUpInside" id="7bz-R4-aOT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzx-rG-PZS" userLabel="lockButton" customClass="CircularButton" customModule="Lightupon" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzx-rG-PZS" userLabel="lockButton" customClass="CircularButton" customModule="Saga" customModuleProvider="target">
                                 <rect key="frame" x="309" y="418" width="50" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -107,7 +107,7 @@
         <!--Search View Controller-->
         <scene sceneID="BfH-dP-wHn">
             <objects>
-                <viewController id="nXO-VD-sny" customClass="SearchViewController" customModule="Lightupon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nXO-VD-sny" customClass="SearchViewController" customModule="Saga" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yME-gw-EYW"/>
                         <viewControllerLayoutGuide type="bottom" id="3oJ-hV-yvc"/>
@@ -136,7 +136,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" reuseIdentifier="PartyMemberCollectionViewCell" id="I1y-FN-KKW" customClass="PartyMemberCollectionViewCell" customModule="Lightupon" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" reuseIdentifier="PartyMemberCollectionViewCell" id="I1y-FN-KKW" customClass="PartyMemberCollectionViewCell" customModule="Saga" customModuleProvider="target">
                                         <rect key="frame" x="0.5" y="0.0" width="374" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -255,7 +255,7 @@
         <!--Scene Form View Controller-->
         <scene sceneID="Syg-Eu-UoB">
             <objects>
-                <viewController id="O5p-Xp-7sj" customClass="SceneFormViewController" customModule="Lightupon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="O5p-Xp-7sj" customClass="SceneFormViewController" customModule="Saga" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5wm-JX-cqp"/>
                         <viewControllerLayoutGuide type="bottom" id="RNU-vM-IkD"/>
@@ -389,7 +389,7 @@
         <!--Trip Form View Controller-->
         <scene sceneID="CPG-ad-WgY">
             <objects>
-                <viewController id="8A4-Eq-8gO" customClass="TripFormViewController" customModule="Lightupon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8A4-Eq-8gO" customClass="TripFormViewController" customModule="Saga" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="84J-u5-3bS"/>
                         <viewControllerLayoutGuide type="bottom" id="E73-qb-Mnn"/>
@@ -479,7 +479,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TripCollectionViewCell" id="ysl-TF-Bbu" customClass="TripCollectionViewCell" customModule="Lightupon" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TripCollectionViewCell" id="ysl-TF-Bbu" customClass="TripCollectionViewCell" customModule="Saga" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -574,7 +574,7 @@
         <!--Create Trip View Controller-->
         <scene sceneID="KXZ-fK-BPD">
             <objects>
-                <viewController id="TI7-bX-pU9" customClass="CreateTripViewController" customModule="Lightupon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="TI7-bX-pU9" customClass="CreateTripViewController" customModule="Saga" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fu5-8y-QU3"/>
                         <viewControllerLayoutGuide type="bottom" id="tc1-Cf-6ne"/>
@@ -685,7 +685,7 @@
         <!--Login View Controller-->
         <scene sceneID="AKr-vG-EU6">
             <objects>
-                <viewController restorationIdentifier="LoginViewController" storyboardIdentifier="LoginViewController" id="gQu-ls-H9T" customClass="LoginViewController" customModule="Lightupon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="LoginViewController" storyboardIdentifier="LoginViewController" id="gQu-ls-H9T" customClass="LoginViewController" customModule="Saga" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1vP-FU-7of"/>
                         <viewControllerLayoutGuide type="bottom" id="2m5-gn-uF4"/>
@@ -720,7 +720,7 @@
         <!--Quest Log View Controller-->
         <scene sceneID="8kY-Ir-N0z">
             <objects>
-                <viewController restorationIdentifier="QuestLogViewController" storyboardIdentifier="QuestLogViewController" id="h04-z6-OpC" customClass="QuestLogViewController" customModule="Lightupon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="QuestLogViewController" storyboardIdentifier="QuestLogViewController" id="h04-z6-OpC" customClass="QuestLogViewController" customModule="Saga" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ma7-UU-f4e"/>
                         <viewControllerLayoutGuide type="bottom" id="p8f-gA-sEf"/>
@@ -748,11 +748,19 @@
                                 <color key="textColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dCO-fJ-vaT">
+                                <rect key="frame" x="86" y="150" width="269" height="497"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="p8f-gA-sEf" firstAttribute="top" secondItem="dCO-fJ-vaT" secondAttribute="bottom" constant="20" id="6i0-0n-vqS"/>
+                            <constraint firstAttribute="trailing" secondItem="dCO-fJ-vaT" secondAttribute="trailing" constant="20" id="BOS-gh-cbe"/>
                             <constraint firstItem="EMX-6F-cdY" firstAttribute="top" secondItem="Ma7-UU-f4e" secondAttribute="bottom" constant="10" id="KYo-Ni-rmv"/>
+                            <constraint firstItem="dCO-fJ-vaT" firstAttribute="leading" secondItem="EMX-6F-cdY" secondAttribute="leading" id="KjS-9F-URO"/>
                             <constraint firstItem="Qe2-hX-om4" firstAttribute="bottom" secondItem="EMX-6F-cdY" secondAttribute="bottom" id="Ld5-Ca-6W7"/>
+                            <constraint firstItem="dCO-fJ-vaT" firstAttribute="top" secondItem="EMX-6F-cdY" secondAttribute="bottom" constant="50" id="Yih-BO-4xD"/>
                             <constraint firstItem="Qe2-hX-om4" firstAttribute="leading" secondItem="EMX-6F-cdY" secondAttribute="trailing" constant="8" id="ZYj-hb-ewa"/>
                             <constraint firstItem="EMX-6F-cdY" firstAttribute="leading" secondItem="phV-Ja-Fge" secondAttribute="leadingMargin" constant="70" id="bqv-Jr-pJN"/>
                             <constraint firstItem="Wf5-XA-nFV" firstAttribute="leading" secondItem="EMX-6F-cdY" secondAttribute="trailing" constant="8" id="gjn-S9-MtE"/>
@@ -763,17 +771,18 @@
                         <outlet property="levelLabel" destination="Qe2-hX-om4" id="XKj-Iq-qXR"/>
                         <outlet property="nameLabel" destination="Wf5-XA-nFV" id="wWh-7F-AA1"/>
                         <outlet property="profilePicture" destination="EMX-6F-cdY" id="b4Q-Fh-MOl"/>
+                        <outlet property="questLog" destination="dCO-fJ-vaT" id="gOv-2j-Nst"/>
                         <segue destination="zM7-UW-UFv" kind="presentation" identifier="StoryTellerMenuToHome" id="gY1-t0-Oa9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vAt-v1-R1J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3839" y="-1245"/>
+            <point key="canvasLocation" x="-3839.1999999999998" y="-1245.4272863568217"/>
         </scene>
         <!--Initial Loading View Controller-->
         <scene sceneID="KWa-es-hyg">
             <objects>
-                <viewController id="zM7-UW-UFv" customClass="InitialLoadingViewController" customModule="Lightupon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zM7-UW-UFv" customClass="InitialLoadingViewController" customModule="Saga" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gu5-D0-hDD"/>
                         <viewControllerLayoutGuide type="bottom" id="oyl-2f-sDm"/>
@@ -795,7 +804,7 @@
         <!--Main Container View Controller-->
         <scene sceneID="lik-QZ-Xj4">
             <objects>
-                <viewController restorationIdentifier="MainContainerViewController" storyboardIdentifier="MainContainerViewController" id="0Y6-rN-5xt" customClass="MainContainerViewController" customModule="Lightupon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MainContainerViewController" storyboardIdentifier="MainContainerViewController" id="0Y6-rN-5xt" customClass="MainContainerViewController" customModule="Saga" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Kg-Us-6yv"/>
                         <viewControllerLayoutGuide type="bottom" id="23K-qL-Brd"/>
@@ -813,7 +822,7 @@
         <!--Card View Controller-->
         <scene sceneID="VB1-l1-edc">
             <objects>
-                <viewController storyboardIdentifier="CardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="R1e-pt-I6A" customClass="CardViewController" customModule="Lightupon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="R1e-pt-I6A" customClass="CardViewController" customModule="Saga" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wLU-lc-hwa"/>
                         <viewControllerLayoutGuide type="bottom" id="Hzj-w3-jbv"/>
@@ -836,7 +845,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="0nf-rV-JkR"/>
                                     <constraint firstItem="YOI-lS-feC" firstAttribute="centerY" secondItem="jNZ-YK-6J2" secondAttribute="centerY" id="FLB-1k-2ma"/>
@@ -880,7 +889,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.31372549020000001" green="0.066666666669999999" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="EJC-N7-e6J"/>
                                             <constraint firstItem="75d-0s-O7c" firstAttribute="leading" secondItem="blp-cr-etw" secondAttribute="leading" id="Er5-IO-Dd4"/>
@@ -893,11 +902,28 @@
                                             <constraint firstItem="75d-0s-O7c" firstAttribute="top" secondItem="5S5-aq-7VO" secondAttribute="centerY" constant="3" id="vmC-a3-1X8"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yke-2s-Q60">
+                                        <rect key="frame" x="112.5" y="186" width="150" height="27"/>
+                                        <color key="backgroundColor" red="0.60392156860000001" green="0.3921568627" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="27" id="Lk9-R4-jft"/>
+                                            <constraint firstAttribute="width" constant="150" id="yht-kq-j2J"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="15"/>
+                                        <state key="normal" title="COMPLETE">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onCompletionPress:" destination="R1e-pt-I6A" eventType="touchUpInside" id="o5o-EL-GzK"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="5S5-aq-7VO" firstAttribute="leading" secondItem="W1a-Vu-hRu" secondAttribute="leading" id="4hR-Hy-X7c"/>
+                                    <constraint firstItem="Yke-2s-Q60" firstAttribute="centerX" secondItem="W1a-Vu-hRu" secondAttribute="centerX" id="6Hy-4K-75J"/>
                                     <constraint firstItem="Ulb-MH-1hj" firstAttribute="leading" secondItem="W1a-Vu-hRu" secondAttribute="leading" constant="25" id="9FD-sm-DAk"/>
+                                    <constraint firstItem="Yke-2s-Q60" firstAttribute="top" secondItem="Ulb-MH-1hj" secondAttribute="bottom" constant="50" id="OuE-T0-jd1"/>
                                     <constraint firstAttribute="trailing" secondItem="Ulb-MH-1hj" secondAttribute="trailing" constant="25" id="PKx-Gp-7bD"/>
                                     <constraint firstItem="5S5-aq-7VO" firstAttribute="top" secondItem="W1a-Vu-hRu" secondAttribute="top" id="cWj-cD-E5f"/>
                                     <constraint firstItem="Ulb-MH-1hj" firstAttribute="top" secondItem="5S5-aq-7VO" secondAttribute="bottom" constant="15" id="jC3-0a-c0b"/>
@@ -926,6 +952,7 @@
                         <outlet property="beltOverlay" destination="5S5-aq-7VO" id="qfn-b8-Be0"/>
                         <outlet property="bottomView" destination="W1a-Vu-hRu" id="oQg-xZ-c3m"/>
                         <outlet property="bottomViewTopConstraint" destination="7cD-IR-gcb" id="hen-uW-a7J"/>
+                        <outlet property="completeButton" destination="Yke-2s-Q60" id="NFr-HZ-qOI"/>
                         <outlet property="descriptionLabel" destination="Ulb-MH-1hj" id="keI-sx-JGv"/>
                         <outlet property="overlay" destination="jNZ-YK-6J2" id="F19-N1-FQt"/>
                         <outlet property="overlayTopConstraint" destination="G1a-Au-xd8" id="w7B-08-FQX"/>
@@ -1064,7 +1091,7 @@ GHQ
         <image name="search" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="igN-LA-eCX"/>
+        <segue reference="srQ-7O-bBb"/>
         <segue reference="gY1-t0-Oa9"/>
     </inferredMetricsTieBreakers>
 </document>
