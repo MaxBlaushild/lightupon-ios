@@ -23,6 +23,7 @@ target 'Saga' do
   pod 'MDCSwipeToChoose'
   pod 'CBZSplashView'
   pod 'PocketSVG'
+  pod 'Observable'
 end
 
 post_install do |installer|

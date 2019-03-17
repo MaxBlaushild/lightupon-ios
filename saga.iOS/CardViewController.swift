@@ -7,15 +7,26 @@
 //
 
 import UIKit
+import CoreLocation
+import Observable
 
 @objc protocol CardViewControllerDelegate {
     func onDismissed () -> Void
     func createProfileView (userID: Int) -> Void
 }
 
-class CardViewController: UIViewController, ProfileViewCreator {
-    
+enum PostState {
+    case trackable
+    case tracked
+    case completable
+    case completed
+}
+
+class CardViewController: UIViewController, ProfileViewCreator, CurrentLocationServiceDelegate {
+
     let postService = Services.shared.getPostService()
+    let currentLocationService = Services.shared.getCurrentLocationService()
+    let questService = Services.shared.getQuestService()
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var sceneImageView: UIImageView!
@@ -33,8 +44,13 @@ class CardViewController: UIViewController, ProfileViewCreator {
     
     var delegate: CardViewControllerDelegate!
     var postID: Int = 0
+    var location: CLLocation = CLLocation(latitude: 0, longitude: 0)
+    var postState: PostState = .trackable
+    var questID = 0
+    var disposable: Disposable!
     
     func bindContext(post: Post, blurApplies: Bool) {
+        setCanTrackState()
         sceneImageView.imageFromUrl(post.imageUrl)
         postID = post.id
         
@@ -47,16 +63,70 @@ class CardViewController: UIViewController, ProfileViewCreator {
             setCompletedState()
         }
         
+        currentLocationService.registerDelegate(self)
+        location = post.cllocation
+        questID = post.questID
         sceneTitleLabel.text = post.name
         timeSinceLabel.text = post.prettyTimeSinceCreation()
         addressLabel.text = "\(post.streetNumber) \(post.route)"
         descriptionLabel.attributedText = createBylineText(username: post.owner!.fullName, caption: post.caption)
+        
+        disposable = questService.observeFocusChanges({ focusedQuest in
+            if let quest = focusedQuest.quest {
+                if self.questID == quest.id {
+                    self.setTrackingState()
+                }
+            }
+        })
     }
 
+    func onLocationUpdated() {
+        let currentLocation = currentLocationService.location
+        
+        if postState == .completed {
+            let distance = location.distance(from: currentLocation.cllocation)
+
+            if (distance < 20) {
+                setCanCompleteState()
+            } else {
+                setCanTrackState()
+            }
+        }
+    }
+    
     @IBAction func onCompletionPress(_ sender: Any) {
+        switch postState {
+        case .completable:
+            completePost()
+        case .trackable:
+            trackPost()
+        default:
+            print("")
+        }
+    }
+    
+    func completePost() {
         postService.completePost(postID: postID).then { _ in
             self.setCompletedState()
         }
+    }
+    
+    func trackPost() {
+        questService.trackNewQuest(questID: questID).then {
+            self.setTrackingState()
+        }
+    }
+    
+    func setCanCompleteState() {
+        completeButton.setTitle("COMPLETE", for: .normal)
+        completeButton.backgroundColor = UIColor.basePurple
+        postState = .completable
+    }
+    
+    func setCanTrackState() {
+        completeButton.setTitle("TRACK", for: .normal)
+        completeButton.backgroundColor = UIColor.basePurple
+        postState = .trackable
     }
     
     func setCompletedState() {
@@ -64,6 +134,15 @@ class CardViewController: UIViewController, ProfileViewCreator {
         completeButton.isEnabled = false
         completeButton.backgroundColor = UIColor.gray
         completeButton.alpha = 0.6
+        postState = .completed
+    }
+    
+    func setTrackingState() {
+        completeButton.setTitle("TRACKING", for: .normal)
+        completeButton.isEnabled = false
+        completeButton.backgroundColor = UIColor.gray
+        completeButton.alpha = 0.6
+        postState = .tracked
     }
     
     func createProfileView(_ userId: Int) {

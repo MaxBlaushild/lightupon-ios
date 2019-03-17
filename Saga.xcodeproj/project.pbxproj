@@ -39,7 +39,6 @@
 		1E22A7D41D2C6FD200163785 /* birdhouse@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D11D2C6FD200163785 /* birdhouse@3x.png */; };
 		1E22A7D51D2C6FD200163785 /* birdhouse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D21D2C6FD200163785 /* birdhouse@2x.png */; };
 		1E22A7D61D2C6FD200163785 /* birdhouse@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D31D2C6FD200163785 /* birdhouse@1x.png */; };
-		1E22A7DA1D2C763300163785 /* CompassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E22A7D91D2C763300163785 /* CompassView.xib */; };
 		1E22C6751C70232200B13A1B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E22C6741C70232200B13A1B /* LoginViewController.swift */; };
 		1E2ADDB11E7CEED200FA47CE /* ReplaceRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2ADDB01E7CEED200FA47CE /* ReplaceRootViewController.swift */; };
 		1E3343CE1E15B27700A6E633 /* RoundDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3343CD1E15B27700A6E633 /* RoundDoubles.swift */; };
@@ -115,7 +114,6 @@
 		1EAE6A2F1D8605DC00DA19A8 /* DefaultCardDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EAE6A2E1D8605DC00DA19A8 /* DefaultCardDetailsView.xib */; };
 		1EBB2F431E4A9B5B00EB8104 /* SceneFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBB2F421E4A9B5B00EB8104 /* SceneFormViewController.swift */; };
 		1EBBFC1A1D72AB5700697894 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBFC191D72AB5700697894 /* SplashScreen.swift */; };
-		1EBBFC1E1D734C6000697894 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBFC1D1D734C6000697894 /* CompassView.swift */; };
 		1EBBFC201D734EB100697894 /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBFC1F1D734EB100697894 /* NavigationService.swift */; };
 		1EBBFC221D73545F00697894 /* AddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBFC211D73545F00697894 /* AddShadow.swift */; };
 		1EC102101EC1658100D85CFD /* TripCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1020F1EC1658100D85CFD /* TripCollectionViewCell.swift */; };
@@ -158,7 +156,6 @@
 		1EF783AF1D00941700860510 /* PictureHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF783AE1D00941700860510 /* PictureHero.swift */; };
 		1EF90D6C1ECD4EED00728FBF /* RotateImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF90D6B1ECD4EED00728FBF /* RotateImage.swift */; };
 		1EF93BFE1C6046F800A5B463 /* InitialLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF93BFD1C6046F800A5B463 /* InitialLoadingViewController.swift */; };
-		245A888C52EA8A07D422BD63 /* Pods_Lightupon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4136805875FAF88775BC625 /* Pods_Lightupon.framework */; };
 		6D1B503C222B6567008B6A0F /* QuestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B503B222B6567008B6A0F /* QuestService.swift */; };
 		6D1B503E222B9561008B6A0F /* Quest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B503D222B9561008B6A0F /* Quest.swift */; };
 		6D1B5040222B9F2B008B6A0F /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B503F222B9F2A008B6A0F /* Scene.swift */; };
@@ -226,7 +223,6 @@
 		1E22A7D11D2C6FD200163785 /* birdhouse@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "birdhouse@3x.png"; sourceTree = "<group>"; };
 		1E22A7D21D2C6FD200163785 /* birdhouse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "birdhouse@2x.png"; sourceTree = "<group>"; };
 		1E22A7D31D2C6FD200163785 /* birdhouse@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "birdhouse@1x.png"; sourceTree = "<group>"; };
-		1E22A7D91D2C763300163785 /* CompassView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompassView.xib; sourceTree = "<group>"; };
 		1E22C6711C701AE000B13A1B /* -Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "-Bridging-Header.h"; sourceTree = "<group>"; };
 		1E22C6741C70232200B13A1B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1E2ADDB01E7CEED200FA47CE /* ReplaceRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceRootViewController.swift; sourceTree = "<group>"; };
@@ -303,7 +299,6 @@
 		1EAE6A2E1D8605DC00DA19A8 /* DefaultCardDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultCardDetailsView.xib; sourceTree = "<group>"; };
 		1EBB2F421E4A9B5B00EB8104 /* SceneFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneFormViewController.swift; sourceTree = "<group>"; };
 		1EBBFC191D72AB5700697894 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
-		1EBBFC1D1D734C6000697894 /* CompassView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
 		1EBBFC1F1D734EB100697894 /* NavigationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
 		1EBBFC211D73545F00697894 /* AddShadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddShadow.swift; sourceTree = "<group>"; };
 		1EC1020F1EC1658100D85CFD /* TripCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -367,7 +362,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				245A888C52EA8A07D422BD63 /* Pods_Lightupon.framework in Frameworks */,
 				17613ED1C86C3F97545700F8 /* Pods_Saga.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,7 +662,6 @@
 				1E7779891E08F3A8005B883D /* CommentCollectionViewCell */,
 				1ED488171D98525600C67516 /* ProfileView */,
 				1EAE6A2D1D85FE6A00DA19A8 /* DefaultCardDetailsView */,
-				1EE009941D8052A800E550CF /* CompassView */,
 				1EF7839B1CFF46D100860510 /* cards */,
 				1ED4B0871FC7C5F4005B76A3 /* CircularButton.swift */,
 				1EA5AFD41D7E430E0024D6CD /* TitleLabel.swift */,
@@ -725,15 +718,6 @@
 				6D1B503B222B6567008B6A0F /* QuestService.swift */,
 			);
 			name = services;
-			sourceTree = "<group>";
-		};
-		1EE009941D8052A800E550CF /* CompassView */ = {
-			isa = PBXGroup;
-			children = (
-				1EBBFC1D1D734C6000697894 /* CompassView.swift */,
-				1E22A7D91D2C763300163785 /* CompassView.xib */,
-			);
-			name = CompassView;
 			sourceTree = "<group>";
 		};
 		1EF7839B1CFF46D100860510 /* cards */ = {
@@ -946,7 +930,6 @@
 				1E76EDA91E3EAB7C0020CD05 /* firetruck.svg in Resources */,
 				1E51D5C71D9D96A70052DA6E /* GothamRounded-Bold.otf in Resources */,
 				1E51D5CF1D9D96A70052DA6E /* GothamRoundedBold_21016.ttf in Resources */,
-				1E22A7DA1D2C763300163785 /* CompassView.xib in Resources */,
 				1ED69B3C1D07A96800CF2172 /* SIL Open Font License.txt in Resources */,
 				1E51D5C61D9D96A70052DA6E /* gotham_rounded.png in Resources */,
 				1EAA89B61D94A7D0009E9D03 /* ComboTitle.xib in Resources */,
@@ -1015,6 +998,7 @@
 				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
 				"${BUILT_PRODUCTS_DIR}/MDCSwipeToChoose/MDCSwipeToChoose.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Observable/Observable.framework",
 				"${BUILT_PRODUCTS_DIR}/PocketSVG/PocketSVG.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesSwift/Promises.framework",
@@ -1038,6 +1022,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDCSwipeToChoose.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Observable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PocketSVG.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Promises.framework",
@@ -1114,7 +1099,6 @@
 				1E5690561DA9C46300872DDA /* UserService.swift in Sources */,
 				1E1711931CD431D20083236C /* Services.swift in Sources */,
 				1E2014981C71273B0012B863 /* LoginService.swift in Sources */,
-				1EBBFC1E1D734C6000697894 /* CompassView.swift in Sources */,
 				1EA20DEC1DA18ECC00596CDE /* ISO8601MilliDateTransform.swift in Sources */,
 				6D1B5040222B9F2B008B6A0F /* Scene.swift in Sources */,
 				AEE1AC691E2D5A790043ADDE /* MapSceneCell.swift in Sources */,

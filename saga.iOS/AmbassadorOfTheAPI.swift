@@ -10,10 +10,10 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+//let apiURL:String = "http://826ae127.ngrok.io/lightupon"
+//let wsURL:String = "http://826ae127.ngrok.io/lightupon"
 let apiURL:String = "https://www.lightupon.net/lightupon"
-let wsURL:String = "ws://www.lightupon.net/lightupon"
-//let apiURL:String = "http://fd7a57f5.ngrok.io/lightupon"
-//let wsURL:String = "http://fd7a57f5.ngrok.io/lightupon"
+let wsURL:String = "https://www.lightupon.net/lightupon"
 
 class AmbassadorToTheAPI: NSObject {
     fileprivate let _authService:AuthService
@@ -133,11 +133,13 @@ class AmbassadorToTheAPI: NSObject {
         let facebookId:String = _authService.getFacebookId()
         Alamofire.request("\(apiURL)/users/\(facebookId)/token", method: .patch)
             .responseJSON { response in
-                let json = JSON(response.result.value!)
-                let token:String = json.string!
-                self._authService.setToken(token)
-                self.setHeaders()
-                self.get(uri, success: success!)
+                if let responseValue = response.result.value {
+                    let json = JSON(responseValue)
+                    let token: String = json.string!
+                    self._authService.setToken(token)
+                    self.setHeaders()
+                    self.get(uri, success: success!)
+                }
         }
     }
 

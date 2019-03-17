@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import GoogleMaps
 
-class Compass: UIImageView, CurrentLocationServiceDelegate {
+class Compass: UIView, CurrentLocationServiceDelegate {
 
     private let navigationService = Services.shared.getNavigationService()
     private let currentLocationService = Services.shared.getCurrentLocationService()

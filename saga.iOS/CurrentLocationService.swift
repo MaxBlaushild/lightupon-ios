@@ -2,7 +2,7 @@ import UIKit
 import CoreLocation
 import APScheduledLocationManager
 
-protocol LocationInfo{
+protocol LocationInfo {
     var locationStatus:String { get }
     var longitude:Double { get }
     var latitude:Double { get }
@@ -69,16 +69,6 @@ class CurrentLocationService: NSObject, CLLocationManagerDelegate, LocationInfo 
         for delegate in delegates {
             delegate.onLocationUpdated()
         }
-    }
-    
-    func updateLocation() {
-        let location = [
-            "Latitude": _latitude,
-            "Longitude": _longitude
-            ] as [String : Any]
-        
-        apiAmbassador.post("/discover", parameters: location as [String : AnyObject], success: { _ in
-        }, failure: { _ in })
     }
     
     func registerDelegate(_ delegate: CurrentLocationServiceDelegate) {

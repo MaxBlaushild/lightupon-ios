@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Observable
 
 let cellReuseIdentifier = "QuestLogItem"
+let trackingQuestCopy = "You are currently tracking:"
+let notTrackingCopy = "No quests being tracked"
 
 class QuestLogViewController: UIViewController, ProfileViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -19,11 +22,15 @@ class QuestLogViewController: UIViewController, ProfileViewDelegate, UITableView
 
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var questNameLabel: UILabel!
     @IBOutlet weak var questLog: UITableView!
+    @IBOutlet weak var activeQuestHeight: NSLayoutConstraint!
+    @IBOutlet weak var questTrackingLabel: UILabel!
+    @IBOutlet weak var questLogSectionTop: NSLayoutConstraint!
     
     fileprivate var profileView: ProfileView!
-    fileprivate var xBackButton:XBackButton!
+    fileprivate var xBackButton: XBackButton!
+    fileprivate var focusedQuestDisposable: Disposable!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +39,35 @@ class QuestLogViewController: UIViewController, ProfileViewDelegate, UITableView
         getQuests()
         configureQuestLog()
         
+        focusedQuestDisposable = questService.observeFocusChanges { focusedQuest in
+            if let quest = focusedQuest.quest {
+                let containsQuest = self.quests.contains { element in
+                    return element.id == quest.id
+                }
+                
+                if !containsQuest {
+                    self.quests.append(quest)
+                    self.questLog.reloadData()
+                }
+                
+                self.questNameLabel.text = quest.title
+                self.questTrackingLabel.text = trackingQuestCopy
+                self.animateActiveQuestIn()
+
+            } else {
+                self.questNameLabel.text = ""
+                self.questTrackingLabel.text = notTrackingCopy
+                self.animateActiveQuestOut()
+            }
+        }
+    }
+    
+    func animateActiveQuestIn() {
+        questLogSectionTop.constant = 120
+    }
+    
+    func animateActiveQuestOut() {
+        questLogSectionTop.constant = 10
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +87,10 @@ class QuestLogViewController: UIViewController, ProfileViewDelegate, UITableView
         questLog.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         questLog.delegate = self
         questLog.dataSource = self
+    }
+    
+    @IBAction func onStopFocus(_ sender: Any) {
+        questService.dropQuestFocus()
     }
     
     func bindProfile() {
@@ -76,9 +116,17 @@ class QuestLogViewController: UIViewController, ProfileViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = questLog.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
         let quest = quests[indexPath.row]
-        cell.textLabel?.text = "\(quest.title) \(quest.questProgress.completedPosts)/\(quest.posts.count)"
+        cell.textLabel?.text = "\(quest.title) (\(quest.questProgress.completedPosts)/\(quest.posts.count))"
         cell.textLabel?.font = UIFont(name: "Gotham", size: 14)
+        cell.textLabel?.textColor = UIColor.white
+        cell.backgroundColor = UIColor.black
+        cell.selectionStyle = .none
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let quest = quests[indexPath.row]
+        questService.focusOnQuest(quest)
     }
     
 

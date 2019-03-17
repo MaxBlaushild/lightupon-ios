@@ -11,6 +11,7 @@ import GoogleMaps
 import Alamofire
 import MDCSwipeToChoose
 import Toucan
+import Observable
 
 private extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: Bundle.main) }
@@ -38,10 +39,10 @@ class MapViewController: UIViewController,
     let imagePicker = UIImagePickerController()
     
     private let currentLocationService = Services.shared.getCurrentLocationService()
+    private let questService = Services.shared.getQuestService()
     private let feedService = Services.shared.getFeedService()
     private let userService = Services.shared.getUserService()
     private let postService = Services.shared.getPostService()
-    private let discoveryService = Services.shared.getDiscoveryService()
 
     var xBackButton:XBackButton!
     var compasses:[Compass] = [Compass]()
@@ -63,14 +64,14 @@ class MapViewController: UIViewController,
     var updateTime: Timer!
     var _users: [User] = [User]()
     var posts: [Post] = [Post]()
-    
-    var onViewOpened:((Int) -> Void)!
-    var onViewClosed:(() -> Void)!
-    
+    var focusedQuestDisposable: Disposable!
+    var isFocusing = false
+
     fileprivate var profileView: ProfileView!
     @IBOutlet weak var partyButton: UIButton!
     @IBOutlet weak var mapView: LightuponGMSMapView!
     @IBOutlet weak var sideMenuButton: UIButton!
+    @IBOutlet weak var focusedCompass: Compass!
     
     var barButtonItems: [CircularButton]!
 
@@ -91,10 +92,26 @@ class MapViewController: UIViewController,
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.triggerDeepLinkIfPresent(callback: self.onDeepLink)
         
-        self.updateTime = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(discover), userInfo: nil, repeats: true)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(onSceneAdded), name: postService.postNotificationName, object: nil)
-
+        
+        focusedQuestDisposable = questService.observeFocusChanges({ focusedQuest in
+            if let quest = focusedQuest.quest {
+                self.isFocusing = true
+                self.mapView.lockState = .locked
+                self.setLockButton()
+                
+                if let nextPost = quest.nextPost {
+                    self.focusedCompass.isHidden = false
+                    self.focusedCompass.pointTowards(target: nextPost.cllocation)
+                    self.focusedCompass.twirl()
+                }
+            } else {
+                self.focusedCompass.isHidden = true
+                self.isFocusing = false
+            }
+        })
+        
+        view.bringSubview(toFront: focusedCompass)
     }
     
     @IBAction func toggleLock(_ sender: Any) {
@@ -105,8 +122,15 @@ class MapViewController: UIViewController,
     func setLockButton() {
         if mapView.lockState == .locked {
             lockButton.setImage(UIImage(named: "locked"), for: .normal)
+            
+            if isFocusing {
+                focusedCompass.isHidden = false
+                focusedCompass.twirl()
+            }
+
         } else {
             lockButton.setImage(UIImage(named: "unlocked"), for: .normal)
+            focusedCompass.isHidden = true
         }
         lockButton.setImageTint(color: .basePurple)
     }
@@ -163,11 +187,6 @@ class MapViewController: UIViewController,
         }
     }
     
-    func discover() {
-        mapView.markers.forEach(discoveryService.discover)
-    }
-    
-    
     func onDeepLink(deepLink: DeepLink) {
         if deepLink.resource == "scenes" {
             let postId = deepLink.id
@@ -182,7 +201,6 @@ class MapViewController: UIViewController,
                     self.mapView.lockState = .unlocked
                     self.setLockButton()
                     self.toggleDrawer(post, blurApplies: true)
-                    self.onViewOpened(post.id)
                 }
             })
         }

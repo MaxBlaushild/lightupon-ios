@@ -25,5 +25,15 @@ class Quest: NSObject, Mappable {
     }
     
     required init?(map: Map) {}
+    
+    var nextPost: Post? {
+        get {
+            posts.sort { one, two in
+                return one.questOrder < two.questOrder
+            }
+            let nextPostIndex = questProgress.completedPosts
+            return posts.indices.contains(nextPostIndex) ? posts[nextPostIndex] : nil
+        }
+    }
 }
 
